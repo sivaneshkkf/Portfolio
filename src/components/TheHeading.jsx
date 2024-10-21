@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { HeadingContext } from "../context/HeadingContext";
 
-function TheHeading({heading}) {
+function TheHeading({heading,id}) {
 
   const {visibleSection,setVisibleSection}= useContext(HeadingContext);
 
@@ -12,7 +12,7 @@ function TheHeading({heading}) {
           {heading}
         </h4>
         <div
-        className={`h-1 bg-accent transition-all duration-500 ${visibleSection === heading ? "w-full" : "w-0"}`}
+        className={`h-1 bg-accent transition-all duration-500 ${visibleSection === id ? "w-full" : "w-0"}`}
       ></div>
       </div>
      );

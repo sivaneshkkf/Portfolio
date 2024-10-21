@@ -1,29 +1,28 @@
 import { useContext } from "react";
 import { NavLiContext } from "../context/NavLiContext";
-import { Link } from "react-scroll";
 
-function NavLi({name,onClick,link,id}) {
-
-  const {activeLi,setActiveLi} = useContext(NavLiContext)
-
-  console.log(activeLi)
+function NavLi({ name, onClick, id }) {
+  const { activeLi } = useContext(NavLiContext);
 
   return (
-
     <li className="group">
-      <Link to={link}
-      onClick={onClick}
-       className="hover:text-accent"
-      smooth={true}
-      >{name}
-      <div
-        className={`h-1 bg-accent transition-all duration-500 ${
-          activeLi === id ? "w-full" : "w-0"
-        }`}
-      ></div>
-      </Link>
+      <a
+        href="#"
+        onClick={(e) => {
+          e.preventDefault(); // Prevent default anchor behavior
+          onClick(); // Call onClick to trigger state change
+        }}
+        className="hover:text-accent"
+      >
+        {name}
+        <div
+          className={`h-1 bg-accent transition-all duration-500 ${
+            activeLi === id ? "w-full" : "w-0"
+          }`}
+        ></div>
+      </a>
     </li>
   );
 }
 
-export default NavLi
+export default NavLi;

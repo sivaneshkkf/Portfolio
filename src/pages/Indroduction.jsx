@@ -34,11 +34,11 @@ function Indroduction() {
             <img
               src="../src/images/pfImg.png"
               alt=""
-              className="max-w-80 lg:max-w-sm ml-auto"
+              className="max-w-80 lg:max-w-xs ml-auto"
             />
           </div>
         </div>
-        <div className="mt-14">
+        <div className="mt-8">
           <p className="text-gray-300 text-sm mb-2">Follow Me</p>
           <div className="flex gap-4 items-center text-white">
             <span>

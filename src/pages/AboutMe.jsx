@@ -1,5 +1,6 @@
 import BreakLine from "../components/BreakLine";
 import TheHeading from "../components/TheHeading";
+import sectionID from "../data/sectionIdData.json"
 
 
 
@@ -9,7 +10,7 @@ function AboutMe() {
 
   return (
     <div className="bg-primary p-10 relative -z-[2]">
-      <TheHeading heading="ABOUT ME"/>
+      <TheHeading heading="ABOUT ME" id={sectionID.aboutME}/>
       <div className="flex items-center py-20 px-10 lg:px-60">
         <p className="text-textpara text-md lg:text-lg font-medium flex-1">
           I’m a dedicated web developer with a passion for crafting clean,
