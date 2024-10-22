@@ -7,6 +7,8 @@ import { HeadingContext } from "./context/HeadingContext";
 import sectionID from "./data/sectionIdData";
 import Projects from "./pages/Projects";
 import { NavLiContext } from "./context/NavLiContext";
+import Resume from "./pages/Resume";
+import Contact from "./pages/Contact";
 
 function App() {
   const [visibleSection, setVisibleSection] = useState(null);
@@ -16,12 +18,16 @@ function App() {
   const aboutRef = useRef(null);
   const skillsRef = useRef(null);
   const projectRef = useRef(null);
+  const resumeRef = useRef(null);
+  const contactRef = useRef(null);
 
   const sections = [
     { ref: introRef, id: sectionID.home },
     { ref: aboutRef, id: sectionID.aboutME },
     { ref: skillsRef, id: sectionID.skills },
     { ref: projectRef, id: sectionID.projects },
+    { ref: resumeRef, id: sectionID.resume },
+    { ref: contactRef, id: sectionID.contact },
   ];
 
   const handleScroll = () => {
@@ -29,7 +35,7 @@ function App() {
       const { ref, id } = section;
       if (ref.current) {
         const rect = ref.current.getBoundingClientRect();
-        const isVisible = rect.top >= 0 && rect.top < window.innerHeight * 0.8;
+        const isVisible = rect.top >= 0 && rect.top < window.innerHeight * 0.1;
 
         if (isVisible) {
           setVisibleSection(id);
@@ -86,6 +92,12 @@ function App() {
           </div>
           <div ref={projectRef} id={sectionID.projects}>
             <Projects />
+          </div>
+          <div ref={resumeRef} id={sectionID.resume}>
+            <Resume />
+          </div>
+          <div ref={contactRef} id={sectionID.contact}>
+            <Contact />
           </div>
         </NavLiContext.Provider>
       </HeadingContext.Provider>

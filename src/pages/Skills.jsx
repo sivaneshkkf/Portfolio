@@ -9,8 +9,8 @@ function SKills() {
   return (
     <div className="bg-primary pt-5">
       <TheHeading heading="MY SKILLS" id={sectionID.skills}/>
-      <div className="py-10 px-20 w-fit mx-auto">
-        <ul className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-14">
+      <div className="lg:py-10 lg:px-20 sm:py-5 sm:px-10 py-5 px-5 w-fit mx-auto">
+        <ul className="grid xl:grid-cols-5 md:grid-cols-3 grid-cols-2 xl:gap-14 sm:gap-10 gap-8">
           {skillsData.map((li, index) => (
             <SkillsLi
               key={index}

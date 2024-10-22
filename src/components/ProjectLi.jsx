@@ -1,6 +1,6 @@
 function ProjectLi({ name, disc, img, techs }) {
   return (
-    <li className="bg-white shadow-cardShadow p-4 w-96 h-96 flex flex-col justify-between rounded-lg">
+    <li className="bg-white shadow-cardShadow sm:p-4 p-3 flex flex-col justify-between rounded-lg">
       <a href="#" className="flex flex-col h-full">
         <div className="flex-grow">
           <img
@@ -10,22 +10,23 @@ function ProjectLi({ name, disc, img, techs }) {
           />
         </div>
         <div className="flex-grow">
-          <h4 className="text-accent text-lg font-semibold">{name}</h4>
-          <p className="text-textpara text-xs mt-2">{disc}</p>
+          <h4 className="text-accent lg:text-lg text-sm font-semibold">{name}</h4>
+          <p className="text-textpara sm:text-xs text-[10px] mt-2">{disc}</p>
         </div>
-        <div className="mt-4 flex items-center justify-between">
-          <div className="flex gap-2">
+        <div className="mt-4 flex sm:items-center items-end justify-between">
+          <ul className="flex flex-wrap md:gap-2 gap-1">
             {techs.map((li, index) => {
               return (
-                <span className="py-1 px-2 border-2 bg-primary text-xs font-semibold text-textHead rounded" key={index}>
+                <li className="md:py-1 md:px-2 py-[2px] px-1 border-2 bg-primary md:text-xs text-[10px] font-semibold text-textHead rounded" key={index}>
                   {li}
-                </span>
+                </li>
               );
             })}
            
-          </div>
+          </ul>
           <span className="text-accent">
             <svg
+              className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
               xmlns="http://www.w3.org/2000/svg"
               width="2em"
               height="2em"

@@ -14,6 +14,11 @@ export default {
         textpara: "#7E919A",
         gradient1: "rgba(37,46,58,0.8)",
         gradient2: "rgba(55,72,92,0.95)",
+        dark: {
+          primary: "#1a202c", // Dark theme background
+          textHead: "#e2e8f0", // Dark theme text
+          textpara: "#a0aec0", // Dark theme text for paragraphs
+        },
       },
 
       fontFamily:{

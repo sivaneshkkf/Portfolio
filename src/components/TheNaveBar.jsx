@@ -12,9 +12,9 @@ function TheNaveBar() {
     setActiveLi(state); // Update the active section
   }
 
-  useEffect(() => {
-    setActiveLi(visibleSection);
-  }, [visibleSection]);
+  // useEffect(() => {
+  //   setActiveLi(visibleSection);
+  // }, [visibleSection]);
 
   return (
     <div className=" bg-white fixed top-0 left-0 right-0 z-50 overflow-hidden">
@@ -49,7 +49,7 @@ function TheNaveBar() {
             <NavLi
               name="Projects"
               onClick={() => handleClick(sectionID.projects)}
-              id={sectionID.project}
+              id={sectionID.projects}
             />
             <NavLi
               name="Resume"

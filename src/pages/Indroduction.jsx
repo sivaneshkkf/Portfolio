@@ -4,7 +4,7 @@ function Indroduction() {
   return (
     <div className="bg-[url('../src/images/bg.png')] bg-cover bg-center h-full w-full relative z-0 mt-16">
       <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10"></div>
-      <div className=" py-20 px-20 lg:px-80">
+      <div className=" py-20 px-20 2xl:px-80">
         <div className="flex gap-4 items-center justify-between">
           <div className="space-y-8 flex-1">
             <p className="text-gray-500 text-sm font-bold tracking-widest">
@@ -34,7 +34,7 @@ function Indroduction() {
             <img
               src="../src/images/pfImg.png"
               alt=""
-              className="max-w-80 lg:max-w-xs ml-auto"
+              className="max-w-80 lg:max-w-md xl:max-w-xl ml-auto"
             />
           </div>
         </div>
