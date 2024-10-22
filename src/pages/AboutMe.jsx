@@ -11,7 +11,7 @@ function AboutMe() {
   return (
     <div className="bg-primary p-10 relative -z-[2]">
       <TheHeading heading="ABOUT ME" id={sectionID.aboutME}/>
-      <div className="flex items-center py-20 px-10 lg:px-60">
+      <div className="flex items-center md:py-20 md:px-10 lg:px-60">
         <p className="text-textpara text-md lg:text-lg font-medium flex-1">
           I’m a dedicated web developer with a passion for crafting clean,
           efficient, and visually appealing websites. With a strong foundation
@@ -29,7 +29,7 @@ function AboutMe() {
         </div>
       </div>
 
-      <div className="absolute top-0 left-0">
+      <div className="absolute top-0 left-0 -z-[2]">
         <svg
           width="318"
           height="238"

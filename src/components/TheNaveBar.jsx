@@ -62,7 +62,7 @@ function TheNaveBar() {
               id={sectionID.contact}
             />
           </ul>
-          <img src="../src/images/github.png" alt="" className="w-8" />
+          <img src="../src/images/github.png" alt="" className="w-8 cursor-pointer" />
         </div>
       </div>
       <div className="w-full h-[2px] bg-gradient1 blur-[2px]"></div>

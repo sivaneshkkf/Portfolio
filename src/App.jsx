@@ -9,6 +9,7 @@ import Projects from "./pages/Projects";
 import { NavLiContext } from "./context/NavLiContext";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
+import Footer from "./pages/Footer";
 
 function App() {
   const [visibleSection, setVisibleSection] = useState(null);
@@ -99,6 +100,7 @@ function App() {
           <div ref={contactRef} id={sectionID.contact}>
             <Contact />
           </div>
+          <Footer/>
         </NavLiContext.Provider>
       </HeadingContext.Provider>
     </div>

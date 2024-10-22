@@ -28,7 +28,7 @@ function Contact() {
   console.log(errors);
 
   return (
-    <div className="px-10 pt-5 pb-20 bg-primary">
+    <div className="px-10 pt-5 pb-10 bg-primary">
       <TheHeading heading="CONTACT" id={sectionID.contact} />
       <div className="md:flex space-y-10 md:space-y-0 lg:gap-20 gap-10 justify-center mt-10">
         <div className="xl:w-2/6 lg:w-3/6 md:w-4/6 px-8 py-24 bg-white flex flex-col gap-10 overflow-hidden items-center justify-center shadow-cardShadow rounded-2xl relative bg-[url('../src/images/card.png')] bg-cover bg-center">
@@ -36,7 +36,7 @@ function Contact() {
             {ContactData.map((d, index) => (
               <li className="flex items-center gap-3" key={index}>
                 <span dangerouslySetInnerHTML={{ __html: d.svg }}></span>
-                <p className="text-textHead text-lg font-semibold">{d.data}</p>
+                <p className="text-textHead text-sm font-semibold">{d.data}</p>
               </li>
             ))}
           </ul>
@@ -160,10 +160,10 @@ function Contact() {
           </span>
         </div>
 
-        <div className="xl:w-2/6 lg:w-3/6 md:w-4/6 p-8 sm:p-10 md:p-12 lg:p-14 bg-white flex flex-col gap-10 items-center shadow-cardShadow rounded-2xl">
+        <div className="xl:w-2/6 lg:w-3/6 md:w-4/6 p-8 bg-white flex flex-col gap-5 items-center shadow-cardShadow rounded-2xl">
           <form
             action="submit"
-            className="flex flex-col justify-between gap-5 h-full w-full"
+            className="flex flex-col justify-between gap-3 h-full w-full"
             onSubmit={handleSubmit(getFormData)}
           >
             <ContactInput
