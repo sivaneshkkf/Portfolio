@@ -99,7 +99,7 @@ function Indroduction() {
               <img
                 src="../src/images/pfImg.png"
                 alt=""
-                className="md:max-w-80 xl:max-w-sm ml-auto"
+                className="md:max-w-80 xl:max-w-sm mx-auto"
               />
               {/* <div className="w-80 h-8 bg-black rounded-full mx-auto absolute -bottom-5 left-1/2 transform -translate-x-1/2 -z-10 blur-2xl"></div> */}
             </motion.div>

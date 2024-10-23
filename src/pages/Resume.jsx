@@ -4,6 +4,7 @@ import { JobExperience } from "../data/JobExperience";
 import { EducationData } from "../data/EducationData";
 import resume from "../images/resume.jpg";
 import BreakLine from "../components/BreakLine";
+import { motion } from "framer-motion";
 
 function Resume() {
   return (
@@ -43,15 +44,23 @@ function Resume() {
             <div className="">
               <img src={resume} alt="resume" className="w-72 mx-auto" />
             </div>
-            <button className="py-2 px-3 flex gap-2 items-center mx-auto bg-accent rounded text-white text-sm font-semibold text-center">
+            <button className="group py-2 px-3 flex gap-2 items-center mx-auto bg-accent rounded text-white text-sm font-semibold text-center">
               DOWNLOAD RESUME
               <span>
-                <svg
+                <motion.svg
                   width="24"
                   height="24"
                   viewBox="0 0 38 38"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  initial={{ y: 0, opacity: 1, scale:1 }}
+                  animate={{ y: -10, opacity:0.5 , scale:0.8}}
+                  transition={{
+                    ease: "easeInOut",
+                    duration: 1,
+                    repeat: Infinity,
+                    repeatType: "reverse", // Moves up and down
+                  }}
                 >
                   <path
                     d="M19 6.33301H22.1667V11.083H26.125L19 18.208M19 6.33301H15.8333V11.083H11.875L19 18.208"
@@ -71,7 +80,7 @@ function Resume() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-                </svg>
+                </motion.svg>
               </span>
             </button>
           </div>
@@ -107,7 +116,7 @@ function Resume() {
         </div>
       </div>
 
-      <BreakLine/>
+      <BreakLine />
     </div>
   );
 }

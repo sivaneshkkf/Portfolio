@@ -45,7 +45,7 @@ function ProjectLi({ name, disc, img, techs, bg }) {
     // </li>
 
     <li
-      className="bg-white shadow-cardShadow flex flex-col justify-between rounded-lg relative overflow-hidden backdrop-blur-lg backdrop-saturate-0 bg-opacity-100"
+      className="bg-white shadow-cardShadow flex flex-col justify-between md:rounded-3xl rounded-xl relative overflow-hidden backdrop-blur-lg backdrop-saturate-0 bg-opacity-100"
       style={{ backgroundImage: `url(${bg})` }}
     >
       {/* Blurred Background using an absolute div */}
@@ -63,7 +63,7 @@ function ProjectLi({ name, disc, img, techs, bg }) {
           <img
             src={img}
             alt={name}
-            className="w-full object-center relative"
+            className="object-cover object-center relative"
           />
         </div>
 

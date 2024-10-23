@@ -8,8 +8,8 @@ function TheNaveBar() {
   const { activeLi, setActiveLi } = useContext(NavLiContext);
   const { visibleSection, setVisibleSection } = useContext(HeadingContext);
 
-  function handleClick(state) {
-    setActiveLi(state); // Update the active section
+  function handleClick(id) {
+    setActiveLi(id); // Update the active section
   }
 
   // useEffect(() => {

@@ -5,33 +5,35 @@ import ContactInput from "../components/ContactInput";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
 
 function Contact() {
-
-    const schemaValidation = z.object({
-        name: z.string().min(3,{message: "Invalid Name"}).max(40),
-        phoneNumber: z.string().min(10, {message: "Invalid Number"}).max(10),
-        email : z.string().email(),
-        message : z.string().min(2,{message : "Enter your message breifly"})
-    })
+  const schemaValidation = z.object({
+    name: z.string().min(3, { message: "Invalid Name" }).max(40),
+    phoneNumber: z.string().min(10, { message: "Invalid Number" }).max(10),
+    email: z.string().email(),
+    message: z.string().min(2, { message: "Enter your message breifly" }),
+  });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({resolver: zodResolver(schemaValidation)});
+  } = useForm({ resolver: zodResolver(schemaValidation) });
 
   function getFormData(data) {
     console.log(data);
   }
 
-  console.log(errors);
+  // console.log(errors);
 
   return (
     <div className="px-10 pt-5 pb-10 bg-primary">
       <TheHeading heading="CONTACT" id={sectionID.contact} />
       <div className="md:flex space-y-10 md:space-y-0 lg:gap-20 gap-10 justify-center mt-10">
-        <div className="xl:w-2/6 lg:w-3/6 md:w-4/6 px-8 py-24 bg-white flex flex-col gap-10 overflow-hidden items-center justify-center shadow-cardShadow rounded-2xl relative bg-[url('../src/images/card.png')] bg-cover bg-center">
+        <div className="group xl:w-2/6 lg:w-3/6 md:w-4/6 px-8 py-24 bg-white flex flex-col gap-10 overflow-hidden items-center justify-center shadow-cardShadow rounded-2xl relative hover:backdrop-blur-2xl">
+          <div className="absolute inset-0 bg-[url('../src/images/card.png')] group-hover:-inset-10 transition-all duration-300 ease-out z-10 bg-cover bg-center "></div>
+
           <ul className="space-y-2 z-10">
             {ContactData.map((d, index) => (
               <li className="flex items-center gap-3" key={index}>
@@ -50,6 +52,7 @@ function Contact() {
                   viewBox="0 0 25 25"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="cursor-pointer transition-all duration-150 hover:transform hover:-translate-y-1"
                 >
                   <g clipPath="url(#clip0_102_699)">
                     <path
@@ -72,6 +75,7 @@ function Contact() {
                 viewBox="0 0 25 25"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                className="cursor-pointer transition-all duration-150 hover:transform hover:-translate-y-1"
               >
                 <g clipPath="url(#clip0_102_701)">
                   <path
@@ -93,6 +97,7 @@ function Contact() {
                 viewBox="0 0 25 25"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                className="cursor-pointer transition-all duration-150 hover:transform hover:-translate-y-1"
               >
                 <path
                   d="M5.56383 3.92193C5.5635 4.57197 5.30496 5.19526 4.84508 5.65468C4.38521 6.1141 3.76166 6.37201 3.11162 6.37169C2.46158 6.37136 1.83829 6.11282 1.37887 5.65295C0.919456 5.19307 0.661541 4.56952 0.661866 3.91948C0.662191 3.26944 0.92073 2.64615 1.38061 2.18674C1.84049 1.72732 2.46403 1.4694 3.11407 1.46973C3.76411 1.47005 4.3874 1.72859 4.84682 2.18847C5.30624 2.64835 5.56415 3.27189 5.56383 3.92193ZM5.63736 8.18664H0.735395V23.5298H5.63736V8.18664ZM13.3825 8.18664H8.505V23.5298H13.3334V15.4783C13.3334 10.993 19.179 10.5763 19.179 15.4783V23.5298H24.0197V13.8116C24.0197 6.25036 15.3677 6.53223 13.3334 10.2455L13.3825 8.18664Z"
@@ -107,6 +112,7 @@ function Contact() {
                 viewBox="0 0 25 25"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                className="cursor-pointer transition-all duration-150 hover:transform hover:-translate-y-1"
               >
                 <g clipPath="url(#clip0_102_707)">
                   <path
@@ -130,6 +136,7 @@ function Contact() {
               viewBox="0 0 322 292"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="cursor-pointer transition-all duration-150 hover:transform hover:-translate-y-1"
             >
               <rect
                 x="-253"
@@ -148,6 +155,7 @@ function Contact() {
               viewBox="0 0 331 327"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="cursor-pointer transition-all duration-150 hover:transform hover:-translate-y-1"
             >
               <rect
                 y="356.309"
@@ -201,7 +209,9 @@ function Contact() {
                 name="message"
                 id="message"
                 rows={5}
-                className={`bg-secondary py-2 px-3 rounded w-full resize-none outline-none ${errors.message ? "border-2 border-accent" : ""}`}
+                className={`bg-secondary py-2 px-3 rounded w-full resize-none outline-none ${
+                  errors.message ? "border-2 border-accent" : ""
+                }`}
                 {...register("message")}
               ></textarea>
               {errors.message && (
@@ -210,9 +220,23 @@ function Contact() {
                 </span>
               )}
             </div>
-            <button className="py-2 px-3 mt-5 flex gap-2 items-center mx-auto bg-accent rounded text-white text-sm font-semibold text-center">
+            <motion.button
+              className="group py-2 px-3 mt-5 flex gap-2 items-center mx-auto bg-accent rounded text-white text-sm font-semibold text-center"
+              whileHover="hover"
+            >
               SEND MESSAGE
-              <span>
+              <motion.span
+                variants={{
+                  hover: {
+                    scale: 1.3,
+                  },
+                }}
+                initial={{ scale: 1 }}
+                transition={{
+                  ease: "easeInOut",
+                  duration: 0.5,
+                }}
+              >
                 <svg
                   width="24"
                   height="24"
@@ -234,8 +258,8 @@ function Contact() {
                     </clipPath>
                   </defs>
                 </svg>
-              </span>
-            </button>
+              </motion.span>
+            </motion.button>
           </form>
         </div>
       </div>
