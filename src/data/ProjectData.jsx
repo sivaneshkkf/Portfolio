@@ -11,20 +11,26 @@ export const ProjectData =[
         image : img1,
         bg : musicplayerbg,
         disc : "Responsive music player with smooth playback and easy-to-use interface on all devices.",
-        techs : ["HTML","TAILWINDCSS","JS"]
+        techs : ["HTML","TAILWINDCSS","JS"],
+        link : "https://sivaneshkkf.github.io/Music-Player/",
+        ghLink : "https://github.com/sivaneshkkf/Music-Player"
     },
     {
         name :"Giveaway Form",
         image : img2,
         bg : formbg,
         disc : "Responsive form design with user-friendly layout, optimized for all devices and screen sizes.",
-        techs : ["HTML","TAILWINDCSS","JS"]
+        techs : ["HTML","TAILWINDCSS","JS","Firebase"],
+        link : "https://sivaneshkkf.github.io/Giveaway-Form/",
+        ghLink : "https://github.com/sivaneshkkf/Giveaway-Form"
     },
     {
         name :"Calculator",
         image : img3,
         bg : calculator,
         disc : "A sleek, responsive calculator app for quick and easy calculations, designed for seamless performance on any device.",
-        techs : ["HTML","TAILWINDCSS","JS"]
+        techs : ["HTML","TAILWINDCSS","JS"],
+        link : "https://sivaneshkkf.github.io/Calculator-App/",
+        ghLink : "https://github.com/sivaneshkkf/Calculator-App"
     }
 ]

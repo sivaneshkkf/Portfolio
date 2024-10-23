@@ -1,4 +1,7 @@
-function ProjectLi({ name, disc, img, techs, bg }) {
+import { motion } from "framer-motion";
+import { FadeIn } from "../varients/varientAnim";
+
+function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
   return (
     // <li className="bg-white shadow-cardShadow sm:p-4 p-3 flex flex-col justify-between rounded-lg">
     //   <a href="#" className="flex flex-col h-full">
@@ -44,9 +47,13 @@ function ProjectLi({ name, disc, img, techs, bg }) {
     //   </a>
     // </li>
 
-    <li
+    <motion.li
       className="bg-white shadow-cardShadow flex flex-col justify-between md:rounded-3xl rounded-xl relative overflow-hidden backdrop-blur-lg backdrop-saturate-0 bg-opacity-100"
       style={{ backgroundImage: `url(${bg})` }}
+      variants={FadeIn("up", 0.2)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: false }}
     >
       {/* Blurred Background using an absolute div */}
       <div
@@ -57,7 +64,7 @@ function ProjectLi({ name, disc, img, techs, bg }) {
           zIndex: -1,
         }}
       ></div>
-      <a href="#" className="flex flex-col h-full relative">
+      <a href={link} className=" group flex flex-col h-full relative" target="blank">
         <div className="relative flex-grow flex justify-center items-center bg-cover bg-center">
           {/* Main content */}
           <img
@@ -68,7 +75,7 @@ function ProjectLi({ name, disc, img, techs, bg }) {
         </div>
 
         {/* Content section */}
-        <div className="bottom-0 bg-white p-5 w-full bg-blend-color-burn backdrop-blur-lg bg-opacity-10">
+        <div className="bottom-0 bg-white p-5 w-full bg-blend-color-burn backdrop-blur-lg bg-opacity-0">
           <div className="flex-grow">
             <h4 className="text-accent lg:text-lg text-sm font-semibold">
               {name}
@@ -87,7 +94,7 @@ function ProjectLi({ name, disc, img, techs, bg }) {
                 </li>
               ))}
             </ul>
-            <span className="text-accent">
+            <a href={ghLink} className="text-accent" target="blank">
               <svg
                 className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
                 xmlns="http://www.w3.org/2000/svg"
@@ -102,11 +109,11 @@ function ProjectLi({ name, disc, img, techs, bg }) {
                   clipRule="evenodd"
                 ></path>
               </svg>
-            </span>
+            </a>
           </div>
         </div>
       </a>
-    </li>
+    </motion.li>
   );
 }
 

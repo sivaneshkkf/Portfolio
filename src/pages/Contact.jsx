@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import { FadeIn } from "../varients/varientAnim";
 
 function Contact() {
   const schemaValidation = z.object({
@@ -31,7 +32,12 @@ function Contact() {
     <div className="px-10 pt-5 pb-10 bg-primary">
       <TheHeading heading="CONTACT" id={sectionID.contact} />
       <div className="md:flex space-y-10 md:space-y-0 lg:gap-20 gap-10 justify-center mt-10">
-        <div className="group xl:w-2/6 lg:w-3/6 md:w-4/6 px-8 py-24 bg-white flex flex-col gap-10 overflow-hidden items-center justify-center shadow-cardShadow rounded-2xl relative hover:backdrop-blur-2xl">
+        <motion.div className="group xl:w-2/6 lg:w-3/6 md:w-4/6 px-8 py-24 bg-white flex flex-col gap-10 overflow-hidden items-center justify-center shadow-cardShadow rounded-2xl relative hover:backdrop-blur-2xl"
+        variants={FadeIn("left",0.2)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{once:false, amount: 0.2}}
+        >
           <div className="absolute inset-0 bg-[url('../src/images/card.png')] group-hover:-inset-10 transition-all duration-300 ease-out z-10 bg-cover bg-center "></div>
 
           <ul className="space-y-2 z-10">
@@ -166,9 +172,14 @@ function Contact() {
               />
             </svg>
           </span>
-        </div>
+        </motion.div>
 
-        <div className="xl:w-2/6 lg:w-3/6 md:w-4/6 p-8 bg-white flex flex-col gap-5 items-center shadow-cardShadow rounded-2xl">
+        <motion.div className="xl:w-2/6 lg:w-3/6 md:w-4/6 p-8 bg-white flex flex-col gap-5 items-center shadow-cardShadow rounded-2xl"
+        variants={FadeIn("right", 0.2)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{once:false, amount: 0.2}}
+        >
           <form
             action="submit"
             className="flex flex-col justify-between gap-3 h-full w-full"
@@ -261,7 +272,7 @@ function Contact() {
               </motion.span>
             </motion.button>
           </form>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

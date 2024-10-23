@@ -5,6 +5,7 @@ import { EducationData } from "../data/EducationData";
 import resume from "../images/resume.jpg";
 import BreakLine from "../components/BreakLine";
 import { motion } from "framer-motion";
+import { FadeIn } from "../varients/varientAnim";
 
 function Resume() {
   return (
@@ -16,10 +17,14 @@ function Resume() {
           <h2 className="text-xl font-bold text-center mb-8 text-textHead">
             Education
           </h2>
-          <div
+          <motion.div
             className={
               "relative before:absolute before:top-0 before:bottom-0 before:left-5 before:w-[2px] before:bg-accent before:opacity-80 "
             }
+            variants={FadeIn("left", 0.2)}
+           initial="hidden"
+           whileInView={"show"}
+           viewport={{ once: false }}
           >
             {EducationData.map((edu, index) => (
               <div
@@ -38,9 +43,14 @@ function Resume() {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="px-5 py-8 bg-secondary rounded-lg shadow-cardShadow space-y-5">
+          <motion.div className="px-5 py-8 bg-secondary rounded-lg shadow-cardShadow space-y-5"
+          variants={FadeIn("left", 0.2)}
+          initial= "hidden"
+          whileInView={"show"}
+          viewport={{once:false, amount:0.1}}
+          >
             <div className="">
               <img src={resume} alt="resume" className="w-72 mx-auto" />
             </div>
@@ -83,17 +93,22 @@ function Resume() {
                 </motion.svg>
               </span>
             </button>
-          </div>
+          </motion.div>
         </div>
 
         <div className="max-w-2xl py-10">
           <h2 className="text-xl font-bold text-center mb-8 text-textHead">
             Job Experience
           </h2>
-          <div
+          <motion.div
             className={
               "relative before:absolute before:top-0 before:bottom-0 before:left-5 before:w-[2px] before:bg-accent before:opacity-80 "
             }
+
+            variants={FadeIn("right", 0.2)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: false }}
           >
             {JobExperience.map((job, index) => (
               <div
@@ -112,7 +127,7 @@ function Resume() {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 

@@ -1,9 +1,15 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { FadeIn } from "../varients/varientAnim"; 
 
 function SkillsLi({ svg, name, hoverCol, svgCol }) {
 
   return (
-    <li className="flex flex-col items-center z-10 justify-center shadow-cardShadow rounded-lg p-4 w-44 h-48 gap-2 group relative overflow-hidden">
+    <motion.li className="flex flex-col items-center z-10 justify-center shadow-cardShadow rounded-lg p-4 w-44 h-48 gap-2 group relative overflow-hidden"
+    variants={FadeIn("up",0.2)}
+    initial="hidden"
+    whileInView={"show"}
+    viewport={{once: false}}>
         
       <span
         dangerouslySetInnerHTML={{ __html: svg }}
@@ -19,7 +25,7 @@ function SkillsLi({ svg, name, hoverCol, svgCol }) {
         }
         style={{ background: `${hoverCol}` }}
       ></div>
-    </li>
+    </motion.li>
   );
 }
 
