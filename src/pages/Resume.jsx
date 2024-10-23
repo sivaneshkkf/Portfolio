@@ -6,6 +6,7 @@ import resume from "../images/resume.jpg";
 import BreakLine from "../components/BreakLine";
 import { motion } from "framer-motion";
 import { FadeIn } from "../varients/varientAnim";
+import sivanesh_resume from "../images/SIVANESH-RESUME.pdf"
 
 function Resume() {
   return (
@@ -54,7 +55,7 @@ function Resume() {
             <div className="">
               <img src={resume} alt="resume" className="w-72 mx-auto" />
             </div>
-            <button className="group py-2 px-3 flex gap-2 items-center mx-auto bg-accent rounded text-white text-sm font-semibold text-center">
+            <a href={sivanesh_resume} download className="group py-2 px-3 flex gap-2 items-center mx-auto bg-accent rounded text-white text-sm font-semibold text-center w-fit">
               DOWNLOAD RESUME
               <span>
                 <motion.svg
@@ -92,7 +93,7 @@ function Resume() {
                   />
                 </motion.svg>
               </span>
-            </button>
+            </a>
           </motion.div>
         </div>
 

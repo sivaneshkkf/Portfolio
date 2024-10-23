@@ -108,7 +108,7 @@ function Indroduction() {
         <div className="mt-8">
           <p className="text-gray-300 text-sm mb-2">Follow Me</p>
           <div className="flex gap-4 items-center text-white">
-            <span>
+            <a href="https://www.instagram.com/siva_innocent_soul/profilecard/?igsh=MTV0cGRzZXNzMmw3ZQ== " target="blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1.5rem"
@@ -127,8 +127,8 @@ function Indroduction() {
                   <path d="M4.312 6.862a2.55 2.55 0 1 0 5.1 0a2.55 2.55 0 1 0-5.1 0"></path>
                 </g>
               </svg>
-            </span>
-            <span>
+            </a>
+            <a href="https://www.linkedin.com/in/sivanesh-raja-2aa575240" target="blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1.5em"
@@ -143,8 +143,8 @@ function Indroduction() {
                   clipRule="evenodd"
                 ></path>
               </svg>
-            </span>
-            <span>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100005058169350" target="blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1.3em"
@@ -158,8 +158,8 @@ function Indroduction() {
                   d="M18.896 0H1.104C.494 0 0 .494 0 1.104v17.792C0 19.506.494 20 1.104 20h9.578v-7.745H8.076V9.237h2.606V7.01c0-2.584 1.578-3.99 3.883-3.99c1.104 0 2.052.082 2.329.119v2.7h-1.598c-1.254 0-1.496.596-1.496 1.47v1.927h2.989l-.39 3.018h-2.6V20h5.097c.61 0 1.104-.494 1.104-1.104V1.104C20 .494 19.506 0 18.896 0"
                 ></path>
               </svg>
-            </span>
-            <span>
+            </a>
+            <a href="http://Wa.me/+917010037476" target="blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1.5em"
@@ -183,7 +183,7 @@ function Indroduction() {
                   </defs>
                 </g>
               </svg>
-            </span>
+            </a>
           </div>
         </div>
         <BreakLine />
