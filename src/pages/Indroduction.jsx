@@ -40,7 +40,7 @@ function Indroduction() {
   };
 
   return (
-    <div className="bg-[url('../src/images/bg.png')] bg-cover bg-center h-full w-full relative z-0 sm:mt-16">
+    <div className="bg-[url('../src/images/bg.png')] bg-cover bg-center h-full w-full relative z-0 mt-16">
       <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10"></div>
       <div className=" p-10 sm:p-20 xl:px-60">
         <div className="flex gap-4 items-center justify-between">
