@@ -1,26 +1,73 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useLayoutEffect, useRef } from "react";
 import NavLi from "./NavLi";
-import sectionID from "../data/sectionIdData.json";
-import { NavLiContext } from "../context/NavLiContext";
+import sectionIDS from "../data/SectionIDS";
 import { HeadingContext } from "../context/HeadingContext";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { ScrolContext } from "../varients/ScrolContext";
 
 function TheNaveBar() {
-  const { activeLi, setActiveLi } = useContext(NavLiContext);
   const { visibleSection, setVisibleSection } = useContext(HeadingContext);
 
-  const [navLine, setNavLine] = useState({w:0,x:0})
+  const [dimensions, setDimensions] = useState({
+    width: 0,
+    x: 0,
+    preX: 0,
+    left: 0,
+  });
 
-  function handleClick(id) {
-    setActiveLi(id); // Update the active section
+  const {scrolEnable, setScrollEnable } = useContext(ScrolContext)
 
-  }
+  // useLayoutEffect(() => {
+  //   if (activeLi || visibleSection) {
+
+  //     // console.log(document.getElementById(activeLi))
+  //     //   const rect = document
+  //     //     .getElementById(sectionID.home)
+  //     //     .getBoundingClientRect();
+  //     //   const actWidth = Math.floor(rect.width);
+  //     //   setDimensions({
+  //     //     width: actWidth,
+  //     //     x: e.clientX,
+  //     //     preX: dimensions.left,
+  //     //     left: rect.left,
+  //     //   });
+
+  //   }
+  // }, [activeLi, visibleSection]); // Re-run effect on activeLi, visibleSection, or id change
+
+  useLayoutEffect(() => {
+      const el = document.getElementById(visibleSection.navLiId);
+      const rectDefault = el.getBoundingClientRect();
+      const actWidth = Math.floor(rectDefault.width);
+    setDimensions({
+      width: actWidth,
+      x: rectDefault.x,
+      preX: rectDefault.x, // Set preX to match the initial x position
+      left: rectDefault.left,
+    });
+    
+  }, [visibleSection.navLiId]);
+
+  const handleClick = (e, navId, secId) => {
+    e.preventDefault();
+
+    setScrollEnable(false)
+
+    setVisibleSection((pre) => ({
+      sectionId:secId,
+      navLiId: navId,
+    })); // Update the active section
+
+  };
+
+  console.log(dimensions);
+
+  console.log(visibleSection.navLiId, sectionIDS.home.navId)
 
   // useEffect(() => {
   //   setActiveLi(visibleSection);
   // }, [visibleSection]);
-
-
 
   return (
     <div className=" bg-white fixed top-0 left-0 right-0 z-50 overflow-hidden">
@@ -39,11 +86,12 @@ function TheNaveBar() {
           <ul className="flex items-end sm:gap-4 text-textHead text-sm font-bold w-full justify-around">
             <NavLi
               name="Home"
-              onClick={() => handleClick(sectionID.home)}
-              id={sectionID.home}
+              onClick={(e) => handleClick(e, sectionIDS.home.navId,sectionIDS.home.sectionId)}
+              id={sectionIDS.home.navId}
             >
               <span className="sm:hidden">
                 <svg
+                  className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.home.navId ? "w-10 h-10" : ""}`}
                   xmlns="http://www.w3.org/2000/svg"
                   width="2em"
                   height="2em"
@@ -58,11 +106,12 @@ function TheNaveBar() {
             </NavLi>
             <NavLi
               name="About Me"
-              onClick={() => handleClick(sectionID.aboutME)}
-              id={sectionID.aboutME}
+              onClick={(e) => handleClick(e, sectionIDS.aboutME.navId,sectionIDS.aboutME.sectionId)}
+              id={sectionIDS.aboutME.navId}
             >
               <span className="sm:hidden">
                 <svg
+                   className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.aboutME.navId ? "w-10 h-10" : ""}`}
                   xmlns="http://www.w3.org/2000/svg"
                   width="2em"
                   height="2em"
@@ -77,11 +126,12 @@ function TheNaveBar() {
             </NavLi>
             <NavLi
               name="Skills"
-              onClick={() => handleClick(sectionID.skills)}
-              id={sectionID.skills}
+              onClick={(e) => handleClick(e, sectionIDS.skills.navId,sectionIDS.skills.sectionId)}
+              id={sectionIDS.skills.navId}
             >
               <span className="sm:hidden">
                 <svg
+                 className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.skills.navId ? "w-10 h-10" : ""}`}
                   width="2em"
                   height="2em"
                   viewBox="0 0 24 24"
@@ -97,11 +147,12 @@ function TheNaveBar() {
             </NavLi>
             <NavLi
               name="Projects"
-              onClick={() => handleClick(sectionID.projects)}
-              id={sectionID.projects}
+              onClick={(e) => handleClick(e, sectionIDS.projects.navId,sectionIDS.projects.sectionId)}
+              id={sectionIDS.projects.navId}
             >
               <span className="sm:hidden">
                 <svg
+                 className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.projects.navId ? "w-10 h-10" : ""}`}
                   xmlns="http://www.w3.org/2000/svg"
                   width="1.6em"
                   height="2em"
@@ -127,13 +178,14 @@ function TheNaveBar() {
             </NavLi>
             <NavLi
               name="Resume"
-              onClick={() => handleClick(sectionID.resume)}
-              id={sectionID.resume}
+              onClick={(e) => handleClick(e, sectionIDS.resume.navId,sectionIDS.resume.sectionId)}
+              id={sectionIDS.resume.navId}
             >
               <span className="sm:hidden">
                 <svg
+                 className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.resume.navId ? "w-10 h-10" : ""}`}
                   width="1.6em"
-                  height="1.6em"
+                  height="1.9em"
                   viewBox="0 0 16 16"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -147,11 +199,12 @@ function TheNaveBar() {
             </NavLi>
             <NavLi
               name="Contact"
-              onClick={() => handleClick(sectionID.contact)}
-              id={sectionID.contact}
+              onClick={(e) => handleClick(e, sectionIDS.contact.navId,sectionIDS.contact.sectionId)}
+              id={sectionIDS.contact.navId}
             >
               <span className="sm:hidden">
                 <svg
+                   className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.contact.navId ? "w-10 h-10" : ""}`}
                   xmlns="http://www.w3.org/2000/svg"
                   width="2em"
                   height="2em"
@@ -190,7 +243,13 @@ function TheNaveBar() {
         </div>
       </div>
       <div className="w-full h-[2px] bg-gradient1 blur-[2px]"></div>
-      <div className="absolute w-20 h-1 bg-accent bottom-0 left-0"></div>
+      <motion.div
+        className="sm:hidden absolute h-1 bg-accent bottom-0 left-0"
+        style={{ width: `${dimensions.width}px` }}
+        initial={{ x: dimensions.preX }} // Start from the previous x position
+        animate={{ x: dimensions.left }} // Animate to the current x position
+        transition={{ duration: 0.5 }} // Optional: Add smooth animation timing
+      ></motion.div>
     </div>
   );
 }

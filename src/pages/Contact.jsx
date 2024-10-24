@@ -1,5 +1,5 @@
 import TheHeading from "../components/TheHeading";
-import sectionID from "../data/sectionIdData.json";
+import sectionIDS from "../data/SectionIDS";
 import { ContactData } from "../data/ContactData";
 import ContactInput from "../components/ContactInput";
 import { useForm } from "react-hook-form";
@@ -50,8 +50,8 @@ function Contact() {
   // console.log(errors);
 
   return (
-    <div className="px-10 pt-5 bg-primary">
-      <TheHeading heading="CONTACT" id={sectionID.contact} />
+    <div className="px-10 pb-5 pt-5 bg-primary">
+      <TheHeading heading="CONTACT" id={sectionIDS.contact.sectionId} />
       <div className="md:flex space-y-10 md:space-y-0 lg:gap-20 gap-10 justify-center mt-10">
         <motion.div
           className="group xl:w-2/6 lg:w-3/6 md:w-4/6 px-8 py-24 bg-white flex flex-col gap-10 overflow-hidden items-center justify-center shadow-cardShadow rounded-2xl relative hover:backdrop-blur-2xl"
@@ -212,7 +212,7 @@ function Contact() {
         >
           <form
             action="submit"
-            className="flex flex-col justify-between gap-3 h-full w-full"
+            className="flex flex-col justify-between gap-2 h-full w-full"
             onSubmit={handleSubmit(getFormData)}
           >
             <ContactInput

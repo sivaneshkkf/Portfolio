@@ -15,9 +15,13 @@ export default {
         gradient1: "rgba(37,46,58,0.8)",
         gradient2: "rgba(55,72,92,0.95)",
         dark: {
-          primary: "#1a202c", // Dark theme background
-          textHead: "#e2e8f0", // Dark theme text
-          textpara: "#a0aec0", // Dark theme text for paragraphs
+          primary: "#212428",
+          secondary: "#333333",
+          accent: "#FF0051",
+          textHead: "#E4E3E3",
+          textpara: "#7E7E7E",
+          gradient1: "rgb(52, 52, 52,0.8)",
+          gradient2: "rgba(63, 63, 63,0.95)",
         },
       },
 

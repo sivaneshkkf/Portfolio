@@ -12,7 +12,7 @@ function TheHeading({heading,id}) {
           {heading}
         </h4>
         <div
-        className={`md:h-1 h-[2px] bg-accent transition-all duration-500 ${visibleSection === id ? "w-full" : "w-0"}`}
+        className={`md:h-1 h-[2px] bg-accent transition-all duration-1000 ${visibleSection.sectionId === id ? "w-full" : "w-0"}`}
       ></div>
       </div>
      );

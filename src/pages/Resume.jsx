@@ -1,5 +1,5 @@
 import TheHeading from "../components/TheHeading";
-import sectionID from "../data/sectionIdData.json";
+import sectionIDS from "../data/SectionIDS";
 import { JobExperience } from "../data/JobExperience";
 import { EducationData } from "../data/EducationData";
 import resume from "../images/resume.jpg";
@@ -11,7 +11,7 @@ import sivanesh_resume from "../images/SIVANESH-RESUME.pdf"
 function Resume() {
   return (
     <div className="pt-5 px-10 bg-primary">
-      <TheHeading heading="RESUME" id={sectionID.resume} />
+      <TheHeading heading="RESUME" id={sectionIDS.resume.sectionId} />
 
       <div className="md:flex md:gap-20 block sm:justify-center">
         <div className="max-w-2xl py-10">
