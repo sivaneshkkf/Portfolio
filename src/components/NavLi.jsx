@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { NavLiContext } from "../context/NavLiContext";
 import { HeadingContext } from "../context/HeadingContext";
 
-function NavLi({ name, onClick, id }) {
+function NavLi({ name, onClick, id, children }) {
   const { activeLi, setActiveLi } = useContext(NavLiContext);
   const { visibleSection, setVisibleSection } = useContext(HeadingContext);
 
@@ -25,20 +25,21 @@ function NavLi({ name, onClick, id }) {
     
 
   return (
-    <li className="group">
+    <li className="group w-full sm:w-fit">
       <a
         href="#"
         onClick={(e) => {
           e.preventDefault(); // Prevent default anchor behavior
           onClick(); // Call onClick to trigger state change
         }}
-        className="hover:text-accent"
+        className="hover:text-accent flex flex-col justify-center items-center text-xs md:text-sm font-medium sm:font-bold"
       >
+        {children && children}
         {name}
       </a>
 
       <div
-        className={`h-1 bg-accent transition-all duration-500 ${
+        className={`h-1 bg-accent transition-all duration-500 hidden sm:block ${
           showLine ? "w-full" : "w-0"
         }`}
       ></div>

@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import BreakLine from "../components/BreakLine";
 import { TypeAnimation } from "react-type-animation";
+import { FadeIn } from "../varients/varientAnim";
 
 function Indroduction() {
   const x = useMotionValue(0);
@@ -39,18 +40,24 @@ function Indroduction() {
   };
 
   return (
-    <div className="bg-[url('../src/images/bg.png')] bg-cover bg-center h-full w-full relative z-0 mt-16">
+    <div className="bg-[url('../src/images/bg.png')] bg-cover bg-center h-full w-full relative z-0 sm:mt-16">
       <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10"></div>
-      <div className=" py-20 px-20 xl:px-60">
+      <div className=" p-10 sm:p-20 xl:px-60">
         <div className="flex gap-4 items-center justify-between">
-          <div className="space-y-8 flex-1">
-            <p className="text-gray-500 text-sm font-bold tracking-widest">
+          <motion.div
+            className="space-y-8 flex-1"
+            variants={FadeIn("left", 0.2,0)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true }}
+          >
+            <p className="text-gray-500 text-xs sm:text-sm font-bold tracking-widest">
               Welcome to my world
             </p>
 
-            <h3 className="lg:text-5xl text-3xl md:text-6xl text-white font-semibold">
+            <h3 className="lg:text-5xl text-xl md:text-6xl text-white font-semibold">
               Hi I'm{" "}
-              <span className="text-accent font-bold lg:text-5xl text-3xl md:text-6xl tracking-wide ml-2">
+              <span className="text-accent font-bold lg:text-5xl text-xl md:text-6xl tracking-wide ml-2">
                 Sivanesh
               </span>
             </h3>
@@ -67,17 +74,17 @@ function Indroduction() {
               ]}
               wrapper="span"
               speed={10}
-              className="lg:text-5xl text-3xl text-white font-semibold mt-10"
+              className="lg:text-5xl text-xl text-white font-semibold mt-10"
               repeat={Infinity}
             />
 
-            <p className="text-gray-400 text-sm font-medium max-w-md pt-5">
+            <p className="text-gray-400 text-xs md:font-medium max-w-md pt-5 hidden sm:block">
               I am a passionate web developer skilled in building responsive and
               user-friendly websites. With expertise in HTML, CSS, JavaScript,
               and React, I focus on creating seamless digital experiences.
               Explore my portfolio to see my latest work!
             </p>
-          </div>
+          </motion.div>
 
           <div
             className="flex-1 relative"
@@ -105,16 +112,35 @@ function Indroduction() {
             </motion.div>
           </div>
         </div>
+        <motion.p
+          className="text-gray-400 text-xs md:font-medium pt-5 sm:hidden"
+          variants={FadeIn("up", 0.5,0)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: true }}
+        >
+          I am a passionate web developer skilled in building responsive and
+          user-friendly websites. With expertise in HTML, CSS, JavaScript, and
+          React, I focus on creating seamless digital experiences. Explore my
+          portfolio to see my latest work!
+        </motion.p>
         <div className="mt-8">
-          <p className="text-gray-300 text-sm mb-2">Follow Me</p>
-          <div className="flex gap-4 items-center text-white">
-            <a href="https://www.instagram.com/siva_innocent_soul/profilecard/?igsh=MTV0cGRzZXNzMmw3ZQ== " target="blank">
+          <p className="text-gray-300 text-xs md:text-sm mb-1 md:mb-2">Follow Me</p>
+          <div className="flex md:gap-4 gap-2 items-center text-white">
+            <motion.a
+              href="https://www.instagram.com/siva_innocent_soul/profilecard/?igsh=MTV0cGRzZXNzMmw3ZQ== "
+              target="blank"
+              variants={FadeIn("up",0.5,0)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{once:true}}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1.5rem"
                 height="1.5em"
                 viewBox="0 0 14 14"
-                className="hover:text-accent cursor-pointer"
+                className="hover:text-accent cursor-pointer w-4 md:w-6"
               >
                 <g
                   fill="none"
@@ -127,14 +153,21 @@ function Indroduction() {
                   <path d="M4.312 6.862a2.55 2.55 0 1 0 5.1 0a2.55 2.55 0 1 0-5.1 0"></path>
                 </g>
               </svg>
-            </a>
-            <a href="https://www.linkedin.com/in/sivanesh-raja-2aa575240" target="blank">
+            </motion.a>
+            <motion.a
+              href="https://www.linkedin.com/in/sivanesh-raja-2aa575240"
+              target="blank"
+              variants={FadeIn("up",0.6,0)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{once:true}}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1.5em"
                 height="1.5em"
                 viewBox="0 0 24 24"
-                className="hover:text-accent cursor-pointer"
+                className="hover:text-accent cursor-pointer w-4 md:w-6"
               >
                 <path
                   fill="currentColor"
@@ -143,14 +176,21 @@ function Indroduction() {
                   clipRule="evenodd"
                 ></path>
               </svg>
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=100005058169350" target="blank">
+            </motion.a>
+            <motion.a
+              href="https://www.facebook.com/profile.php?id=100005058169350"
+              target="blank"
+              variants={FadeIn("up",0.7,0)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{once:true}}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1.3em"
                 height="1.3em"
                 viewBox="0 0 20 20"
-                className="hover:text-accent cursor-pointer"
+                className="hover:text-accent cursor-pointer w-4 md:w-6"
               >
                 <path
                   fill="currentColor"
@@ -158,14 +198,19 @@ function Indroduction() {
                   d="M18.896 0H1.104C.494 0 0 .494 0 1.104v17.792C0 19.506.494 20 1.104 20h9.578v-7.745H8.076V9.237h2.606V7.01c0-2.584 1.578-3.99 3.883-3.99c1.104 0 2.052.082 2.329.119v2.7h-1.598c-1.254 0-1.496.596-1.496 1.47v1.927h2.989l-.39 3.018h-2.6V20h5.097c.61 0 1.104-.494 1.104-1.104V1.104C20 .494 19.506 0 18.896 0"
                 ></path>
               </svg>
-            </a>
-            <a href="http://Wa.me/+917010037476" target="blank">
+            </motion.a>
+            <motion.a href="http://Wa.me/+917010037476" target="blank"
+              variants={FadeIn("up",0.8,0)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{once:true}}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1.5em"
                 height="1.5em"
                 viewBox="0 0 24 24"
-                className="hover:text-accent cursor-pointer"
+                className="hover:text-accent cursor-pointer w-4 md:w-6"
               >
                 <g fill="none">
                   <g clipPath="url(#akarIconsWhatsappFill0)">
@@ -183,10 +228,35 @@ function Indroduction() {
                   </defs>
                 </g>
               </svg>
-            </a>
+            </motion.a>
+
+            <motion.a href="http://Wa.me/+917010037476" target="blank"
+              variants={FadeIn("up",0.9,0)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{once:true}}
+            >
+              <svg
+                 className="hover:text-accent cursor-pointer w-5 md:w-6 sm:hidden"
+                xmlns="http://www.w3.org/2000/svg"
+                width="2em"
+                height="2em"
+                viewBox="0 0 15 15"
+              >
+                <path
+                  fill="currentColor"
+                  fillRule="evenodd"
+                  d="M7.5.25a7.25 7.25 0 0 0-2.292 14.13c.363.066.495-.158.495-.35c0-.172-.006-.628-.01-1.233c-2.016.438-2.442-.972-2.442-.972c-.33-.838-.805-1.06-.805-1.06c-.658-.45.05-.441.05-.441c.728.051 1.11.747 1.11.747c.647 1.108 1.697.788 2.11.602c.066-.468.254-.788.46-.969c-1.61-.183-3.302-.805-3.302-3.583a2.8 2.8 0 0 1 .747-1.945c-.075-.184-.324-.92.07-1.92c0 0 .61-.194 1.994.744A7 7 0 0 1 7.5 3.756A7 7 0 0 1 9.315 4c1.384-.938 1.992-.743 1.992-.743c.396.998.147 1.735.072 1.919c.465.507.745 1.153.745 1.945c0 2.785-1.695 3.398-3.31 3.577c.26.224.492.667.492 1.343c0 .97-.009 1.751-.009 1.989c0 .194.131.42.499.349A7.25 7.25 0 0 0 7.499.25"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+            </motion.a>
+
           </div>
         </div>
-        <BreakLine />
+        <div className=" w-full h-[1px] bg-secondary md:mt-5 mt-1">
+
+        </div>
       </div>
     </div>
   );

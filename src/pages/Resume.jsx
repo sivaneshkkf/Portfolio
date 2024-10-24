@@ -10,12 +10,12 @@ import sivanesh_resume from "../images/SIVANESH-RESUME.pdf"
 
 function Resume() {
   return (
-    <div className="pt-5 pb-20 px-10 bg-primary">
+    <div className="pt-5 px-10 bg-primary">
       <TheHeading heading="RESUME" id={sectionID.resume} />
 
       <div className="md:flex md:gap-20 block sm:justify-center">
         <div className="max-w-2xl py-10">
-          <h2 className="text-xl font-bold text-center mb-8 text-textHead">
+          <h2 className="md:text-xl font-bold sm:text-center mb-8 text-textHead">
             Education
           </h2>
           <motion.div
@@ -35,12 +35,12 @@ function Resume() {
                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-accent rounded-full"></div>
                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-accent rounded-full blur-[5px]"></div>
                 <div>
-                  <h3 className="text-lg font-bold text-textHead">
+                  <h3 className="lg:text-lg text-sm font-bold text-textHead">
                     {edu.title}
-                    <span className="text-sm font-semibold">{edu.year}</span>
+                    <span className="lg:text-sm font-semibold">{edu.year}</span>
                   </h3>
-                  <p className="text-sm text-textpara">{edu.company}</p>
-                  <p className="text-sm text-textpara">{edu.desc}</p>
+                  <p className="lg:text-sm text-xs text-textpara">{edu.company}</p>
+                  <p className="lg:text-sm text-xs text-textpara">{edu.desc}</p>
                 </div>
               </div>
             ))}
@@ -53,9 +53,9 @@ function Resume() {
           viewport={{once:false, amount:0.1}}
           >
             <div className="">
-              <img src={resume} alt="resume" className="w-72 mx-auto" />
+              <img src={resume} alt="resume" className="w-52 md:w-72 mx-auto" />
             </div>
-            <a href={sivanesh_resume} download className="group py-2 px-3 flex gap-2 items-center mx-auto bg-accent rounded text-white text-sm font-semibold text-center w-fit">
+            <a href={sivanesh_resume} download className="group py-1 px-2 md:py-2 md:px-3 flex gap-2 items-center mx-auto bg-accent rounded text-white text-xs md:text-sm md:font-semibold text-center w-fit">
               DOWNLOAD RESUME
               <span>
                 <motion.svg
@@ -98,7 +98,7 @@ function Resume() {
         </div>
 
         <div className="max-w-2xl py-10">
-          <h2 className="text-xl font-bold text-center mb-8 text-textHead">
+          <h2 className="md:text-xl font-bold text-center mb-8 text-textHead">
             Job Experience
           </h2>
           <motion.div
@@ -119,12 +119,12 @@ function Resume() {
                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-accent rounded-full"></div>
                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-accent rounded-full blur-[5px]"></div>
                 <div>
-                  <h3 className="text-lg font-bold text-textHead">
+                  <h3 className="text-sm lg:text-lg font-bold text-textHead">
                     {job.title}
-                    <span className="text-sm font-semibold">{job.year}</span>
+                    <span className="lg:text-sm font-semibold">{job.year}</span>
                   </h3>
-                  <p className="text-sm text-textpara">{job.company}</p>
-                  <p className="text-sm text-textpara">{job.description}</p>
+                  <p className="text-xs lg:text-sm text-textpara mb-2">{job.company}</p>
+                  <p className="text-xs lg:text-sm text-textpara">{job.description}</p>
                 </div>
               </div>
             ))}

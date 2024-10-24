@@ -8,11 +8,11 @@ function TheHeading({heading,id}) {
     return ( 
         
       <div className="w-fit mx-auto">
-        <h4 className="text-textHead text-2xl font-bold text-center">
+        <h4 className="text-textHead text-md md:text-2xl font-bold text-center">
           {heading}
         </h4>
         <div
-        className={`h-1 bg-accent transition-all duration-500 ${visibleSection === id ? "w-full" : "w-0"}`}
+        className={`md:h-1 h-[2px] bg-accent transition-all duration-500 ${visibleSection === id ? "w-full" : "w-0"}`}
       ></div>
       </div>
      );

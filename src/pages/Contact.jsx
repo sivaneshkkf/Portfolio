@@ -50,7 +50,7 @@ function Contact() {
   // console.log(errors);
 
   return (
-    <div className="px-10 pt-5 pb-10 bg-primary">
+    <div className="px-10 pt-5 bg-primary">
       <TheHeading heading="CONTACT" id={sectionID.contact} />
       <div className="md:flex space-y-10 md:space-y-0 lg:gap-20 gap-10 justify-center mt-10">
         <motion.div
@@ -242,7 +242,7 @@ function Contact() {
             <div className="space-y-1">
               <label
                 htmlFor="message"
-                className="text-md text-textHead font-semibold"
+                className="text-xs md:text-sm text-textHead font-semibold"
               >
                 Message
               </label>
@@ -262,7 +262,7 @@ function Contact() {
               )}
             </div>
             <motion.button
-              className="group py-2 px-3 mt-5 flex gap-2 items-center mx-auto bg-accent rounded text-white text-sm font-semibold text-center"
+              className="group md:py-2 md:px-3 py-1 px-2 mt-5 flex gap-2 items-center mx-auto bg-accent rounded text-white text-xs md:text-sm font-normal md:font-semibold text-center"
               whileHover="hover"
             >
               SEND MESSAGE
