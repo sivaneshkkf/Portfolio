@@ -75,7 +75,7 @@ function Indroduction() {
               ]}
               wrapper="span"
               speed={10}
-              className="lg:text-5xl text-lg text-white font-semibold mt-10"
+              className="lg:text-5xl text-md text-white font-semibold mt-10"
               repeat={Infinity}
             />
 

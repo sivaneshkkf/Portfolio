@@ -67,8 +67,7 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
       ></div>
 
        
-        <GlowCircle 
-        content="View"
+        <GlowCircle
         className="group-hover:bottom-1/2 group-hover:opacity-100 group-hover:scale-100"
         link={link}/>
       

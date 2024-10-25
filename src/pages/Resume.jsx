@@ -55,7 +55,7 @@ function Resume() {
             <div className="">
               <img src={resume} alt="resume" className="w-52 md:w-72 mx-auto" />
             </div>
-            <a href={sivanesh_resume} download className="group py-1 px-2 md:py-2 md:px-3 flex gap-2 items-center mx-auto bg-accent rounded text-white text-xs md:text-sm md:font-semibold text-center w-fit">
+            <a href={sivanesh_resume} download className="group py-1 px-2 md:py-2 md:px-3 flex gap-2 items-center mx-auto bg-accent rounded text-white text-xs font-medium md:text-sm md:font-semibold text-center w-fit">
               DOWNLOAD RESUME
               <span>
                 <motion.svg

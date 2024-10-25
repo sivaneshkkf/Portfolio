@@ -23,27 +23,26 @@ function Contact() {
   } = useForm({ resolver: zodResolver(schemaValidation) });
 
   async function getFormData(data) {
-   
-    const mailObj={...data}
+    const mailObj = { ...data };
     event.preventDefault();
-      const formData = new FormData(event.target);
-  
-      mailObj.access_key="9b19e215-8878-45d3-8f85-a6ca812579c3";
-  
-      const json = JSON.stringify(mailObj);
-  
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: json
-      }).then((res) => res.json());
-  
-      if (res.success) {
-        alert("Message sent successfully")
-      }
+    const formData = new FormData(event.target);
+
+    mailObj.access_key = "9b19e215-8878-45d3-8f85-a6ca812579c3";
+
+    const json = JSON.stringify(mailObj);
+
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: json,
+    }).then((res) => res.json());
+
+    if (res.success) {
+      alert("Message sent successfully");
+    }
   }
 
   // console.log(errors);
@@ -65,7 +64,9 @@ function Contact() {
             {ContactData.map((d, index) => (
               <li className="flex items-center gap-3" key={index}>
                 <span dangerouslySetInnerHTML={{ __html: d.svg }}></span>
-                <p className="text-textHead dark:text-dark-textHead text-sm font-semibold">{d.data}</p>
+                <p className="text-textHead dark:text-dark-textHead text-sm font-semibold">
+                  {d.data}
+                </p>
               </li>
             ))}
           </ul>
@@ -203,7 +204,7 @@ function Contact() {
         </motion.div>
 
         <motion.div
-          className="xl:w-2/6 lg:w-3/6 md:w-4/6 p-8 bg-white dark:bg-dark-primary flex flex-col gap-5 items-center shadow-cardShadow rounded-2xl"
+          className="xl:w-2/6 lg:w-3/6 md:w-4/6 p-8 bg-white dark:bg-dark-primary flex flex-col gap-5 items-center shadow-cardShadow rounded-2xl relative overflow-hidden"
           variants={FadeIn("right", 0.2)}
           initial="hidden"
           whileInView={"show"}
@@ -261,7 +262,7 @@ function Contact() {
               )}
             </div>
             <motion.button
-              className="group md:py-2 md:px-3 py-1 px-2 mt-5 flex gap-2 items-center mx-auto bg-accent rounded text-white text-xs md:text-sm font-normal md:font-semibold text-center"
+              className="group md:py-2 md:px-3 py-1 px-2 mt-5 flex gap-2 items-center mx-auto bg-accent rounded text-white text-xs font-medium md:text-sm md:font-semibold text-center"
               whileHover="hover"
             >
               SEND MESSAGE
@@ -301,6 +302,16 @@ function Contact() {
               </motion.span>
             </motion.button>
           </form>
+
+          <div className="absolute hidden">
+            <dotlottie-player
+              src="https://lottie.host/91517511-b38b-4222-b664-a2e8f959db3b/kAjEz4uEvJ.json"
+              background="transparent"
+              speed="1"
+              style={{ width: "600px", height: "500px" }}
+              autoplay
+            ></dotlottie-player>
+          </div>
         </motion.div>
       </div>
     </div>
