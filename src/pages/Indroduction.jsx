@@ -41,7 +41,7 @@ function Indroduction() {
 
   return (
     <div className="bg-[url('../src/images/bg.png')] bg-cover bg-center h-full w-full relative z-0 mt-16">
-      <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10"></div>
+      <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10 dark:from-dark-gradient1 dark:to-dark-gradient2"></div>
       <div className=" p-10 sm:p-20 xl:px-60">
         <div className="flex gap-4 items-center justify-between">
           <motion.div
@@ -78,7 +78,7 @@ function Indroduction() {
               repeat={Infinity}
             />
 
-            <p className="text-gray-400 text-xs md:font-medium max-w-md pt-5 hidden sm:block">
+            <p className="text-gray-400 dark:text-gray-300 text-xs md:font-medium max-w-md pt-5 hidden sm:block">
               I am a passionate web developer skilled in building responsive and
               user-friendly websites. With expertise in HTML, CSS, JavaScript,
               and React, I focus on creating seamless digital experiences.
@@ -113,7 +113,7 @@ function Indroduction() {
           </div>
         </div>
         <motion.p
-          className="text-gray-400 text-xs md:font-medium pt-5 sm:hidden"
+          className="text-gray-400 dark:text-gray-300 text-xs md:font-medium pt-5 sm:hidden"
           variants={FadeIn("up", 0.5,0)}
           initial="hidden"
           whileInView={"show"}

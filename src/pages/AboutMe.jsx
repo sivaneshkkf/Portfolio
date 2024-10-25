@@ -9,10 +9,10 @@ function AboutMe() {
 
 
   return (
-    <div className="bg-primary px-10 pt-10 relative -z-[2]">
+    <div className="bg-primary dark:bg-dark-secondary px-10 pt-10 relative -z-[2]">
       <TheHeading heading="ABOUT ME" id={sectionIDS.aboutME.sectionId}/>
       <div className="flex items-center md:py-20 md:px-10 lg:px-60">
-        <p className="text-textpara text-xs sm:text-sm md:text-base lg:text-md font-medium flex-1">
+        <p className="text-textpara dark:text-dark-textpara text-xs sm:text-sm md:text-base lg:text-md font-medium flex-1">
           I’m a dedicated web developer with a passion for crafting clean,
           efficient, and visually appealing websites. With a strong foundation
           in HTML, CSS, JavaScript, and frameworks like React, I specialize in

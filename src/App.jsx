@@ -119,7 +119,7 @@ function App() {
   }, [scrolEnable]);
 
   return (
-    <div>
+    <div className="relative overflow-x-hidden">
       <ScrolContext.Provider value={{ scrolEnable, setScrollEnable }}>
         <HeadingContext.Provider value={{ visibleSection, setVisibleSection }}>
           <div id="navBar">

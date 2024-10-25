@@ -7,3 +7,12 @@
 body{
     @apply font-poppins
 }
+
+.glow-effect {
+    filter: saturate(100);
+    filter: hue-rotate(100px);
+    filter: drop-shadow(5 5 8px rgba(24, 186, 255, 0.6)) 
+    drop-shadow(0 0 4px rgba(36, 140, 237, 0.4));
+  }
+  
+  

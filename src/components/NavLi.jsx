@@ -23,10 +23,12 @@ function NavLi({ name, onClick, id, children }) {
       <a
         href="#"
         onClick={onClick}
-        className="hover:text-accent flex flex-col justify-center items-center text-xs md:text-sm font-medium sm:font-bold"
-      >
+        className={`flex flex-col justify-center items-center text-xs md:text-sm font-medium sm:font-bold 
+          ${showLine ? "text-accent" : "dark:text-white"} 
+          hover:sm:text-accent dark:hover:sm:text-accent`}>
+            
         {children && children}
-        <p className={`${showLine? "hidden md:block":""}`}>{name}</p>
+        <p className={`${showLine? "hidden sm:block":""} dark:text-dark-textHead`}>{name}</p>
         
       </a>
 

@@ -6,7 +6,7 @@ import BreakLine from "../components/BreakLine";
 
 function Projects() {
   return (
-    <div className="px-10 pt-5 bg-primary">
+    <div className="px-10 pt-5 bg-primary dark:bg-dark-secondary">
       <TheHeading heading="PROJECTS" id={sectionIDS.projects.sectionId} />
       <div className="sm:mt-8 pt-10 lg:px-20 pb-20 flex flex-col items-center">
         <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 xl:gap-20 sm:gap-10 gap-8 w-fit">

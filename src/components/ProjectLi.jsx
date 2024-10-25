@@ -69,7 +69,7 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
         className=" group flex flex-col h-full relative"
         target="blank"
       >
-        <div className="relative flex justify-center items-center bg-cover bg-center">
+        <div className="relative flex-1 flex justify-center items-center bg-cover bg-center">
           {/* Main content */}
           <img
             src={img}
@@ -79,19 +79,19 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
         </div>
 
         {/* Content section */}
-        <div className="bottom-0 bg-white p-5 w-full bg-blend-color-burn backdrop-blur-lg bg-opacity-0">
+        <div className="bottom-0 bg-white p-5 w-full h-full bg-blend-color-burn backdrop-blur-lg bg-opacity-[0.05]">
           <div className="flex-grow">
             <h4 className="text-accent lg:text-lg text-sm font-semibold">
               {name}
             </h4>
-            <p className="text-gray-200 sm:text-xs text-[10px] mt-2">{disc}</p>
+            <p className="text-gray-200 dark:text-gray-400 sm:text-xs text-[10px] mt-2">{disc}</p>
           </div>
 
           <div className="mt-4 flex sm:items-center items-end justify-between">
             <ul className="flex flex-wrap md:gap-2 gap-1">
               {techs.map((li, index) => (
                 <li
-                  className="md:py-1 md:px-2 py-[2px] px-1 border-2 bg-primary md:text-xs text-[10px] font-semibold text-textHead rounded"
+                  className="md:py-1 md:px-2 py-[2px] px-1 border dark:border-gray-600 bg-primary dark:bg-dark-primary md:text-xs text-[10px] font-semibold text-textHead dark:text-dark-textHead rounded"
                   key={index}
                 >
                   {li}

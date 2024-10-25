@@ -5,7 +5,7 @@ import { FadeIn } from "../varients/varientAnim";
 function SkillsLi({ svg, name, hoverCol, svgCol }) {
 
   return (
-    <motion.li className="flex flex-col items-center z-10 justify-center shadow-cardShadow rounded-lg p-4 gap-2 group relative overflow-hidden w-28 h-28 sm:w-36 sm:h-36"
+    <motion.li className="dark:bg-dark-primary flex flex-col items-center z-10 justify-center shadow-cardShadow rounded-lg p-4 gap-2 group relative overflow-hidden w-28 h-28 sm:w-36 sm:h-36"
     variants={FadeIn("up",0.2)}
     initial="hidden"
     whileInView={"show"}
@@ -17,7 +17,7 @@ function SkillsLi({ svg, name, hoverCol, svgCol }) {
 
         </span>{" "}
       {/* This will render the SVG */}
-      <p className="text-textHead text-xs sm:text-sm font-bold text-center group-hover:text-white">
+      <p className="text-textHead dark:text-dark-textHead text-xs sm:text-sm font-bold text-center group-hover:text-white">
         {name}
       </p>
       <div
