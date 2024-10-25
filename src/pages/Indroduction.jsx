@@ -8,6 +8,7 @@ import {
 import BreakLine from "../components/BreakLine";
 import { TypeAnimation } from "react-type-animation";
 import { FadeIn } from "../varients/varientAnim";
+import sivaneshImg from "../images/sivaneshImg.png"
 
 function Indroduction() {
   const x = useMotionValue(0);
@@ -104,9 +105,9 @@ function Indroduction() {
               }}
             >
               <img
-                src="../src/images/pfImg.png"
-                alt=""
-                className="md:max-w-80 xl:max-w-sm mx-auto"
+                src={sivaneshImg}
+                alt="pfImg"
+                className="md:max-w-80 xl:max-w-sm mx-auto rounded-3xl shadow-2xl border-2 border-zinc-700"
               />
               {/* <div className="w-80 h-8 bg-black rounded-full mx-auto absolute -bottom-5 left-1/2 transform -translate-x-1/2 -z-10 blur-2xl"></div> */}
             </motion.div>
