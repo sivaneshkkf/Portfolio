@@ -1,6 +1,7 @@
 import BreakLine from "../components/BreakLine";
 import TheHeading from "../components/TheHeading";
 import sectionIDS from "../data/SectionIDS"
+import aboutImg from "../images/about.png"
 
 
 
@@ -22,7 +23,7 @@ function AboutMe() {
         </p>
         <div className="">
           <img
-            src="../src/images/about.png"
+            src={aboutImg}
             alt="about"
             className="max-w-28 sm:max-w-32 md:max-w-44 lg:max-w-96 ml-auto"
           />

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ScrolContext } from "../varients/ScrolContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import logo from "../images/logo.png"
 import { faHouse,faIdBadge, faUserGear, faFileCode, faSheetPlastic, faAddressBook } from '@fortawesome/free-solid-svg-icons'
 
 function TheNaveBar() {
@@ -81,7 +82,7 @@ function TheNaveBar() {
               Developer
             </span>
           </p>
-          <img src="../src/images/logo.png" alt="" className="w-14" />
+          <img src={logo} alt="" className="w-14" />
         </div>
 
         <div className="flex gap-6 items-center w-full sm:w-fit">
