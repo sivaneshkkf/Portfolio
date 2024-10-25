@@ -43,7 +43,7 @@ function Indroduction() {
   return (
     <div className="bg-[url('../src/images/bg.png')] bg-cover bg-center h-full w-full relative z-0 mt-16">
       <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10 dark:from-dark-gradient1 dark:to-dark-gradient2"></div>
-      <div className=" p-10 sm:p-20 xl:px-60">
+      <div className=" p-8 sm:p-20 xl:px-60">
         <div className="flex gap-4 items-center justify-between">
           <motion.div
             className="space-y-8 flex-1"
@@ -56,7 +56,7 @@ function Indroduction() {
               Welcome to my world
             </p>
 
-            <h3 className="lg:text-5xl text-xl md:text-6xl text-white font-semibold">
+            <h3 className="lg:text-5xl text-lg md:text-6xl text-white font-semibold">
               Hi I'm{" "}
               <span className="text-accent font-bold lg:text-5xl text-xl md:text-6xl tracking-wide ml-2">
                 Sivanesh
@@ -75,7 +75,7 @@ function Indroduction() {
               ]}
               wrapper="span"
               speed={10}
-              className="lg:text-5xl text-xl text-white font-semibold mt-10"
+              className="lg:text-5xl text-lg text-white font-semibold mt-10"
               repeat={Infinity}
             />
 
@@ -107,7 +107,7 @@ function Indroduction() {
               <img
                 src={sivaneshImg}
                 alt="pfImg"
-                className="md:max-w-80 xl:max-w-sm mx-auto rounded-3xl shadow-2xl border-2 border-zinc-700"
+                className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700"
               />
               {/* <div className="w-80 h-8 bg-black rounded-full mx-auto absolute -bottom-5 left-1/2 transform -translate-x-1/2 -z-10 blur-2xl"></div> */}
             </motion.div>
@@ -127,7 +127,7 @@ function Indroduction() {
         </motion.p>
         <div className="mt-8">
           <p className="text-gray-300 text-xs md:text-sm mb-1 md:mb-2">Follow Me</p>
-          <div className="flex md:gap-4 gap-2 items-center text-white">
+          <div className="flex md:gap-4 gap-3 items-center text-white">
             <motion.a
               href="https://www.instagram.com/siva_innocent_soul/profilecard/?igsh=MTV0cGRzZXNzMmw3ZQ== "
               target="blank"
@@ -141,7 +141,7 @@ function Indroduction() {
                 width="1.5rem"
                 height="1.5em"
                 viewBox="0 0 14 14"
-                className="hover:text-accent cursor-pointer w-4 md:w-6"
+                className="hover:text-accent cursor-pointer w-5 md:w-6"
               >
                 <g
                   fill="none"
@@ -168,7 +168,7 @@ function Indroduction() {
                 width="1.5em"
                 height="1.5em"
                 viewBox="0 0 24 24"
-                className="hover:text-accent cursor-pointer w-4 md:w-6"
+                className="hover:text-accent cursor-pointer w-5 md:w-6"
               >
                 <path
                   fill="currentColor"
@@ -191,7 +191,7 @@ function Indroduction() {
                 width="1.3em"
                 height="1.3em"
                 viewBox="0 0 20 20"
-                className="hover:text-accent cursor-pointer w-4 md:w-6"
+                className="hover:text-accent cursor-pointer w-5 md:w-6"
               >
                 <path
                   fill="currentColor"
@@ -211,7 +211,7 @@ function Indroduction() {
                 width="1.5em"
                 height="1.5em"
                 viewBox="0 0 24 24"
-                className="hover:text-accent cursor-pointer w-4 md:w-6"
+                className="hover:text-accent cursor-pointer w-5 md:w-6"
               >
                 <g fill="none">
                   <g clipPath="url(#akarIconsWhatsappFill0)">
@@ -231,14 +231,14 @@ function Indroduction() {
               </svg>
             </motion.a>
 
-            <motion.a href="http://Wa.me/+917010037476" target="blank"
+            <motion.a href="https://github.com/sivaneshkkf?tab=repositories" target="blank"
               variants={FadeIn("up",0.9,0)}
               initial="hidden"
               whileInView={"show"}
               viewport={{once:true}}
             >
               <svg
-                 className="hover:text-accent cursor-pointer w-5 md:w-6 sm:hidden"
+                 className="hover:text-accent cursor-pointer w-6 md:w-7 sm:hidden"
                 xmlns="http://www.w3.org/2000/svg"
                 width="2em"
                 height="2em"

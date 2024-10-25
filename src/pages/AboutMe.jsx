@@ -10,10 +10,10 @@ function AboutMe() {
 
 
   return (
-    <div className="bg-primary dark:bg-dark-secondary px-10 pt-10 relative -z-[2]">
+    <div className="bg-primary dark:bg-dark-secondary px-5 pt-10 relative -z-[2]">
       <TheHeading heading="ABOUT ME" id={sectionIDS.aboutME.sectionId}/>
       <div className="flex items-center md:py-20 md:px-10 lg:px-60">
-        <p className="text-textpara dark:text-dark-textpara text-xs sm:text-sm md:text-base lg:text-md font-medium flex-1">
+        <p className="text-textpara dark:text-dark-textpara text-xs sm:text-sm md:text-base lg:text-md font-medium flex-1 mt-3">
           I’m a dedicated web developer with a passion for crafting clean,
           efficient, and visually appealing websites. With a strong foundation
           in HTML, CSS, JavaScript, and frameworks like React, I specialize in
@@ -32,7 +32,7 @@ function AboutMe() {
 
       <div className="absolute top-0 left-0 -z-[2]">
         <svg
-          className="w-40 sm:w-52 md:w-64 h-fit"
+          className="w-28 sm:w-52 md:w-64 h-fit"
           width="318"
           height="238"
           viewBox="0 0 318 238"
@@ -46,9 +46,9 @@ function AboutMe() {
           />
         </svg>
       </div>
-      <div className="absolute bottom-14 right-0 -z-[1]">
+      <div className="absolute bottom-2 md:bottom-14 right-0 -z-[1]">
         <svg
-            className="lg:max-w-6xl max-w-40 sm:max-w-52 md:max-w-64 h-fit"
+            className="lg:max-w-6xl max-w-28 sm:max-w-52 md:max-w-64 h-fit"
           width="308"
           height="650"
           viewBox="0 0 308 650"

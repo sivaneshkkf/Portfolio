@@ -5,14 +5,14 @@ import { FadeIn } from "../varients/varientAnim";
 function SkillsLi({ svg, name, hoverCol, svgCol }) {
 
   return (
-    <motion.li className="dark:bg-dark-primary flex flex-col items-center z-10 justify-center shadow-cardShadow rounded-lg p-4 gap-2 group relative overflow-hidden w-28 h-28 sm:w-36 sm:h-36"
+    <motion.li className="dark:bg-dark-primary flex flex-col items-center z-10 justify-center shadow-cardShadow rounded-lg p-2 gap-2 group relative overflow-hidden w-24 h-24 sm:w-36 sm:h-36"
     variants={FadeIn("up",0.2)}
     initial="hidden"
     whileInView={"show"}
     viewport={{once: false}}>
         
       <span
-        className="w-14 h-14 sm:w-20 sm:h-20"
+        className="w-10 h-10 sm:w-20 sm:h-20"
         dangerouslySetInnerHTML={{ __html: svg }}>
 
         </span>{" "}

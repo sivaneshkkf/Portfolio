@@ -64,10 +64,6 @@ function TheNaveBar() {
 
   };
 
-  console.log(dimensions);
-
-  console.log(visibleSection.navLiId, sectionIDS.home.navId)
-
   // useEffect(() => {
   //   setActiveLi(visibleSection);
   // }, [visibleSection]);
@@ -94,7 +90,7 @@ function TheNaveBar() {
             >
               <span className="sm:hidden">
                
-              <FontAwesomeIcon icon={faHouse} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.home.navId ? "w-8 h-8" : "w-6 h-6"}`}/>
+              <FontAwesomeIcon icon={faHouse} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.home.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
 
               </span>
             </NavLi>
@@ -105,7 +101,7 @@ function TheNaveBar() {
             >
               <span className="sm:hidden">
                    
-                <FontAwesomeIcon icon={faIdBadge} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.aboutME.navId ? "w-8 h-8" : "w-6 h-6"}`}/>
+                <FontAwesomeIcon icon={faIdBadge} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.aboutME.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
               </span>
             </NavLi>
             <NavLi
@@ -115,7 +111,7 @@ function TheNaveBar() {
             >
               <span className="sm:hidden">
                
-                <FontAwesomeIcon icon={faUserGear} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.skills.navId ? "w-8 h-8" : "w-6 h-6"}`}/>
+                <FontAwesomeIcon icon={faUserGear} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.skills.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
               </span>
             </NavLi>
             <NavLi
@@ -125,7 +121,7 @@ function TheNaveBar() {
             >
               <span className="sm:hidden">
                 
-                <FontAwesomeIcon icon={faFileCode} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.projects.navId ? "w-8 h-8" : "w-6 h-6"}`}/>
+                <FontAwesomeIcon icon={faFileCode} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.projects.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
               </span>
             </NavLi>
             <NavLi
@@ -135,7 +131,7 @@ function TheNaveBar() {
             >
               <span className="sm:hidden">
                 
-                <FontAwesomeIcon icon={faSheetPlastic} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.resume.navId ? "w-8 h-8" : "w-6 h-6"}`}/>
+                <FontAwesomeIcon icon={faSheetPlastic} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.resume.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
               </span>
             </NavLi>
             <NavLi
@@ -145,7 +141,7 @@ function TheNaveBar() {
             >
               <span className="sm:hidden">
                
-                <FontAwesomeIcon icon={faAddressBook} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.contact.navId ? "w-8 h-8" : "w-6 h-6"}`}/>
+                <FontAwesomeIcon icon={faAddressBook} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.contact.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
               </span>
             </NavLi>
           </ul>

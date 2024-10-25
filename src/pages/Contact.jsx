@@ -31,7 +31,6 @@ function Contact() {
       mailObj.access_key="9b19e215-8878-45d3-8f85-a6ca812579c3";
   
       const json = JSON.stringify(mailObj);
-      console.log(json)
   
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -50,7 +49,7 @@ function Contact() {
   // console.log(errors);
 
   return (
-    <div className="px-10 pb-5 pt-5 bg-primary dark:bg-dark-secondary">
+    <div className="px-5 pb-5 pt-5 bg-primary dark:bg-dark-secondary">
       <TheHeading heading="CONTACT" id={sectionIDS.contact.sectionId} />
       <div className="md:flex space-y-10 md:space-y-0 lg:gap-20 gap-10 justify-center mt-10">
         <motion.div

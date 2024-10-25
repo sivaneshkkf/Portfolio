@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FadeIn } from "../varients/varientAnim";
+import GlowCircle from "./GlowCircle";
 
 function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
   return (
@@ -48,7 +49,7 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
     // </li>
 
     <motion.li
-      className="bg-white shadow-cardShadow flex flex-col md:rounded-3xl rounded-xl relative overflow-hidden backdrop-blur-lg backdrop-saturate-0 bg-opacity-100"
+      className="bg-white group shadow-cardShadow flex flex-col md:rounded-3xl rounded-xl relative overflow-hidden backdrop-blur-lg backdrop-saturate-0 bg-opacity-100 relative"
       style={{ backgroundImage: `url(${bg})` }}
       variants={FadeIn("up", 0.2)}
       initial="hidden"
@@ -64,12 +65,20 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
           zIndex: -1,
         }}
       ></div>
-      <a
-        href={link}
+
+       
+        <GlowCircle 
+        content="View"
+        className="group-hover:bottom-1/2 group-hover:opacity-100 group-hover:scale-100"
+        link={link}/>
+      
+        
+    
+
+      <div
         className=" group flex flex-col h-full relative"
-        target="blank"
       >
-        <div className="relative flex-1 flex justify-center items-center bg-cover bg-center">
+        <div className="relative flex-1 flex justify-center items-center bg-cover bg-center group-hover:blur-[1px]">
           {/* Main content */}
           <img
             src={img}
@@ -84,7 +93,9 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
             <h4 className="text-accent lg:text-lg text-sm font-semibold">
               {name}
             </h4>
-            <p className="text-gray-200 dark:text-gray-400 sm:text-xs text-[10px] mt-2">{disc}</p>
+            <p className="text-gray-200 dark:text-gray-400 sm:text-xs text-[10px] mt-2">
+              {disc}
+            </p>
           </div>
 
           <div className="mt-4 flex sm:items-center items-end justify-between">
@@ -118,7 +129,7 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </motion.li>
   );
 }

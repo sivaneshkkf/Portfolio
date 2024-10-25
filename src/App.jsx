@@ -103,7 +103,15 @@ function App() {
       setScrollEnable(true); // Enable scrolling when wheel event is triggered
     };
 
+    const handleTouch = (e) => {
+      if(e.target != "navBar"){
+        setScrollEnable(true)
+      }
+    } 
+
     document.addEventListener("wheel", handleWheelScroll);
+
+    document.addEventListener("touchstart", handleTouch)
 
     return () => {
       document.removeEventListener("wheel", handleWheelScroll);

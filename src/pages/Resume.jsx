@@ -10,7 +10,7 @@ import sivanesh_resume from "../images/SIVANESH-RESUME.pdf"
 
 function Resume() {
   return (
-    <div className="pt-5 px-10 bg-primary dark:bg-dark-secondary">
+    <div className="pt-5 px-5 bg-primary dark:bg-dark-secondary">
       <TheHeading heading="RESUME" id={sectionIDS.resume.sectionId} />
 
       <div className="md:flex md:gap-20 block sm:justify-center">
