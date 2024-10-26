@@ -7,7 +7,7 @@ function ContactInput({lable,type, id, className,register,error}) {
         id={id}
         name={id}
         {...register}
-        className={`md:py-2 md:px-3 py-1 px-2 bg-secondary dark:bg-dark-secondary rounded outline-none w-full ${className} ${error ? "border-2 border-accent" : ""}`}
+        className={`md:py-2 md:px-3 py-1 px-2 text-sm text-textHead dark:text-dark-textHead bg-secondary dark:bg-dark-secondary rounded outline-none w-full ${className} ${error ? "border-2 border-accent" : ""}`}
       />
       {error && <span className="text-xs text-red-600 font-medium">{error.message}</span>}
     </div>

@@ -6,9 +6,30 @@ import resume from "../images/resume.jpg";
 import BreakLine from "../components/BreakLine";
 import { motion } from "framer-motion";
 import { FadeIn } from "../varients/varientAnim";
-import sivanesh_resume from "../images/SIVANESH-RESUME.pdf"
+import sivanesh_resume from "../images/SIVANESH-RESUME.pdf";
+import Btn from "../components/Btn";
+import axios from "axios";
+import { useState } from "react";
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 function Resume() {
+  const [progressValue, setProgressValue] = useState(0);
+
+  async function handleDownload(e) {
+    await axios({
+      url: sivanesh_resume,
+      method: "GET",
+      responseType: "blob", // important
+      onDownloadProgress: (progressEvent) => {
+        let percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        ); // you can use this to show user percentage of file downloaded
+        setProgressValue(percentCompleted);
+      },
+    });
+  }
+
   return (
     <div className="pt-5 px-5 bg-primary dark:bg-dark-secondary">
       <TheHeading heading="RESUME" id={sectionIDS.resume.sectionId} />
@@ -23,9 +44,9 @@ function Resume() {
               "relative before:absolute before:top-0 before:bottom-0 before:left-5 before:w-[2px] before:bg-accent before:opacity-80 "
             }
             variants={FadeIn("left", 0.2)}
-           initial="hidden"
-           whileInView={"show"}
-           viewport={{ once: false }}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: false }}
           >
             {EducationData.map((edu, index) => (
               <div
@@ -39,60 +60,79 @@ function Resume() {
                     {edu.title}
                     <span className="lg:text-sm font-semibold">{edu.year}</span>
                   </h3>
-                  <p className="lg:text-sm text-xs text-textpara dark:text-dark-textpara">{edu.company}</p>
+                  <p className="lg:text-sm text-xs text-textpara dark:text-dark-textpara">
+                    {edu.company}
+                  </p>
                   <p className="lg:text-sm text-xs text-textpara">{edu.desc}</p>
                 </div>
               </div>
             ))}
           </motion.div>
 
-          <motion.div className="px-5 py-8 bg-secondary dark:bg-dark-primary rounded-lg shadow-cardShadow space-y-5"
-          variants={FadeIn("left", 0.2)}
-          initial= "hidden"
-          whileInView={"show"}
-          viewport={{once:false, amount:0.1}}
+          <motion.div
+            className="px-5 py-8 bg-secondary dark:bg-dark-primary rounded-lg shadow-cardShadow space-y-5"
+            variants={FadeIn("left", 0.2)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: false, amount: 0.1 }}
           >
             <div className="">
               <img src={resume} alt="resume" className="w-52 md:w-72 mx-auto" />
             </div>
-            <a href={sivanesh_resume} download className="group py-1 px-2 md:py-2 md:px-3 flex gap-2 items-center mx-auto bg-accent rounded text-white text-xs font-medium md:text-sm md:font-semibold text-center w-fit">
-              DOWNLOAD RESUME
-              <span>
-                <motion.svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 38 38"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  initial={{ y: 0, opacity: 1, scale:1 }}
-                  animate={{ y: -10, opacity:0.5 , scale:0.8}}
-                  transition={{
-                    ease: "easeInOut",
-                    duration: 1,
-                    repeat: Infinity,
-                    repeatType: "reverse", // Moves up and down
-                  }}
-                >
-                  <path
-                    d="M19 6.33301H22.1667V11.083H26.125L19 18.208M19 6.33301H15.8333V11.083H11.875L19 18.208"
-                    fill="white"
+            <a href={sivanesh_resume} download onClick={handleDownload}>
+              <Btn text={`${progressValue>0 ? "DOWNLOADED" : "DOWNLOAD RESUME"}`}>
+                <span className={`${progressValue>0 ? "hidden" : "block"}`}>
+                  <motion.svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 38 38"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    initial={{ y: 0, opacity: 1, scale: 1 }}
+                    animate={{ y: -10, opacity: 0.5, scale: 0.8 }}
+                    transition={{
+                      ease: "easeInOut",
+                      duration: 1,
+                      repeat: Infinity,
+                      repeatType: "reverse", // Moves up and down
+                    }}
+                  >
+                    <path
+                      d="M19 6.33301H22.1667V11.083H26.125L19 18.208M19 6.33301H15.8333V11.083H11.875L19 18.208"
+                      fill="white"
+                    />
+                    <path
+                      d="M19 6.33301H22.1667V11.083H26.125L19 18.208L11.875 11.083H15.8333V6.33301H19Z"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M9.5 26.083H28.5"
+                      stroke="white"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </motion.svg>
+                </span>
+                <div className={`w-8 h-8 text-sm font-bold ${progressValue>0 ? "block" : "hidden"}`}>
+                  <CircularProgressbar
+                    value={progressValue}
+                    text={`${progressValue}%`}
+                    styles={buildStyles({
+                      // Path color (progress bar color)
+                      pathColor: `#ffffff`, // Adjust color as needed
+                      // Text color
+                      textColor: "#f88",
+                      // Trail color (background path color)
+                      trailColor: "rgba(255,255,255,0.2)",
+                      textSize: "24px"
+                    })}
                   />
-                  <path
-                    d="M19 6.33301H22.1667V11.083H26.125L19 18.208L11.875 11.083H15.8333V6.33301H19Z"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M9.5 26.083H28.5"
-                    stroke="white"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </motion.svg>
-              </span>
+                </div>
+              </Btn>
             </a>
           </motion.div>
         </div>
@@ -105,7 +145,6 @@ function Resume() {
             className={
               "relative before:absolute before:top-0 before:bottom-0 before:left-5 before:w-[2px] before:bg-accent before:opacity-80 "
             }
-
             variants={FadeIn("right", 0.2)}
             initial="hidden"
             whileInView={"show"}
@@ -123,8 +162,12 @@ function Resume() {
                     {job.title}
                     <span className="lg:text-sm font-semibold">{job.year}</span>
                   </h3>
-                  <p className="text-xs lg:text-sm text-textpara dark:text-dark-textpara mb-2">{job.company}</p>
-                  <p className="text-xs lg:text-sm text-textpara dark:text-dark-textpara">{job.description}</p>
+                  <p className="text-xs lg:text-sm text-textpara dark:text-dark-textpara mb-2">
+                    {job.company}
+                  </p>
+                  <p className="text-xs lg:text-sm text-textpara dark:text-dark-textpara">
+                    {job.description}
+                  </p>
                 </div>
               </div>
             ))}

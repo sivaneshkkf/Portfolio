@@ -6,14 +6,22 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { FadeIn } from "../varients/varientAnim";
+import { FadeIn, SuccessMessage } from "../varients/varientAnim";
+import { useState } from "react";
+import Btn from "../components/Btn";
 
 function Contact() {
   const schemaValidation = z.object({
     name: z.string().min(3, { message: "Invalid Name" }).max(40),
     phoneNumber: z.string().min(10, { message: "Invalid Number" }).max(10),
     email: z.string().email(),
-    message: z.string().min(2, { message: "Enter your message breifly" }),
+    message: z.string().min(2, { message: "Enter your message briefly" }),
+  });
+
+  const [showMessage, setShowMessage] = useState({
+    anim: false,
+    text: false,
+    btnAnim: false,
   });
 
   const {
@@ -25,7 +33,11 @@ function Contact() {
   async function getFormData(data) {
     const mailObj = { ...data };
     event.preventDefault();
-    const formData = new FormData(event.target);
+
+    setShowMessage((pre) => ({
+      ...pre,
+      btnAnim: true,
+    }));
 
     mailObj.access_key = "9b19e215-8878-45d3-8f85-a6ca812579c3";
 
@@ -41,11 +53,17 @@ function Contact() {
     }).then((res) => res.json());
 
     if (res.success) {
-      alert("Message sent successfully");
+      setShowMessage((pre) => ({ ...pre, anim: true, btnAnim: false }));
+      setTimeout(() => {
+        setShowMessage((pre) => ({
+          ...pre,
+          text: true,
+        }));
+      }, 1000);
     }
   }
 
-  // console.log(errors);
+  // success message show
 
   return (
     <div className="px-5 pb-5 pt-5 bg-primary dark:bg-dark-secondary">
@@ -212,7 +230,11 @@ function Contact() {
         >
           <form
             action="submit"
-            className="flex flex-col justify-between gap-2 h-full w-full"
+            className={`h-full w-full ${
+              showMessage.anim
+                ? "hidden items-center justify-center"
+                : "flex flex-col justify-between gap-2"
+            }`}
             onSubmit={handleSubmit(getFormData)}
           >
             <ContactInput
@@ -250,7 +272,7 @@ function Contact() {
                 name="message"
                 id="message"
                 rows={5}
-                className={`bg-secondary dark:bg-dark-secondary py-2 px-3 rounded w-full resize-none outline-none ${
+                className={`bg-secondary dark:bg-dark-secondary py-2 px-3 rounded w-full resize-none outline-none text-sm text-textHead dark:text-dark-textHead ${
                   errors.message ? "border-2 border-accent" : ""
                 }`}
                 {...register("message")}
@@ -261,57 +283,95 @@ function Contact() {
                 </span>
               )}
             </div>
-            <motion.button
-              className="group md:py-2 md:px-3 py-1 px-2 mt-5 flex gap-2 items-center mx-auto bg-accent rounded text-white text-xs font-medium md:text-sm md:font-semibold text-center"
-              whileHover="hover"
-            >
-              SEND MESSAGE
-              <motion.span
-                variants={{
-                  hover: {
-                    scale: 1.3,
-                  },
-                }}
-                initial={{ scale: 1 }}
-                transition={{
-                  ease: "easeInOut",
-                  duration: 0.5,
-                }}
-              >
+            <Btn text="SEND MESSAGE" btnAnim={showMessage.btnAnim}>
+              <span className={`${showMessage.btnAnim ? "hidden" : "block"}`}>
                 <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  width="1.5em"
+                  height="1.5em"
+                  viewBox="0 0 24 24"
                 >
-                  <g clipPath="url(#clip0_102_725)">
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M18.2715 5.33675L5.67946 9.88975L9.87446 12.3178L13.5735 8.61775C13.7611 8.43024 14.0155 8.32495 14.2808 8.32505C14.5461 8.32514 14.8005 8.43061 14.988 8.61825C15.1755 8.80589 15.2808 9.06033 15.2807 9.3256C15.2806 9.59087 15.1751 9.84524 14.9875 10.0328L11.2875 13.7328L13.7175 17.9268L18.2715 5.33675ZM18.5945 3.09275C19.7895 2.65975 20.9475 3.81775 20.5145 5.01275L15.2325 19.6178C14.7985 20.8158 13.1625 20.9618 12.5235 19.8587L9.30646 14.3008L3.74846 11.0838C2.64546 10.4448 2.79146 8.80875 3.98946 8.37475L18.5945 3.09275Z"
-                      fill="white"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_102_725">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
+                  <path
+                    fill="currentColor"
+                    fillRule="evenodd"
+                    d="M1.846 7.151a.75.75 0 0 0-.228 1.376l6.517 3.915l6.22-4.355a.75.75 0 0 1 .86 1.229l-6.22 4.355l1.45 7.463a.75.75 0 0 0 1.372.256L22.792 3.94a.75.75 0 0 0-.793-1.133z"
+                    clipRule="evenodd"
+                  ></path>
                 </svg>
-              </motion.span>
-            </motion.button>
+              </span>
+
+              <span className={`absolute ${showMessage.btnAnim ? "block" : "hidden"}`}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="3.8em"
+                  height="3.8em"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeDasharray="2 4"
+                      strokeDashoffset="6"
+                      d="M12 21c-4.97 0 -9 -4.03 -9 -9c0 -4.97 4.03 -9 9 -9"
+                    >
+                      <animate
+                        attributeName="stroke-dashoffset"
+                        dur="0.6s"
+                        repeatCount="indefinite"
+                        values="6;0"
+                      ></animate>
+                    </path>
+                    <path
+                      strokeDasharray="32"
+                      strokeDashoffset="32"
+                      d="M12 3c4.97 0 9 4.03 9 9c0 4.97 -4.03 9 -9 9"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        begin="0.1s"
+                        dur="0.4s"
+                        values="32;0"
+                      ></animate>
+                    </path>
+                    <path
+                      strokeDasharray="10"
+                      strokeDashoffset="10"
+                      d="M12 16v-7.5"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        begin="0.5s"
+                        dur="0.2s"
+                        values="10;0"
+                      ></animate>
+                    </path>
+                    <path
+                      strokeDasharray="6"
+                      strokeDashoffset="6"
+                      d="M12 8.5l3.5 3.5M12 8.5l-3.5 3.5"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        begin="0.7s"
+                        dur="0.2s"
+                        values="6;0"
+                      ></animate>
+                    </path>
+                  </g>
+                </svg>
+              </span>
+            </Btn>
           </form>
 
-          <div className="absolute hidden">
-            <dotlottie-player
-              src="https://lottie.host/91517511-b38b-4222-b664-a2e8f959db3b/kAjEz4uEvJ.json"
-              background="transparent"
-              speed="1"
-              style={{ width: "600px", height: "500px" }}
-              autoplay
-            ></dotlottie-player>
-          </div>
+          <SuccessMessage showMessage={showMessage} />
         </motion.div>
       </div>
     </div>

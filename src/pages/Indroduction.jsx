@@ -47,7 +47,7 @@ function Indroduction() {
         <div className="flex gap-4 items-center justify-between">
           <motion.div
             className="space-y-8 flex-1"
-            variants={FadeIn("left", 0.2,0)}
+            variants={FadeIn("left", 0.5,0)}
             initial="hidden"
             whileInView={"show"}
             viewport={{ once: true }}
@@ -131,7 +131,7 @@ function Indroduction() {
             <motion.a
               href="https://www.instagram.com/siva_innocent_soul/profilecard/?igsh=MTV0cGRzZXNzMmw3ZQ== "
               target="blank"
-              variants={FadeIn("up",0.5,0)}
+              variants={FadeIn("up",0.6,0)}
               initial="hidden"
               whileInView={"show"}
               viewport={{once:true}}
@@ -158,7 +158,7 @@ function Indroduction() {
             <motion.a
               href="https://www.linkedin.com/in/sivanesh-raja-2aa575240"
               target="blank"
-              variants={FadeIn("up",0.6,0)}
+              variants={FadeIn("up",0.8,0)}
               initial="hidden"
               whileInView={"show"}
               viewport={{once:true}}
@@ -181,7 +181,7 @@ function Indroduction() {
             <motion.a
               href="https://www.facebook.com/profile.php?id=100005058169350"
               target="blank"
-              variants={FadeIn("up",0.7,0)}
+              variants={FadeIn("up",1,0)}
               initial="hidden"
               whileInView={"show"}
               viewport={{once:true}}
@@ -201,7 +201,7 @@ function Indroduction() {
               </svg>
             </motion.a>
             <motion.a href="http://Wa.me/+917010037476" target="blank"
-              variants={FadeIn("up",0.8,0)}
+              variants={FadeIn("up",1.12,0)}
               initial="hidden"
               whileInView={"show"}
               viewport={{once:true}}
@@ -232,7 +232,7 @@ function Indroduction() {
             </motion.a>
 
             <motion.a href="https://github.com/sivaneshkkf?tab=repositories" target="blank"
-              variants={FadeIn("up",0.9,0)}
+              variants={FadeIn("up",1.14,0)}
               initial="hidden"
               whileInView={"show"}
               viewport={{once:true}}
