@@ -50,7 +50,7 @@ function RoadMap() {
           />
         </div>
 
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 sm:w-[300px] w-[150px] sm:h-40 h-[130px] overflow-hidden">
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 sm:w-[300px] w-[170px] sm:h-40 h-[95px] overflow-hidden">
         <CircularProgressbar
             className="-rotate-90 duration-300"
             value={25}
