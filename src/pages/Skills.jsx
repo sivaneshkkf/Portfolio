@@ -7,7 +7,7 @@ import sectionIDS from "../data/SectionIDS"
 
 function SKills() {
   return (
-    <div className="bg-primary dark:bg-dark-secondary secondary pt-5">
+    <div className="bg-primary dark:bg-dark-secondary secondary md:pt-16 pt-5">
       <TheHeading heading="MY SKILLS" id={sectionIDS.skills.sectionId}/>
       <div className="lg:py-10 lg:px-20 sm:py-5 sm:px-10 py-5 px-4 w-fit mx-auto">
         <ul className="grid xl:grid-cols-5 grid-cols-3 xl:gap-14 sm:gap-10 gap-6">

@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Theme } from "../context/HeadingContext";
 
 const ToggleSwitch = () => {
-  const [theme, setTheme] = useState("light");
+  
+  const {theme, setTheme} = useContext(Theme)
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");

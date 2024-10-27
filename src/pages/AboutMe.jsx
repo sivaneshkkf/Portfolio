@@ -1,19 +1,14 @@
 import BreakLine from "../components/BreakLine";
 import RoadMap from "../components/RoadMap";
 import TheHeading from "../components/TheHeading";
-import sectionIDS from "../data/SectionIDS"
-import aboutImg from "../images/about.png"
-import aboutMeCodingLap from "../images/codingLaptop.png"
-
-
+import sectionIDS from "../data/SectionIDS";
+import aboutImg from "../images/about.png";
+import aboutMeCodingLap from "../images/codingLaptop.png";
 
 function AboutMe() {
-
-
-
   return (
     <div className="bg-primary dark:bg-dark-secondary px-5 pt-10 relative -z-[2]">
-      <TheHeading heading="ABOUT ME" id={sectionIDS.aboutME.sectionId}/>
+      <TheHeading heading="ABOUT ME" id={sectionIDS.aboutME.sectionId} />
       <div className="flex items-center md:py-20 md:px-10 lg:px-60">
         <p className="text-textpara dark:text-dark-textpara text-xs sm:text-sm md:text-base lg:text-md font-medium flex-1 mt-3">
           I’m a dedicated web developer with a passion for crafting clean,
@@ -32,7 +27,7 @@ function AboutMe() {
         </div>
       </div>
 
-      {/* <div className="absolute top-0 left-0 -z-[2]">
+      <div className="absolute top-0 left-0 -z-[2]">
         <svg
           className="w-28 sm:w-52 md:w-64 h-fit"
           width="318"
@@ -47,10 +42,10 @@ function AboutMe() {
             fillOpacity="0.8"
           />
         </svg>
-      </div> */}
-      {/* <div className="absolute bottom-2 md:bottom-14 right-0 -z-[1]">
+      </div>
+      <div className="absolute bottom-2 md:top-14 top-2 right-0 -z-[1]">
         <svg
-            className="lg:max-w-6xl max-w-28 sm:max-w-52 md:max-w-64 h-fit"
+          className="lg:max-w-6xl max-w-28 sm:max-w-52 md:max-w-64 h-fit"
           width="308"
           height="650"
           viewBox="0 0 308 650"
@@ -63,9 +58,39 @@ function AboutMe() {
             fillOpacity="0.8"
           />
         </svg>
-      </div> */}
-      <RoadMap/>
-      <BreakLine/>
+      </div>
+
+      <div className="mt-8 md:mx-20">
+        <div className="dark:bg-dark-codingOuterBg bg-codingOuterBg px-4 pt-4 pb-1 rounded-xl w-fit mx-auto">
+          <div className="dark:bg-dark-codingBg bg-codingBg w-fit px-4 py-2 rounded-t-lg">
+            <h4 className="text-textHead dark:text-dark-textHead font-semibold text-sm text-center">
+              MY JOURNEY
+            </h4>
+          </div>
+
+          <div className="dark:bg-dark-codingBg bg-codingBg px-4 pt-3 pb-4 sm:pb-8 md:px-8 md:pt-8 rounded-tr-lg rounded-r-lg rounded-bl-lg mb-4 overflow-hidden">
+            <p className="text-codingTextBase dark:text-dark-codingTextBase text-xs md:text-sm pt-3">
+              I began my web development journey 1 years ago, diving deep into
+              <span className="dark:text-dark-codingTextHl text-codingTextHl">
+                {" "}
+                HTML, CSS, and JavaScript.{" "}
+              </span>
+              Over time, I’ve mastered various libraries and frameworks,
+              including
+              <span className="dark:text-dark-codingTextHl text-codingTextHl"> React, </span>and
+              <span className="dark:text-dark-codingTextHl text-codingTextHl"> Tailwind CSS, </span> which
+              allow me to create dynamic, high-performance applications. My
+              curiosity and dedication to learning have driven me to constantly
+              explore new technologies and refine my skills in design and
+              coding.
+            </p>
+
+            <RoadMap />
+          </div>
+        </div>
+      </div>
+
+      <BreakLine />
     </div>
   );
 }

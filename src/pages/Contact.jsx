@@ -13,7 +13,6 @@ import Btn from "../components/Btn";
 function Contact() {
   const schemaValidation = z.object({
     name: z.string().min(3, { message: "Invalid Name" }).max(40),
-    phoneNumber: z.string().min(10, { message: "Invalid Number" }).max(10),
     email: z.string().email(),
     message: z.string().min(2, { message: "Enter your message briefly" }),
   });
@@ -243,14 +242,6 @@ function Contact() {
               type="text"
               register={register("name")}
               error={errors.name}
-            />
-
-            <ContactInput
-              lable="Phone Number"
-              id="phoneNumber"
-              type="text"
-              register={register("phoneNumber")}
-              error={errors.phoneNumber}
             />
 
             <ContactInput

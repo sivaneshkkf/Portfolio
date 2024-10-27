@@ -3,7 +3,7 @@ import TheNaveBar from "./components/TheNaveBar";
 import AboutMe from "./pages/AboutMe";
 import Indroduction from "./pages/Indroduction";
 import SKills from "./pages/Skills";
-import { HeadingContext } from "./context/HeadingContext";
+import { HeadingContext, Theme } from "./context/HeadingContext";
 import sectionIDS from "./data/SectionIDS";
 import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
@@ -19,6 +19,8 @@ function App() {
   });
 
   const [scrolEnable, setScrollEnable] = useState(true);
+
+  const [theme, setTheme] = useState("light");
 
   const introRef = useRef(null);
   const aboutRef = useRef(null);
@@ -67,7 +69,8 @@ function App() {
         const { ref, sectionId, navId } = section;
         if (ref.current) {
           const rect = ref.current.getBoundingClientRect();
-          const isVisible = rect.top >= 0 && rect.top < window.innerHeight * 0.4;
+          const isVisible =
+            rect.top >= 0 && rect.top < window.innerHeight * 0.4;
 
           if (isVisible) {
             setVisibleSection({ navLiId: navId, sectionId: sectionId });
@@ -79,22 +82,20 @@ function App() {
 
   // Scroll to the current section based on visibleSection changes
   useEffect(() => {
-
-    if(!scrolEnable){
+    if (!scrolEnable) {
       const element = document.getElementById(visibleSection.sectionId);
 
       if (element) {
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = window.pageYOffset + elementPosition;
         const navbarHeight = document.querySelector("#navBar").offsetHeight;
-  
+
         window.scrollTo({
           top: offsetPosition - navbarHeight - 60,
           behavior: "smooth",
         });
       }
     }
-   
   }, [visibleSection.navLiId]);
 
   // Enable scrolling when using the mouse wheel
@@ -104,14 +105,14 @@ function App() {
     };
 
     const handleTouch = (e) => {
-      if(e.target != "navBar"){
-        setScrollEnable(true)
+      if (e.target != "navBar") {
+        setScrollEnable(true);
       }
-    } 
+    };
 
     document.addEventListener("wheel", handleWheelScroll);
 
-    document.addEventListener("touchstart", handleTouch)
+    document.addEventListener("touchstart", handleTouch);
 
     return () => {
       document.removeEventListener("wheel", handleWheelScroll);
@@ -128,33 +129,37 @@ function App() {
 
   return (
     <div className="relative overflow-x-hidden">
-      <ScrolContext.Provider value={{ scrolEnable, setScrollEnable }}>
-        <HeadingContext.Provider value={{ visibleSection, setVisibleSection }}>
-          <div id="navBar">
-            <TheNaveBar />
-          </div>
-          <div ref={introRef} id={sectionIDS.home.sectionId}>
-            <Indroduction />
-          </div>
-          <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
-            <AboutMe />
-          </div>
-          <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
-            <SKills />
-          </div>
-          <div ref={projectRef} id={sectionIDS.projects.sectionId}>
-            <Projects />
-          </div>
-          <div ref={resumeRef} id={sectionIDS.resume.sectionId}>
-            <Resume />
-          </div>
-          <div ref={contactRef} id={sectionIDS.contact.sectionId}>
-            <Contact />
-          </div>
-          <Footer />
-          <ThemeBtn/>
-        </HeadingContext.Provider>
-      </ScrolContext.Provider>
+      <Theme.Provider value={{ theme, setTheme }}>
+        <ScrolContext.Provider value={{ scrolEnable, setScrollEnable }}>
+          <HeadingContext.Provider
+            value={{ visibleSection, setVisibleSection }}
+          >
+            <div id="navBar">
+              <TheNaveBar />
+            </div>
+            <div ref={introRef} id={sectionIDS.home.sectionId}>
+              <Indroduction />
+            </div>
+            <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
+              <AboutMe />
+            </div>
+            <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
+              <SKills />
+            </div>
+            <div ref={projectRef} id={sectionIDS.projects.sectionId}>
+              <Projects />
+            </div>
+            <div ref={resumeRef} id={sectionIDS.resume.sectionId}>
+              <Resume />
+            </div>
+            <div ref={contactRef} id={sectionIDS.contact.sectionId}>
+              <Contact />
+            </div>
+            <Footer />
+            <ThemeBtn />
+          </HeadingContext.Provider>
+        </ScrolContext.Provider>
+      </Theme.Provider>
     </div>
   );
 }

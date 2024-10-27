@@ -1,8 +1,28 @@
 import { delay, motion } from "framer-motion";
 import { RoadMapIcons } from "../data/RoadMapData";
 
-function RoadMapLi({index, children }) {
-  const radius = 200; // Radius for positioning along the half-circle
+function RoadMapLi({index, status, children }) {
+
+  function getResponsiveRadius() {
+    const width = window.innerWidth;
+  
+    if (width >= 640) {
+      // sm (640px and up)
+      return 200;
+    } else {
+      // Default for screens smaller than 640px
+      return 115;
+    }
+  }
+  
+  let radius = getResponsiveRadius();
+  
+  // Optional: Update radius when the window resizes
+  window.addEventListener("resize", () => {
+    radius = getResponsiveRadius();
+    console.log("Updated radius:", radius);
+  });
+  
   const angle = (index / (RoadMapIcons.length - 1)) * 180; // Spread icons across 180 degrees for a half-circle
 
   // Calculate x and y using trigonometry for semi-circular positioning
@@ -27,12 +47,16 @@ function RoadMapLi({index, children }) {
       variants={variants}
       initial="hidden"
       animate="show" // Trigger animation when in view
-      className="absolute text-dark-icon saturate-150 rounded-full bg-dark-primary z-10 hover:bg-white transition-all duration-300"
+      className="absolute text-dark-icon saturate-150 rounded-full dark:bg-dark-secondary bg-secondary z-10 hover:bg-white transition-all duration-300"
     >
-      <div className="bg-zinc-800 flex justify-center items-center text-xl w-12 h-12 rounded-full">
+      <div className="dark:bg-dark-secondary bg-secondary flex justify-center items-center sm:text-xl text-sm sm:w-12 sm:h-12 w-8 h-8 rounded-full border-1 border-blue-600">
         {children}
       </div>
-      <div className="absolute inset-0 blur-[8px] bg-accent -z-50 rounded-full"></div>
+
+      {
+        status && (<div className="absolute inset-0 opacity-80 blur-[4px] sm:blur-[8px] bg-accent  -z-50 rounded-full"></div>)
+      }
+      
     </motion.div>
   );
 }
