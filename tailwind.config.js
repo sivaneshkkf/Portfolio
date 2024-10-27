@@ -1,3 +1,5 @@
+import { icon } from '@fortawesome/fontawesome-svg-core';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: "class",
@@ -15,6 +17,7 @@ export default {
         textpara: "#7E919A",
         gradient1: "rgba(37,46,58,0.8)",
         gradient2: "rgba(55,72,92,0.95)",
+        icon: "#565F64",
         dark: {
           primary: "#212428",
           secondary: "#333333",
@@ -23,6 +26,7 @@ export default {
           textpara: "#7E7E7E",
           gradient1: "rgb(52, 52, 52,0.8)",
           gradient2: "rgba(63, 63, 63,0.95)",
+          icon: "#565F64",
         },
       },
 

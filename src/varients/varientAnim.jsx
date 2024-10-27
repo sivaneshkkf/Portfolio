@@ -44,3 +44,19 @@ export function SuccessMessage({ showMessage }) {
     </div>
   );
 }
+
+
+// export const ScaleIn = (delay = 0, angle, radius) => ({
+//   hidden: { scale: 0, rotate: angle, x: radius, y: -50 },
+//   show: {
+//     scale: 1,
+//     rotate: angle,
+//     x: radius,
+//     y: -50,
+//     transition: {
+//       duration: 0.5,
+//       delay: delay,
+//       ease: "easeOut",
+//     },
+//   },
+// });
