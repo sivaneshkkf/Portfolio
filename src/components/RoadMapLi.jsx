@@ -1,7 +1,10 @@
 import { delay, motion } from "framer-motion";
 import { RoadMapIcons } from "../data/RoadMapData";
+import { useEffect, useState } from "react";
 
 function RoadMapLi({index, status, children }) {
+
+  const [radius, setRadius] = useState(getResponsiveRadius())
 
   function getResponsiveRadius() {
     const width = window.innerWidth;
@@ -14,14 +17,20 @@ function RoadMapLi({index, status, children }) {
       return 112;
     }
   }
-  
-  let radius = getResponsiveRadius();
-  
-  // Optional: Update radius when the window resizes
-  window.addEventListener("resize", () => {
-    radius = getResponsiveRadius();
-    console.log("Updated radius:", radius);
-  });
+
+  useEffect(() => {
+    setRadius(getResponsiveRadius())
+
+    const onHandleResize = () => {
+      setRadius(getResponsiveRadius())
+    }
+
+    window.addEventListener("resize", onHandleResize)
+
+    return () => {
+      window.removeEventListener("resize", onHandleResize)
+    }
+  },[])
   
   const angle = (index / (RoadMapIcons.length - 1)) * 180; // Spread icons across 180 degrees for a half-circle
 

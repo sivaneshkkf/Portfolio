@@ -109,7 +109,7 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
               ))}
             </ul>
             <div>
-              <a href={ghLink} className="text-accent" target="blank">
+              <a href={ghLink} className="text-icon" target="blank">
                 <svg
                   className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
                   xmlns="http://www.w3.org/2000/svg"

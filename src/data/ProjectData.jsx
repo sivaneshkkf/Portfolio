@@ -5,6 +5,8 @@ import musicplayerbg from "../images/bg/musicplayerbg.png"
 import formbg from "../images/bg/formbg.png"
 import calculator from "../images/bg/calculator.png"
 
+import iphone from "../images/iphone.png";
+
 export const ProjectData =[
     {
         name :"Music Player",
@@ -32,5 +34,24 @@ export const ProjectData =[
         techs : ["HTML","TAILWINDCSS","JS"],
         link : "https://sivaneshkkf.github.io/Calculator-App/",
         ghLink : "https://github.com/sivaneshkkf/Calculator-App"
+    }
+]
+
+
+export const MobileAppData = [
+    {
+        imgs:[iphone, iphone, iphone],
+        name: "Expense Traker App",
+        disc: "Managing your money shouldn't be a hassle. With our Expense Tracker app, you can effortlessly keep track of your daily expenses, analyze your spending habits, and make informed financial decisions—all from your mobile device!",
+        techs: ["XML", "ANDROID STUDIO", "JAVA"],
+        link: ""
+    },
+
+    {
+        imgs:[iphone, iphone, iphone],
+        name: "Expense Traker App",
+        disc: "Managing your money shouldn't be a hassle. With our Expense Tracker app, you can effortlessly keep track of your daily expenses, analyze your spending habits, and make informed financial decisions—all from your mobile device!",
+        techs: ["XML", "ANDROID STUDIO", "JAVA"],
+        link: ""
     }
 ]
