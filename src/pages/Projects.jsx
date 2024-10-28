@@ -33,7 +33,7 @@ function Projects() {
         </ul>
       </div>
 
-      <div className="w-full px-10 py-16 bg-cover bg-center bg-no-repeat grid lg:grid-cols-2 lg:gap-4 gap-2"
+      <div className="w-full h-full md:px-10 px-5 py-16 bg-cover bg-center bg-no-repeat grid lg:grid-cols-2 lg:gap-6 gap-4"
         style={theme === "dark"? { backgroundImage: `url(${bgforApp})` } : {backgroundImage: `url(${bgLight})`}}
       >
         {MobileAppData.map((li, index) => (

@@ -10,16 +10,16 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
 
     if (width >= 1024) {
       // lg (1024px and up)
-      return { xl: -110, xr: 110 };
+      return { xl: -130, xr: 130 };
     } else if (width >= 768) {
       // md (768px and up)
-      return { xl: -90, xr: 90 };
+      return { xl: -110, xr: 110 };
     } else if (width >= 640) {
       // sm (640px and up)
-      return { xl: -90, xr: 90 };
+      return { xl: -110, xr: 110 };
     } else {
       // Default for screens smaller than 640px
-      return { xl: -70, xr: 70 };
+      return { xl: -80, xr: 80 };
     }
   }
 
@@ -41,9 +41,9 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
   }, []);
 
   return (
-    <div className="border-2 dark:border-dark-primary border-primary md:px-8 md:pt-10 md:pb-5 px-5 pt-8 pb-5 rounded-2xl max-w-4xl mx-auto backdrop-blur-sm bg-black dark:bg-white dark:bg-opacity-10 bg-opacity-10 w-fit h-fit">
+    <div className="border-2 dark:border-dark-primary border-primary md:px-8 md:pt-10 md:pb-5 px-5 pt-8 pb-5 rounded-2xl max-w-4xl mx-auto backdrop-blur-sm bg-black dark:bg-white dark:bg-opacity-10 bg-opacity-10 w-fit h-full flex flex-col justify-between">
       <div
-        className="flex items-center justify-center"
+        className="flex items-center justify-center p-10"
         style={{ perspective: "1000px" }}
       >
         {/* Left iPhone */}
@@ -57,7 +57,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
           <img
             src={imgs[0]}
             alt="iphone"
-            className="lg:max-w-40 sm:max-w-32 max-w-24 drop-shadow-lg"
+            className="lg:max-w-36 sm:max-w-32 max-w-24 drop-shadow-lg"
           />
         </motion.span>
 
@@ -72,7 +72,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
           <img
             src={imgs[1]}
             alt="iphone"
-            className="lg:max-w-40 sm:max-w-32 max-w-24 drop-shadow-lg"
+            className="lg:max-w-36 sm:max-w-32 max-w-24 drop-shadow-lg"
           />
         </motion.span>
 
@@ -87,13 +87,13 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
           <img
             src={imgs[2]}
             alt="iphone"
-            className="lg:max-w-40 sm:max-w-32 max-w-24 drop-shadow-lg"
+            className="lg:max-w-36 sm:max-w-32 max-w-24 drop-shadow-lg"
           />
         </motion.span>
       </div>
 
       <div>
-        <h4 className="text-sm dark:text-dark-textHead text-textHead font-medium">{name}</h4>
+        <h4 className="text-sm dark:text-dark-textHead text-textHead font-semibold">{name}</h4>
         <p className="dark:text-dark-textpara text-zinc-950 text-xs mt-3">{disc}</p>
 
         <div className="mt-5 flex justify-between">

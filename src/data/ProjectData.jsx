@@ -5,7 +5,11 @@ import musicplayerbg from "../images/bg/musicplayerbg.png"
 import formbg from "../images/bg/formbg.png"
 import calculator from "../images/bg/calculator.png"
 
-import iphone from "../images/iphone.png";
+import iphone from "../images/iphone.png"
+
+import savingsApp1 from "../images/savingsApp1.png";
+import savingsApp2 from "../images/savingsApp2.png";
+import savingsApp3 from "../images/savingsApp3.png";
 
 export const ProjectData =[
     {
@@ -40,7 +44,7 @@ export const ProjectData =[
 
 export const MobileAppData = [
     {
-        imgs:[iphone, iphone, iphone],
+        imgs:[savingsApp1, savingsApp2, savingsApp3],
         name: "Expense Traker App",
         disc: "Managing your money shouldn't be a hassle. With our Expense Tracker app, you can effortlessly keep track of your daily expenses, analyze your spending habits, and make informed financial decisions—all from your mobile device!",
         techs: ["XML", "ANDROID STUDIO", "JAVA"],
