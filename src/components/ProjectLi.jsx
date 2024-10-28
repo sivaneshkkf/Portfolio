@@ -49,7 +49,7 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
     // </li>
 
     <motion.li
-      className="bg-white group shadow-cardShadow flex flex-col md:rounded-3xl rounded-xl relative overflow-hidden backdrop-blur-lg backdrop-saturate-0 bg-opacity-100 relative"
+      className="bg-white group shadow-cardShadow flex flex-col md:rounded-3xl rounded-xl overflow-hidden backdrop-blur-lg backdrop-saturate-0 bg-opacity-100 relative"
       style={{ backgroundImage: `url(${bg})` }}
       variants={FadeIn("up", 0.2)}
       initial="hidden"
@@ -77,7 +77,7 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
       <div
         className=" group flex flex-col h-full relative"
       >
-        <div className="relative flex-1 flex justify-center items-center bg-cover bg-center group-hover:blur-[1px]">
+        <div className="relative flex-1 flex justify-center items-center bg-cover bg-center transition-all duration-300 group-hover:scale-[1.02]">
           {/* Main content */}
           <img
             src={img}

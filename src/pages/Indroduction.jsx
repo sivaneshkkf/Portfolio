@@ -8,7 +8,7 @@ import {
 import BreakLine from "../components/BreakLine";
 import { TypeAnimation } from "react-type-animation";
 import { FadeIn } from "../varients/varientAnim";
-import sivaneshImg from "../images/sivaneshImg.png"
+import sivaneshImg from "../images/sivaneshImg.png";
 
 function Indroduction() {
   const x = useMotionValue(0);
@@ -47,7 +47,7 @@ function Indroduction() {
         <div className="flex gap-4 items-center justify-between">
           <motion.div
             className="space-y-8 flex-1"
-            variants={FadeIn("left", 0.5,0)}
+            variants={FadeIn("left", 0.5, 0)}
             initial="hidden"
             whileInView={"show"}
             viewport={{ once: true }}
@@ -79,11 +79,11 @@ function Indroduction() {
               repeat={Infinity}
             />
 
-            <p className="text-gray-400 dark:text-gray-300 text-xs md:font-medium max-w-md pt-5 hidden sm:block">
-              I am a passionate web developer skilled in building responsive and
-              user-friendly websites. With expertise in HTML, CSS, JavaScript,
-              and React, I focus on creating seamless digital experiences.
-              Explore my portfolio to see my latest work!
+            <p className="text-textpara dark:text-dark-textpara text-xs md:font-medium max-w-md pt-5 hidden sm:block">
+              I am a passionate web developer and self-learner, skilled in
+              building responsive and user-friendly websites. With expertise in
+              HTML, CSS, JavaScript, and React, I focus on creating seamless
+              digital experiences. Explore my portfolio to see my latest work!
             </p>
           </motion.div>
 
@@ -114,27 +114,29 @@ function Indroduction() {
           </div>
         </div>
         <motion.p
-          className="text-gray-400 dark:text-gray-300 text-xs md:font-medium pt-5 sm:hidden"
-          variants={FadeIn("up", 0.5,0)}
+          className="text-textpara dark:text-dark-textpara text-xs md:font-medium pt-5 sm:hidden"
+          variants={FadeIn("up", 0.5, 0)}
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: true }}
         >
-          I am a passionate web developer skilled in building responsive and
-          user-friendly websites. With expertise in HTML, CSS, JavaScript, and
-          React, I focus on creating seamless digital experiences. Explore my
-          portfolio to see my latest work!
+          I am a passionate web developer and self-learner, skilled in building
+          responsive and user-friendly websites. With expertise in HTML, CSS,
+          JavaScript, and React, I focus on creating seamless digital
+          experiences. Explore my portfolio to see my latest work!
         </motion.p>
         <div className="mt-8">
-          <p className="text-gray-300 text-xs md:text-sm mb-1 md:mb-2">Follow Me</p>
+          <p className="text-gray-300 text-xs md:text-sm mb-1 md:mb-2">
+            Follow Me
+          </p>
           <div className="flex md:gap-4 gap-3 items-center text-white">
             <motion.a
               href="https://www.instagram.com/siva_innocent_soul/profilecard/?igsh=MTV0cGRzZXNzMmw3ZQ== "
               target="blank"
-              variants={FadeIn("up",0.6,0)}
+              variants={FadeIn("up", 0.6, 0)}
               initial="hidden"
               whileInView={"show"}
-              viewport={{once:true}}
+              viewport={{ once: true }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -158,10 +160,10 @@ function Indroduction() {
             <motion.a
               href="https://www.linkedin.com/in/sivanesh-raja-2aa575240"
               target="blank"
-              variants={FadeIn("up",0.8,0)}
+              variants={FadeIn("up", 0.8, 0)}
               initial="hidden"
               whileInView={"show"}
-              viewport={{once:true}}
+              viewport={{ once: true }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -181,10 +183,10 @@ function Indroduction() {
             <motion.a
               href="https://www.facebook.com/profile.php?id=100005058169350"
               target="blank"
-              variants={FadeIn("up",1,0)}
+              variants={FadeIn("up", 1, 0)}
               initial="hidden"
               whileInView={"show"}
-              viewport={{once:true}}
+              viewport={{ once: true }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -200,11 +202,13 @@ function Indroduction() {
                 ></path>
               </svg>
             </motion.a>
-            <motion.a href="http://Wa.me/+917010037476" target="blank"
-              variants={FadeIn("up",1.12,0)}
+            <motion.a
+              href="http://Wa.me/+917010037476"
+              target="blank"
+              variants={FadeIn("up", 1.12, 0)}
               initial="hidden"
               whileInView={"show"}
-              viewport={{once:true}}
+              viewport={{ once: true }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -231,14 +235,16 @@ function Indroduction() {
               </svg>
             </motion.a>
 
-            <motion.a href="https://github.com/sivaneshkkf?tab=repositories" target="blank"
-              variants={FadeIn("up",1.14,0)}
+            <motion.a
+              href="https://github.com/sivaneshkkf?tab=repositories"
+              target="blank"
+              variants={FadeIn("up", 1.14, 0)}
               initial="hidden"
               whileInView={"show"}
-              viewport={{once:true}}
+              viewport={{ once: true }}
             >
               <svg
-                 className="hover:text-accent cursor-pointer w-6 md:w-7 sm:hidden"
+                className="hover:text-accent cursor-pointer w-6 md:w-7 sm:hidden"
                 xmlns="http://www.w3.org/2000/svg"
                 width="2em"
                 height="2em"
@@ -252,12 +258,9 @@ function Indroduction() {
                 ></path>
               </svg>
             </motion.a>
-
           </div>
         </div>
-        <div className=" w-full h-[1px] bg-secondary md:mt-5 mt-1">
-
-        </div>
+        <div className=" w-full h-[1px] bg-secondary md:mt-5 mt-1"></div>
       </div>
     </div>
   );

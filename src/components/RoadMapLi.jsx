@@ -8,10 +8,10 @@ function RoadMapLi({index, status, children }) {
   
     if (width >= 640) {
       // sm (640px and up)
-      return 200;
+      return 190;
     } else {
       // Default for screens smaller than 640px
-      return 115;
+      return 112;
     }
   }
   

@@ -60,10 +60,10 @@ function AboutMe() {
         </svg>
       </div>
 
-      <div className="mt-8 md:mx-20">
-        <div className="dark:bg-dark-codingOuterBg bg-codingOuterBg px-4 pt-4 pb-1 rounded-xl w-fit mx-auto">
+      <div className="mt-8 md:mx-20 mx-auto">
+        <div className="dark:bg-dark-codingOuterBg bg-codingOuterBg px-4 pt-4 pb-1 rounded-xl w-fit">
           <div className="dark:bg-dark-codingBg bg-codingBg w-fit px-4 py-2 rounded-t-lg">
-            <h4 className="text-textHead dark:text-dark-textHead font-semibold text-sm text-center">
+            <h4 className="text-textHead dark:text-dark-textHead font-semibold text-xs md:text-sm text-center text-ellipsis">
               MY JOURNEY
             </h4>
           </div>
@@ -79,10 +79,7 @@ function AboutMe() {
               including
               <span className="dark:text-dark-codingTextHl text-codingTextHl"> React, </span>and
               <span className="dark:text-dark-codingTextHl text-codingTextHl"> Tailwind CSS, </span> which
-              allow me to create dynamic, high-performance applications. My
-              curiosity and dedication to learning have driven me to constantly
-              explore new technologies and refine my skills in design and
-              coding.
+              allow me to create dynamic, high-performance applications. As a self-learner with a strong curiosity for new technologies, I’m constantly driven to explore, learn, and refine my skills in both design and coding."
             </p>
 
             <RoadMap />
