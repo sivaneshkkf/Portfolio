@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { FadeIn, SuccessMessage } from "../varients/varientAnim";
 import { useState } from "react";
 import Btn from "../components/Btn";
+import SendBtn from "../components/Buttons/SendBtn";
 
 function Contact() {
   const schemaValidation = z.object({
@@ -274,7 +275,7 @@ function Contact() {
                 </span>
               )}
             </div>
-            <Btn text="SEND MESSAGE" btnAnim={showMessage.btnAnim}>
+            {/* <Btn text="SEND MESSAGE" btnAnim={showMessage.btnAnim}>
               <span className={`${showMessage.btnAnim ? "hidden" : "block"}`}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -359,7 +360,9 @@ function Contact() {
                   </g>
                 </svg>
               </span>
-            </Btn>
+            </Btn> */}
+
+            <SendBtn showMessage={showMessage}/>
           </form>
 
           <SuccessMessage showMessage={showMessage} />

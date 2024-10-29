@@ -9,26 +9,59 @@ import { FadeIn } from "../varients/varientAnim";
 import sivanesh_resume from "../images/SIVANESH-RESUME.pdf";
 import Btn from "../components/Btn";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import DownloadBtn from "../components/Buttons/downloadBtn";
 
 function Resume() {
-  const [progressValue, setProgressValue] = useState(0);
+  const [progressValue, setProgressValue] = useState(0);         // Actual progress
+const [displayedProgress, setDisplayedProgress] = useState(0); // Displayed for animation
 
-  async function handleDownload(e) {
+async function handleDownload(e) {
+  try {
     await axios({
       url: sivanesh_resume,
       method: "GET",
-      responseType: "blob", // important
+      responseType: "blob",
       onDownloadProgress: (progressEvent) => {
-        let percentCompleted = Math.round(
+        const percentCompleted = Math.round(
           (progressEvent.loaded * 100) / progressEvent.total
-        ); // you can use this to show user percentage of file downloaded
-        setProgressValue(percentCompleted);
+        );
+        setProgressValue(percentCompleted); // Update actual progress
       },
     });
+
+    // Reset both progress values after download completes
+    setTimeout(() => {
+      setProgressValue(0);
+      setDisplayedProgress(0);
+    }, 3000);
+
+  } catch (error) {
+    console.error("Download error:", error);
+    setProgressValue(0);
+    setDisplayedProgress(0);
   }
+}
+
+// Effect to smoothly animate the displayed progress
+useEffect(() => {
+  if (displayedProgress < progressValue) {
+    const increment = setInterval(() => {
+      setDisplayedProgress((prev) => {
+        if (prev >= progressValue) {
+          clearInterval(increment); // Stop when displayed progress catches up
+          return prev;
+        }
+        return Math.min(prev + 1, progressValue); // Smoothly increment
+      });
+    }, 10); // Adjust timing to control smoothness
+
+    return () => clearInterval(increment);
+  }
+}, [progressValue, displayedProgress]);
+
 
   return (
     <div className="pt-5 px-5 bg-primary dark:bg-dark-secondary">
@@ -80,7 +113,7 @@ function Resume() {
               <img src={resume} alt="resume" className="w-52 md:w-72 mx-auto" />
             </div>
             <a href={sivanesh_resume} download onClick={handleDownload}>
-              <Btn text={`${progressValue>0 ? "DOWNLOADED" : "DOWNLOAD RESUME"}`}>
+              {/* <Btn text={`${progressValue>0 ? "DOWNLOADED" : "DOWNLOAD RESUME"}`}>
                 <span className={`${progressValue>0 ? "hidden" : "block"}`}>
                   <motion.svg
                     width="24"
@@ -132,8 +165,12 @@ function Resume() {
                     })}
                   />
                 </div>
-              </Btn>
+              </Btn> */}
+              <DownloadBtn
+                progressValue={displayedProgress}/>
             </a>
+
+            
           </motion.div>
         </div>
 
