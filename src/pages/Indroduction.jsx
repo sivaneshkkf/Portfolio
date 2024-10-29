@@ -8,7 +8,7 @@ import {
 import BreakLine from "../components/BreakLine";
 import { TypeAnimation } from "react-type-animation";
 import { FadeIn } from "../varients/varientAnim";
-import sivaneshImg from "../images/sivaneshImg.png";
+import sivaneshImg from "../images/sivaneshDP.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Indroduction() {
@@ -42,7 +42,7 @@ function Indroduction() {
   };
 
   return (
-    <div className="bg-[url('../src/images/bg.png')] bg-cover bg-center h-full w-full relative z-0 mt-16">
+    <div className="bg-[url('../src/images/bg.webp')] bg-cover bg-center h-full w-full relative z-0 mt-16">
       <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10 dark:from-dark-gradient1 dark:to-dark-gradient2"></div>
       <div className=" p-8 sm:p-20 xl:px-60">
         <div className="flex gap-4 items-center justify-between">
@@ -114,6 +114,7 @@ function Indroduction() {
                 src={sivaneshImg}
                 className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700"
               />
+              
             </motion.div>
           </div>
         </div>
