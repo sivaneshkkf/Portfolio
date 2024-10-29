@@ -63,7 +63,7 @@ function AboutMe() {
       <div className="mt-8 md:mx-20 mx-auto">
         <div className="dark:bg-dark-codingOuterBg bg-codingOuterBg px-4 pt-4 pb-1 rounded-xl w-fit">
           <div className="dark:bg-dark-codingBg bg-codingBg w-fit px-4 py-2 rounded-t-lg">
-            <h4 className="text-textHead dark:text-dark-textHead font-semibold text-xs md:text-sm text-center text-ellipsis">
+            <h4 className="text-textHead dark:text-dark-textHead font-semibold text-xs md:text-sm text-center text-nowrap">
               MY JOURNEY
             </h4>
           </div>

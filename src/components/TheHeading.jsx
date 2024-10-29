@@ -8,7 +8,7 @@ function TheHeading({heading,id}) {
     return ( 
         
       <div className="w-fit mx-auto">
-        <h4 className="text-textHead dark:text-dark-textHead text-md md:text-2xl font-bold text-center text-ellipsis">
+        <h4 className="text-textHead dark:text-dark-textHead text-md md:text-2xl font-bold text-center text-nowrap">
           {heading}
         </h4>
         <div

@@ -9,6 +9,7 @@ import BreakLine from "../components/BreakLine";
 import { TypeAnimation } from "react-type-animation";
 import { FadeIn } from "../varients/varientAnim";
 import sivaneshImg from "../images/sivaneshImg.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Indroduction() {
   const x = useMotionValue(0);
@@ -104,12 +105,15 @@ function Indroduction() {
                 transformStyle: "preserve-3d",
               }}
             >
-              <img
-                src={sivaneshImg}
+              <LazyLoadImage
                 alt="pfImg"
+                wrapperProps={{
+                  // If you need to, you can tweak the effect transition using the wrapper style.
+                  style: { transitionDelay: "1s" },
+                }}
+                src={sivaneshImg}
                 className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700"
               />
-              {/* <div className="w-80 h-8 bg-black rounded-full mx-auto absolute -bottom-5 left-1/2 transform -translate-x-1/2 -z-10 blur-2xl"></div> */}
             </motion.div>
           </div>
         </div>
