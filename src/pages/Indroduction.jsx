@@ -101,7 +101,7 @@ function Indroduction() {
         <div className="flex gap-4 items-center justify-between">
           <motion.div
             className="space-y-8 flex-1"
-            variants={FadeIn("left", 0.5, 0)}
+            variants={FadeIn("left", 0.8, 0)}
             initial="hidden"
             whileInView={"show"}
             viewport={{ once: true }}
@@ -164,12 +164,13 @@ function Indroduction() {
                 className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700"
               /> */}
               <ImageBlurHash
-                className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700"
+                className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl shadow-dark-primary border-2 border-zinc-700"
               src={sivaneshImg}/>
 
               <a href={sivanesh_resume} download onClick={handleDownload}
               style={{transformStyle: "preserve-3d",
                 transform: "translateZ(500px)",
+                willChange: "transform"
               }}>
                 <CVdownloadBtn
                   rotateX={rotateX}
@@ -182,7 +183,7 @@ function Indroduction() {
         </div>
         <motion.p
           className="text-textpara dark:text-dark-textpara text-xs md:font-medium pt-8 sm:hidden"
-          variants={FadeIn("up", 0.5, 0)}
+          variants={FadeIn("up", 0.9, 0)}
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: true }}
@@ -200,7 +201,7 @@ function Indroduction() {
             <motion.a
               href="https://www.instagram.com/siva_innocent_soul/profilecard/?igsh=MTV0cGRzZXNzMmw3ZQ== "
               target="blank"
-              variants={FadeIn("up", 0.6, 0)}
+              variants={FadeIn("up", 1, 0)}
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: true }}
@@ -227,7 +228,7 @@ function Indroduction() {
             <motion.a
               href="https://www.linkedin.com/in/sivanesh-raja-2aa575240"
               target="blank"
-              variants={FadeIn("up", 0.8, 0)}
+              variants={FadeIn("up", 1.2, 0)}
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: true }}
@@ -250,7 +251,7 @@ function Indroduction() {
             <motion.a
               href="https://www.facebook.com/profile.php?id=100005058169350"
               target="blank"
-              variants={FadeIn("up", 1, 0)}
+              variants={FadeIn("up", 1.4, 0)}
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: true }}
@@ -272,7 +273,7 @@ function Indroduction() {
             <motion.a
               href="http://Wa.me/+917010037476"
               target="blank"
-              variants={FadeIn("up", 1.12, 0)}
+              variants={FadeIn("up", 1.6, 0)}
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: true }}
@@ -305,7 +306,7 @@ function Indroduction() {
             <motion.a
               href="https://github.com/sivaneshkkf?tab=repositories"
               target="blank"
-              variants={FadeIn("up", 1.14, 0)}
+              variants={FadeIn("up", 1.8, 0)}
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: true }}

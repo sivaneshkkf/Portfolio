@@ -10,16 +10,16 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
 
     if (width >= 1024) {
       // lg (1024px and up)
-      return { xl: -135, xr: 135 };
+      return { xl: -145, xr: 145 };
     } else if (width >= 768) {
       // md (768px and up)
-      return { xl: -135, xr: 135 };
+      return { xl: -138, xr: 138 };
     } else if (width >= 640) {
       // sm (640px and up)
-      return { xl: -125, xr: 125 };
+      return { xl: -135, xr: 135 };
     } else {
       // Default for screens smaller than 640px
-      return { xl: -85, xr: 85 };
+      return { xl: -90, xr: 90 };
     }
   }
 
@@ -41,16 +41,17 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
   }, []);
 
   return (
-    <div className="border-2 dark:border-dark-primary border-primary md:px-8 md:pb-5 px-5 pt-8 pb-5 rounded-2xl max-w-4xl mx-auto backdrop-blur-sm bg-black dark:bg-white dark:bg-opacity-10 bg-opacity-10 w-fit h-full flex flex-col justify-between">
+    <div className="border-2 dark:border-dark-primary border-primary md:px-8 md:pb-5 px-5 pt-8 pb-5 rounded-2xl max-w-4xl mx-auto backdrop-blur-sm bg-black dark:bg-white dark:bg-opacity-10 bg-opacity-10 w-fit h-full flex flex-col justify-between z-0">
       <div
         className="flex items-center justify-center p-10"
         style={{ perspective: "1000px" }}
       >
         {/* Left iPhone */}
+        {/* Left iPhone */}
         <motion.span
           className="absolute z-0 drop-shadow-2xl"
-          initial={{ x: 0, z: 0, rotateY: 0 }}
-          whileInView={{ x: xVal.xl, z: 100, rotateY: -20 }}
+          initial={{ x: 0, rotateY: 0 }}
+          whileInView={{ x: xVal.xl, rotateY: -20, scale: 1.05 }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 1, ease: "easeInOut" }}
         >
@@ -58,14 +59,15 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
             src={imgs[0]}
             alt="iphone"
             className="lg:max-w-52 sm:max-w-48 max-w-32 drop-shadow-lg"
+            style={{ willChange: "transform" }}
           />
         </motion.span>
 
         {/* Center iPhone */}
         <motion.span
           className="z-10 drop-shadow-2xl"
-          initial={{ z: 0, rotateY: 0 }}
-          whileInView={{ z: 200, rotateY: 0 }}
+          initial={{ rotateY: 0 }}
+          whileInView={{ scale: 1.2 }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 1, ease: "easeInOut" }}
         >
@@ -73,14 +75,15 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
             src={imgs[1]}
             alt="iphone"
             className="lg:max-w-52 sm:max-w-48 max-w-32 drop-shadow-lg"
+            style={{ willChange: "transform" }}
           />
         </motion.span>
 
         {/* Right iPhone */}
         <motion.span
           className="absolute z-0 drop-shadow-2xl"
-          initial={{ x: 0, z: 0, rotateY: 0 }}
-          whileInView={{ x: xVal.xr, z: 100, rotateY: 20 }}
+          initial={{ x: 0, rotateY: 0 }}
+          whileInView={{ x: xVal.xr, rotateY: 20, scale: 1.05 }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 1, ease: "easeInOut" }}
         >
@@ -88,13 +91,18 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
             src={imgs[2]}
             alt="iphone"
             className="lg:max-w-52 sm:max-w-48 max-w-32 drop-shadow-lg"
+            style={{ willChange: "transform" }}
           />
         </motion.span>
       </div>
 
       <div>
-        <h4 className="text-sm dark:text-dark-textHead text-textHead font-semibold">{name}</h4>
-        <p className="dark:text-dark-textpara text-zinc-950 text-xs mt-3">{disc}</p>
+        <h4 className="text-sm dark:text-dark-textHead text-textHead font-semibold">
+          {name}
+        </h4>
+        <p className="dark:text-dark-textpara text-zinc-950 text-xs mt-3">
+          {disc}
+        </p>
 
         <div className="mt-5 flex justify-between">
           <ul className="flex flex-wrap md:gap-2 gap-1">
@@ -109,7 +117,12 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
           </ul>
 
           <div>
-            <a href={link} className="dark:text-icon" target="_blank" rel="noopener noreferrer">
+            <a
+              href={link}
+              className="dark:text-icon"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <svg
                 className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
                 xmlns="http://www.w3.org/2000/svg"
