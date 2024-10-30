@@ -12,8 +12,6 @@ function LoadingAnim() {
     setTheme(currentTheme);
   }, []);
 
-  console.log(theme);
-
   return (
     <div
       className={`w-full h-screen flex justify-center items-center gap-4 ${

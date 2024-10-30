@@ -47,7 +47,7 @@ export const MobileAppData = [
         imgs:[savingsApp1, savingsApp2, savingsApp3],
         name: "Expense Traker App",
         disc: "Managing your money shouldn't be a hassle. With our Expense Tracker app, you can effortlessly keep track of your daily expenses, analyze your spending habits, and make informed financial decisions—all from your mobile device!",
-        techs: ["XML", "ANDROID STUDIO", "JAVA"],
+        techs: ["XML", "ANDROID STUDIO", "JAVA", "SQLITE"],
         link: ""
     },
 ]

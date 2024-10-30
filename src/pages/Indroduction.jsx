@@ -10,6 +10,11 @@ import { TypeAnimation } from "react-type-animation";
 import { FadeIn } from "../varients/varientAnim";
 import sivaneshImg from "../images/sivaneshDP.webp";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import CVdownloadBtn from "../components/Buttons/CVdowloadBtn";
+import sivanesh_resume from "../images/SIVANESH-RESUME.pdf";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 
 function Indroduction() {
   const x = useMotionValue(0);
@@ -40,6 +45,53 @@ function Indroduction() {
     x.set(0);
     y.set(0);
   };
+
+  // download resume
+  const [progressValue, setProgressValue] = useState(0); // Actual progress
+  const [displayedProgress, setDisplayedProgress] = useState(0); // Displayed for animation
+
+  async function handleDownload(e) {
+    try {
+      await axios({
+        url: sivanesh_resume,
+        method: "GET",
+        responseType: "blob",
+        onDownloadProgress: (progressEvent) => {
+          const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setProgressValue(percentCompleted); // Update actual progress
+        },
+      });
+
+      // Reset both progress values after download completes
+      setTimeout(() => {
+        setProgressValue(0);
+        setDisplayedProgress(0);
+      }, 3000);
+    } catch (error) {
+      console.error("Download error:", error);
+      setProgressValue(0);
+      setDisplayedProgress(0);
+    }
+  }
+
+  // Effect to smoothly animate the displayed progress
+  useEffect(() => {
+    if (displayedProgress < progressValue) {
+      const increment = setInterval(() => {
+        setDisplayedProgress((prev) => {
+          if (prev >= progressValue) {
+            clearInterval(increment); // Stop when displayed progress catches up
+            return prev;
+          }
+          return Math.min(prev + 1, progressValue); // Smoothly increment
+        });
+      }, 8); // Adjust timing to control smoothness
+
+      return () => clearInterval(increment);
+    }
+  }, [progressValue, displayedProgress]);
 
   return (
     <div className="bg-[url('../src/images/bg.webp')] bg-cover bg-center h-full w-full relative z-0 mt-16">
@@ -89,7 +141,7 @@ function Indroduction() {
           </motion.div>
 
           <div
-            className="flex-1 relative"
+            className="flex-1"
             style={{
               perspective: "1000px",
               transformStyle: "preserve-3d",
@@ -98,7 +150,7 @@ function Indroduction() {
             onMouseLeave={handleMouseLeave}
           >
             <motion.div
-              className="drop-shadow-2xl"
+              className="drop-shadow-2xl relative w-fit"
               style={{
                 rotateX,
                 rotateY,
@@ -114,12 +166,18 @@ function Indroduction() {
                 src={sivaneshImg}
                 className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700"
               />
-              
+              <a href={sivanesh_resume} download onClick={handleDownload}>
+                <CVdownloadBtn
+                  rotateX={rotateX}
+                  rotateY={rotateY}
+                  progressValue={displayedProgress}
+                />
+              </a>
             </motion.div>
           </div>
         </div>
         <motion.p
-          className="text-textpara dark:text-dark-textpara text-xs md:font-medium pt-5 sm:hidden"
+          className="text-textpara dark:text-dark-textpara text-xs md:font-medium pt-8 sm:hidden"
           variants={FadeIn("up", 0.5, 0)}
           initial="hidden"
           whileInView={"show"}
@@ -130,7 +188,7 @@ function Indroduction() {
           JavaScript, and React, I focus on creating seamless digital
           experiences. Explore my portfolio to see my latest work!
         </motion.p>
-        <div className="mt-8">
+        <div className="mt-5">
           <p className="text-gray-300 text-xs md:text-sm mb-1 md:mb-2">
             Follow Me
           </p>
