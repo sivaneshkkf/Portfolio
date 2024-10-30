@@ -64,6 +64,31 @@ function TheNaveBar() {
 
   };
 
+
+  useEffect(() => {
+    const handleResize = () => {
+      const el = document.getElementById(visibleSection.navLiId);
+      if (el) { // Check if the element exists
+        const rectDefault = el.getBoundingClientRect();
+        const actWidth = Math.floor(rectDefault.width);
+        setDimensions({
+          width: actWidth,
+          x: rectDefault.x,
+          preX: rectDefault.x, // Set preX to match the initial x position
+          left: rectDefault.left,
+        });
+      }
+    };
+  
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Call initially to set dimensions based on current size
+  
+    return () => {
+      window.removeEventListener("resize", handleResize); // Correct cleanup
+    };
+  }, [visibleSection.navLiId]);
+  
+
   // useEffect(() => {
   //   setActiveLi(visibleSection);
   // }, [visibleSection]);

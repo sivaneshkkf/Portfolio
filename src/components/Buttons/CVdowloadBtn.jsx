@@ -8,11 +8,10 @@ function CVdownloadBtn({ rotateX, rotateY, progressValue }) {
       style={{ perspective: "2000px" }}
       className="absolute sm:-bottom-8 sm:right-6 -bottom-6 right-4"
       initial={{ scale: 0.3 }}
-      animate={{ scale: 1 }}
+      animate={{ scale: 1}}
       transition={{ duration: 1, type: "spring", delay: 0.2 }}
     >
       <motion.div
-        className=""
         style={{
           rotateX,
           rotateY,

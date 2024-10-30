@@ -9,11 +9,12 @@ import BreakLine from "../components/BreakLine";
 import { TypeAnimation } from "react-type-animation";
 import { FadeIn } from "../varients/varientAnim";
 import sivaneshImg from "../images/sivaneshDP.webp";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import CVdownloadBtn from "../components/Buttons/CVdowloadBtn";
 import sivanesh_resume from "../images/SIVANESH-RESUME.pdf";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ImageBlurHash from "../utils/ImageBlurHash";
+import { Translate } from "@mui/icons-material";
 
 
 function Indroduction() {
@@ -23,8 +24,8 @@ function Indroduction() {
   const mouseXspring = useSpring(x);
   const mouseYspring = useSpring(y);
 
-  const rotateX = useTransform(mouseYspring, [-0.5, 0.5], ["-14deg", "14deg"]);
-  const rotateY = useTransform(mouseXspring, [-0.5, 0.5], ["14deg", "-14deg"]);
+  const rotateX = useTransform(mouseYspring, [-0.5, 0.5], ["-12deg", "12deg"]);
+  const rotateY = useTransform(mouseXspring, [-0.5, 0.5], ["12deg", "-12deg"]);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -157,16 +158,19 @@ function Indroduction() {
                 transformStyle: "preserve-3d",
               }}
             >
-              <LazyLoadImage
+              {/* <img
                 alt="pfImg"
-                wrapperProps={{
-                  // If you need to, you can tweak the effect transition using the wrapper style.
-                  style: { transitionDelay: "1s" },
-                }}
                 src={sivaneshImg}
                 className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700"
-              />
-              <a href={sivanesh_resume} download onClick={handleDownload}>
+              /> */}
+              <ImageBlurHash
+                className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700"
+              src={sivaneshImg}/>
+
+              <a href={sivanesh_resume} download onClick={handleDownload}
+              style={{transformStyle: "preserve-3d",
+                transform: "translateZ(500px)",
+              }}>
                 <CVdownloadBtn
                   rotateX={rotateX}
                   rotateY={rotateY}
