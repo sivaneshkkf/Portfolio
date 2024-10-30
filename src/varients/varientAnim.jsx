@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import lottifile from "../animation/messageSentAnim.lottie"
 
 export const FadeIn = (direction, delay, opacity) => {
   return {
@@ -27,7 +28,7 @@ export function SuccessMessage({ showMessage }) {
     <div className={`${showMessage.anim ? "block" : "hidden"}`}>
      {showMessage.anim && (
         <DotLottieReact
-          src="./src/animation/messageSentAnim.lottie"
+          src={lottifile}
           autoplay
         />
       )}
