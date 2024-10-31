@@ -94,8 +94,14 @@ function Indroduction() {
     }
   }, [progressValue, displayedProgress]);
 
+
+  // popup state
+  const [popupState, setPopupState] = useState(false);
+
   return (
-    <div className="bg-[url('../src/images/bg.webp')] bg-cover bg-center h-full w-full relative z-0 mt-16">
+    <motion.div className="bg-[url('../src/images/bg.webp')] bg-cover bg-center h-full w-full relative z-0 mt-16"
+    onMouseLeave={() => setPopupState(false)}
+    >
       <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10 dark:from-dark-gradient1 dark:to-dark-gradient2"></div>
       <div className=" p-8 sm:p-20 xl:px-60">
         <div className="flex gap-4 items-center justify-between">
@@ -340,13 +346,13 @@ function Indroduction() {
               viewport={{ once: true }}
               className="ml-auto"
             >
-             <PopupShareBtn/>
+             <PopupShareBtn popupState={popupState} setPopupState={setPopupState}/>
             </motion.a>
           </div>
         </div>
         <div className=" w-full h-[1px] bg-secondary md:mt-5 mt-1"></div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -9,8 +9,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import React from "react";
 import { Helmet } from "react-helmet";
 
-function PopupShareBtn() {
-  const [popupState, setPopupState] = useState(false);
+function PopupShareBtn({popupState, setPopupState}) {
   const [copySuccess, setCopySuccess] = useState(false);
 
   async function copyToClip() {
@@ -21,11 +20,15 @@ function PopupShareBtn() {
     setTimeout(() => setCopySuccess(false), 2000);
   }
 
+
   const shareUrl = "https://sivaneshkkf.github.io/Portfolio/";
   const message = `Check out Sivanesh's Portfolio: ${shareUrl}`;
 
   return (
-    <div className="flex relative">
+    <motion.div className="flex relative"
+    onViewportLeave={() => setPopupState(false)}
+    viewport={{once:true, amount:0.2}}
+    >
       <Helmet>
         <meta property="og:title" content="Sivanesh's Portfolio" />
         <meta property="og:description" content="Check out my portfolio!" />
@@ -40,9 +43,10 @@ function PopupShareBtn() {
       </Helmet>
 
       <motion.div
-        className="w-9 h-9 bg-dark-primary rounded-full flex justify-center items-center absolute"
+        className="w-9 h-9 bg-[#0b1f35] dark:bg-dark-primary rounded-full flex justify-center items-center absolute"
         animate={popupState ? { x: -90 } : { x: 0 }}
         transition={{ duration: 1, type: "spring" }}
+        onViewportLeave={{x:0}}
       >
         <a
           href={`https://wa.me/?text=${encodeURIComponent(message)}`}
@@ -59,7 +63,7 @@ function PopupShareBtn() {
       </motion.div>
 
       <motion.div
-        className="w-9 h-9 bg-dark-primary rounded-full flex justify-center items-center"
+        className="w-9 h-9 bg-[#0b1f35] dark:bg-dark-primary rounded-full flex justify-center items-center"
         animate={popupState ? { x: -45 } : { x: 0 }}
         transition={{ duration: 1, type: "spring" }}
         onClick={copyToClip}
@@ -76,7 +80,7 @@ function PopupShareBtn() {
       </motion.div>
 
       <motion.div
-        className="w-9 h-9 bg-dark-primary rounded-full flex justify-center items-center absolute"
+        className="w-9 h-9 bg-[#0b1f35] dark:bg-dark-primary rounded-full flex justify-center items-center absolute"
         onClick={() => setPopupState(!popupState)}
       >
         <Tooltip title="Share">
@@ -85,7 +89,7 @@ function PopupShareBtn() {
           </IconButton>
         </Tooltip>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
 
