@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ImageBlurHash from "../utils/ImageBlurHash";
 import { Translate } from "@mui/icons-material";
-
+import PopupShareBtn from "../components/Buttons/PopupBtn";
 
 function Indroduction() {
   const x = useMotionValue(0);
@@ -165,13 +165,19 @@ function Indroduction() {
               /> */}
               <ImageBlurHash
                 className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl shadow-dark-primary border-2 border-zinc-700"
-              src={sivaneshImg}/>
+                src={sivaneshImg}
+              />
 
-              <a href={sivanesh_resume} download onClick={handleDownload}
-              style={{transformStyle: "preserve-3d",
-                transform: "translateZ(500px)",
-                willChange: "transform"
-              }}>
+              <a
+                href={sivanesh_resume}
+                download
+                onClick={handleDownload}
+                style={{
+                  transformStyle: "preserve-3d",
+                  transform: "translateZ(500px)",
+                  willChange: "transform",
+                }}
+              >
                 <CVdownloadBtn
                   rotateX={rotateX}
                   rotateY={rotateY}
@@ -325,6 +331,16 @@ function Indroduction() {
                   clipRule="evenodd"
                 ></path>
               </svg>
+            </motion.a>
+
+            <motion.a
+              variants={FadeIn("up", 1.8, 0)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{ once: true }}
+              className="ml-auto"
+            >
+             <PopupShareBtn/>
             </motion.a>
           </div>
         </div>
