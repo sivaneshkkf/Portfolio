@@ -5,8 +5,6 @@ import musicplayerbg from "../images/bg/musicplayerbg.png"
 import formbg from "../images/bg/formbg.png"
 import calculator from "../images/bg/calculator.png"
 
-import iphone from "../images/iphone.png"
-
 import savingsApp1 from "../images/savingsApp1.png";
 import savingsApp2 from "../images/savingsApp2.png";
 import savingsApp3 from "../images/savingsApp3.png";

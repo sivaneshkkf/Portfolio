@@ -5,7 +5,6 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import BreakLine from "../components/BreakLine";
 import { TypeAnimation } from "react-type-animation";
 import { FadeIn } from "../varients/varientAnim";
 import sivaneshImg from "../images/sivaneshDP.webp";
@@ -14,8 +13,8 @@ import sivanesh_resume from "../images/SIVANESH-RESUME.pdf";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ImageBlurHash from "../utils/ImageBlurHash";
-import { Translate } from "@mui/icons-material";
 import PopupShareBtn from "../components/Buttons/PopupBtn";
+
 
 function Indroduction() {
   const x = useMotionValue(0);
@@ -97,6 +96,8 @@ function Indroduction() {
 
   // popup state
   const [popupState, setPopupState] = useState(false);
+
+  
 
   return (
     <motion.div className="bg-[url('../src/images/bg.webp')] bg-cover bg-center h-full w-full relative z-0 mt-16"
@@ -339,7 +340,7 @@ function Indroduction() {
               </svg>
             </motion.a>
 
-            <motion.a
+            <motion.div
               variants={FadeIn("up", 1.8, 0)}
               initial="hidden"
               whileInView={"show"}
@@ -347,7 +348,7 @@ function Indroduction() {
               className="ml-auto"
             >
              <PopupShareBtn popupState={popupState} setPopupState={setPopupState}/>
-            </motion.a>
+            </motion.div>
           </div>
         </div>
         <div className=" w-full h-[1px] bg-secondary md:mt-5 mt-1"></div>

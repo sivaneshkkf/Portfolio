@@ -1,15 +1,15 @@
 import { createRoot } from "react-dom/client";
-// import App from "./App.jsx";
 import "./index.css";
 
 import LoadingAnim from "./components/LoadingAnim.jsx";
-
 import React, { Suspense, useEffect, useState } from "react";
+import { ScreenSizeContext } from "./context/ScreenSizeContext.jsx";
 
 const LazyComponentApp = React.lazy(() => import("./App.jsx"));
 
 function AppWithDelay() {
   const [showSuspense, setShowSuspense] = useState(false);
+  const [ScreenSize, setScreenSize] = useState(getScreenWidth());
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,13 +19,40 @@ function AppWithDelay() {
     return () => clearTimeout(timer); // Clear timer on component unmount
   }, []);
 
-  return showSuspense ? (
-    <Suspense fallback={<LoadingAnim />}>
-      <LazyComponentApp />
-    </Suspense>
-  ) : (
-    <LoadingAnim /> // Initial loading animation shown during delay
+  useEffect(() => {
+    function handleResize() {
+      setScreenSize(getScreenWidth());
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return (
+    <ScreenSizeContext.Provider value={{ ScreenSize, setScreenSize }}>
+      {showSuspense ? (
+        <Suspense fallback={<LoadingAnim />}>
+          <LazyComponentApp />
+        </Suspense>
+      ) : (
+        <LoadingAnim /> // Initial loading animation shown during delay
+      )}
+    </ScreenSizeContext.Provider>
   );
+}
+
+// Helper function to get screen width size category
+function getScreenWidth() {
+  const screenWidth = window.innerWidth;
+  if (screenWidth >= 1024) {
+    return "xl";
+  } else if (screenWidth >= 768) {
+    return "lg";
+  } else if (screenWidth >= 640) {
+    return "md";
+  } else {
+    return "sm";
+  }
 }
 
 createRoot(document.getElementById("root")).render(<AppWithDelay />);

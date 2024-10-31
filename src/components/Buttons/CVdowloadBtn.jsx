@@ -92,7 +92,7 @@ function CVdownloadBtn({ rotateX, rotateY, progressValue }) {
                   ? { y: 100 }
                   : { y: 0 }
               }
-              transition={{ duration: 1.5, type: "spring" }}
+              transition={{ duration: 1.8, type: "spring" }}
             >
               CV
             </motion.p>

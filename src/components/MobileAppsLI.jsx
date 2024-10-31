@@ -1,20 +1,22 @@
-import iphone from "../images/iphone.png";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ScreenSizeContext } from "../context/ScreenSizeContext";
 
 function MobileAppsLi({ imgs, name, disc, techs, link }) {
+  
+
+  const {ScreenSize} = useContext(ScreenSizeContext)
   const [xVal, setXval] = useState(getResponsiveXvalue());
 
   function getResponsiveXvalue() {
-    const width = window.innerWidth;
 
-    if (width >= 1024) {
+    if (ScreenSize === 'xl') {
       // lg (1024px and up)
       return { xl: -145, xr: 145 };
-    } else if (width >= 768) {
+    } else if (ScreenSize === 'lg') {
       // md (768px and up)
       return { xl: -138, xr: 138 };
-    } else if (width >= 640) {
+    } else if (ScreenSize === 'md') {
       // sm (640px and up)
       return { xl: -135, xr: 135 };
     } else {
@@ -25,20 +27,11 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
 
   useEffect(() => {
     // Set initial xVal on mount
-    setXval(getResponsiveXvalue());
-
-    // Update xVal on window resize
-    const handleResize = () => {
+    if (ScreenSize) {
       setXval(getResponsiveXvalue());
-    };
+    }
 
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup event listener on unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  }, [ScreenSize]);
 
   return (
     <div className="border-2 dark:border-dark-primary border-primary md:px-8 md:pb-5 px-5 pt-8 pb-5 rounded-2xl max-w-4xl mx-auto backdrop-blur-sm bg-black dark:bg-white dark:bg-opacity-10 bg-opacity-10 w-fit h-full flex flex-col justify-between z-0">
