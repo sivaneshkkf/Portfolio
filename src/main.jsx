@@ -4,6 +4,7 @@ import "./index.css";
 import LoadingAnim from "./components/LoadingAnim.jsx";
 import React, { Suspense, useEffect, useState } from "react";
 import { ScreenSizeContext } from "./context/ScreenSizeContext.jsx";
+import { ScrollProvider } from "./Utils/ScrollValues.jsx";
 
 const LazyComponentApp = React.lazy(() => import("./App.jsx"));
 
@@ -32,7 +33,9 @@ function AppWithDelay() {
     <ScreenSizeContext.Provider value={{ ScreenSize, setScreenSize }}>
       {showSuspense ? (
         <Suspense fallback={<LoadingAnim />}>
+           <ScrollProvider>
           <LazyComponentApp />
+          </ScrollProvider>
         </Suspense>
       ) : (
         <LoadingAnim /> // Initial loading animation shown during delay

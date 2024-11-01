@@ -9,15 +9,33 @@ function AboutMe() {
   return (
     <div className="bg-primary dark:bg-dark-secondary px-5 pt-10 relative -z-[2]">
       <TheHeading heading="ABOUT ME" id={sectionIDS.aboutME.sectionId} />
-      <div className="flex items-center md:py-20 md:px-10 lg:px-60">
-        <p className="text-textpara dark:text-dark-textpara text-xs sm:text-sm md:text-base lg:text-md font-medium flex-1 mt-3">
-          I’m a dedicated web developer with a passion for crafting clean,
-          efficient, and visually appealing websites. With a strong foundation
-          in HTML, CSS, JavaScript, and frameworks like React, I specialize in
-          creating responsive, user-centric designs that enhance functionality
-          and user experience. Constantly learning and adapting to new
-          technologies.
-        </p>
+      <div className="flex items-center md:py-10 md:px-10 lg:px-60">
+        <div className="space-y-5">
+          <p className="text-textpara dark:text-dark-textpara text-xs sm:text-sm md:text-base lg:text-md font-medium flex-1 mt-3">
+            I’m a dedicated web developer with a passion for crafting clean,
+            efficient, and visually appealing websites. With a strong foundation
+            in HTML, CSS, JavaScript, and frameworks like React, I specialize in
+            creating responsive, user-centric designs that enhance functionality
+            and user experience. Constantly learning and adapting to new
+            technologies.
+          </p>
+          <div className="bg-dark-primary rounded p-3 relative">
+            <p className="text-textpara dark:text-dark-textpara text-xs sm:text-sm md:text-base lg:text-md font-medium flex-1">
+              I am actively seeking new career opportunities where I can
+              leverage my skills, contribute meaningfully, and expand my
+              knowledge as I grow professionally.
+            </p>
+            <div
+              className="absolute inset-4 -z-10 blur-lg rounded-lg"
+              style={{
+                background:
+                  "linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899, #F59E0B, #10B981)",
+                borderRadius: "8px", // Optional for rounded corners
+              }}
+            ></div>
+          </div>
+        </div>
+
         <div className="">
           <img
             src={aboutImg}
@@ -77,9 +95,19 @@ function AboutMe() {
               </span>
               Over time, I’ve mastered various libraries and frameworks,
               including
-              <span className="dark:text-dark-codingTextHl text-codingTextHl"> React, </span>and
-              <span className="dark:text-dark-codingTextHl text-codingTextHl"> Tailwind CSS, </span> which
-              allow me to create dynamic, high-performance applications. As a self-learner with a strong curiosity for new technologies, I’m constantly driven to explore, learn, and refine my skills in both design and coding."
+              <span className="dark:text-dark-codingTextHl text-codingTextHl">
+                {" "}
+                React,{" "}
+              </span>
+              and
+              <span className="dark:text-dark-codingTextHl text-codingTextHl">
+                {" "}
+                Tailwind CSS,{" "}
+              </span>{" "}
+              which allow me to create dynamic, high-performance applications.
+              As a self-learner with a strong curiosity for new technologies,
+              I’m constantly driven to explore, learn, and refine my skills in
+              both design and coding."
             </p>
 
             <RoadMap />

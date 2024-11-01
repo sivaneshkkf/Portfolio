@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-function SendBtn({ showMessage }) {
+function SendBtn({ showMessage, text }) {
   return (
     <motion.button
       className="mx-auto relative overflow-hidden cursor-pointer bg-accent"
@@ -14,7 +14,7 @@ function SendBtn({ showMessage }) {
             showMessage.btnAnim ? "hidden" : "block"
           }`}
         >
-          SEND MESSAGE
+          {text || "SEND MESSAGE"}
         </p>
         <span
           className={`text-white absolute left-1/2 transform -translate-x-1/2 ${

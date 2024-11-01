@@ -171,7 +171,7 @@ function Indroduction() {
                 className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700"
               /> */}
               <ImageBlurHash
-                className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl shadow-dark-primary border-2 border-zinc-700"
+                className="md:max-w-80 2xl:max-w-xs :max-w-sm xl:max-w-xs mx-auto md:rounded-3xl rounded-2xl shadow-2xl shadow-dark-primary border-2 border-zinc-700"
                 src={sivaneshImg}
               />
 

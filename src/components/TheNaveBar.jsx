@@ -4,10 +4,11 @@ import sectionIDS from "../data/SectionIDS";
 import { HeadingContext } from "../context/HeadingContext";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ScrolContext } from "../varients/ScrolContext";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import logo from "../images/logo.png"
 import { faHouse,faIdBadge, faUserGear, faFileCode, faSheetPlastic, faAddressBook } from '@fortawesome/free-solid-svg-icons'
+import { ScrolContext } from "../context/scrolContext";
 
 function TheNaveBar() {
   const { visibleSection, setVisibleSection } = useContext(HeadingContext);

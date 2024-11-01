@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import TheNaveBar from "./components/TheNaveBar";
 import AboutMe from "./pages/AboutMe";
 import Indroduction from "./pages/Indroduction";
@@ -9,8 +9,13 @@ import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
 import Footer from "./pages/Footer";
-import { ScrolContext } from "./varients/ScrolContext";
 import ThemeBtn from "./components/ThemeBtn";
+import FeedBackForm from "./components/FeedBackForm";
+import { ScrolContext } from "./context/scrolContext";
+import { FeedbackFormContext } from "./context/FeedBackFormContext";
+import { useScrollPosition } from "./Utils/ScrollValues";
+import Dashboard from "./pages/DashBoard";
+
 
 function App() {
   const [visibleSection, setVisibleSection] = useState({
@@ -19,6 +24,13 @@ function App() {
   });
 
   const [scrolEnable, setScrollEnable] = useState(true);
+
+  const [feedbackFormOpen, setFeedbackFormOpen] = useState({
+    open: false,
+    once: false,
+  });
+
+  const { scrollPosition, setScrollPosition } = useScrollPosition();
 
   const [theme, setTheme] = useState("light");
 
@@ -127,40 +139,59 @@ function App() {
     };
   }, [scrolEnable]);
 
+  // feedback form open
+  useEffect(() => {
+    if (scrollPosition === "end") {
+      const isFirstVisit = localStorage.getItem("feedbackFormOpened");
+      if (!isFirstVisit) {
+        setFeedbackFormOpen({ open: true, once: true });
+        localStorage.setItem("feedbackFormOpened", "true");
+      }
+    }
+  }, [scrollPosition]);
+
   return (
-    <div className="relative overflow-x-hidden">
-      <Theme.Provider value={{ theme, setTheme }}>
-        <ScrolContext.Provider value={{ scrolEnable, setScrollEnable }}>
-          <HeadingContext.Provider
-            value={{ visibleSection, setVisibleSection }}
-          >
-            <div id="navBar">
-              <TheNaveBar />
-            </div>
-            <div ref={introRef} id={sectionIDS.home.sectionId}>
-              <Indroduction />
-            </div>
-            <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
-              <AboutMe />
-            </div>
-            <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
-              <SKills />
-            </div>
-            <div ref={projectRef} id={sectionIDS.projects.sectionId}>
-              <Projects />
-            </div>
-            <div ref={resumeRef} id={sectionIDS.resume.sectionId}>
-              <Resume />
-            </div>
-            <div ref={contactRef} id={sectionIDS.contact.sectionId}>
-              <Contact />
-            </div>
-            <Footer />
-            <ThemeBtn />
-          </HeadingContext.Provider>
-        </ScrolContext.Provider>
-      </Theme.Provider>
-    </div>
+    <FeedbackFormContext.Provider
+      value={{ feedbackFormOpen, setFeedbackFormOpen }}
+    >
+      <div className="relative overflow-x-hidden">
+        <Theme.Provider value={{ theme, setTheme }}>
+          <ScrolContext.Provider value={{ scrolEnable, setScrollEnable }}>
+            <HeadingContext.Provider
+              value={{ visibleSection, setVisibleSection }}
+            >
+                <div id="navBar">
+                  <TheNaveBar />
+                </div>
+                <div ref={introRef} id={sectionIDS.home.sectionId}>
+                  <Indroduction />
+                </div>
+                <div className="w-full">
+                  <Dashboard/>
+                </div>
+                <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
+                  <AboutMe />
+                </div>
+                <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
+                  <SKills />
+                </div>
+                <div ref={projectRef} id={sectionIDS.projects.sectionId}>
+                  <Projects />
+                </div>
+                <div ref={resumeRef} id={sectionIDS.resume.sectionId}>
+                  <Resume />
+                </div>
+                <div ref={contactRef} id={sectionIDS.contact.sectionId}>
+                  <Contact />
+                </div>
+                <Footer />
+                <ThemeBtn />
+                <FeedBackForm />
+            </HeadingContext.Provider>
+          </ScrolContext.Provider>
+        </Theme.Provider>
+      </div>
+    </FeedbackFormContext.Provider>
   );
 }
 
