@@ -133,7 +133,7 @@ function Indroduction() {
       onMouseLeave={() => setPopupState(false)}
     >
       <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10 dark:from-dark-gradient1 dark:to-dark-gradient2"></div>
-      <div className=" p-8 sm:p-20 xl:px-60">
+      <div className=" px-5 py-8 sm:p-10 md:p-20 xl:px-60">
         <div className="flex gap-4 items-center justify-between">
           <motion.div
             className="space-y-4 flex-1"
@@ -203,7 +203,7 @@ function Indroduction() {
                 className="md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700"
               /> */}
               <ImageBlurHash
-                className="md:max-w-80 2xl:max-w-xs :max-w-sm xl:max-w-xs mx-auto md:rounded-3xl rounded-2xl shadow-2xl shadow-dark-primary border-2 border-zinc-700"
+                className="md:max-w-80 2xl:max-w-xs sm:max-w-64 xl:max-w-xs mx-auto md:rounded-3xl rounded-2xl shadow-2xl shadow-dark-primary border-2 border-zinc-700"
                 src={sivaneshImg}
               />
 
@@ -238,7 +238,7 @@ function Indroduction() {
           JavaScript, and React, I focus on creating seamless digital
           experiences. Explore my portfolio to see my latest work!
         </motion.p>
-        <div className="mt-5">
+        <div className="mt-5 sm:mt-10 md:mt-5">
           <p className="text-gray-300 text-xs md:text-sm mb-1 md:mb-2">
             Follow Me
           </p>

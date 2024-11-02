@@ -27,7 +27,7 @@ function Dashboard() {
             <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40 dark:bg-opacity-80">
               <IconButton>{icon}</IconButton>
             </div>
-            <h4 className="text-zinc-400 text-sm font-normal lg:font-medium px-3 sm:px-3">{NumberFormatter(count)}
+            <h4 className="text-zinc-400 text-sm font-normal lg:font-medium px-2 sm:px-3">{NumberFormatter(count)}
             <span className="text-[10px] ml-2 hidden font-normal lg:inline">{title}</span>
             </h4>
           </div>
