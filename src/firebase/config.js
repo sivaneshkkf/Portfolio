@@ -2,6 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, Timestamp, collection, addDoc, onSnapshot } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 import { setDoc, doc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import {signInWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB9vzUQDF2NvK4tQfT6JN4WmGsv4ayzktg",
@@ -15,6 +17,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+
 
 export function AddFeedBack(formData) {
   return new Promise(async (resolve, reject) => {
@@ -61,3 +64,23 @@ export function UseFetchCollection(fbCollection) {
 
   return documents;
 }
+
+
+
+
+const auth = getAuth(app);
+
+export function logInFirebase(email, password) {
+  return new Promise((resolve, reject) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        resolve(user);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        reject(errorMessage);
+      });
+  });
+}
+

@@ -10,11 +10,12 @@ import { FadeIn } from "../varients/varientAnim";
 import sivaneshImg from "../images/sivaneshDP.webp";
 import CVdownloadBtn from "../components/Buttons/CVdowloadBtn";
 import sivanesh_resume from "../images/SIVANESH-RESUME.pdf";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import ImageBlurHash from "../utils/ImageBlurHash";
 import PopupShareBtn from "../components/Buttons/PopupBtn";
 import Dashboard from "./DashBoard";
+import { LoginFormContext, LoginStatus } from "../context/LoginFormContext";
 
 function Indroduction() {
   const x = useMotionValue(0);
@@ -46,10 +47,13 @@ function Indroduction() {
     y.set(0);
   };
 
-  // download resume
+  
   const [progressValue, setProgressValue] = useState(0); // Actual progress
   const [displayedProgress, setDisplayedProgress] = useState(0); // Displayed for animation
+  const {loginFormOpen, setLoginFormOpen} = useContext(LoginFormContext)
+  const {loginStatus} = useContext(LoginStatus)
 
+  // download resume
   async function handleDownload(e) {
     try {
       await axios({
@@ -102,7 +106,7 @@ function Indroduction() {
       onMouseLeave={() => setPopupState(false)}
     >
       <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10 dark:from-dark-gradient1 dark:to-dark-gradient2"></div>
-      <div className=" p-8 sm:px-20 xl:px-60">
+      <div className=" p-8 sm:p-20 xl:px-60">
         <div className="flex gap-4 items-center justify-between">
           <motion.div
             className="space-y-4 flex-1"
@@ -357,9 +361,29 @@ function Indroduction() {
         </div>
         <div className=" w-full h-[1px] bg-secondary md:mt-5 mt-1"></div>
 
-        <div className="w-full">
+        <div className={`w-full ${loginStatus? "block" : "hidden"}`}>
           <Dashboard />
         </div>
+      </div>
+
+      <div className="absolute top-5 left-5 sm:w-10 sm:h-10 w-8 h-8 border border-dark-textpara rounded-full flex items-center justify-center opacity-20 hover:opacity-60 cursor-pointer transition-all duration-300"
+      onClick={() => setLoginFormOpen(true)}
+      >
+        <span className="text-dark-textpara">
+          <svg
+            className="sm:w-5 sm:h-5 w-4 h-4"
+            xmlns="http://www.w3.org/2000/svg"
+            width="1.3em"
+            height="1.3em"
+            viewBox="0 0 14 16"
+          >
+            <path
+              fillRule="evenodd"
+              d="M7 6.75V12h4V8h1v4c0 .55-.45 1-1 1H7v3l-5.45-2.72c-.33-.17-.55-.52-.55-.91V1c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v3h-1V1H3l4 2v2.25L10 3v2h4v2h-4v2L7 6.75z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </span>
       </div>
     </motion.div>
   );

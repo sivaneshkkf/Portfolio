@@ -18,7 +18,7 @@ function Footer() {
                     open:true
                 }))}
             }>
-                Send Feedback
+                Feedback
             </button>
         </div>
      );

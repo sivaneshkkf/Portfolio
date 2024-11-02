@@ -1,8 +1,11 @@
 import { button, div } from "framer-motion/client";
 
-function BtnForm({ text, loading }) {
+function BtnForm({ text, className, loading, onClick }) {
   return (
-    <button className="mx-auto w-full relative cursor-pointer bg-accent px-8 py-2 text-white font-semibold text-xs rounded flex gap-2 items-center text-center justify-center">
+    <button 
+      className={`mx-auto w-full relative cursor-pointer bg-accent px-8 py-2 text-white font-semibold text-xs rounded flex gap-2 items-center text-center justify-center ${className ? className : "bg-accent"}`}
+      onClick={onClick}
+    >
       <p className={`${loading ? "hidden" : "block"}`}>{text}</p>
 
       <span className={`text-white ${loading ? "block" : "hidden"}`}>
