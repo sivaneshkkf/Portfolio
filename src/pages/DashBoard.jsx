@@ -26,7 +26,7 @@ function Dashboard() {
             <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40">
               <IconButton>{icon}</IconButton>
             </div>
-            <h4 className="text-white text-sm font-normal px-3 sm:px-4">{NumberFormatter(count)}</h4>
+            <h4 className="text-zinc-400 text-sm font-normal px-3 sm:px-4">{NumberFormatter(count)}</h4>
           </div>
         </Tooltip>
       </div>
