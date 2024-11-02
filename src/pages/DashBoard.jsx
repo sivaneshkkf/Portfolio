@@ -9,10 +9,11 @@ import LinkIcon from "@mui/icons-material/Link";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { NumberFormatter } from "../utils/Formatter";
+import GetAppIcon from '@mui/icons-material/GetApp';
 
 function Dashboard() {
   const dashbordDetails = UseFetchCollection("dashboard");
-  const { whatsapp = 0, url = 0, views = 0 } = dashbordDetails[0] || {};
+  const { whatsapp = 0, url = 0, views = 0, downloads = 0 } = dashbordDetails[0] || {};
 
   const feedBackData = UseFetchCollection("feedback");
   const feedBackLength = feedBackData.length;
@@ -23,10 +24,12 @@ function Dashboard() {
       <div className="flex justify-center items-center shadow-lg">
         <Tooltip title={title}>
           <div className="flex bg-[#0b1f35] dark:bg-white h-7 dark:bg-opacity-5 bg-opacity-40 rounded overflow-hidden items-center justify-center">
-            <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40">
+            <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40 dark:bg-opacity-80">
               <IconButton>{icon}</IconButton>
             </div>
-            <h4 className="text-zinc-400 text-sm font-normal px-3 sm:px-4">{NumberFormatter(count)}</h4>
+            <h4 className="text-zinc-400 text-sm font-normal lg:font-medium px-3 sm:px-3">{NumberFormatter(count)}
+            <span className="text-[10px] ml-2 hidden font-normal lg:inline">{title}</span>
+            </h4>
           </div>
         </Tooltip>
       </div>
@@ -55,6 +58,11 @@ function Dashboard() {
           icon={<FeedbackIcon sx={{ color: "#A5A7A9",fontSize: "1rem" }}  />}
           count={feedBackLength}
           title="Feedbacks"
+        />
+        <Stats
+          icon={<GetAppIcon sx={{ color: "#A5A7A9",fontSize: "1rem" }}  />}
+          count={downloads}
+          title="Downloads"
         />
       </div>
     </div>

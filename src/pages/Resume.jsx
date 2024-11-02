@@ -13,10 +13,20 @@ import { useEffect, useState } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import DownloadBtn from "../components/Buttons/downloadBtn";
+import { AddDashboardDetails, UseFetchCollection } from "../firebase/config";
 
 function Resume() {
   const [progressValue, setProgressValue] = useState(0);         // Actual progress
 const [displayedProgress, setDisplayedProgress] = useState(0); // Displayed for animation
+
+const dashbordDetails = UseFetchCollection("dashboard");
+const {
+  whatsapp = 0,
+  url = 0,
+  views = 0,
+  downloads = 0,
+} = dashbordDetails[0] || {};
+
 
 async function handleDownload(e) {
   try {
@@ -31,6 +41,21 @@ async function handleDownload(e) {
         setProgressValue(percentCompleted); // Update actual progress
       },
     });
+
+    // update dashboard
+    const updateDashboard = {
+      whatsapp: whatsapp,
+      url: url,
+      views: views,
+      downloads: downloads + 1,
+    };
+    AddDashboardDetails(updateDashboard)
+      .then((docRef) => {
+        console.log("Feedback successfully submitted with ID:", docRef.id);
+      })
+      .catch((e) => {
+        console.error("Failed to send feedback:", e);
+      });
 
     // Reset both progress values after download completes
     setTimeout(() => {

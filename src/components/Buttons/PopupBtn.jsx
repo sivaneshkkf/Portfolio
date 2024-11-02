@@ -10,12 +10,13 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { ScreenSizeContext } from "../../context/ScreenSizeContext";
 import { AddDashboardDetails, UseFetchCollection } from "../../firebase/config";
+import { Download } from "@mui/icons-material";
 
 function PopupShareBtn({ popupState, setPopupState }) {
   const [copySuccess, setCopySuccess] = useState(false);
 
   const dashboardDetails = UseFetchCollection("dashboard");
-  const { whatsapp = 0, url = 0, views = 0 } = dashboardDetails[0] || {};
+  const { whatsapp = 0, url = 0, views = 0, downloads=0 } = dashboardDetails[0] || {};
 
   // useRef to track if views have already been incremented
   const hasUpdatedViews = useRef(false);
@@ -27,6 +28,7 @@ function PopupShareBtn({ popupState, setPopupState }) {
         const updatedDetails = {
           whatsapp,
           url,
+          downloads,
           views: views + 1, // Increment view count
         };
 
@@ -61,7 +63,8 @@ function PopupShareBtn({ popupState, setPopupState }) {
       const updatedDetails = {
         whatsapp: whatsapp, // Increment whatsapp count
         url: url + 1,
-        views: views, // Increment url count
+        views: views,
+        downloads:downloads, // Increment url count
       };
 
       // Update the Firestore database with incremented values
@@ -84,7 +87,8 @@ function PopupShareBtn({ popupState, setPopupState }) {
     const updatedDetails = {
       whatsapp: whatsapp + 1, // Increment whatsapp count
       url: url,
-      views: views, // Increment url count
+      views: views,
+      downloads : downloads, // Increment url count
     };
 
     // Update the Firestore database with incremented values

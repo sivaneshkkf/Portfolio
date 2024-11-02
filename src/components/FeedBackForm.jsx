@@ -25,9 +25,9 @@ function FeedBackForm() {
   // }, [setFeedbackFormOpen]);
 
   const schemaValidation = z.object({
-    name: z.string().min(3, { message: "Invalid Name" }).max(30),
-    email: z.string().email(),
-    message: z.string().min(5, { message: "Enter your message briefly" }),
+    feedbackName: z.string().min(3, { message: "Invalid Name" }).max(30),
+    feedbackEmail: z.string().email(),
+    feedbackMessage: z.string().min(5, { message: "Enter your message briefly" }),
   });
 
   const [showMessage, setShowMessage] = useState({loading:false, success:false});
@@ -109,23 +109,23 @@ function FeedBackForm() {
           >
             <FeedbackInput
               placeholder="Name"
-              id="name"
+              id="feedbackName"
               type="text"
-              register={register("name")}
-              error={errors.name}
+              register={register("feedbackName")}
+              error={errors.feedbackName}
             />
             <FeedbackInput
               placeholder="Email"
-              id="email"
+              id="feedbackEmail"
               type="email"
-              register={register("email")}
-              error={errors.email}
+              register={register("feedbackEmail")}
+              error={errors.feedbackEmail}
             />
             <div className="space-y-1">
               <textarea
                 placeholder="Enter Your Feedback briefly"
                 name="message"
-                id="message"
+                id="feedbackMessage"
                 rows={5}
                 className={`bg-secondary dark:bg-dark-secondary py-2 px-3 rounded w-full resize-none outline-none text-xs text-textHead dark:text-dark-textHead ${
                   errors.message ? "border-2 border-accent" : ""

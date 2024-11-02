@@ -16,6 +16,12 @@ import ImageBlurHash from "../utils/ImageBlurHash";
 import PopupShareBtn from "../components/Buttons/PopupBtn";
 import Dashboard from "./DashBoard";
 import { LoginFormContext, LoginStatus } from "../context/LoginFormContext";
+import { AddDashboardDetails, UseFetchCollection } from "../firebase/config";
+import { NumberFormatter } from "../utils/Formatter";
+import { IconButton, Tooltip } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { span } from "framer-motion/client";
+
 
 function Indroduction() {
   const x = useMotionValue(0);
@@ -47,11 +53,17 @@ function Indroduction() {
     y.set(0);
   };
 
-  
   const [progressValue, setProgressValue] = useState(0); // Actual progress
   const [displayedProgress, setDisplayedProgress] = useState(0); // Displayed for animation
-  const {loginFormOpen, setLoginFormOpen} = useContext(LoginFormContext)
-  const {loginStatus} = useContext(LoginStatus)
+  const { loginFormOpen, setLoginFormOpen } = useContext(LoginFormContext);
+  const { loginStatus } = useContext(LoginStatus);
+  const dashbordDetails = UseFetchCollection("dashboard");
+  const {
+    whatsapp = 0,
+    url = 0,
+    views = 0,
+    downloads = 0,
+  } = dashbordDetails[0] || {};
 
   // download resume
   async function handleDownload(e) {
@@ -67,6 +79,21 @@ function Indroduction() {
           setProgressValue(percentCompleted); // Update actual progress
         },
       });
+
+      // update dashboard
+      const updateDashboard = {
+        whatsapp: whatsapp,
+        url: url,
+        views: views,
+        downloads: downloads + 1,
+      };
+      AddDashboardDetails(updateDashboard)
+        .then((docRef) => {
+          console.log("Feedback successfully submitted with ID:", docRef.id);
+        })
+        .catch((e) => {
+          console.error("Failed to send feedback:", e);
+        });
 
       // Reset both progress values after download completes
       setTimeout(() => {
@@ -346,6 +373,34 @@ function Indroduction() {
             </motion.a>
 
             <motion.div
+              href="http://Wa.me/+917010037476"
+              target="blank"
+              variants={FadeIn("up", 1.6, 0)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{ once: true }}
+              className="absolute top-[22px] left-[60px] sm:static"
+            >
+              <div className="flex justify-center items-center shadow-lg opacity-80 sm:opacity-100">
+                <Tooltip title="Views">
+                  <div className="flex bg-[#0b1f35] dark:bg-white h-7 dark:bg-opacity-5 bg-opacity-60 sm:bg-opacity-40 rounded overflow-hidden items-center justify-center">
+                    <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40">
+                      <IconButton>
+                        <VisibilityIcon
+                          sx={{ color: "#A5A7A9", fontSize: "1rem" }}
+                        />
+                      </IconButton>
+                    </div>
+                    <h4 className="text-zinc-400 text-sm font-normal px-2 sm:px-3">
+                      {NumberFormatter(views)}
+                      <span className="text-[10px]"> Views</span>
+                    </h4>
+                  </div>
+                </Tooltip>
+              </div>
+            </motion.div>
+
+            <motion.div
               variants={FadeIn("up", 1.8, 0)}
               initial="hidden"
               whileInView={"show"}
@@ -361,13 +416,14 @@ function Indroduction() {
         </div>
         <div className=" w-full h-[1px] bg-secondary md:mt-5 mt-1"></div>
 
-        <div className={`w-full ${loginStatus? "block" : "hidden"}`}>
+        <div className={`w-full ${loginStatus ? "block" : "hidden"}`}>
           <Dashboard />
         </div>
       </div>
 
-      <div className="absolute top-5 left-5 sm:w-10 sm:h-10 w-8 h-8 border border-dark-textpara rounded-full flex items-center justify-center opacity-20 hover:opacity-60 cursor-pointer transition-all duration-300"
-      onClick={() => setLoginFormOpen(true)}
+      <div
+        className="absolute top-5 left-5 sm:w-10 sm:h-10 w-8 h-8 border border-dark-textpara rounded-full flex items-center justify-center opacity-50 hover:opacity-80 cursor-pointer transition-all duration-300"
+        onClick={() => setLoginFormOpen(true)}
       >
         <span className="text-dark-textpara">
           <svg
