@@ -140,7 +140,7 @@ function LoginForm() {
           <div
             className={`${loginStatus ? "block" : "hidden"}`}
           >
-            <p className="text-xs text-textHead font-medium mb-5">
+            <p className="text-xs text-textHead dark:text-dark-textHead font-medium mb-5">
               Are you sure you want to log out?
             </p>
             <div className="flex gap-3 ">
