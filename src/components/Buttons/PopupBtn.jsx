@@ -30,8 +30,12 @@ function PopupShareBtn({ popupState, setPopupState }) {
           views: views + 1, // Increment view count
         };
 
-        const docRef = await AddDashboardDetails(updatedDetails);
-        console.log("View count updated with ID:", docRef.id);
+        const userId = localStorage.getItem("portfolioUserId")
+        if(!userId){
+          const docRef = await AddDashboardDetails(updatedDetails);
+          console.log("View count updated with ID:", docRef.id);
+        }
+       
       } catch (error) {
         console.error("Failed to update view count:", error);
       }

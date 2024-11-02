@@ -23,7 +23,6 @@ function LoginForm() {
 
   useEffect(() => {
     const userId = localStorage.getItem("portfolioUserId");
-    console.log(userId);
     if (userId === "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
       setLoginStatus(true);
     }
