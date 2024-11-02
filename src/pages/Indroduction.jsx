@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ImageBlurHash from "../utils/ImageBlurHash";
 import PopupShareBtn from "../components/Buttons/PopupBtn";
-
+import Dashboard from "./DashBoard";
 
 function Indroduction() {
   const x = useMotionValue(0);
@@ -68,7 +68,7 @@ function Indroduction() {
       setTimeout(() => {
         setProgressValue(0);
         setDisplayedProgress(0);
-      }, 3000);
+      }, 5000);
     } catch (error) {
       console.error("Download error:", error);
       setProgressValue(0);
@@ -93,21 +93,19 @@ function Indroduction() {
     }
   }, [progressValue, displayedProgress]);
 
-
   // popup state
   const [popupState, setPopupState] = useState(false);
 
-  
-
   return (
-    <motion.div className="bg-[url('../src/images/bg.webp')] bg-cover bg-center h-full w-full relative z-0 mt-16"
-    onMouseLeave={() => setPopupState(false)}
+    <motion.div
+      className="bg-[url('../src/images/bg.webp')] bg-cover bg-center h-full w-full relative z-0 mt-16"
+      onMouseLeave={() => setPopupState(false)}
     >
       <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10 dark:from-dark-gradient1 dark:to-dark-gradient2"></div>
-      <div className=" p-8 sm:p-20 xl:px-60">
+      <div className=" p-8 sm:px-20 xl:px-60">
         <div className="flex gap-4 items-center justify-between">
           <motion.div
-            className="space-y-8 flex-1"
+            className="space-y-4 flex-1"
             variants={FadeIn("left", 0.8, 0)}
             initial="hidden"
             whileInView={"show"}
@@ -139,6 +137,9 @@ function Indroduction() {
               className="lg:text-5xl text-md text-white font-semibold mt-10"
               repeat={Infinity}
             />
+            <p className="text-[#649aaf] saturate-150 dark:text-[#859aa1] text-xs bg-white rounded sm:text-sm md:text-base lg:text-md font-normal w-fit px-2 py-1 bg-opacity-10 backdrop-blur-0">
+              I am currently available for hire
+            </p>
 
             <p className="text-textpara dark:text-dark-textpara text-xs md:font-medium max-w-md pt-5 hidden sm:block">
               I am a passionate web developer and self-learner, skilled in
@@ -347,11 +348,18 @@ function Indroduction() {
               viewport={{ once: true }}
               className="ml-auto"
             >
-             <PopupShareBtn popupState={popupState} setPopupState={setPopupState}/>
+              <PopupShareBtn
+                popupState={popupState}
+                setPopupState={setPopupState}
+              />
             </motion.div>
           </div>
         </div>
         <div className=" w-full h-[1px] bg-secondary md:mt-5 mt-1"></div>
+
+        <div className="w-full">
+          <Dashboard />
+        </div>
       </div>
     </motion.div>
   );

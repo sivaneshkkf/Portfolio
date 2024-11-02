@@ -1,34 +1,64 @@
 import { div } from "framer-motion/client";
 import TheHeading from "../components/TheHeading";
 import { UseFetchCollection } from "../firebase/config";
+import Tooltip from "@mui/material/Tooltip";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { IconButton } from "@mui/material";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import LinkIcon from "@mui/icons-material/Link";
+import FeedbackIcon from "@mui/icons-material/Feedback";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { NumberFormatter } from "../utils/Formatter";
 
 function Dashboard() {
-    const dashbordDetails = UseFetchCollection("dashboard");
-  console.log(dashbordDetails);
+  const dashbordDetails = UseFetchCollection("dashboard");
+  const { whatsapp = 0, url = 0, views = 0 } = dashbordDetails[0] || {};
 
-  const { whatsapp, url } = dashbordDetails[0] || { whatsapp: 0, url: 0 };
+  const feedBackData = UseFetchCollection("feedback");
+  const feedBackLength = feedBackData.length;
 
-    return ( 
-        <div className="bg-primary flex flex-col w-full justify-center px-10 py-10">
-            <TheHeading heading="DASHBOARD"/>
-            <div className="bg-white p-4 rounded-lg flex gap-8 mx-auto shadow-cardShadow mt-10">
-                <div className="flex flex-col gap-2 justify-center items-center">
-                    <p className="text-sm text-textHead font-semibold">Whatsapp Sharing</p>
-                    <h4 className="text-textpara text-2xl font-bold">{whatsapp}</h4>
-                </div>
-                <div className="w-[3px] bg-secondary"></div>
-                <div className="flex flex-col gap-2 justify-center items-center">
-                    <p className="text-sm text-textHead font-semibold">URL Sharing</p>
-                    <h4 className="text-textpara text-2xl font-bold">{url}</h4>
-                </div>
-                <div className="w-[3px] bg-secondary"></div>
-                <div className="flex flex-col gap-2 justify-center items-center">
-                    <p className="text-sm text-textHead font-semibold">Feedbacks</p>
-                    <h4 className="text-textpara text-2xl font-bold">10</h4>
-                </div>
+  // Reusable Stats Component
+  function Stats({ icon, count, title }) {
+    return (
+      <div className="flex justify-center items-center shadow-lg">
+        <Tooltip title={title}>
+          <div className="flex bg-[#0b1f35] dark:bg-white h-7 dark:bg-opacity-5 bg-opacity-40 rounded overflow-hidden items-center justify-center">
+            <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40">
+              <IconButton>{icon}</IconButton>
             </div>
-        </div>
-     );
+            <h4 className="text-white text-sm font-normal px-3 sm:px-4">{NumberFormatter(count)}</h4>
+          </div>
+        </Tooltip>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col justify-center mt-3">
+      <div className="flex gap-2 sm:gap-5 mx-auto mt-3">
+        <Stats
+          icon={<VisibilityIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}
+          count={views}
+          title="Views"
+        />
+        <Stats
+          icon={<WhatsAppIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}
+          count={whatsapp}
+          title="WhatsApp Shares"
+        />
+        <Stats
+          icon={<LinkIcon sx={{ color: "#A5A7A9",fontSize: "1rem" }} />}
+          count={url}
+          title="URL Shares"
+        />
+        <Stats
+          icon={<FeedbackIcon sx={{ color: "#A5A7A9",fontSize: "1rem" }}  />}
+          count={feedBackLength}
+          title="Feedbacks"
+        />
+      </div>
+    </div>
+  );
 }
 
 export default Dashboard;

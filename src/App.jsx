@@ -166,9 +166,6 @@ function App() {
                 <div ref={introRef} id={sectionIDS.home.sectionId}>
                   <Indroduction />
                 </div>
-                <div className="w-full">
-                  <Dashboard/>
-                </div>
                 <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
                   <AboutMe />
                 </div>

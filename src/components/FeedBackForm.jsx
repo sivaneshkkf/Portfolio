@@ -69,17 +69,17 @@ function FeedBackForm() {
 
   return (
     <div
-      className={`fixed w-full h-screen flex justify-center items-center inset-0 z-50 bg-white bg-opacity-20 overflow-y-scroll ${
+      className={`fixed w-full h-screen flex justify-center items-center inset-0 z-50 dark:bg-white dark:bg-opacity-20 bg-black bg-opacity-20 overflow-y-scroll ${
         open || once ? "block" : "hidden"
       }`}
     >
       <motion.div
-        className="p-8 rounded-lg bg-dark-primary flex flex-col items-center justify-center w-[30rem] m-2 relative overflow-hidden"
+        className="p-8 rounded-lg bg-primary dark:bg-dark-primary flex flex-col items-center justify-center w-[30rem] m-2 relative overflow-hidden"
         animate={open || once ? { y: [200, 0] } : { y: 200 }}
         transition={{ duration: 0.5, type: "spring" }}
       >
         <div className="w-full">
-          <h4 className="text-center text-white font-semibold">Feedback</h4>
+          <h4 className="text-center text-textHead dark:text-white font-semibold">Feedback</h4>
           <div className="w-full h-[1px] bg-dark-icon"></div>
         </div>
 
@@ -88,11 +88,11 @@ function FeedBackForm() {
             <span>
               <img src={emoji} alt="emoji" className="w-20 h-20" />
             </span>
-            <h4 className="text-white font-semibold">
+            <h4 className="text-textHead dark:text-white font-semibold">
               Thank you for scrolling
             </h4>
           </div>
-          <p className="text-center w-full text-white mb-1">
+          <p className="text-center w-full text-textHead dark:text-white mb-1">
             Thank you for exploring my portfolio!
           </p>
           <p className="text-xs text-dark-textpara font-medium">
@@ -167,7 +167,7 @@ function FeedBackForm() {
         </div>
 
         <span
-          className="text-lg p-3 text-dark-textpara absolute top-1 right-1"
+          className="text-lg p-3 cursor-pointer text-dark-textpara absolute top-1 right-1"
           onClick={() => setFeedbackFormOpen({ open: false, once: false })}
         >
           <svg

@@ -1,15 +1,19 @@
+import { useContext } from "react";
 import BreakLine from "../components/BreakLine";
 import RoadMap from "../components/RoadMap";
 import TheHeading from "../components/TheHeading";
 import sectionIDS from "../data/SectionIDS";
 import aboutImg from "../images/about.png";
 import aboutMeCodingLap from "../images/codingLaptop.png";
+import { Theme } from "../context/HeadingContext";
 
 function AboutMe() {
+  const { theme } = useContext(Theme);
+
   return (
     <div className="bg-primary dark:bg-dark-secondary px-5 pt-10 relative -z-[2]">
       <TheHeading heading="ABOUT ME" id={sectionIDS.aboutME.sectionId} />
-      <div className="flex items-center md:py-10 md:px-10 lg:px-60">
+      <div className="flex items-center md:py-10 md:px-10 2xl:px-60">
         <div className="space-y-5">
           <p className="text-textpara dark:text-dark-textpara text-xs sm:text-sm md:text-base lg:text-md font-medium flex-1 mt-3">
             I’m a dedicated web developer with a passion for crafting clean,
@@ -19,28 +23,13 @@ function AboutMe() {
             and user experience. Constantly learning and adapting to new
             technologies.
           </p>
-          <div className="bg-dark-primary rounded p-3 relative">
-            <p className="text-textpara dark:text-dark-textpara text-xs sm:text-sm md:text-base lg:text-md font-medium flex-1">
-              I am actively seeking new career opportunities where I can
-              leverage my skills, contribute meaningfully, and expand my
-              knowledge as I grow professionally.
-            </p>
-            <div
-              className="absolute inset-4 -z-10 blur-lg rounded-lg"
-              style={{
-                background:
-                  "linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899, #F59E0B, #10B981)",
-                borderRadius: "8px", // Optional for rounded corners
-              }}
-            ></div>
-          </div>
         </div>
 
         <div className="">
           <img
             src={aboutImg}
             alt="about"
-            className="max-w-28 sm:max-w-32 md:max-w-44 lg:max-w-96 ml-auto"
+            className="max-w-28 sm:max-w-32 lg:max-w-56 2xl:max-w-96 ml-auto"
           />
         </div>
       </div>
