@@ -87,7 +87,7 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
         </div>
 
         {/* Content section */}
-        <div className="bottom-0 bg-white p-5 w-full h-full bg-blend-color-burn backdrop-blur-lg bg-opacity-[0.05]">
+        <div className="bottom-0 bg-white flex flex-col px-5 py-3 w-full h-full bg-blend-color-burn backdrop-blur-lg bg-opacity-[0.05]">
           <div className="flex-grow">
             <h4 className="text-accent lg:text-lg text-sm font-semibold">
               {name}
@@ -97,7 +97,7 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
             </p>
           </div>
 
-          <div className="mt-4 flex sm:items-center items-end justify-between">
+          <div className="mt-auto pt-5 flex sm:items-center items-end justify-between">
             <ul className="flex flex-wrap md:gap-2 gap-1">
               {techs.map((li, index) => (
                 <li
