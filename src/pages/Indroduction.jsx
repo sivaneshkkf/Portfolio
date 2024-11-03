@@ -146,9 +146,9 @@ function Indroduction() {
               Welcome to my world
             </p>
 
-            <h3 className="lg:text-5xl text-lg md:text-6xl text-white font-semibold">
+            <h3 className="lg:text-5xl sm:text-2xl text-lg md:text-3xl text-white font-semibold w-fit">
               Hi I'm{" "}
-              <span className="text-accent font-bold lg:text-5xl text-xl md:text-6xl tracking-wide ml-2">
+              <span className="text-accent font-bold sm:text-2xl lg:text-5xl text-xl md:text-3xl tracking-wide ml-2">
                 Sivanesh
               </span>
             </h3>
@@ -165,7 +165,7 @@ function Indroduction() {
               ]}
               wrapper="span"
               speed={10}
-              className="lg:text-5xl text-md text-white font-semibold mt-10"
+              className="lg:text-4xl xl:text-5xl text-md text-white font-semibold mt-10"
               repeat={Infinity}
             />
             <p className="text-[#649aaf] saturate-150 dark:text-[#859aa1] text-xs bg-white rounded sm:text-sm md:text-base lg:text-md font-normal w-fit px-2 py-1 bg-opacity-10 backdrop-blur-0">
@@ -379,21 +379,21 @@ function Indroduction() {
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: true }}
-              className="absolute top-[22px] left-[60px] sm:static"
+              className="absolute top-[25px] left-[60px] sm:static"
             >
-              <div className="flex justify-center items-center shadow-lg opacity-80 sm:opacity-100">
+              <div className="flex justify-center items-center shadow-lg opacity-50 sm:opacity-100">
                 <Tooltip title="Views">
-                  <div className="flex bg-[#0b1f35] dark:bg-white h-7 dark:bg-opacity-5 bg-opacity-60 sm:bg-opacity-40 rounded overflow-hidden items-center justify-center">
-                    <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40">
+                  <div className="flex bg-[#0b1f35] dark:bg-white h-6 dark:bg-opacity-5 bg-opacity-60 sm:bg-opacity-40 rounded overflow-hidden items-center justify-center">
+                    <div className="bg-[#081625] w-6 flex justify-center items-center dark:bg-dark-primary bg-opacity-40">
                       <IconButton>
                         <VisibilityIcon
-                          sx={{ color: "#A5A7A9", fontSize: "1rem" }}
+                          sx={{ color: "#A5A7A9", fontSize: "0.8rem" }}
                         />
                       </IconButton>
                     </div>
-                    <h4 className="text-zinc-400 text-sm font-normal px-2 sm:px-3">
+                    <h4 className="text-zinc-400 text-xs font-normal px-1 sm:px-3">
                       {NumberFormatter(views)}
-                      <span className="text-[10px]"> Views</span>
+                      <span className="text-[9px]"> Views</span>
                     </h4>
                   </div>
                 </Tooltip>
