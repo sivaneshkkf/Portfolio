@@ -3,51 +3,51 @@ import { Blurhash } from "react-blurhash";
 
 function ImageBlurHash({ src, className }) {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [size, setSize] = useState({ width: 200, height: 250 });
 
   useEffect(() => {
     const img = new Image();
     img.onload = () => {
-      setImageLoaded(true);
+      setImageLoaded(true);  // Corrected: Set to true when image is loaded
     };
     img.src = src;
   }, [src]);
-
-  const [size, setSize] = useState({ width: 200, height: 250 });
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1280) {
         setSize({ width: 384, height: 460 });
       } else if (window.innerWidth >= 1024) {
-        // LG screens
         setSize({ width: 320, height: 390 });
       } else if (window.innerWidth >= 768) {
-        // MD screens
         setSize({ width: 320, height: 390 });
       } else {
         setSize({ width: 180, height: 210 });
       }
     };
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initial call to set the correct size
+    handleResize(); // Set initial size on mount
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <>
-      <div className={`md:max-w-80 xl:max-w-sm mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700 overflow-hidden ${imageLoaded && "hidden"}`}>
+      <div
+        className={`mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700 overflow-hidden ${imageLoaded ? "hidden" : ""}`}
+        style={{ width: `${size.width}px`, height: `${size.height}px` }}
+      >
         {!imageLoaded && (
           <Blurhash
             hash="L7C?WAog0Lac?[XARktR0KofIpx]"
-            width={size.width}
-            height={size.height}
+            width="100%"
+            height="100%"
             resolutionX={32}
             resolutionY={32}
             punch={1}
           />
         )}
       </div>
-      <div className={`${!imageLoaded && "hidden"}`}>
+      <div className={`${!imageLoaded ? "hidden" : ""}`}>
         {imageLoaded && <img className={className} src={src} alt="pf" />}
       </div>
     </>
