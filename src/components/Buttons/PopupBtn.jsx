@@ -11,12 +11,19 @@ import { Helmet } from "react-helmet";
 import { ScreenSizeContext } from "../../context/ScreenSizeContext";
 import { AddDashboardDetails, UseFetchCollection } from "../../firebase/config";
 import { Download } from "@mui/icons-material";
+import { RWebShare } from "react-web-share";
+import ReplyIcon from "@mui/icons-material/Reply";
 
 function PopupShareBtn({ popupState, setPopupState }) {
   const [copySuccess, setCopySuccess] = useState(false);
 
   const dashboardDetails = UseFetchCollection("dashboard");
-  const { whatsapp = 0, url = 0, views = 0, downloads=0 } = dashboardDetails[0] || {};
+  const {
+    whatsapp = 0,
+    url = 0,
+    views = 0,
+    downloads = 0,
+  } = dashboardDetails[0] || {};
 
   // useRef to track if views have already been incremented
   const hasUpdatedViews = useRef(false);
@@ -32,12 +39,11 @@ function PopupShareBtn({ popupState, setPopupState }) {
           views: views + 1, // Increment view count
         };
 
-        const userId = localStorage.getItem("portfolioUserId")
-        if(!userId){
+        const userId = localStorage.getItem("portfolioUserId");
+        if (!userId) {
           const docRef = await AddDashboardDetails(updatedDetails);
           console.log("View count updated with ID:", docRef.id);
         }
-       
       } catch (error) {
         console.error("Failed to update view count:", error);
       }
@@ -64,7 +70,7 @@ function PopupShareBtn({ popupState, setPopupState }) {
         whatsapp: whatsapp, // Increment whatsapp count
         url: url + 1,
         views: views,
-        downloads:downloads, // Increment url count
+        downloads: downloads, // Increment url count
       };
 
       // Update the Firestore database with incremented values
@@ -88,7 +94,7 @@ function PopupShareBtn({ popupState, setPopupState }) {
       whatsapp: whatsapp + 1, // Increment whatsapp count
       url: url,
       views: views,
-      downloads : downloads, // Increment url count
+      downloads: downloads, // Increment url count
     };
 
     // Update the Firestore database with incremented values
@@ -100,7 +106,6 @@ function PopupShareBtn({ popupState, setPopupState }) {
         console.error("Failed to send feedback:", e);
       });
   }
- 
 
   const shareUrl = "https://sivaneshkkf.github.io/Portfolio/";
   const message = `Check out Sivanesh's Portfolio: ${shareUrl}`;
@@ -125,7 +130,31 @@ function PopupShareBtn({ popupState, setPopupState }) {
 
       <motion.div
         className="w-9 h-9 bg-[#0b1f35] dark:bg-dark-primary rounded-full flex justify-center items-center absolute"
-        animate={popupState ? { x: -90 } : { x: 0 }}
+        animate={popupState ? { x: -120 } : { x: 0 }}
+        transition={{ duration: 1, type: "spring" }}
+        onClick={handleWhatsappShare}
+      >
+        <RWebShare
+          data={{
+            text: "Sivanesh Portfolio: ",
+            url: "https://sivaneshkkf.github.io/Portfolio/",
+            title: "Sivanesh Portfolio",
+          }}
+          onClick={handleWhatsappShare}
+        >
+          <Tooltip title="Share link">
+            <IconButton>
+              <div style={{ transform: "rotateY(180deg)" }}>
+                <ReplyIcon sx={{ color: "#A5A7A9", padding: "0 0 3px 0" }} />
+              </div>
+            </IconButton>
+          </Tooltip>
+        </RWebShare>
+      </motion.div>
+
+      <motion.div
+        className="w-9 h-9 bg-[#0b1f35] dark:bg-dark-primary rounded-full flex justify-center items-center absolute"
+        animate={popupState ? { x: -80 } : { x: 0 }}
         transition={{ duration: 1, type: "spring" }}
         onClick={handleWhatsappShare}
       >
@@ -145,7 +174,7 @@ function PopupShareBtn({ popupState, setPopupState }) {
 
       <motion.div
         className="w-9 h-9 bg-[#0b1f35] dark:bg-dark-primary rounded-full flex justify-center items-center"
-        animate={popupState ? { x: -45 } : { x: 0 }}
+        animate={popupState ? { x: -40 } : { x: 0 }}
         transition={{ duration: 1, type: "spring" }}
         onClick={copyToClip}
       >

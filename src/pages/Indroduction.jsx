@@ -383,17 +383,17 @@ function Indroduction() {
             >
               <div className="flex justify-center items-center shadow-lg opacity-50 sm:opacity-100">
                 <Tooltip title="Views">
-                  <div className="flex bg-[#0b1f35] dark:bg-white h-6 dark:bg-opacity-5 bg-opacity-60 sm:bg-opacity-40 rounded overflow-hidden items-center justify-center">
-                    <div className="bg-[#081625] w-6 flex justify-center items-center dark:bg-dark-primary bg-opacity-40">
+                  <div className="flex bg-[#0b1f35] dark:bg-white h-6 sm:h-7 dark:bg-opacity-5 bg-opacity-60 sm:bg-opacity-40 rounded overflow-hidden items-center justify-center">
+                    <div className="bg-[#081625] w-6 sm:w-7 flex justify-center items-center dark:bg-dark-primary bg-opacity-40">
                       <IconButton>
                         <VisibilityIcon
-                          sx={{ color: "#A5A7A9", fontSize: "0.8rem" }}
+                          sx={{ color: "#A5A7A9", fontSize: "1rem" }}
                         />
                       </IconButton>
                     </div>
-                    <h4 className="text-zinc-400 text-xs font-normal px-1 sm:px-3">
+                    <h4 className="text-zinc-400 text-xs sm:text-sm font-normal px-1 sm:px-3">
                       {NumberFormatter(views)}
-                      <span className="text-[9px]"> Views</span>
+                      <span className="text-[9px] sm:text-[10px] sm:ml-1"> Views</span>
                     </h4>
                   </div>
                 </Tooltip>
