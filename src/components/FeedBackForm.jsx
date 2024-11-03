@@ -75,8 +75,8 @@ function FeedBackForm() {
     >
       <motion.div
         className="p-8 rounded-lg bg-primary dark:bg-dark-primary flex flex-col items-center justify-center w-[30rem] m-2 relative overflow-hidden"
-        animate={open || once ? { y: [200, 0] } : { y: 200 }}
-        transition={{ duration: 0.5, type: "spring" }}
+        animate={open || once ? { y: [400, 0] } : { y: 400 }}
+        transition={{ duration: 0.7, type: "spring" }}
       >
         <div className="w-full">
           <h4 className="text-center text-textHead dark:text-white font-semibold">Feedback</h4>

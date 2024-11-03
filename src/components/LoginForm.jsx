@@ -98,7 +98,7 @@ function LoginForm() {
     >
       <motion.div
         className="p-8 rounded-lg bg-primary dark:bg-dark-primary flex flex-col items-center justify-center w-[30rem] m-2 relative overflow-hidden"
-        animate={loginFormOpen ? { y: [200, 0] } : { y: 200 }}
+        animate={loginFormOpen ? { y: [300, 0] } : { y: 300 }}
         transition={{ duration: 0.5, type: "spring" }}
       >
         <div className={`w-full ${loginStatus ? "hidden" : "block"}`}>
