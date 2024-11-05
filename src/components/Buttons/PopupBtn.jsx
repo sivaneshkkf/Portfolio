@@ -40,7 +40,7 @@ function PopupShareBtn({ popupState, setPopupState }) {
         };
 
         const userId = localStorage.getItem("portfolioUserId");
-        if (!userId) {
+        if (userId != "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
           const docRef = await AddDashboardDetails(updatedDetails);
           console.log("View count updated with ID:", docRef.id);
         }

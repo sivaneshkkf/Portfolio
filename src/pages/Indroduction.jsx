@@ -21,7 +21,8 @@ import { NumberFormatter } from "../utils/Formatter";
 import { IconButton, Tooltip } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { span } from "framer-motion/client";
-
+import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
+import { DashBoardContext } from "../context/DashBoardContext";
 
 function Indroduction() {
   const x = useMotionValue(0);
@@ -56,6 +57,7 @@ function Indroduction() {
   const [progressValue, setProgressValue] = useState(0); // Actual progress
   const [displayedProgress, setDisplayedProgress] = useState(0); // Displayed for animation
   const { loginFormOpen, setLoginFormOpen } = useContext(LoginFormContext);
+  const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
   const { loginStatus } = useContext(LoginStatus);
   const dashbordDetails = UseFetchCollection("dashboard");
   const {
@@ -381,7 +383,7 @@ function Indroduction() {
               viewport={{ once: true }}
               className="absolute top-[25px] left-[60px] sm:static"
             >
-              <div className="flex justify-center items-center shadow-lg opacity-50 sm:opacity-100">
+              <div className="flex justify-center gap-1 items-center shadow-lg opacity-50 sm:opacity-100">
                 <Tooltip title="Views">
                   <div className="flex bg-[#0b1f35] dark:bg-white h-6 sm:h-7 dark:bg-opacity-5 bg-opacity-60 sm:bg-opacity-40 rounded overflow-hidden items-center justify-center">
                     <div className="bg-[#081625] w-6 sm:w-7 flex justify-center items-center dark:bg-dark-primary bg-opacity-40">
@@ -393,8 +395,23 @@ function Indroduction() {
                     </div>
                     <h4 className="text-zinc-400 text-xs sm:text-sm font-normal px-1 sm:px-3">
                       {NumberFormatter(views)}
-                      <span className="text-[9px] sm:text-[10px] sm:ml-1"> Views</span>
+                      <span className="text-[9px] sm:text-[10px] sm:ml-1">
+                        {" "}
+                        Views
+                      </span>
                     </h4>
+                  </div>
+                </Tooltip>
+
+                <Tooltip title="Views" onClick={() => setDashboardOpen(true)}>
+                  <div className="flex bg-[#0b1f35] dark:bg-white h-6 sm:h-7 dark:bg-opacity-5 bg-opacity-60 sm:bg-opacity-40 rounded overflow-hidden items-center justify-center">
+                    <div className="bg-[#081625] w-6 sm:w-7 flex justify-center items-center dark:bg-dark-primary bg-opacity-40">
+                      <IconButton>
+                        <SpaceDashboardIcon
+                          sx={{ color: "#A5A7A9", fontSize: "1rem" }}
+                        />
+                      </IconButton>
+                    </div>
                   </div>
                 </Tooltip>
               </div>

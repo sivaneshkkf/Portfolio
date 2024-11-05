@@ -27,35 +27,38 @@ function FeedBackForm() {
   const schemaValidation = z.object({
     feedbackName: z.string().min(3, { message: "Invalid Name" }).max(30),
     feedbackEmail: z.string().email(),
-    feedbackMessage: z.string().min(5, { message: "Enter your message briefly" }),
+    message: z.string().min(5, { message: "Enter your message briefly" }),
   });
 
-  const [showMessage, setShowMessage] = useState({loading:false, success:false});
+  const [showMessage, setShowMessage] = useState({
+    loading: false,
+    success: false,
+  });
 
   // formData
-  function sentFormData(data) {
+  const sentFormData = (data) => {
+    console.log("working");
 
-    setShowMessage((pre) => ({
-        ...pre,
-        loading:true
-    }))
+    setShowMessage({ loading: true, success: false });
 
     AddFeedBack(data)
       .then((docRef) => {
         console.log("Feedback successfully submitted with ID:", docRef.id);
-        setShowMessage({loading:true, success:true});
+        setShowMessage({ loading: true, success: true });
 
         setTimeout(() => {
-            setFeedbackFormOpen((pre) => ({
-                ...pre,
-                open:false
-            }))
+          setFeedbackFormOpen((pre) => ({
+            ...pre,
+            open: false,
+          }));
+          setShowMessage({ loading: false, success: false });
         }, 3000);
       })
       .catch((e) => {
         console.error("Failed to send feedback:", e);
+        setShowMessage({ loading: false, success: false });
       });
-  }
+  };
 
   // const documents = UseFetchCollection("feedback")
 
@@ -64,8 +67,6 @@ function FeedBackForm() {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: zodResolver(schemaValidation) });
-
-  
 
   return (
     <div
@@ -79,11 +80,13 @@ function FeedBackForm() {
         transition={{ duration: 0.7, type: "spring" }}
       >
         <div className="w-full">
-          <h4 className="text-center text-textHead dark:text-white font-semibold">Feedback</h4>
+          <h4 className="text-center text-textHead dark:text-white font-semibold">
+            Feedback
+          </h4>
           <div className="w-full h-[1px] bg-dark-icon"></div>
         </div>
 
-        <div className={`${showMessage.success ? "hidden" : "block"}`}>
+        {/* <div className={`${showMessage.success ? "hidden" : "block"}`}>
           <div className="flex items-center justify-center">
             <span>
               <img src={emoji} alt="emoji" className="w-20 h-20" />
@@ -100,12 +103,10 @@ function FeedBackForm() {
             improve the work I present. I appreciate your insights, which
             encourage me to grow and create an even better experience.
           </p>
-
+          
           <form
-            action="submit"
-            name="feedBackForm"
-            className={`w-full space-y-5  pt-5`}
-            onSubmit={handleSubmit(sentFormData)}
+            onSubmit={handleSubmit(sentFormData)} // Pass sentFormData directly to handleSubmit
+            className="w-full space-y-5 pt-5"
           >
             <FeedbackInput
               placeholder="Name"
@@ -124,7 +125,7 @@ function FeedBackForm() {
             <div className="space-y-1">
               <textarea
                 placeholder="Enter Your Feedback briefly"
-                name="message"
+                name="feedbackMessage"
                 id="feedbackMessage"
                 rows={5}
                 className={`bg-secondary dark:bg-dark-secondary py-2 px-3 rounded w-full resize-none outline-none text-xs text-textHead dark:text-dark-textHead ${
@@ -138,7 +139,64 @@ function FeedBackForm() {
                 </span>
               )}
             </div>
-            <BtnForm text="SUBMIT" loading={showMessage.loading && true} />
+            <BtnForm text="SUBMIT" loading={showMessage.loading} />
+          </form>
+         
+        </div> */}
+
+        <div className={`${showMessage.success ? "hidden" : "block"}`}>
+          <div className="flex items-center justify-center">
+            <span>
+              <img src={emoji} alt="emoji" className="w-20 h-20" />
+            </span>
+            <h4 className="text-textHead dark:text-white font-semibold">
+              Thank you for scrolling
+            </h4>
+          </div>
+          <p className="text-center w-full text-textHead dark:text-white mb-1">
+            Thank you for exploring my portfolio!
+          </p>
+          <p className="text-xs text-dark-textpara font-medium">
+            Your feedback is invaluable in helping me enhance my skills and
+            improve the work I present. I appreciate your insights, which
+            encourage me to grow and create an even better experience.
+          </p>
+          <form
+            onSubmit={handleSubmit(sentFormData)} // Pass sentFormData directly to handleSubmit
+            className="w-full space-y-5 pt-5"
+          >
+            <FeedbackInput
+              placeholder="Name"
+              id="feedbackName"
+              type="text"
+              register={register("feedbackName")}
+              error={errors.feedbackName}
+            />
+            <FeedbackInput
+              placeholder="Email"
+              id="feedbackEmail"
+              type="email"
+              register={register("feedbackEmail")}
+              error={errors.feedbackEmail}
+            />
+            <div className="space-y-1">
+              <textarea
+                placeholder="Enter Your Feedback briefly"
+                id="feedbackMessage"
+                name="message"
+                rows={5}
+                className={`bg-secondary dark:bg-dark-secondary py-2 px-3 rounded w-full resize-none outline-none text-xs text-textHead dark:text-dark-textHead ${
+                  errors.message ? "border-2 border-accent" : ""
+                }`}
+                {...register("message")} // Register with "message" as per schema
+              ></textarea>
+              {errors.message && (
+                <span className="text-xs text-red-600 font-medium">
+                  {errors.message.message}
+                </span>
+              )}
+            </div>
+            <BtnForm text="SUBMIT" loading={showMessage.loading} />
           </form>
         </div>
 
@@ -148,9 +206,7 @@ function FeedBackForm() {
           }`}
         >
           <motion.span
-            animate={
-              showMessage.success ? { scale: [0, 1] } : { scale: 0 }
-            }
+            animate={showMessage.success ? { scale: [0, 1] } : { scale: 0 }}
             transition={{
               duration: 0.8,
               type: "spring",

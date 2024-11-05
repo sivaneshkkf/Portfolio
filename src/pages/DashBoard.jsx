@@ -11,7 +11,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { NumberFormatter } from "../utils/Formatter";
 import GetAppIcon from '@mui/icons-material/GetApp';
 
-function Dashboard() {
+function Dashboard({className = ""}) {
   const dashbordDetails = UseFetchCollection("dashboard");
   const { whatsapp = 0, url = 0, views = 0, downloads = 0 } = dashbordDetails[0] || {};
 
@@ -27,7 +27,7 @@ function Dashboard() {
             <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40 dark:bg-opacity-80">
               <IconButton>{icon}</IconButton>
             </div>
-            <h4 className="text-zinc-400 text-sm font-normal lg:font-medium px-2 sm:px-3">{NumberFormatter(count)}
+            <h4 className={`text-sm font-normal lg:font-medium px-2 sm:px-3 ${className? className : "text-zinc-400"}`}>{NumberFormatter(count)}
             <span className="text-[10px] ml-2 hidden font-normal lg:inline">{title}</span>
             </h4>
           </div>

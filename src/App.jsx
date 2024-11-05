@@ -17,6 +17,8 @@ import { useScrollPosition } from "./Utils/ScrollValues";
 import Dashboard from "./pages/DashBoard";
 import { LoginFormContext, LoginStatus } from "./context/LoginFormContext";
 import LoginForm from "./components/LoginForm";
+import { DashBoardContext } from "./context/DashBoardContext";
+import DashBordWindow from "./components/DashBoardWindow";
 
 function App() {
   const [visibleSection, setVisibleSection] = useState({
@@ -31,11 +33,13 @@ function App() {
     once: false,
   });
 
+  const [dashboardOpen, setDashboardOpen] = useState(false)
+
   const [loginFormOpen, setLoginFormOpen] = useState(false);
 
   const { scrollPosition, setScrollPosition } = useScrollPosition();
 
-  const [loginStatus, setLoginStatus] = useState(null)
+  const [loginStatus, setLoginStatus] = useState(null);
 
   const [theme, setTheme] = useState("light");
 
@@ -156,49 +160,52 @@ function App() {
   }, [scrollPosition]);
 
   return (
-    <FeedbackFormContext.Provider
-      value={{ feedbackFormOpen, setFeedbackFormOpen }}
-    >
-      <LoginFormContext.Provider value={{ loginFormOpen, setLoginFormOpen }}>
-        <LoginStatus.Provider value={{ loginStatus, setLoginStatus }}>
-          <div className="relative overflow-x-hidden">
-            <Theme.Provider value={{ theme, setTheme }}>
-              <ScrolContext.Provider value={{ scrolEnable, setScrollEnable }}>
-                <HeadingContext.Provider
-                  value={{ visibleSection, setVisibleSection }}
-                >
-                  <div id="navBar">
-                    <TheNaveBar />
-                  </div>
-                  <div ref={introRef} id={sectionIDS.home.sectionId}>
-                    <Indroduction />
-                  </div>
-                  <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
-                    <AboutMe />
-                  </div>
-                  <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
-                    <SKills />
-                  </div>
-                  <div ref={projectRef} id={sectionIDS.projects.sectionId}>
-                    <Projects />
-                  </div>
-                  <div ref={resumeRef} id={sectionIDS.resume.sectionId}>
-                    <Resume />
-                  </div>
-                  <div ref={contactRef} id={sectionIDS.contact.sectionId}>
-                    <Contact />
-                  </div>
-                  <Footer />
-                  <ThemeBtn />
-                  <FeedBackForm />
-                  <LoginForm />
-                </HeadingContext.Provider>
-              </ScrolContext.Provider>
-            </Theme.Provider>
-          </div>
-        </LoginStatus.Provider>
-      </LoginFormContext.Provider>
-    </FeedbackFormContext.Provider>
+    <DashBoardContext.Provider value={{ dashboardOpen, setDashboardOpen }}>
+      <FeedbackFormContext.Provider
+        value={{ feedbackFormOpen, setFeedbackFormOpen }}
+      >
+        <LoginFormContext.Provider value={{ loginFormOpen, setLoginFormOpen }}>
+          <LoginStatus.Provider value={{ loginStatus, setLoginStatus }}>
+            <div className="relative overflow-x-hidden">
+              <Theme.Provider value={{ theme, setTheme }}>
+                <ScrolContext.Provider value={{ scrolEnable, setScrollEnable }}>
+                  <HeadingContext.Provider
+                    value={{ visibleSection, setVisibleSection }}
+                  >
+                    <div id="navBar">
+                      <TheNaveBar />
+                    </div>
+                    <div ref={introRef} id={sectionIDS.home.sectionId}>
+                      <Indroduction />
+                    </div>
+                    <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
+                      <AboutMe />
+                    </div>
+                    <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
+                      <SKills />
+                    </div>
+                    <div ref={projectRef} id={sectionIDS.projects.sectionId}>
+                      <Projects />
+                    </div>
+                    <div ref={resumeRef} id={sectionIDS.resume.sectionId}>
+                      <Resume />
+                    </div>
+                    <div ref={contactRef} id={sectionIDS.contact.sectionId}>
+                      <Contact />
+                    </div>
+                    <Footer />
+                    <ThemeBtn />
+                    <FeedBackForm />
+                    <LoginForm />
+                    <DashBordWindow/>
+                  </HeadingContext.Provider>
+                </ScrolContext.Provider>
+              </Theme.Provider>
+            </div>
+          </LoginStatus.Provider>
+        </LoginFormContext.Provider>
+      </FeedbackFormContext.Provider>
+    </DashBoardContext.Provider>
   );
 }
 
