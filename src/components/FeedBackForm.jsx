@@ -38,20 +38,19 @@ function FeedBackForm() {
   // formData
   const sentFormData = (data) => {
     console.log("working");
-
     setShowMessage({ loading: true, success: false });
 
     AddFeedBack(data)
       .then((docRef) => {
         console.log("Feedback successfully submitted with ID:", docRef.id);
         setShowMessage({ loading: true, success: true });
-
         setTimeout(() => {
           setFeedbackFormOpen((pre) => ({
-            ...pre,
+            once: false,
             open: false,
           }));
           setShowMessage({ loading: false, success: false });
+          
         }, 3000);
       })
       .catch((e) => {
@@ -215,7 +214,7 @@ function FeedBackForm() {
             <img src={emojiThumb} alt="thump" className="w-20 h-20" />
           </motion.span>
           <motion.p
-            className={`text-center w-full text-white mt-5`}
+            className={`text-center w-full text-textHead dark:text-white mt-5`}
             animate={showMessage.success && { y: [200, 0] }}
           >
             Thank you for your valuable feedback
