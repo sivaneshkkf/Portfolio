@@ -8,8 +8,8 @@ function FeedbackList() {
   console.log(fetchFeedBack)
 
   return (
-    <div className="overflow-y-scroll w-full h-screen">
-      <h4 className="text-sm font-medium dark:text-white text-textHead mt-10 mb-2">
+    <div className="overflow-y-auto w-full">
+      <h4 className="text-sm font-medium dark:text-white text-textHead mb-2">
         Feedbaks
       </h4>
       <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-4 2xl:flex-row 2xl:flex-wrap gap-2">

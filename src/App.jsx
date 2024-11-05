@@ -33,7 +33,7 @@ function App() {
     once: false,
   });
 
-  const [dashboardOpen, setDashboardOpen] = useState(false)
+  const [dashboardOpen, setDashboardOpen] = useState(false);
 
   const [loginFormOpen, setLoginFormOpen] = useState(false);
 
@@ -159,6 +159,19 @@ function App() {
     }
   }, [scrollPosition]);
 
+
+  // scroll off function when i am open dashboard
+  useEffect(() => {
+    if (dashboardOpen) {
+      document.body.style.overflow = "hidden"; // Disable scroll
+    } else {
+      document.body.style.overflow = ""; // Enable scroll
+    }
+    return () => {
+      document.body.style.overflow = ""; // Reset on component unmount
+    };
+  }, [dashboardOpen]);
+
   return (
     <DashBoardContext.Provider value={{ dashboardOpen, setDashboardOpen }}>
       <FeedbackFormContext.Provider
@@ -197,7 +210,9 @@ function App() {
                     <ThemeBtn />
                     <FeedBackForm />
                     <LoginForm />
-                    <DashBordWindow/>
+                    <div className="h-screen relative overflow-hidden">
+                      <DashBordWindow />
+                    </div>
                   </HeadingContext.Provider>
                 </ScrolContext.Provider>
               </Theme.Provider>

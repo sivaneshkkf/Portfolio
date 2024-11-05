@@ -9,17 +9,31 @@ import FeedbackList from "./FeedBackList";
 function DashBordWindow() {
   const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
 
+
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div
-      className={`fixed w-full h-screen flex justify-center items-center inset-0 z-50 dark:bg-white dark:bg-opacity-20 bg-black bg-opacity-20 ${
+      className={`fixed w-full flex justify-center items-center inset-0 z-50 dark:bg-white dark:bg-opacity-20 bg-black bg-opacity-20 ${
         dashboardOpen ? "block" : "hidden"
       }`}
     >
-      <div className="absolute top-20 bottom-20">
         <motion.div
-          className="p-8 rounded-lg bg-primary dark:bg-dark-primary flex flex-col items-center justify-center md:mx-20 m-2 relative overflow-hidden"
+          className="p-8 w-full rounded-lg bg-primary dark:bg-dark-primary flex flex-col items-center justify-center m-2 relative overflow-hidden"
           animate={dashboardOpen ? { y: [400, 0] } : { y: 400 }}
           transition={{ duration: 0.7, type: "spring" }}
+          style={{height: `${windowHeight-100}px`}}
         >
           <div className="w-full">
             <h4 className="text-center text-textHead dark:text-white font-semibold">
@@ -28,7 +42,9 @@ function DashBordWindow() {
             <div className="w-full h-[1px] bg-dark-icon"></div>
           </div>
 
+          <div className="pb-8">
           <Dashboard className="text-textHead dark:text-dark-textpara" />
+          </div>
 
           <FeedbackList />
 
@@ -50,7 +66,6 @@ function DashBordWindow() {
           </span>
         </motion.div>
       </div>
-    </div>
   );
 }
 
