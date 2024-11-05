@@ -5,6 +5,7 @@ import LoadingAnim from "./components/LoadingAnim.jsx";
 import React, { Suspense, useEffect, useState } from "react";
 import { ScreenSizeContext } from "./context/ScreenSizeContext.jsx";
 import { ScrollProvider } from "./Utils/ScrollValues.jsx";
+import getUserLocation from "./utils/GetUserLocation.jsx";
 
 const LazyComponentApp = React.lazy(() => import("./App.jsx"));
 
@@ -28,6 +29,12 @@ function AppWithDelay() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+
+  // location
+  const { ipAddress } = getUserLocation();
+
+  // console.log(ipAddress)
 
   return (
     <ScreenSizeContext.Provider value={{ ScreenSize, setScreenSize }}>

@@ -37,7 +37,6 @@ function FeedBackForm() {
 
   // formData
   const sentFormData = (data) => {
-    console.log("working");
     setShowMessage({ loading: true, success: false });
 
     AddFeedBack(data)

@@ -17,7 +17,22 @@ body{
     filter: hue-rotate(100px);
     filter: drop-shadow(5 5 8px rgba(24, 186, 255, 0.6)) 
     drop-shadow(0 0 4px rgba(36, 140, 237, 0.4));
-  }
+}
+
+
+.hidden-scrollbar::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+/* Hide scrollbar for IE and Edge */
+.hidden-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Firefox */
+.hidden-scrollbar {
+    scrollbar-width: none; /* Firefox */
+}
   
   
   
