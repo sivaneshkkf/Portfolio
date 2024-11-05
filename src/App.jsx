@@ -210,7 +210,7 @@ function App() {
                     <ThemeBtn />
                     <FeedBackForm />
                     <LoginForm />
-                    <div className="h-screen relative overflow-hidden">
+                    <div className="relative overflow-hidden">
                       <DashBordWindow />
                     </div>
                   </HeadingContext.Provider>
