@@ -6,11 +6,16 @@ import { DashBoardContext } from "../context/DashBoardContext";
 import Dashboard from "../pages/DashBoard";
 import FeedbackList from "./FeedBackList";
 import LocationList from "./LocationList";
+import { LoginStatus } from "../context/LoginFormContext";
+import getUserLocation from "../Utils/GetUserLocation";
 
 function DashBordWindow() {
   const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
 
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+
+  const {loginStatus} = useContext(LoginStatus);
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,6 +27,14 @@ function DashBordWindow() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+
+  useEffect(() => {
+    // Fetch user location only if loginStatus is false
+    if (!loginStatus && loginStatus != null) {
+      getUserLocation();
+    }
+  }, [loginStatus]);
 
   return (
     <div

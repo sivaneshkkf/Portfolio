@@ -48,7 +48,10 @@ export function AddDashboardDetails(data) {
   return new Promise(async (resolve, reject) => {
     try {
       const docRef = doc(db, "dashboard", "dashboard123"); // Specify the ID here
-      await setDoc(docRef, data); // Set the document data with the specified ID
+      await setDoc(docRef, {
+        ...data,
+        createdAt: Timestamp.now(),
+      }); // Set the document data with the specified ID
       resolve(docRef);
     } catch (e) {
       reject(e);
@@ -67,11 +70,11 @@ export function AddLocationToFirebase(data) {
       const docsArray = existingDocs.docs;
 
       // Check the number of documents in the collection
-      if (docsArray.length >= 10) {
+      if (docsArray.length >= 20) {
         // Sort documents by creation time (assuming they have a createdAt timestamp)
         const oldestDocs = docsArray
           .sort((a, b) => a.data().createdAt - b.data().createdAt)
-          .slice(0, docsArray.length - 9);
+          .slice(0, docsArray.length - 19);
         // Delete the oldest documents
         for (const doc of oldestDocs) {
           await deleteDoc(doc.ref);

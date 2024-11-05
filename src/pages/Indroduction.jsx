@@ -403,7 +403,7 @@ function Indroduction() {
                   </div>
                 </Tooltip>
                 <div className={`${loginStatus ? "block" : "hidden"}`}>
-                  <Tooltip title="Views" onClick={() => setDashboardOpen(true)}>
+                  <Tooltip title="Dashboard" onClick={() => setDashboardOpen(true)}>
                     <div className="flex bg-[#0b1f35] dark:bg-white h-6 sm:h-7 dark:bg-opacity-5 bg-opacity-60 sm:bg-opacity-40 rounded overflow-hidden items-center justify-center">
                       <div className="bg-[#081625] w-6 sm:w-7 flex justify-center items-center dark:bg-dark-primary bg-opacity-40">
                         <IconButton>
