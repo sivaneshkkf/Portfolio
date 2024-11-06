@@ -29,11 +29,12 @@ function DashBordWindow() {
   }, []);
 
 
-  useEffect(() => {
-    // Fetch user location only if loginStatus is false 
-      getUserLocation();
+  const { ipAddress, geoInfo } = getUserLocation();
   
-  }, []);
+  useEffect(() => {
+        console.log(ipAddress);
+}, [ipAddress]);
+
 
   return (
     <div

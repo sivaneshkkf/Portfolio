@@ -1,21 +1,25 @@
+import { useEffect, useState } from "react";
 import { AddLocationToFirebase } from "../firebase/config";
 
-async function getUserLocation() {
-    try {
-        const fetchIp = await fetch("http://ip-api.com/json/?fields=61439");
-        const response = await fetchIp.json();
+function useUserLocation() {
+    const [ipAddress, setIpAddress] = useState("");
+    const [geoInfo, setGeoInfo] = useState({});
 
-        await AddLocationToFirebase(response).then((docRef) => {
-            //console.log("Location saved to Firebase:");
-        }).catch((e) => {
-            console.error("Firebase failed");
-        });
+    useEffect(() => {
+        const getVisitorIp = async () => {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.text();
+                setIpAddress(data);
+            } catch (error) {
+                console.log("Failed to fetch IP");
+            }
+        };
 
-        return response; // Return the fetched response
-    } catch (error) {
-        console.error("Failed to fetch IP");
-        return null;
-    }
+        getVisitorIp();
+    }, []);
+
+    return { ipAddress, geoInfo };
 }
 
-export default getUserLocation;
+export default useUserLocation;
