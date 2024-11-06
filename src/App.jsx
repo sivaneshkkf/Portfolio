@@ -190,7 +190,9 @@ function App() {
 
       // Clear the timeout if the component unmounts
       return () => clearTimeout(timer);
-  }, []);
+  }, [loginStatus]);
+
+  console.log(loginStatus)
 
   return (
     <DashBoardContext.Provider value={{ dashboardOpen, setDashboardOpen }}>

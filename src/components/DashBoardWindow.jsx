@@ -7,7 +7,6 @@ import Dashboard from "../pages/DashBoard";
 import FeedbackList from "./FeedBackList";
 import LocationList from "./LocationList";
 import { LoginStatus } from "../context/LoginFormContext";
-import getUserLocation from "../Utils/GetUserLocation";
 
 function DashBordWindow() {
   const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
