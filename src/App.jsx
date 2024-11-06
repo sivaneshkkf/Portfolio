@@ -178,21 +178,19 @@ function App() {
     const userId = localStorage.getItem("portfolioUserId");
     if (userId === "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
       setLoginStatus(true);
+      return; // Exit if loginStatus is true
     }
 
     // Fetch user location only if loginStatus is false, with a delay
-    
-      const timer = setTimeout(() => {
-        if (!loginStatus) {
+    const timer = setTimeout(() => {
+      if (!loginStatus) {
         getUserLocation();
-        }
-      }, 3000); // 5-second delay, adjust as needed
+      }
+    }, 3000); // 3-second delay
 
-      // Clear the timeout if the component unmounts
-      return () => clearTimeout(timer);
+    // Clear the timeout if the component unmounts
+    return () => clearTimeout(timer);
   }, [loginStatus]);
-
-  console.log(loginStatus)
 
   return (
     <DashBoardContext.Provider value={{ dashboardOpen, setDashboardOpen }}>
