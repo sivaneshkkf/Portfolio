@@ -70,7 +70,7 @@ function Contact() {
       <TheHeading heading="CONTACT" id={sectionIDS.contact.sectionId} />
       <div className="md:flex space-y-10 md:space-y-0 lg:gap-20 gap-10 justify-center mt-10">
         <motion.div
-          className="group xl:w-2/6 lg:w-3/6 md:w-4/6 px-8 py-24 bg-white flex flex-col gap-10 overflow-hidden items-center justify-center shadow-cardShadow rounded-2xl relative hover:backdrop-blur-2xl"
+          className="group xl:w-2/6 lg:w-3/6 md:w-4/6 px-8 py-24 bg-white dark:bg-dark-secondary flex flex-col gap-10 overflow-hidden items-center justify-center shadow-cardShadow rounded-2xl relative hover:backdrop-blur-2xl"
           variants={FadeIn("left", 0.2)}
           initial="hidden"
           whileInView={"show"}
