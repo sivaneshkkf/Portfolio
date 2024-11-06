@@ -1,6 +1,8 @@
 import { AddLocationToFirebase } from "../firebase/config";
 
 async function getUserLocation() {
+
+    const apiKey = "fb280a422eff45ba84bc5ab237df3d41"
     const fetchLocationData = async (latitude, longitude) => {
         try {
             const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
@@ -15,10 +17,10 @@ async function getUserLocation() {
 
     const fetchLocationData1 = async () => {
         try {
-            const url = 'https://geolocation-db.com/json/';
+            const url ="https://api.ipgeolocation.io/ipgeo?apiKey=fb280a422eff45ba84bc5ab237df3d41";
             const fetchData = await fetch(url);
             const response = await fetchData.json();
-            console.log(response)
+            //console.log(response)
             await AddLocationToFirebase(response);
         } catch (error) {
             console.error("Error fetching location data:", error);

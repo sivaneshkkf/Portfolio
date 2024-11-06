@@ -49,7 +49,7 @@ function LocationList() {
                       <th className="w-fit sm:px-2 px-1 py-2">CountryCode</th>
                       <th className="w-fit sm:px-2 px-1 py-2">City</th>
                       <th className="w-fit sm:px-2 px-1 py-2">Time</th>
-                      <th className="w-fit sm:px-2 px-1 py-2">State</th>
+                      <th className="w-fit sm:px-2 px-1 py-2">Dist/State</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -65,7 +65,7 @@ function LocationList() {
                         </td>
                         <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
                           {location.address?.country_code ||
-                            location.country_code ||
+                            location.country_code2 ||
                             "N/A"}
                         </td>
                         <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
@@ -88,7 +88,7 @@ function LocationList() {
                           })()}
                         </td>
                         <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
-                          {location.address?.state || location.state || "N/A"}
+                          {location.address?.state || location.district || "N/A"}
                         </td>
                       </tr>
                     ))}

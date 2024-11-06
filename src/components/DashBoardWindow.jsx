@@ -34,7 +34,7 @@ function DashBordWindow() {
         const timer = setTimeout(() => {
             getUserLocation()
                 .then((data) => {
-                    console.log("Location data:", data);
+                    console.log("Location data:");
                     // Handle data as needed, such as saving to Firebase
                 })
                 .catch((error) => {
