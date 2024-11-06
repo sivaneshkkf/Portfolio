@@ -70,11 +70,11 @@ export function AddLocationToFirebase(data) {
       const docsArray = existingDocs.docs;
 
       // Check the number of documents in the collection
-      if (docsArray.length >= 20) {
+      if (docsArray.length >= 15) {
         // Sort documents by creation time (assuming they have a createdAt timestamp)
         const oldestDocs = docsArray
           .sort((a, b) => a.data().createdAt - b.data().createdAt)
-          .slice(0, docsArray.length - 19);
+          .slice(0, docsArray.length - 14);
         // Delete the oldest documents
         for (const doc of oldestDocs) {
           await deleteDoc(doc.ref);
@@ -87,10 +87,9 @@ export function AddLocationToFirebase(data) {
         ...data,
         createdAt: new Date(), // Add a timestamp for sorting
       });
-      resolve(docRef)
-
+      resolve(docRef);
     } catch (error) {
-     reject(error)
+      reject(error);
     }
   });
 }
@@ -135,4 +134,16 @@ export function logInFirebase(email, password) {
         reject(errorMessage);
       });
   });
+}
+
+// delete feedback
+
+export async function deleteDocument(collectionName, docId) {
+  try {
+    const docRef = doc(db, collectionName, docId); // Reference to the document
+    await deleteDoc(docRef); // Deletes the document
+    console.log("Deleted document with ID:", docId);
+  } catch (error) {
+    console.error("Error deleting document:", error);
+  }
 }
