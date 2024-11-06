@@ -7,6 +7,7 @@ import Dashboard from "../pages/DashBoard";
 import FeedbackList from "./FeedBackList";
 import LocationList from "./LocationList";
 import { LoginStatus } from "../context/LoginFormContext";
+import getUserLocation from "../Utils/GetUserLocation";
 
 function DashBordWindow() {
   const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
@@ -25,6 +26,13 @@ function DashBordWindow() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
+  }, []);
+
+
+  useEffect(() => {
+    // Fetch user location only if loginStatus is false 
+      getUserLocation();
+  
   }, []);
 
   return (
