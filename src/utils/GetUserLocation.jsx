@@ -17,7 +17,7 @@ async function getUserLocation() {
 
     const fetchLocationData1 = async () => {
         try {
-            const url ="https://api.ipgeolocation.io/ipgeo?apiKey=fb280a422eff45ba84bc5ab237df3d41";
+            const url ="https://api.ipgeolocation.io/ipgeo?apiKey=fb280a422eff45ba84bc5ab237df3d41&fields=geo";
             const fetchData = await fetch(url);
             const response = await fetchData.json();
             //console.log(response)
