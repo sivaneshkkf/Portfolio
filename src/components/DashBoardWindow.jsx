@@ -28,14 +28,6 @@ function DashBordWindow() {
     };
   }, []);
 
-
-  useEffect(() => {
-    // Fetch user location only if loginStatus is false
-    if (!loginStatus && loginStatus != null) {
-      getUserLocation();
-    }
-  }, [loginStatus]);
-
   return (
     <div
       className={`fixed w-full flex justify-center items-center inset-0 z-50 dark:bg-white dark:bg-opacity-20 bg-black bg-opacity-20 ${

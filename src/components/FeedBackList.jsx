@@ -8,7 +8,7 @@ import { IconButton, Tooltip } from "@mui/material";
 
 function FeedbackList() {
   const fetchFeedBack = UseFetchCollection("feedback");
-  console.log(fetchFeedBack)
+ 
   const { theme } = useContext(Theme);
 
   return (

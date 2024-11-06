@@ -21,12 +21,12 @@ function LoginForm() {
   const { loginStatus, setLoginStatus } = useContext(LoginStatus);
   const [loginError, setLoginError] = useState(null);
 
-  useEffect(() => {
-    const userId = localStorage.getItem("portfolioUserId");
-    if (userId === "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
-      setLoginStatus(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const userId = localStorage.getItem("portfolioUserId");
+  //   if (userId === "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
+  //     setLoginStatus(true);
+  //   }
+  // }, []);
 
   // Check localStorage on mount to determine initial open state
   // useEffect(() => {
@@ -60,7 +60,7 @@ function LoginForm() {
 
     logInFirebase(loginEmail, password)
       .then((user) => {
-        console.log("Login Successfully", user);
+        console.log("Login Successfully");
 
         // Store the user ID in local storage
         localStorage.setItem("portfolioUserId", user.uid); // Assuming `user.uid` is the user ID

@@ -19,6 +19,7 @@ import { LoginFormContext, LoginStatus } from "./context/LoginFormContext";
 import LoginForm from "./components/LoginForm";
 import { DashBoardContext } from "./context/DashBoardContext";
 import DashBordWindow from "./components/DashBoardWindow";
+import getUserLocation from "./Utils/GetUserLocation";
 
 function App() {
   const [visibleSection, setVisibleSection] = useState({
@@ -39,7 +40,7 @@ function App() {
 
   const { scrollPosition, setScrollPosition } = useScrollPosition();
 
-  const [loginStatus, setLoginStatus] = useState(null);
+  const [loginStatus, setLoginStatus] = useState(false);
 
   const [theme, setTheme] = useState("light");
 
@@ -171,6 +172,25 @@ function App() {
       document.body.style.overflow = ""; // Reset on component unmount
     };
   }, [dashboardOpen]);
+
+
+  useEffect(() => {
+    const userId = localStorage.getItem("portfolioUserId");
+    if (userId === "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
+      setLoginStatus(true);
+    }
+
+    // Fetch user location only if loginStatus is false, with a delay
+    
+      const timer = setTimeout(() => {
+        if (!loginStatus) {
+        getUserLocation();
+        }
+      }, 3000); // 5-second delay, adjust as needed
+
+      // Clear the timeout if the component unmounts
+      return () => clearTimeout(timer);
+  }, []);
 
   return (
     <DashBoardContext.Provider value={{ dashboardOpen, setDashboardOpen }}>
