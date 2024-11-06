@@ -6,16 +6,14 @@ import { DashBoardContext } from "../context/DashBoardContext";
 import Dashboard from "../pages/DashBoard";
 import FeedbackList from "./FeedBackList";
 import LocationList from "./LocationList";
-import { LoginStatus } from "../context/LoginFormContext";
 import getUserLocation from "../Utils/GetUserLocation";
+import { LoginStatus } from "../context/LoginFormContext";
 
 function DashBordWindow() {
   const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
 
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-
-  const {loginStatus} = useContext(LoginStatus);
-
+  const {loginStatus, setLoginStatus} = useContext(LoginStatus);
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,14 +25,29 @@ function DashBordWindow() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-
-  const { ipAddress, geoInfo } = getUserLocation();
   
-  useEffect(() => {
-        console.log(ipAddress);
-}, [ipAddress]);
+   //  userLocation
+   useEffect(() => {
+    const userId = localStorage.getItem("portfolioUserId");
 
+    if (userId !== "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
+        const timer = setTimeout(() => {
+            getUserLocation()
+                .then((data) => {
+                    console.log("Location data:", data);
+                    // Handle data as needed, such as saving to Firebase
+                })
+                .catch((error) => {
+                    console.error("Error getting location:", error);
+                });
+        }, 5000);
+
+        // Clear the timer if the component unmounts before 5 seconds
+        return () => clearTimeout(timer);
+    }
+}, []);
+
+   
 
   return (
     <div

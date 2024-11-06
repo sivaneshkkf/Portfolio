@@ -20,6 +20,7 @@ import LoginForm from "./components/LoginForm";
 import { DashBoardContext } from "./context/DashBoardContext";
 import DashBordWindow from "./components/DashBoardWindow";
 import getUserLocation from "./Utils/GetUserLocation";
+import useUserLocation from "./Utils/GetUserLocation";
 
 function App() {
   const [visibleSection, setVisibleSection] = useState({
@@ -160,7 +161,6 @@ function App() {
     }
   }, [scrollPosition]);
 
-
   // scroll off function when i am open dashboard
   useEffect(() => {
     if (dashboardOpen) {
@@ -173,31 +173,26 @@ function App() {
     };
   }, [dashboardOpen]);
 
-
   useEffect(() => {
     const userId = localStorage.getItem("portfolioUserId");
     if (userId === "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
       setLoginStatus(true);
-      
     }
 
-    // Fetch user location only if loginStatus is false, with a delay
-    // const timer = setTimeout(() => {
-    //   if (!loginStatus) {
-    //     getUserLocation();
-    //   }
-    // }, 3000); // 3-second delay
-
-    // // Clear the timeout if the component unmounts
-    // return () => clearTimeout(timer);
+   
   }, [loginStatus]);
 
+ 
+
+
+  
+
   return (
-    <DashBoardContext.Provider value={{ dashboardOpen, setDashboardOpen }}>
-      <FeedbackFormContext.Provider
-        value={{ feedbackFormOpen, setFeedbackFormOpen }}
-      >
-        <LoginFormContext.Provider value={{ loginFormOpen, setLoginFormOpen }}>
+    <LoginFormContext.Provider value={{ loginFormOpen, setLoginFormOpen }}>
+      <DashBoardContext.Provider value={{ dashboardOpen, setDashboardOpen }}>
+        <FeedbackFormContext.Provider
+          value={{ feedbackFormOpen, setFeedbackFormOpen }}
+        >
           <LoginStatus.Provider value={{ loginStatus, setLoginStatus }}>
             <div className="relative overflow-x-hidden">
               <Theme.Provider value={{ theme, setTheme }}>
@@ -238,9 +233,9 @@ function App() {
               </Theme.Provider>
             </div>
           </LoginStatus.Provider>
-        </LoginFormContext.Provider>
-      </FeedbackFormContext.Provider>
-    </DashBoardContext.Provider>
+        </FeedbackFormContext.Provider>
+      </DashBoardContext.Provider>
+    </LoginFormContext.Provider>
   );
 }
 

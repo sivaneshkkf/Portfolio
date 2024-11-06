@@ -21,6 +21,17 @@ function LocationList() {
   //     timezone: "Asia/Bahrain",
   //     zip: "09834",
   //   };
+
+  const obj = {
+    IPv4: "109.161.184.198",
+    city: null,
+    country_code: "BH",
+    country_name: "Bahrain",
+    latitude: 26,
+    longitude: 50.55,
+    postal: null,
+    state: null,
+  };
   return (
     <>
       <h4 className="text-sm font-medium dark:text-white text-textHead mb-2">
@@ -34,51 +45,50 @@ function LocationList() {
                 <table className="w-full table-auto">
                   <thead>
                     <tr className="text-center bg-secondary dark:bg-dark-secondary text-[10px] sm:text-xs dark:font-normal font-semibold dark:text-white text-textHead border-b border-icon dark:border-dark-icon">
-                      <th className="w-fit sm:px-2 px-1 py-2">
-                        Country
-                      </th>
-                      <th className="w-fit sm:px-2 px-1 py-2">
-                        CountryCode
-                      </th>
-                      <th className="w-fit sm:px-2 px-1 py-2">
-                        City
-                      </th>
-                      <th className="w-fit sm:px-2 px-1 py-2">
-                        Time
-                      </th>
-                      <th className="w-fit sm:px-2 px-1 py-2">
-                        Pin Code
-                      </th>
+                      <th className="w-fit sm:px-2 px-1 py-2">Country</th>
+                      <th className="w-fit sm:px-2 px-1 py-2">CountryCode</th>
+                      <th className="w-fit sm:px-2 px-1 py-2">City</th>
+                      <th className="w-fit sm:px-2 px-1 py-2">Time</th>
+                      <th className="w-fit sm:px-2 px-1 py-2">State</th>
                     </tr>
                   </thead>
                   <tbody>
                     {loction.map((location, index) => (
-                      <tr key={index} className="text-textpara border-b border-primary dark:border-dark-primary bg-secondary dark:bg-dark-secondary">
-                        <td className="  px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
-                          {location.country}
+                      <tr
+                        key={index}
+                        className="text-textpara border-b border-primary dark:border-dark-primary bg-secondary dark:bg-dark-secondary"
+                      >
+                        <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
+                          {location.address?.country ||
+                            location.country_name ||
+                            "N/A"}
                         </td>
-                        <td className="  px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
-                          {location.countryCode}
+                        <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
+                          {location.address?.country_code ||
+                            location.country_code ||
+                            "N/A"}
                         </td>
-                        <td className=" px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
-                          {location.city}
+                        <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
+                          {location.address?.town || location.city || "N/A"}
                         </td>
-                        <td className=" px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium flex justify-center items-center">
+                        <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium flex justify-center items-center">
                           {(() => {
-                            const [date, time] = formatTimestamp(
-                              location.createdAt
-                            ).split(","); // Split the timestamp into date and time
-                            return (
-                              <div className="sm:flex sm:gap-1">
-                                <div>{date.trim()}</div>
-                                <div>{time.trim()}</div>
-                              </div>
-                            );
+                            const timestamp = location.createdAt;
+                            if (timestamp) {
+                              const [date, time] =
+                                formatTimestamp(timestamp).split(","); // Split the timestamp into date and time
+                              return (
+                                <div className="sm:flex sm:gap-1">
+                                  <div>{date.trim()}</div>
+                                  <div>{time.trim()}</div>
+                                </div>
+                              );
+                            }
+                            return "N/A";
                           })()}
                         </td>
-
                         <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
-                          {location.zip}
+                          {location.address?.state || location.state || "N/A"}
                         </td>
                       </tr>
                     ))}
