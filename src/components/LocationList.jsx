@@ -1,6 +1,8 @@
 import { div } from "framer-motion/client";
 import { UseFetchCollection } from "../firebase/config";
 import { formatTimestamp } from "../utils/Formatter";
+import DisplayObject from "../utils/DisplayObject";
+import React from "react";
 
 function LocationList() {
   const loction = UseFetchCollection("locations");
@@ -53,39 +55,48 @@ function LocationList() {
                   </thead>
                   <tbody>
                     {loction.map((location, index) => (
-                      <tr
-                        key={index}
-                        className="text-textpara border-b border-primary dark:border-dark-primary bg-secondary dark:bg-dark-secondary"
-                      >
-                        <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
-                          {location.address?.country ||
-                            location.country_name ||
-                            "N/A"}
-                        </td>
-                        <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
-                          {location.address?.state || location.state_prov || "N/A"}
-                        </td>
-                        <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
-                          {location.address?.town || location.city || "N/A"}
-                        </td>
-                        <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium flex justify-center items-center">
-                          {(() => {
-                            const timestamp = location.createdAt;
-                            if (timestamp) {
-                              const [date, time] =
-                                formatTimestamp(timestamp).split(","); // Split the timestamp into date and time
-                              return (
-                                <div className="sm:flex sm:gap-1">
-                                  <div>{date.trim()}</div>
-                                  <div>{time.trim()}</div>
-                                </div>
-                              );
-                            }
-                            return "N/A";
-                          })()}
-                        </td>
-                       
-                      </tr>
+                      <React.Fragment key={index}>
+                        <tr className="text-textpara border-b border-primary dark:border-dark-primary bg-secondary dark:bg-dark-secondary">
+                          <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
+                            {location.address?.country ||
+                              location.country_name ||
+                              "N/A"}
+                          </td>
+                          <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
+                            {location.address?.state ||
+                              location.state_prov ||
+                              "N/A"}
+                          </td>
+                          <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
+                            {location.address?.town ||
+                              location.address?.city ||
+                              location.city ||
+                              "N/A"}
+                          </td>
+                          <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium flex justify-center items-center">
+                            {(() => {
+                              const timestamp = location.createdAt;
+                              if (timestamp) {
+                                const [date, time] = formatTimestamp(timestamp).split(",");
+                                return (
+                                  <div className="sm:flex sm:gap-1">
+                                    <div>{date.trim()}</div>
+                                    <div>{time.trim()}</div>
+                                  </div>
+                                );
+                              }
+                              return "N/A";
+                            })()}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colSpan="4" className="px-1 sm:px-2 py-2">
+                            <div className="w-full bg-gray-100 dark:bg-dark-secondary p-2 rounded">
+                              <DisplayObject object={location} />
+                            </div>
+                          </td>
+                        </tr>
+                      </React.Fragment>
                     ))}
                   </tbody>
                 </table>
