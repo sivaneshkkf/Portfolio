@@ -13,7 +13,7 @@ function DashBordWindow() {
   const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
 
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const {loginStatus, setLoginStatus} = useContext(LoginStatus);
+  const { loginStatus, setLoginStatus } = useContext(LoginStatus);
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,29 +25,27 @@ function DashBordWindow() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  
-   //  userLocation
-   useEffect(() => {
+
+  //  userLocation
+  useEffect(() => {
     const userId = localStorage.getItem("portfolioUserId");
 
     if (userId !== "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
-        const timer = setTimeout(() => {
-            getUserLocation()
-                .then((data) => {
-                    console.log("Location data:");
-                    // Handle data as needed, such as saving to Firebase
-                })
-                .catch((error) => {
-                    console.error("Error getting location:", error);
-                });
-        }, 5000);
+      const timer = setTimeout(() => {
+        getUserLocation()
+          .then((data) => {
+            console.log("Location data:");
+            // Handle data as needed, such as saving to Firebase
+          })
+          .catch((error) => {
+            console.error("Error getting location:", error);
+          });
+      }, 5000);
 
-        // Clear the timer if the component unmounts before 5 seconds
-        return () => clearTimeout(timer);
+      // Clear the timer if the component unmounts before 5 seconds
+      return () => clearTimeout(timer);
     }
-}, []);
-
-   
+  }, []);
 
   return (
     <div
@@ -71,10 +69,13 @@ function DashBordWindow() {
         <div className="pb-8">
           <Dashboard className="text-textHead dark:text-dark-textpara" />
         </div>
-        <div className="hidden-scrollbar overflow-y-auto space-y-5 w-full md:max-w-4xl mx-auto">
-          <LocationList />
-          <FeedbackList />
-        </div>
+
+        {dashboardOpen && (
+          <div className="hidden-scrollbar overflow-y-auto space-y-5 w-full md:max-w-4xl mx-auto">
+            <LocationList />
+            <FeedbackList />
+          </div>
+        )}
 
         <span
           className="text-lg p-3 cursor-pointer text-dark-textpara absolute top-1 right-1"

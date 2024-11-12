@@ -4,10 +4,10 @@ const DisplayObject = ({ object }) => {
   const renderData = (data) => {
     if (typeof data === "object" && data !== null) {
       return (
-        <div style={{ marginLeft: "20px" }}>
+        <div style={{ marginLeft: "20px" }} className="text-xs font-semibold dark:font-normal dark:text-dark-textHead">
           {Object.entries(data).map(([key, value]) => (
             <div key={key} style={{ marginBottom: "10px" }}>
-              <strong>{key}:</strong>{" "}
+              <span className="font-normal dark:text-dark-textpara">{key}:</span>{" "}
               {Array.isArray(value) ? (
                 <ul>
                   {value.map((item, index) => (
@@ -17,7 +17,7 @@ const DisplayObject = ({ object }) => {
               ) : typeof value === "object" ? (
                 renderData(value)
               ) : (
-                <span>{value}</span>
+                <span className="ml-2">{value}</span>
               )}
             </div>
           ))}

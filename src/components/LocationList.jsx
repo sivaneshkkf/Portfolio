@@ -1,39 +1,29 @@
-import { div } from "framer-motion/client";
+import React, { useRef, useState } from "react";
 import { UseFetchCollection } from "../firebase/config";
 import { formatTimestamp } from "../utils/Formatter";
 import DisplayObject from "../utils/DisplayObject";
-import React from "react";
 
 function LocationList() {
   const loction = UseFetchCollection("locations");
+  const locationDetailsRefs = useRef([]);
 
-  //   const location = {
-  //     as: "AS31452 ZAIN BAHRAIN B.S.C.",
-  //     city: "Manama",
-  //     country: "Bahrain",
-  //     countryCode: "BH",
-  //     isp: "Zain Bahrain",
-  //     lat: 26.241,
-  //     lon: 50.5779,
-  //     org: "",
-  //     query: "109.161.176.183",
-  //     region: "13",
-  //     regionName: "Manama",
-  //     status: "success",
-  //     timezone: "Asia/Bahrain",
-  //     zip: "09834",
-  //   };
+  const [accordionState, setAccordionState] = useState(null);
+  const [heights, setHeights] = useState({});
 
-  const obj = {
-    IPv4: "109.161.184.198",
-    city: null,
-    country_code: "BH",
-    country_name: "Bahrain",
-    latitude: 26,
-    longitude: 50.55,
-    postal: null,
-    state: null,
+  const handleOnClick = (index) => {
+    const currentRef = locationDetailsRefs.current[index];
+    if (currentRef) {
+      const scrollHeight = currentRef.scrollHeight;
+
+      // Toggle the accordion; if it's already open, close it
+      setAccordionState((prevIndex) => (prevIndex === index ? null : index));
+      
+      // Set height only for the current clicked index
+      setHeights({
+        [index]: scrollHeight});
+    }
   };
+
   return (
     <>
       <h4 className="text-sm font-medium dark:text-white text-textHead mb-2">
@@ -56,16 +46,17 @@ function LocationList() {
                   <tbody>
                     {loction.map((location, index) => (
                       <React.Fragment key={index}>
-                        <tr className="text-textpara border-b border-primary dark:border-dark-primary bg-secondary dark:bg-dark-secondary">
+                        <tr
+                          className="text-textpara border-b border-primary dark:border-dark-primary bg-secondary dark:bg-dark-secondary cursor-pointer"
+                          onClick={() => handleOnClick(index)}
+                        >
                           <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
                             {location.address?.country ||
                               location.country_name ||
                               "N/A"}
                           </td>
                           <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
-                            {location.address?.state ||
-                              location.state_prov ||
-                              "N/A"}
+                            {location.address?.state || location.state_prov || "N/A"}
                           </td>
                           <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
                             {location.address?.town ||
@@ -90,8 +81,14 @@ function LocationList() {
                           </td>
                         </tr>
                         <tr>
-                          <td colSpan="4" className="px-1 sm:px-2 py-2">
-                            <div className="w-full bg-gray-100 dark:bg-dark-secondary p-2 rounded">
+                          <td colSpan="4">
+                            <div
+                              className="w-full bg-gray-100 dark:bg-dark-secondary rounded overflow-hidden transition-all duration-200"
+                              style={{
+                                height: accordionState === index ? `${heights[index]}px` : "0px",
+                              }}
+                              ref={(el) => (locationDetailsRefs.current[index] = el)}
+                            >
                               <DisplayObject object={location} />
                             </div>
                           </td>
