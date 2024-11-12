@@ -27,7 +27,7 @@ const DisplayObject = ({ object }) => {
     return <span>{data}</span>;
   };
 
-  return <div>{renderData(object)}</div>;
+  return <div className="py-3">{renderData(object)}</div>;
 };
 
 export default DisplayObject;

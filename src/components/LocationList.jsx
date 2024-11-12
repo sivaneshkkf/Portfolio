@@ -20,7 +20,7 @@ function LocationList() {
       
       // Set height only for the current clicked index
       setHeights({
-        [index]: scrollHeight});
+        [index]: scrollHeight + 10});
     }
   };
 
@@ -83,7 +83,7 @@ function LocationList() {
                         <tr>
                           <td colSpan="4">
                             <div
-                              className="w-full bg-gray-100 dark:bg-dark-secondary rounded overflow-hidden transition-all duration-200"
+                              className="w-full bg-gray-100 dark:bg-zinc-800 rounded overflow-hidden transition-all duration-200"
                               style={{
                                 height: accordionState === index ? `${heights[index]}px` : "0px",
                               }}
