@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import emoji from "../images/emoji.png";
 import { motion } from "framer-motion";
 import { AddFeedBack, UseFetchCollection } from "../firebase/config";
-import { DashBoardContext } from "../context/DashBoardContext";
+import { DashBoardContext, DashBoardDataContext } from "../context/DashBoardContext";
 import Dashboard from "../pages/DashBoard";
 import FeedbackList from "./FeedBackList";
 import LocationList from "./LocationList";
@@ -15,6 +15,21 @@ function DashBordWindow() {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const { loginStatus, setLoginStatus } = useContext(LoginStatus);
 
+  const {dashboardData, setDashboardData} =useContext(DashBoardDataContext)
+
+
+  // store dashboard data to local storage
+  useEffect(() => {
+
+    if(dashboardData){
+      localStorage.setItem("dashBoardData",JSON.stringify(dashboardData))
+    }
+
+  },[dashboardOpen])
+
+  //console.log(dashboardData)
+
+  // screen height update
   useEffect(() => {
     const handleResize = () => {
       setWindowHeight(window.innerHeight);
