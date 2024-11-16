@@ -15,9 +15,9 @@ export const ProjectData =[
         image : img1,
         bg : musicplayerbg,
         disc : "Responsive music player with smooth playback and easy-to-use interface on all devices.",
-        techs : ["HTML","TAILWINDCSS","JS"],
-        link : "https://sivaneshkkf.github.io/Music-Player/",
-        ghLink : "https://github.com/sivaneshkkf/Music-Player"
+        techs : ["HTML","TAILWINDCSS","JS","REACT", "SUPABASE"],
+        link : "https://sivaneshkkf.github.io/Beat-Tunes-MusicPlayer/",
+        ghLink : "https://sivaneshkkf.github.io/Beat-Tunes-MusicPlayer/"
     },
     {
         name :"Giveaway Form",
