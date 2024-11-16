@@ -61,6 +61,8 @@ function LocationList() {
                           <td className="px-1 sm:px-2 py-2 text-center text-[10px] sm:text-xs font-medium">
                             {location.address?.town ||
                               location.address?.city ||
+                              location.address?.suburb ||
+                              location.address?.village ||
                               location.city ||
                               "N/A"}
                           </td>
