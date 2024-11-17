@@ -44,10 +44,27 @@ export function AddFeedBack(formData) {
   });
 }
 
+//Add DashBoard Details
 export function AddDashboardDetails(data) {
   return new Promise(async (resolve, reject) => {
     try {
       const docRef = doc(db, "dashboard", "dashboard123"); // Specify the ID here
+      await setDoc(docRef, {
+        ...data,
+        createdAt: Timestamp.now(),
+      }); // Set the document data with the specified ID
+      resolve(docRef);
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
+// Add pre Dashboard Details
+export function AddPreDashboardDetails(data) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const docRef = doc(db, "dashboardPreData", "dashboardPreData123"); // Specify the ID here
       await setDoc(docRef, {
         ...data,
         createdAt: Timestamp.now(),

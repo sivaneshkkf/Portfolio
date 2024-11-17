@@ -50,19 +50,19 @@ function Dashboard({ className = "" }) {
 
 
   // Calculate badge values based on localStorage
+  const preDashbordDetails = UseFetchCollection("dashboardPreData");
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("dashBoardData")) || [];
-    const localData = storedData || {}; // Ensure the structure is consist
-
+    // const storedData = JSON.parse(localStorage.getItem("dashBoardData")) || [];
+    // const localData = storedData || {}; // Ensure the structure is consist
+    const data = preDashbordDetails[0] || ""
     setDashboardBadge({
-      whatsapp: whatsapp - localData.whatsapp,
-      url: url - localData.url,
-      views: views - localData.views,
-      downloads: downloads - localData.downloads,
-      feedbacks: feedBackLength - localData.feedbacks
+      whatsapp: whatsapp - data.whatsapp,
+      url: url - data.url,
+      views: views - data.views,
+      downloads: downloads - data.downloads,
+      feedbacks: feedBackLength - data.feedbacks
     });
   }, [whatsapp, url, views, downloads,feedBackLength]); // Use individual dependencies for clarity
-
   // Reusable Stats Component
   function Stats({ icon, count, title, dif }) {
     return (

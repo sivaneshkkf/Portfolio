@@ -91,10 +91,10 @@ function Indroduction() {
       };
       AddDashboardDetails(updateDashboard)
         .then((docRef) => {
-          console.log("Feedback successfully submitted with ID:", docRef.id);
+          console.log("Downloads with ID:", docRef.id);
         })
         .catch((e) => {
-          console.error("Failed to send feedback:", e);
+          console.error("Failed to update download count:", e);
         });
 
       // Reset both progress values after download completes

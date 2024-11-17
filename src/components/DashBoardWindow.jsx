@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import emoji from "../images/emoji.png";
 import { motion } from "framer-motion";
-import { AddFeedBack, UseFetchCollection } from "../firebase/config";
+import { AddFeedBack, AddPreDashboardDetails, UseFetchCollection } from "../firebase/config";
 import { DashBoardContext, DashBoardDataContext } from "../context/DashBoardContext";
 import Dashboard from "../pages/DashBoard";
 import FeedbackList from "./FeedBackList";
@@ -21,9 +21,19 @@ function DashBordWindow() {
   // store dashboard data to local storage
   useEffect(() => {
 
-    if(dashboardData){
-      localStorage.setItem("dashBoardData",JSON.stringify(dashboardData))
-    }
+    // if(dashboardData){
+    //   localStorage.setItem("dashBoardData",JSON.stringify(dashboardData))
+    // }
+      // Update the Firestore database with incremented values
+      if(dashboardData){
+        AddPreDashboardDetails(dashboardData)
+        .then((docRef) => {
+          console.log("DashBordPreData successfully submitted with ID:", docRef.id);
+        })
+        .catch((e) => {
+          console.error("Failed to send feedback:", e);
+        });
+      }
 
   },[dashboardOpen])
 
@@ -49,7 +59,7 @@ function DashBordWindow() {
       const timer = setTimeout(() => {
         getUserLocation()
           .then((data) => {
-            console.log("Location data:");
+            //console.log("Location data:");
             // Handle data as needed, such as saving to Firebase
           })
           .catch((error) => {

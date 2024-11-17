@@ -100,10 +100,10 @@ function PopupShareBtn({ popupState, setPopupState }) {
     // Update the Firestore database with incremented values
     AddDashboardDetails(updatedDetails)
       .then((docRef) => {
-        console.log("Feedback successfully submitted with ID:", docRef.id);
+        console.log("Whatsapp successfully submitted with ID:", docRef.id);
       })
       .catch((e) => {
-        console.error("Failed to send feedback:", e);
+        console.error("Failed to update whatsapp count:", e);
       });
   }
 
