@@ -40,6 +40,7 @@
     "react-type-animation": "^3.2.0",
     "react-web-share": "^2.0.2",
     "styled-components": "^6.1.13",
+    "vite-plugin-pwa": "^0.21.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
