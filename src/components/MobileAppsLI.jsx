@@ -90,10 +90,10 @@ function MobileAppsLi({ imgs, name, disc, techs, link }) {
       </div>
 
       <div>
-        <h4 className="text-sm dark:text-dark-textHead text-textHead font-semibold">
+        <h4 className="md:text-lg text-sm dark:text-dark-textHead text-textHead font-semibold">
           {name}
         </h4>
-        <p className="dark:text-dark-textpara text-zinc-950 text-xs mt-3">
+        <p className="dark:text-dark-textpara text-zinc-950 md:text-sm text-xs mt-3">
           {disc}
         </p>
 

@@ -10,6 +10,7 @@ import { FadeIn, SuccessMessage } from "../varients/varientAnim";
 import { useState } from "react";
 import Btn from "../components/Btn";
 import SendBtn from "../components/Buttons/SendBtn";
+import { AddMessage } from "../firebase/config";
 
 function Contact() {
   const schemaValidation = z.object({
@@ -39,6 +40,8 @@ function Contact() {
       btnAnim: true,
     }));
 
+    addMessage(data)
+
     mailObj.access_key = "9b19e215-8878-45d3-8f85-a6ca812579c3";
 
     const json = JSON.stringify(mailObj);
@@ -61,6 +64,18 @@ function Contact() {
         }));
       }, 1000);
     }
+  }
+
+
+
+  const addMessage = (data) => {
+    AddMessage(data)
+      .then((docRef) => {
+        console.log("Message successfully submitted with ID:", docRef.id);
+      })
+      .catch((e) => {
+        console.error("Failed to add Message:", e);
+      });
   }
 
   // success message show

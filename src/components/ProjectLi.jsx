@@ -49,7 +49,7 @@ function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
     // </li>
 
     <motion.li
-      className="bg-white group shadow-cardShadow flex flex-col md:rounded-3xl rounded-xl overflow-hidden backdrop-blur-lg backdrop-saturate-0 bg-opacity-100 relative"
+      className="bg-white group shadow-cardShadow flex flex-col md:rounded-2xl rounded-xl overflow-hidden backdrop-blur-lg backdrop-saturate-0 bg-opacity-100 relative"
       style={{ backgroundImage: `url(${bg})` }}
       variants={FadeIn("up", 0.2)}
       initial="hidden"

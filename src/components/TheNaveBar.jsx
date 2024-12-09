@@ -96,19 +96,19 @@ function TheNaveBar() {
 
   return (
     <div className=" bg-white dark:bg-dark-primary fixed top-0 left-0 right-0 z-50 overflow-hidden">
-      <div className=" py-3 sm:px-4 md:px-10 flex items-center gap-4 relative">
-        <div className="hidden sm:flex items-center gap-4 flex-1">
-          <p className="text-textHead dark:text-dark-textHead text-xl font-black md:text-2xl">
+      <div className=" py-1 sm:px-4 md:px-10 flex items-center gap-4 relative">
+        <div className="hidden sm:flex items-center gap-1 lg:gap-4 flex-1">
+          <p className="text-textHead dark:text-dark-textHead text-xl font-black sm:text-lg lg:text-2xl">
             Web
-            <span className="text-accent text-xl font-black md:text-2xl">
+            <span className="text-accent text-xl font-black lg:text-2xl sm:text-lg">
               Developer
             </span>
           </p>
-          <img src={logo} alt="" className="w-14" />
+          <img src={logo} alt="" className="lg:w-14 w-12" />
         </div>
 
         <div className="flex gap-6 items-center w-full sm:w-fit">
-          <ul className="flex items-end sm:gap-4 text-textHead text-sm font-bold w-full justify-around">
+          <ul className="flex items-end sm:gap-3 lg:gap-4 text-textHead text-sm font-bold w-full justify-around">
             <NavLi
               name="Home"
               onClick={(e) => handleClick(e, sectionIDS.home.navId,sectionIDS.home.sectionId)}

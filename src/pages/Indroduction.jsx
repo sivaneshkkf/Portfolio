@@ -131,11 +131,11 @@ function Indroduction() {
 
   return (
     <motion.div
-      className="bg-[url('../src/images/bg.webp')] bg-cover bg-center h-full w-full relative z-0 mt-16"
+      className="bg-[url('../src/images/bg.webp')] bg-cover bg-center h-full w-full relative z-0 mt-10"
       onMouseLeave={() => setPopupState(false)}
     >
       <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10 dark:from-dark-gradient1 dark:to-dark-gradient2"></div>
-      <div className=" px-5 py-8 sm:p-10 md:p-20 xl:px-60">
+      <div className=" px-5 py-8 sm:p-10 md:p-20 2xl:px-60">
         <div className="flex gap-4 items-center justify-between">
           <motion.div
             className="space-y-4 flex-1"

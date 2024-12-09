@@ -29,10 +29,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
+// Feedback add
 export function AddFeedBack(formData) {
   return new Promise(async (resolve, reject) => {
     try {
       const collectionRef = collection(db, "feedback");
+      const docRef = await addDoc(collectionRef, {
+        ...formData,
+        createdAt: Timestamp.now(),
+      });
+      resolve(docRef);
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
+// message add
+export function AddMessage(formData) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const collectionRef = collection(db, "messages");
       const docRef = await addDoc(collectionRef, {
         ...formData,
         createdAt: Timestamp.now(),

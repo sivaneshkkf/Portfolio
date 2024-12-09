@@ -8,6 +8,7 @@ import FeedbackList from "./FeedBackList";
 import LocationList from "./LocationList";
 import getUserLocation from "../Utils/GetUserLocation";
 import { LoginStatus } from "../context/LoginFormContext";
+import MessageList from "./MessageList";
 
 function DashBordWindow() {
   const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
@@ -79,7 +80,7 @@ function DashBordWindow() {
       }`}
     >
       <motion.div
-        className="p-8 w-full rounded-lg bg-primary dark:bg-dark-primary flex flex-col items-center justify-center m-2 relative overflow-hidden"
+        className="p-4 w-full rounded-lg bg-primary dark:bg-dark-primary flex flex-col items-center justify-center m-2 relative overflow-hidden"
         animate={dashboardOpen ? { y: [400, 0] } : { y: 400 }}
         transition={{ duration: 0.7, type: "spring" }}
         style={{ height: `${windowHeight - 100}px` }}
@@ -92,12 +93,13 @@ function DashBordWindow() {
         </div>
 
         <div className="pb-8">
-          <Dashboard className="text-textHead dark:text-dark-textpara" />
+          <Dashboard className="text-textHead dark:text-dark-textpara" flex="flex-wrap" />
         </div>
 
         {dashboardOpen && (
           <div className="hidden-scrollbar overflow-y-auto space-y-5 w-full md:max-w-4xl mx-auto">
             <LocationList />
+            <MessageList/>
             <FeedbackList />
           </div>
         )}

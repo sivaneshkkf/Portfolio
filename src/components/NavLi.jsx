@@ -28,7 +28,7 @@ function NavLi({ name, onClick, id, children }) {
           hover:sm:text-accent dark:hover:sm:text-accent`}>
             
         {children && children}
-        <p className={`${showLine? "hidden sm:block":""} sm:font-medium sm:dark:text-dark-textHead dark:text-[#565F64]`}>{name}</p>
+        <p className={`${showLine? "hidden sm:block":""} sm:font-bold sm:dark:text-dark-textHead dark:text-[#565F64]`}>{name}</p>
         
       </a>
 

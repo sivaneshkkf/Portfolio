@@ -7,6 +7,7 @@ import { IconButton } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkIcon from "@mui/icons-material/Link";
 import FeedbackIcon from "@mui/icons-material/Feedback";
+import EmailIcon from '@mui/icons-material/Email';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { NumberFormatter } from "../utils/Formatter";
 import GetAppIcon from "@mui/icons-material/GetApp";
@@ -16,9 +17,10 @@ import {
   DashBoardDataContext,
 } from "../context/DashBoardContext";
 
-function Dashboard({ className = "" }) {
+function Dashboard({ className = "", flex }) {
 
   const feedBackData = UseFetchCollection("feedback");
+  const messageDataLength = UseFetchCollection("messages").length;
   const feedBackLength = feedBackData.length;
 
   const { dashboardData, setDashboardData } = useContext(DashBoardDataContext);
@@ -28,6 +30,7 @@ function Dashboard({ className = "" }) {
     views: 0,
     downloads: 0,
     feedbacks:0,
+    messages:0,
   });
   const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
 
@@ -44,9 +47,9 @@ function Dashboard({ className = "" }) {
   // Update dashboard data in context when fetched
   useEffect(() => {
     if (dashbordDetails.length > 0) {
-      setDashboardData({...dashbordDetails[0],feedbacks:feedBackLength});
+      setDashboardData({...dashbordDetails[0],feedbacks:feedBackLength,messages:messageDataLength});
     }
-  }, [dashbordDetails, setDashboardData,feedBackLength]);
+  }, [dashbordDetails, setDashboardData,feedBackLength,messageDataLength]);
 
 
   // Calculate badge values based on localStorage
@@ -60,13 +63,14 @@ function Dashboard({ className = "" }) {
       url: url - data.url,
       views: views - data.views,
       downloads: downloads - data.downloads,
-      feedbacks: feedBackLength - data.feedbacks
+      feedbacks: feedBackLength - data.feedbacks,
+      messages: messageDataLength - data.messages
     });
-  }, [whatsapp, url, views, downloads,feedBackLength]); // Use individual dependencies for clarity
+  }, [whatsapp, url, views, downloads,feedBackLength,messageDataLength]); // Use individual dependencies for clarity
   // Reusable Stats Component
-  function Stats({ icon, count, title, dif }) {
+  function Stats({ icon, count, title, dif, style }) {
     return (
-      <div className="flex justify-center items-center shadow-lg relative">
+      <div className={`flex justify-center items-center shadow-lg relative ${style}`}>
         <Tooltip title={title}>
           <div className="flex bg-[#0b1f35] dark:bg-white h-7 dark:bg-opacity-5 bg-opacity-40 rounded overflow-hidden items-center justify-center">
             <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40 dark:bg-opacity-80">
@@ -78,7 +82,7 @@ function Dashboard({ className = "" }) {
               }`}
             >
               {NumberFormatter(count)}
-              <span className="text-[10px] ml-2 hidden font-normal lg:inline">
+              <span className="text-[10px] ml-2 hidden font-normal xl:inline">
                 {title}
               </span>
             </h4>
@@ -96,7 +100,7 @@ function Dashboard({ className = "" }) {
 
   return (
     <div className="flex flex-col justify-center mt-3">
-      <div className="flex gap-2 sm:gap-5 mx-auto mt-3">
+      <div className={`flex gap-2 sm:gap-5 mx-auto mt-3 ${flex}`}>
         <Stats
           icon={<VisibilityIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}
           count={views}
@@ -110,10 +114,17 @@ function Dashboard({ className = "" }) {
           dif={dashboardBadge.whatsapp}
         />
         <Stats
+          icon={<EmailIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}
+          count={messageDataLength}
+          title="Messages"
+          dif={dashboardBadge.messages}
+        />
+        <Stats
           icon={<LinkIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}
           count={url}
           title="URL Shares"
           dif={dashboardBadge.url}
+          style={`${dashboardOpen ? "flex" : "hidden"} sm:flex`}
         />
         <Stats
           icon={<FeedbackIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}
