@@ -65,6 +65,7 @@ function LoginForm() {
         // Store the user ID in local storage
         localStorage.setItem("portfolioUserId", user.uid); // Assuming `user.uid` is the user ID
 
+        setLoginError(null)
         setShowMessage({ loading: true, success: true });
         setLoginStatus(true);
 

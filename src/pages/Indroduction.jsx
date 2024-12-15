@@ -131,7 +131,7 @@ function Indroduction() {
 
   return (
     <motion.div
-      className="bg-[url('../src/images/bg.webp')] bg-cover bg-center h-full w-full relative z-0 mt-10"
+      className="bg-[url('../src/images/bg.webp')] bg-cover bg-center h-full w-full relative z-0 mt-10 sm:mt-14"
       onMouseLeave={() => setPopupState(false)}
     >
       <div className="absolute bg-gradient-to-b from-gradient1 to-gradient2 inset-0 -z-10 dark:from-dark-gradient1 dark:to-dark-gradient2"></div>
@@ -440,7 +440,7 @@ function Indroduction() {
       </div>
 
       <div
-        className="absolute top-5 left-5 sm:w-10 sm:h-10 w-8 h-8 border border-dark-textpara rounded-full flex items-center justify-center opacity-50 hover:opacity-80 cursor-pointer transition-all duration-300"
+        className="absolute top-5 sm:top-6 left-5 sm:w-10 sm:h-10 w-8 h-8 border border-dark-textpara rounded-full flex items-center justify-center opacity-50 hover:opacity-80 cursor-pointer transition-all duration-300"
         onClick={() => setLoginFormOpen(true)}
       >
         <span className="text-dark-textpara">
