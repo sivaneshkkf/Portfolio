@@ -440,7 +440,7 @@ function Indroduction() {
       </div>
 
       <div
-        className="absolute top-5 sm:top-6 left-5 sm:w-10 sm:h-10 w-8 h-8 border border-dark-textpara rounded-full flex items-center justify-center opacity-50 hover:opacity-80 cursor-pointer transition-all duration-300"
+        className="absolute top-5 sm:top-6 lg:top-8 left-5 sm:w-10 sm:h-10 w-8 h-8 border border-dark-textpara rounded-full flex items-center justify-center opacity-50 hover:opacity-80 cursor-pointer transition-all duration-300"
         onClick={() => setLoginFormOpen(true)}
       >
         <span className="text-dark-textpara">
