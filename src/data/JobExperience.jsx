@@ -1,6 +1,6 @@
 export const JobExperience = [
     {
-      title: "Draftsman | 2024 Aug - ",
+      title: "Autocad Draftsman | 2024 Aug - ",
       year: "Present",
       company: "Falcon Aluminium International S.P.C. - BAHRAIN.",
       description:
