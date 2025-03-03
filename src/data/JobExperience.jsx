@@ -1,7 +1,7 @@
 export const JobExperience = [
     {
       title: "Autocad Draftsman | 2024 Aug - ",
-      year: "Present",
+      year: "2025 Jan",
       company: "Falcon Aluminium International S.P.C. - BAHRAIN.",
       description:
         "Create detailed 2D and 3D CAD drawings and schematics for aluminum    windows, doors, and kitchen installations using software like AutoCAD, Revit, and SolidWorks, to prepare plans, elevations, sections, and shop drawings based on specifications and customer requirements for accurate fabrication and installation.",

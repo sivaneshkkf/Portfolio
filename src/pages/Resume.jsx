@@ -222,7 +222,7 @@ useEffect(() => {
                 <div>
                   <h3 className="text-sm lg:text-lg font-bold text-textHead dark:text-dark-textHead">
                     {job.title}
-                    <span className="lg:text-sm font-semibold">{job.year}</span>
+                    <span className="text-sm lg:text-lg font-bold text-textHead dark:text-dark-textHead">{job.year}</span>
                   </h3>
                   <p className="text-xs lg:text-sm text-textpara dark:text-dark-textpara mb-2">
                     {job.company}
