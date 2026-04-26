@@ -1,17 +1,17 @@
 export const JobExperience = [
     {
-      title: "Autocad Draftsman | 2024 Aug - ",
-      year: "2025 Jan",
-      company: "Falcon Aluminium International S.P.C. - BAHRAIN.",
+      title: "React Full Stack Developer | 2025 Feb - ",
+      year: "Present",
+      company: "Canvendor Software Solutions PVT LTD.",
       description:
-        "Create detailed 2D and 3D CAD drawings and schematics for aluminum    windows, doors, and kitchen installations using software like AutoCAD, Revit, and SolidWorks, to prepare plans, elevations, sections, and shop drawings based on specifications and customer requirements for accurate fabrication and installation.",
+        "Built scalable web applications using React JS with clean and responsive UI. Developed RESTful APIs using Node.js and Express for efficient backend operations. Handled data using MySQL and MongoDB with optimized queries and schema design. Implemented authentication and improved performance across full stack applications.",
     },
     {
-      title: "Android Developer | 2023 Mar - ",
-      year: "2024 Feb",
+      title: "React Developer | 2022 Jul - ",
+      year: "2025 Feb",
       company: "AK Infopark Pvt, Ltd. - Kanyakumari, India.",
       description:
-        "Design and develop high-quality Android applications by understanding client requirements, collaborating with cross-functional teams, integrating external APIs, fixing bugs, and continuously improving performance, while ensuring compatibility across all devices, monitoring app reviews, and releasing updates as needed.",
+        "Developed responsive web applications using React JS and modern JavaScript (ES6+) for high performance and user-friendly UI. Built and integrated RESTful APIs using Node.js and Express to handle backend logic efficiently. Managed data using MongoDB and MySQL with optimized queries and effective data handling. Collaborated with teams, fixed bugs, and improved application quality through testing and best practices.",
     },
     {
       title: "QA Jr. supervisor | 2020 Jun - ",
