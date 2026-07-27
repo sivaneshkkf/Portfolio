@@ -6,6 +6,15 @@ import React, { Suspense, useEffect, useState } from "react";
 import { ScreenSizeContext } from "./context/ScreenSizeContext.jsx";
 import { ScrollProvider } from "./Utils/ScrollValues.jsx";
 
+// Temporary on-page debug console for diagnosing a mobile rendering issue.
+// Only loads when visiting the site with ?debug in the URL. Remove once resolved.
+if (new URLSearchParams(window.location.search).has("debug")) {
+  const script = document.createElement("script");
+  script.src = "https://cdn.jsdelivr.net/npm/eruda";
+  script.onload = () => window.eruda && window.eruda.init();
+  document.head.appendChild(script);
+}
+
 const LazyComponentApp = React.lazy(() => import("./App.jsx"));
 
 function AppWithDelay() {
