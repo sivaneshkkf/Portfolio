@@ -60,7 +60,7 @@ function PopupShareBtn({ popupState, setPopupState }) {
     try {
       // Copy the URL to the clipboard
       await navigator.clipboard.writeText(
-        "https://sivaneshkkf.github.io/Portfolio/"
+        "https://sivaneshkkf.github.io/Portfolio/",
       );
       setCopySuccess(true);
 
@@ -112,6 +112,15 @@ function PopupShareBtn({ popupState, setPopupState }) {
 
   // screen size contenxt
   const { ScreenSize, setScreenSize } = useContext(ScreenSizeContext);
+  // Narrow screens don't have room to expand sideways without running off
+  // the edge of the viewport, so the menu opens upward instead.
+  const isNarrowScreen = ScreenSize === "sm";
+  const getOffset = (distance) =>
+    popupState
+      ? isNarrowScreen
+        ? { x: 0, y: -distance }
+        : { x: distance, y: 0 }
+      : { x: 0, y: 0 };
 
   return (
     <motion.div className="flex relative">
@@ -130,7 +139,7 @@ function PopupShareBtn({ popupState, setPopupState }) {
 
       <motion.div
         className="w-9 h-9 bg-[#0b1f35] dark:bg-dark-primary rounded-full flex justify-center items-center absolute"
-        animate={popupState ? { x: -120 } : { x: 0 }}
+        animate={getOffset(120)}
         transition={{ duration: 1, type: "spring" }}
         onClick={handleWhatsappShare}
       >
@@ -154,7 +163,7 @@ function PopupShareBtn({ popupState, setPopupState }) {
 
       <motion.div
         className="w-9 h-9 bg-[#0b1f35] dark:bg-dark-primary rounded-full flex justify-center items-center absolute"
-        animate={popupState ? { x: -80 } : { x: 0 }}
+        animate={getOffset(80)}
         transition={{ duration: 1, type: "spring" }}
         onClick={handleWhatsappShare}
       >
@@ -174,7 +183,7 @@ function PopupShareBtn({ popupState, setPopupState }) {
 
       <motion.div
         className="w-9 h-9 bg-[#0b1f35] dark:bg-dark-primary rounded-full flex justify-center items-center"
-        animate={popupState ? { x: -40 } : { x: 0 }}
+        animate={getOffset(40)}
         transition={{ duration: 1, type: "spring" }}
         onClick={copyToClip}
       >

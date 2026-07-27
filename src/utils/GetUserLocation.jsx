@@ -1,8 +1,12 @@
 import { AddLocationToFirebase } from "../firebase/config";
+import { parseUserAgent } from "./dashboardHelpers";
 
 async function getUserLocation() {
 
     const apiKey = "fb280a422eff45ba84bc5ab237df3d41"
+    const { browser, device } = parseUserAgent(navigator.userAgent);
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
     const fetchLocationData = async (latitude, longitude) => {
         try {
             const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
@@ -21,7 +25,7 @@ async function getUserLocation() {
             const fetchData = await fetch(url);
             const response = await fetchData.json();
             //console.log(response)
-            await AddLocationToFirebase(response);
+            await AddLocationToFirebase({ ...response, browser, device, timezone });
         } catch (error) {
             console.error("Error fetching location data:", error);
         }
@@ -34,9 +38,9 @@ async function getUserLocation() {
                 const { latitude, longitude } = pos.coords;
                 try {
                     const geoInfo = await fetchLocationData(latitude, longitude);
-                    
-                    await AddLocationToFirebase(geoInfo);
-    
+
+                    await AddLocationToFirebase({ ...geoInfo, browser, device, timezone });
+
                     resolve({ lat: latitude, lon: longitude, geoInfo });
                 } catch (error) {
                     reject(error); // Handle fetch or Firebase errors
@@ -59,7 +63,7 @@ async function getUserLocation() {
             }
         );
     });
-    
+
 }
 
 export default getUserLocation;

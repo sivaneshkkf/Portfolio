@@ -26,25 +26,14 @@ function SKills() {
   const totalProjects = ProjectData.length + MobileAppData.length;
 
   return (
-    <div className="relative overflow-hidden bg-primary dark:bg-dark-secondary py-20 sm:py-28 lg:py-36 px-5">
+    <div className="relative overflow-hidden bg-primary dark:bg-gradient-to-b dark:from-hero-bg2 dark:via-hero-bg dark:to-[#020617] py-20 sm:py-28 lg:py-36 px-5">
       {/* decorative background */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        <div className="absolute inset-0 bg-grid-pattern opacity-60"></div>
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-hero-primary/10 blur-[100px]"></div>
-        <div className="absolute top-1/2 -left-24 w-96 h-96 rounded-full bg-hero-secondary/10 blur-[100px]"></div>
-        <div className="absolute bottom-0 right-1/3 w-80 h-80 rounded-full bg-hero-accent/10 blur-[90px]"></div>
-        <span className="hidden sm:block absolute top-[10%] left-[6%] text-hero-primary/10 text-6xl font-mono select-none">
-          {"</>"}
-        </span>
-        <span className="hidden sm:block absolute bottom-[14%] right-[8%] text-hero-secondary/10 text-5xl font-mono select-none">
-          {"{ }"}
-        </span>
-        <span className="hidden sm:block absolute top-[45%] right-[16%] font-mono text-sm text-hero-accent/20 select-none">
-          01001<span className="animate-blink">_</span>
-        </span>
+        <div className="absolute top-1/4 -right-24 -translate-y-1/2 w-96 h-96 rounded-full bg-hero-primary/10 dark:bg-hero-primary/25 blur-[200px] dark:animate-blobSlow"></div>
+        <div className="absolute top-1/2 -left-24 -translate-y-1/2 w-96 h-96 rounded-full bg-hero-secondary/10 dark:bg-hero-secondary/25 blur-[200px] dark:animate-blob"></div>
       </div>
 
       <div className="mx-auto max-w-7xl">
@@ -63,7 +52,10 @@ function SKills() {
             </span>
           </motion.div>
 
-          <TheHeading heading="MY TECH STACK" id={sectionIDS.skills.sectionId} />
+          <TheHeading
+            heading="MY TECH STACK"
+            id={sectionIDS.skills.sectionId}
+          />
 
           <motion.h2
             variants={FadeIn("up", 0.2, 0)}
@@ -93,9 +85,7 @@ function SKills() {
         {/* categorized skill cards */}
         <div className="space-y-16 sm:space-y-20">
           {CATEGORIES.map((category) => {
-            const items = enrichedSkills.filter(
-              (s) => s.category === category
-            );
+            const items = enrichedSkills.filter((s) => s.category === category);
             if (items.length === 0) return null;
 
             return (

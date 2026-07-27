@@ -1,36 +1,71 @@
-import { button, div } from "framer-motion/client";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
-function BtnForm({ text, className, loading, onClick }) {
+function BtnForm({ text, className = "", loading, onClick }) {
+  const [ripples, setRipples] = useState([]);
+
+  const handleClick = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height) * 1.4;
+    const id = Date.now();
+    setRipples((prev) => [
+      ...prev,
+      {
+        id,
+        x: e.clientX - rect.left - size / 2,
+        y: e.clientY - rect.top - size / 2,
+        size,
+      },
+    ]);
+    setTimeout(() => {
+      setRipples((prev) => prev.filter((r) => r.id !== id));
+    }, 650);
+    onClick && onClick(e);
+  };
+
   return (
-    <button 
-      className={`mx-auto w-full relative cursor-pointer bg-accent px-8 py-2 text-white font-semibold text-xs rounded flex gap-2 items-center text-center justify-center ${className ? className : "bg-accent"}`}
-      onClick={onClick}
+    <motion.button
+      type="submit"
+      onClick={handleClick}
+      disabled={loading}
+      whileHover={!loading ? { y: -2, scale: 1.01 } : {}}
+      whileTap={{ scale: 0.97 }}
+      className={`relative mx-auto flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-hero-primary to-hero-secondary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-hero-primary/30 transition-shadow duration-300 hover:shadow-xl hover:shadow-hero-secondary/40 disabled:cursor-not-allowed disabled:opacity-80 ${className}`}
     >
-      <p className={`${loading ? "hidden" : "block"}`}>{text}</p>
+      {ripples.map((r) => (
+        <motion.span
+          key={r.id}
+          initial={{ opacity: 0.4, scale: 0 }}
+          animate={{ opacity: 0, scale: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="pointer-events-none absolute rounded-full bg-white/40"
+          style={{ left: r.x, top: r.y, width: r.size, height: r.size }}
+        ></motion.span>
+      ))}
 
-      <span className={`text-white ${loading ? "block" : "hidden"}`}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="2em"
-          height="2em"
-          viewBox="0 0 24 24"
-          className="animate-spin"
-        >
-          <g fill="none" fillRule="evenodd">
-            <path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"></path>
+      {loading ? (
+        <>
+          <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
             <path
+              className="opacity-90"
               fill="currentColor"
-              d="M12 4.5a7.5 7.5 0 1 0 0 15a7.5 7.5 0 0 0 0-15M1.5 12C1.5 6.201 6.201 1.5 12 1.5S22.5 6.201 22.5 12S17.799 22.5 12 22.5S1.5 17.799 1.5 12"
-              opacity=".4"
-            ></path>
-            <path
-              fill="currentColor"
-              d="M12 4.5a7.46 7.46 0 0 0-5.187 2.083a1.5 1.5 0 0 1-2.075-2.166A10.46 10.46 0 0 1 12 1.5a1.5 1.5 0 0 1 0 3"
-            ></path>
-          </g>
-        </svg>
-      </span>
-    </button>
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+            />
+          </svg>
+          Submitting...
+        </>
+      ) : (
+        text
+      )}
+    </motion.button>
   );
 }
 

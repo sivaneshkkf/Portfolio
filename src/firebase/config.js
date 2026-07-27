@@ -94,6 +94,8 @@ export function AddPreDashboardDetails(data) {
 }
 
 // location add
+const MAX_LOCATION_DOCS = 300;
+
 export function AddLocationToFirebase(data) {
   return new Promise(async (resolve, reject) => {
     try {
@@ -104,11 +106,11 @@ export function AddLocationToFirebase(data) {
       const docsArray = existingDocs.docs;
 
       // Check the number of documents in the collection
-      if (docsArray.length >= 15) {
+      if (docsArray.length >= MAX_LOCATION_DOCS) {
         // Sort documents by creation time (assuming they have a createdAt timestamp)
         const oldestDocs = docsArray
           .sort((a, b) => a.data().createdAt - b.data().createdAt)
-          .slice(0, docsArray.length - 14);
+          .slice(0, docsArray.length - (MAX_LOCATION_DOCS - 1));
         // Delete the oldest documents
         for (const doc of oldestDocs) {
           await deleteDoc(doc.ref);

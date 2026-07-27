@@ -1,71 +1,98 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import SendRoundedIcon from "@mui/icons-material/SendRounded";
+
 function SendBtn({ showMessage, text }) {
+  const [ripples, setRipples] = useState([]);
+
+  const handleClick = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height) * 1.4;
+    const id = Date.now();
+    setRipples((prev) => [
+      ...prev,
+      {
+        id,
+        x: e.clientX - rect.left - size / 2,
+        y: e.clientY - rect.top - size / 2,
+        size,
+      },
+    ]);
+    setTimeout(() => {
+      setRipples((prev) => prev.filter((r) => r.id !== id));
+    }, 650);
+  };
+
   return (
     <motion.button
-      className="mx-auto relative overflow-hidden cursor-pointer bg-accent"
-      initial={{ width: 130, height: 32, borderRadius: "5px" }}
-      animate={
-        showMessage.btnAnim && { width: 45, height: 45, borderRadius: "50%" }
-      }
+      type="submit"
+      onClick={handleClick}
+      className="group relative mx-auto flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-hero-primary to-hero-secondary text-white shadow-lg shadow-hero-primary/30 transition-shadow duration-300 hover:shadow-xl hover:shadow-hero-secondary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hero-primary focus-visible:ring-offset-2"
+      initial={{ width: 190, height: 48, borderRadius: 9999 }}
+      animate={{
+        width: showMessage.btnAnim ? 48 : 190,
+        height: 48,
+        borderRadius: 9999,
+      }}
+      transition={{ duration: 0.35, ease: [0.25, 0.25, 0.25, 0.75] }}
+      whileHover={!showMessage.btnAnim ? { y: -2, scale: 1.02 } : {}}
+      whileTap={{ scale: 0.96 }}
     >
-      <div className="flex justify-center items-center px-2 gap-1">
-        <p
-          className={`text-white text-xs ${
-            showMessage.btnAnim ? "hidden" : "block"
-          }`}
-        >
-          {text || "SEND MESSAGE"}
-        </p>
-        <span
-          className={`text-white absolute left-1/2 transform -translate-x-1/2 ${
-            showMessage.btnAnim ? "block" : "hidden"
-          }`}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="2.8em"
-            height="2.8em"
-            viewBox="0 0 24 24"
-            className="animate-spin"
-          >
-            <g fill="none" fillRule="evenodd">
-              <path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"></path>
-              <path
-                fill="currentColor"
-                d="M12 4.5a7.5 7.5 0 1 0 0 15a7.5 7.5 0 0 0 0-15M1.5 12C1.5 6.201 6.201 1.5 12 1.5S22.5 6.201 22.5 12S17.799 22.5 12 22.5S1.5 17.799 1.5 12"
-                opacity=".1"
-              ></path>
-              <path
-                fill="currentColor"
-                d="M12 4.5a7.46 7.46 0 0 0-5.187 2.083a1.5 1.5 0 0 1-2.075-2.166A10.46 10.46 0 0 1 12 1.5a1.5 1.5 0 0 1 0 3"
-              ></path>
-            </g>
-          </svg>
-        </span>
+      {ripples.map((r) => (
         <motion.span
-          className="text-white"
-          animate={showMessage.btnAnim ?  { x:50, y:-50} : { x:0, y:0 }}
-          transition={{
-            duration: 2,
-            delay:1,
-            ease: "linear",
-          }}
+          key={r.id}
+          initial={{ opacity: 0.45, scale: 0 }}
+          animate={{ opacity: 0, scale: 1 }}
+          transition={{ duration: 0.65, ease: "easeOut" }}
+          className="pointer-events-none absolute rounded-full bg-white/50"
+          style={{ left: r.x, top: r.y, width: r.size, height: r.size }}
+        />
+      ))}
+
+      <span
+        className={`flex items-center gap-2 px-6 text-sm font-semibold tracking-wide transition-opacity duration-200 ${
+          showMessage.btnAnim ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        {text || "Send Message"}
+        <motion.span
+          className="flex"
+          animate={
+            showMessage.btnAnim
+              ? { x: 60, y: -60, opacity: 0 }
+              : { x: 0, y: 0, opacity: 1 }
+          }
+          transition={{ duration: 0.7, ease: "easeIn" }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.2em"
-            height="1.2em"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentColor"
-              fillRule="evenodd"
-              d="M1.846 7.151a.75.75 0 0 0-.228 1.376l6.517 3.915l6.22-4.355a.75.75 0 0 1 .86 1.229l-6.22 4.355l1.45 7.463a.75.75 0 0 0 1.372.256L22.792 3.94a.75.75 0 0 0-.793-1.133z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
+          <SendRoundedIcon fontSize="small" />
         </motion.span>
-      </div>
+      </span>
+
+      <span
+        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${
+          showMessage.btnAnim ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <svg
+          className="h-5 w-5 animate-spin text-white"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          />
+          <path
+            className="opacity-90"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+          />
+        </svg>
+      </span>
     </motion.button>
   );
 }

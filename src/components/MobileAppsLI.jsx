@@ -280,7 +280,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
             </div>
           )}
 
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+          {/* <div className="flex flex-col sm:flex-row gap-3 pt-2">
             {link ? (
               <CtaButton
                 as="a"
@@ -327,7 +327,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
                 Coming Soon
               </CtaButton>
             )}
-          </div>
+          </div> */}
         </motion.div>
       </div>
     </div>

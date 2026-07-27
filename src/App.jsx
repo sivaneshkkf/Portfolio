@@ -14,16 +14,14 @@ import FeedBackForm from "./components/FeedBackForm";
 import { ScrolContext } from "./context/scrolContext";
 import { FeedbackFormContext } from "./context/FeedBackFormContext";
 import { useScrollPosition } from "./Utils/ScrollValues";
-import Dashboard from "./pages/DashBoard";
 import { LoginFormContext, LoginStatus } from "./context/LoginFormContext";
 import LoginForm from "./components/LoginForm";
 import {
   DashBoardContext,
   DashBoardDataContext,
 } from "./context/DashBoardContext";
-import DashBordWindow from "./components/DashBoardWindow";
-import getUserLocation from "./Utils/GetUserLocation";
-import useUserLocation from "./Utils/GetUserLocation";
+import DashboardScreen from "./pages/DashboardScreen";
+import getUserLocation from "./utils/GetUserLocation";
 
 function App() {
   const [visibleSection, setVisibleSection] = useState({
@@ -185,6 +183,23 @@ function App() {
     }
   }, [loginStatus]);
 
+  // Track visitor location (skipped for the admin). Lives here (always
+  // mounted) rather than inside the dashboard, since the dashboard is now
+  // a full-screen view that isn't mounted unless it's open.
+  useEffect(() => {
+    const userId = localStorage.getItem("portfolioUserId");
+
+    if (userId !== "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
+      const timer = setTimeout(() => {
+        getUserLocation().catch((error) => {
+          console.error("Error getting location:", error);
+        });
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   return (
     <LoginFormContext.Provider value={{ loginFormOpen, setLoginFormOpen }}>
       <DashBoardContext.Provider value={{ dashboardOpen, setDashboardOpen }}>
@@ -195,46 +210,47 @@ function App() {
             value={{ feedbackFormOpen, setFeedbackFormOpen }}
           >
             <LoginStatus.Provider value={{ loginStatus, setLoginStatus }}>
-              <div className="relative overflow-x-hidden">
-                <Theme.Provider value={{ theme, setTheme }}>
-                  <ScrolContext.Provider
-                    value={{ scrolEnable, setScrollEnable }}
-                  >
-                    <HeadingContext.Provider
-                      value={{ visibleSection, setVisibleSection }}
+              <Theme.Provider value={{ theme, setTheme }}>
+                {dashboardOpen ? (
+                  <DashboardScreen />
+                ) : (
+                  <div className="relative overflow-x-hidden">
+                    <ScrolContext.Provider
+                      value={{ scrolEnable, setScrollEnable }}
                     >
-                      <div id="navBar">
-                        <TheNaveBar />
-                      </div>
-                      <div ref={introRef} id={sectionIDS.home.sectionId}>
-                        <Indroduction />
-                      </div>
-                      <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
-                        <AboutMe />
-                      </div>
-                      <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
-                        <SKills />
-                      </div>
-                      <div ref={projectRef} id={sectionIDS.projects.sectionId}>
-                        <Projects />
-                      </div>
-                      <div ref={resumeRef} id={sectionIDS.resume.sectionId}>
-                        <Resume />
-                      </div>
-                      <div ref={contactRef} id={sectionIDS.contact.sectionId}>
-                        <Contact />
-                      </div>
-                      <Footer />
-                      <ThemeBtn />
-                      <FeedBackForm />
-                      <LoginForm />
-                      <div className="relative overflow-hidden">
-                        <DashBordWindow />
-                      </div>
-                    </HeadingContext.Provider>
-                  </ScrolContext.Provider>
-                </Theme.Provider>
-              </div>
+                      <HeadingContext.Provider
+                        value={{ visibleSection, setVisibleSection }}
+                      >
+                        <div id="navBar">
+                          <TheNaveBar />
+                        </div>
+                        <div ref={introRef} id={sectionIDS.home.sectionId}>
+                          <Indroduction />
+                        </div>
+                        <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
+                          <AboutMe />
+                        </div>
+                        <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
+                          <SKills />
+                        </div>
+                        <div ref={projectRef} id={sectionIDS.projects.sectionId}>
+                          <Projects />
+                        </div>
+                        <div ref={resumeRef} id={sectionIDS.resume.sectionId}>
+                          <Resume />
+                        </div>
+                        <div ref={contactRef} id={sectionIDS.contact.sectionId}>
+                          <Contact />
+                        </div>
+                        <Footer />
+                        <ThemeBtn />
+                        <FeedBackForm />
+                        <LoginForm />
+                      </HeadingContext.Provider>
+                    </ScrolContext.Provider>
+                  </div>
+                )}
+              </Theme.Provider>
             </LoginStatus.Provider>
           </FeedbackFormContext.Provider>
         </DashBoardDataContext.Provider>

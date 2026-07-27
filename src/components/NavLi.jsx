@@ -1,42 +1,28 @@
-import { useContext, useEffect, useState } from "react";
-import { HeadingContext } from "../context/HeadingContext";
+import { motion } from "framer-motion";
 
-function NavLi({ name, onClick, id, children }) {
-  const { visibleSection, setVisibleSection } = useContext(HeadingContext);
-
-  // if(visibleSection){
-  //   setActiveLi(null)
-  // }
-
-  const [showLine, setShowLine] = useState(false);
-
-  useEffect(() => {
-    if (visibleSection.navLiId === id) {
-      setShowLine(true); // Show the line after 100ms
-    } else {
-      setShowLine(false); // Hide the line immediately if not active or visible
-    }
-  }, [visibleSection]); // Re-run effect on activeLi, visibleSection, or id change
-
+function NavLi({ label, isActive, compact, onClick }) {
   return (
-    <li className="group w-full sm:w-fit h-10 flex flex-col items-center justify-center" id={id}>
+    <li className="relative">
       <a
         href="#"
         onClick={onClick}
-        className={`flex flex-col justify-center items-center text-xs md:text-sm font-medium sm:font-bold transition-transform duration-300
-          ${showLine ? "text-accent" : "dark:text-[#565F64]"}
-          hover:sm:text-accent dark:hover:sm:text-accent hover:sm:-translate-y-0.5`}>
-            
-        {children && children}
-        <p className={`${showLine? "hidden sm:block":""} sm:font-bold sm:dark:text-dark-textHead dark:text-[#565F64]`}>{name}</p>
-        
-      </a>
-
-      <div
-        className={`h-1 bg-accent transition-all duration-500 hidden sm:block ${
-          showLine ? "w-full" : "w-0"
+        className={`relative z-10 block whitespace-nowrap rounded-full font-semibold tracking-wide transition-all duration-300 hover:-translate-y-0.5 ${
+          compact ? "px-3.5 py-1.5 text-sm" : "px-4 py-2 text-[15px]"
+        } ${
+          isActive
+            ? "text-white"
+            : "text-hero-muted hover:bg-white/[0.06] hover:text-hero-text"
         }`}
-      ></div>
+      >
+        {label}
+      </a>
+      {isActive && (
+        <motion.span
+          layoutId="navActivePill"
+          transition={{ type: "spring", stiffness: 380, damping: 32 }}
+          className="absolute inset-0 -z-0 rounded-full bg-gradient-to-r from-hero-primary to-hero-secondary shadow-[0_0_18px_-2px_rgba(99,102,241,0.7)]"
+        ></motion.span>
+      )}
     </li>
   );
 }

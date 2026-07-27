@@ -7,7 +7,7 @@ import { IconButton } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkIcon from "@mui/icons-material/Link";
 import FeedbackIcon from "@mui/icons-material/Feedback";
-import EmailIcon from '@mui/icons-material/Email';
+import EmailIcon from "@mui/icons-material/Email";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { NumberFormatter } from "../utils/Formatter";
 import GetAppIcon from "@mui/icons-material/GetApp";
@@ -18,7 +18,6 @@ import {
 } from "../context/DashBoardContext";
 
 function Dashboard({ className = "", flex }) {
-
   const feedBackData = UseFetchCollection("feedback");
   const messageDataLength = UseFetchCollection("messages").length;
   const feedBackLength = feedBackData.length;
@@ -29,11 +28,10 @@ function Dashboard({ className = "", flex }) {
     url: 0,
     views: 0,
     downloads: 0,
-    feedbacks:0,
-    messages:0,
+    feedbacks: 0,
+    messages: 0,
   });
   const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
-
 
   const dashbordDetails = UseFetchCollection("dashboard");
   const {
@@ -43,34 +41,38 @@ function Dashboard({ className = "", flex }) {
     downloads = 0,
   } = dashbordDetails[0] || {}; // Handle the case where dashbordDetails is empty
 
-
   // Update dashboard data in context when fetched
   useEffect(() => {
     if (dashbordDetails.length > 0) {
-      setDashboardData({...dashbordDetails[0],feedbacks:feedBackLength,messages:messageDataLength});
+      setDashboardData({
+        ...dashbordDetails[0],
+        feedbacks: feedBackLength,
+        messages: messageDataLength,
+      });
     }
-  }, [dashbordDetails, setDashboardData,feedBackLength,messageDataLength]);
-
+  }, [dashbordDetails, setDashboardData, feedBackLength, messageDataLength]);
 
   // Calculate badge values based on localStorage
   const preDashbordDetails = UseFetchCollection("dashboardPreData");
   useEffect(() => {
     // const storedData = JSON.parse(localStorage.getItem("dashBoardData")) || [];
     // const localData = storedData || {}; // Ensure the structure is consist
-    const data = preDashbordDetails[0] || ""
+    const data = preDashbordDetails[0] || "";
     setDashboardBadge({
       whatsapp: whatsapp - data.whatsapp,
       url: url - data.url,
       views: views - data.views,
       downloads: downloads - data.downloads,
       feedbacks: feedBackLength - data.feedbacks,
-      messages: messageDataLength - data.messages
+      messages: messageDataLength - data.messages,
     });
-  }, [whatsapp, url, views, downloads,feedBackLength,messageDataLength]); // Use individual dependencies for clarity
+  }, [whatsapp, url, views, downloads, feedBackLength, messageDataLength]); // Use individual dependencies for clarity
   // Reusable Stats Component
   function Stats({ icon, count, title, dif, style }) {
     return (
-      <div className={`flex justify-center items-center shadow-lg relative ${style}`}>
+      <div
+        className={`flex justify-center items-center shadow-lg relative ${style}`}
+      >
         <Tooltip title={title}>
           <div className="flex bg-[#0b1f35] dark:bg-white h-7 dark:bg-opacity-5 bg-opacity-40 rounded overflow-hidden items-center justify-center">
             <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40 dark:bg-opacity-80">
@@ -90,10 +92,9 @@ function Dashboard({ className = "", flex }) {
         </Tooltip>
         {dif > 0 && (
           <div className="absolute -top-3 -right-2 w-5 h-5 flex items-center justify-center bg-green-600 rounded-full p-1">
-          <p className="text-[12px] text-white">{dif}</p>
-        </div>
+            <p className="text-[12px] text-white">{dif}</p>
+          </div>
         )}
-        
       </div>
     );
   }
@@ -131,7 +132,6 @@ function Dashboard({ className = "", flex }) {
           count={feedBackLength}
           title="Feedbacks"
           dif={dashboardBadge.feedbacks}
-         
         />
         <Stats
           icon={<GetAppIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}

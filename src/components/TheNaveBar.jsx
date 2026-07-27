@@ -1,28 +1,41 @@
-import { useContext, useEffect, useLayoutEffect, useRef } from "react";
+import { useContext, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import NavLi from "./NavLi";
+import CtaButton from "./Buttons/CtaButton";
+import SocialButton from "./SocialButton";
 import sectionIDS from "../data/SectionIDS";
+import { SocialLinks } from "../data/SocialLinks";
+import { FadeIn } from "../varients/varientAnim";
 import { HeadingContext } from "../context/HeadingContext";
-import { useState } from "react";
-import { motion } from "framer-motion";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import logo from "../images/logo.png"
-import { faHouse,faIdBadge, faUserGear, faFileCode, faSheetPlastic, faAddressBook } from '@fortawesome/free-solid-svg-icons'
 import { ScrolContext } from "../context/scrolContext";
+
+import HomeIcon from "@mui/icons-material/Home";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import FolderOpenIcon from "@mui/icons-material/FolderOpen";
+import DescriptionIcon from "@mui/icons-material/Description";
+import EmailIcon from "@mui/icons-material/Email";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+
+const navItems = [
+  { label: "Home", icon: HomeIcon, ...sectionIDS.home },
+  { label: "About", icon: PersonOutlineIcon, ...sectionIDS.aboutME },
+  { label: "Skills", icon: AutoAwesomeIcon, ...sectionIDS.skills },
+  { label: "Projects", icon: FolderOpenIcon, ...sectionIDS.projects },
+  { label: "Resume", icon: DescriptionIcon, ...sectionIDS.resume },
+  { label: "Contact", icon: EmailIcon, ...sectionIDS.contact },
+];
+
+const navSocials = SocialLinks.filter((social) =>
+  ["GitHub", "LinkedIn", "Email"].includes(social.name),
+);
 
 function TheNaveBar() {
   const { visibleSection, setVisibleSection } = useContext(HeadingContext);
-
-  const [dimensions, setDimensions] = useState({
-    width: 0,
-    x: 0,
-    preX: 0,
-    left: 0,
-  });
-
-  const {scrolEnable, setScrollEnable } = useContext(ScrolContext)
+  const { setScrollEnable } = useContext(ScrolContext);
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScrollShadow = () => setIsScrolled(window.scrollY > 12);
@@ -31,191 +44,215 @@ function TheNaveBar() {
     return () => window.removeEventListener("scroll", handleScrollShadow);
   }, []);
 
-  // useLayoutEffect(() => {
-  //   if (activeLi || visibleSection) {
-
-  //     // console.log(document.getElementById(activeLi))
-  //     //   const rect = document
-  //     //     .getElementById(sectionID.home)
-  //     //     .getBoundingClientRect();
-  //     //   const actWidth = Math.floor(rect.width);
-  //     //   setDimensions({
-  //     //     width: actWidth,
-  //     //     x: e.clientX,
-  //     //     preX: dimensions.left,
-  //     //     left: rect.left,
-  //     //   });
-
-  //   }
-  // }, [activeLi, visibleSection]); // Re-run effect on activeLi, visibleSection, or id change
-
-  useLayoutEffect(() => {
-      const el = document.getElementById(visibleSection.navLiId);
-      const rectDefault = el.getBoundingClientRect();
-      const actWidth = Math.floor(rectDefault.width);
-    setDimensions({
-      width: actWidth,
-      x: rectDefault.x,
-      preX: rectDefault.x, // Set preX to match the initial x position
-      left: rectDefault.left,
-    });
-    
-  }, [visibleSection.navLiId]);
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   const handleClick = (e, navId, secId) => {
     e.preventDefault();
-
-    setScrollEnable(false)
-
-    setVisibleSection((pre) => ({
-      sectionId:secId,
-      navLiId: navId,
-    })); // Update the active section
-
+    e.currentTarget.blur();
+    setScrollEnable(false);
+    setVisibleSection({ sectionId: secId, navLiId: navId });
+    setMobileOpen(false);
   };
-
-
-  useEffect(() => {
-    const handleResize = () => {
-      const el = document.getElementById(visibleSection.navLiId);
-      if (el) { // Check if the element exists
-        const rectDefault = el.getBoundingClientRect();
-        const actWidth = Math.floor(rectDefault.width);
-        setDimensions({
-          width: actWidth,
-          x: rectDefault.x,
-          preX: rectDefault.x, // Set preX to match the initial x position
-          left: rectDefault.left,
-        });
-      }
-    };
-  
-    window.addEventListener("resize", handleResize);
-    handleResize(); // Call initially to set dimensions based on current size
-  
-    return () => {
-      window.removeEventListener("resize", handleResize); // Correct cleanup
-    };
-  }, [visibleSection.navLiId]);
-  
-
-  // useEffect(() => {
-  //   setActiveLi(visibleSection);
-  // }, [visibleSection]);
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 px-2 pt-2 sm:px-3 sm:pt-3">
       <div
-        className={`bg-white/80 dark:bg-dark-primary/70 backdrop-blur-xl border border-black/5 dark:border-white/10 rounded-b-2xl sm:rounded-2xl overflow-hidden transition-shadow duration-300 ${
-          isScrolled ? "shadow-lg shadow-black/10 dark:shadow-black/30" : ""
+        className={`mx-auto max-w-[1400px] overflow-hidden border border-white/10 bg-hero-bg/90 backdrop-blur-md dark:backdrop-blur-2xl transition-all duration-300 dark:bg-hero-bg/75 ${
+          isScrolled
+            ? "rounded-b-2xl shadow-xl shadow-black/40 sm:rounded-[20px]"
+            : "rounded-b-2xl shadow-md shadow-black/20 sm:rounded-[24px]"
         }`}
       >
-      <div className=" py-1 sm:px-4 md:px-10 flex items-center gap-4 relative">
-        <div className="hidden sm:flex items-center gap-1 lg:gap-4 flex-1">
-          <p className="text-textHead dark:text-dark-textHead text-xl font-black sm:text-lg lg:text-2xl">
-            Web
-            <span className="text-accent text-xl font-black lg:text-2xl sm:text-lg">
-              Developer
-            </span>
-          </p>
-          <img src={logo} alt="" className="lg:w-14 w-12" />
-        </div>
-
-        <div className="flex gap-6 items-center w-full sm:w-fit">
-          <ul className="flex items-end sm:gap-3 lg:gap-4 text-textHead text-sm font-bold w-full justify-around">
-            <NavLi
-              name="Home"
-              onClick={(e) => handleClick(e, sectionIDS.home.navId,sectionIDS.home.sectionId)}
-              id={sectionIDS.home.navId}
-            >
-              <span className="sm:hidden">
-               
-              <FontAwesomeIcon icon={faHouse} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.home.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
-
-              </span>
-            </NavLi>
-            <NavLi
-              name="About Me"
-              onClick={(e) => handleClick(e, sectionIDS.aboutME.navId,sectionIDS.aboutME.sectionId)}
-              id={sectionIDS.aboutME.navId}
-            >
-              <span className="sm:hidden">
-                   
-                <FontAwesomeIcon icon={faIdBadge} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.aboutME.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
-              </span>
-            </NavLi>
-            <NavLi
-              name="Skills"
-              onClick={(e) => handleClick(e, sectionIDS.skills.navId,sectionIDS.skills.sectionId)}
-              id={sectionIDS.skills.navId}
-            >
-              <span className="sm:hidden">
-               
-                <FontAwesomeIcon icon={faUserGear} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.skills.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
-              </span>
-            </NavLi>
-            <NavLi
-              name="Projects"
-              onClick={(e) => handleClick(e, sectionIDS.projects.navId,sectionIDS.projects.sectionId)}
-              id={sectionIDS.projects.navId}
-            >
-              <span className="sm:hidden">
-                
-                <FontAwesomeIcon icon={faFileCode} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.projects.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
-              </span>
-            </NavLi>
-            <NavLi
-              name="Resume"
-              onClick={(e) => handleClick(e, sectionIDS.resume.navId,sectionIDS.resume.sectionId)}
-              id={sectionIDS.resume.navId}
-            >
-              <span className="sm:hidden">
-                
-                <FontAwesomeIcon icon={faSheetPlastic} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.resume.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
-              </span>
-            </NavLi>
-            <NavLi
-              name="Contact"
-              onClick={(e) => handleClick(e, sectionIDS.contact.navId,sectionIDS.contact.sectionId)}
-              id={sectionIDS.contact.navId}
-            >
-              <span className="sm:hidden">
-               
-                <FontAwesomeIcon icon={faAddressBook} className={`transition-all duration-200 ${visibleSection.navLiId === sectionIDS.contact.navId ? "w-7 h-7" : "w-5 h-5"}`}/>
-              </span>
-            </NavLi>
-          </ul>
+        <div
+          className={`flex items-center justify-between gap-4 px-3 transition-all duration-300 sm:px-5 lg:px-7 ${
+            isScrolled ? "py-2" : "py-2.5 sm:py-3"
+          }`}
+        >
+          {/* logo */}
           <motion.a
-            href="https://github.com/sivaneshkkf?tab=repositories"
-            target="blank"
-            className="hidden sm:flex w-9 h-9 lg:w-11 lg:h-11 items-center justify-center rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 backdrop-blur-md text-accent transition-colors duration-300 hover:bg-accent hover:text-white hover:border-accent"
-            whileHover={{ scale: 1.12 }}
-            whileTap={{ scale: 0.95 }}
+            href="#"
+            onClick={(e) =>
+              handleClick(e, sectionIDS.home.navId, sectionIDS.home.sectionId)
+            }
+            whileHover="hover"
+            initial="rest"
+            className="group flex items-center gap-2.5 sm:gap-3"
           >
-              <svg
-                className="w-5 h-5 lg:w-6 lg:h-6"
-                xmlns="http://www.w3.org/2000/svg"
-                width="2em"
-                height="2em"
-                viewBox="0 0 15 15"
+            <span className="relative flex h-9 w-9 shrink-0 items-center justify-center sm:h-10 sm:w-10">
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 rounded-xl bg-gradient-to-br from-hero-primary to-hero-secondary opacity-60 blur-md transition-opacity duration-300 group-hover:opacity-90"
+              ></span>
+              <motion.span
+                variants={{
+                  rest: { rotate: 0, scale: 1 },
+                  hover: { rotate: -8, scale: 1.06 },
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="relative flex h-full w-full items-center justify-center rounded-xl bg-gradient-to-br from-hero-primary to-hero-secondary font-manrope text-base font-extrabold text-white shadow-lg shadow-hero-primary/30 sm:text-lg"
               >
-                <path
-                  fill="currentColor"
-                  fillRule="evenodd"
-                  d="M7.5.25a7.25 7.25 0 0 0-2.292 14.13c.363.066.495-.158.495-.35c0-.172-.006-.628-.01-1.233c-2.016.438-2.442-.972-2.442-.972c-.33-.838-.805-1.06-.805-1.06c-.658-.45.05-.441.05-.441c.728.051 1.11.747 1.11.747c.647 1.108 1.697.788 2.11.602c.066-.468.254-.788.46-.969c-1.61-.183-3.302-.805-3.302-3.583a2.8 2.8 0 0 1 .747-1.945c-.075-.184-.324-.92.07-1.92c0 0 .61-.194 1.994.744A7 7 0 0 1 7.5 3.756A7 7 0 0 1 9.315 4c1.384-.938 1.992-.743 1.992-.743c.396.998.147 1.735.072 1.919c.465.507.745 1.153.745 1.945c0 2.785-1.695 3.398-3.31 3.577c.26.224.492.667.492 1.343c0 .97-.009 1.751-.009 1.989c0 .194.131.42.499.349A7.25 7.25 0 0 0 7.499.25"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+                S
+              </motion.span>
+            </span>
+            <span className="flex flex-col leading-none">
+              <span className="font-manrope text-lg font-extrabold text-hero-text sm:text-xl">
+                Sivanesh
+              </span>
+              <span className="hidden text-[10px] font-semibold uppercase tracking-widest text-hero-muted sm:block">
+                Full Stack Developer
+              </span>
+            </span>
           </motion.a>
+
+          {/* desktop nav */}
+          <ul className="relative hidden items-center gap-1 md:flex">
+            {navItems.map((item) => (
+              <NavLi
+                key={item.navId}
+                label={item.label}
+                isActive={visibleSection.navLiId === item.navId}
+                onClick={(e) => handleClick(e, item.navId, item.sectionId)}
+              />
+            ))}
+          </ul>
+
+          {/* desktop right side */}
+          <div className="hidden items-center gap-2.5 md:flex lg:gap-3">
+            {/* {navSocials.map((social, index) => (
+              <SocialButton
+                key={social.name}
+                href={social.href}
+                label={social.name}
+                icon={<social.icon fontSize="small" />}
+                brand={social.brand}
+                brandDark={social.brandDark}
+                delay={0.05 * index}
+                surface="dark"
+              />
+            ))} */}
+            <CtaButton
+              as="button"
+              type="button"
+              variant="primary"
+              onClick={(e) =>
+                handleClick(
+                  e,
+                  sectionIDS.contact.navId,
+                  sectionIDS.contact.sectionId,
+                )
+              }
+              icon={<ArrowOutwardIcon sx={{ fontSize: 16 }} />}
+              className="!rounded-full !px-5 !py-2.5 !text-sm"
+            >
+              Let&apos;s Talk
+            </CtaButton>
+          </div>
+
+          {/* mobile hamburger */}
+          <button
+            type="button"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((prev) => !prev)}
+            className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-hero-text transition-colors duration-300 hover:bg-white/10 md:hidden"
+          >
+            <motion.span
+              className="absolute h-0.5 w-5 rounded-full bg-current"
+              animate={mobileOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -6 }}
+              transition={{ duration: 0.3 }}
+            ></motion.span>
+            <motion.span
+              className="absolute h-0.5 w-5 rounded-full bg-current"
+              animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            ></motion.span>
+            <motion.span
+              className="absolute h-0.5 w-5 rounded-full bg-current"
+              animate={mobileOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 6 }}
+              transition={{ duration: 0.3 }}
+            ></motion.span>
+          </button>
         </div>
-      </div>
-      <motion.div
-        className="sm:hidden absolute h-1 bg-accent bottom-0 left-0"
-        style={{ width: `${dimensions.width}px` }}
-        initial={{ x: dimensions.preX }} // Start from the previous x position
-        animate={{ x: dimensions.left }} // Animate to the current x position
-        transition={{ duration: 0.5 }} // Optional: Add smooth animation timing
-      ></motion.div>
+
+        {/* mobile drawer */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0, transition: { duration: 0.001 } }}
+              transition={{ duration: 0.35, ease: [0.25, 0.25, 0.25, 0.75] }}
+              className="overflow-hidden border-t border-white/10 md:hidden"
+            >
+              <div className="flex flex-col gap-1.5 px-4 py-4">
+                {navItems.map((item, index) => {
+                  const Icon = item.icon;
+                  const active = visibleSection.navLiId === item.navId;
+                  return (
+                    <motion.a
+                      key={item.navId}
+                      href="#"
+                      onClick={(e) =>
+                        handleClick(e, item.navId, item.sectionId)
+                      }
+                      variants={FadeIn("up", 0.04 * index, 0)}
+                      initial="hidden"
+                      animate="show"
+                      className={`flex items-center gap-3 rounded-2xl px-4 py-3.5 text-base font-semibold transition-colors duration-300 ${
+                        active
+                          ? "bg-gradient-to-r from-hero-primary/20 to-hero-secondary/20 text-hero-text"
+                          : "text-hero-muted hover:bg-white/5 hover:text-hero-text"
+                      }`}
+                    >
+                      <Icon
+                        fontSize="small"
+                        className={active ? "text-hero-accent" : ""}
+                      />
+                      {item.label}
+                    </motion.a>
+                  );
+                })}
+
+                <div className="mt-2 flex items-center gap-3 border-t border-white/10 pt-4">
+                  {navSocials.map((social, index) => (
+                    <SocialButton
+                      key={social.name}
+                      href={social.href}
+                      label={social.name}
+                      icon={<social.icon fontSize="small" />}
+                      brand={social.brand}
+                      brandDark={social.brandDark}
+                      delay={0.05 * index}
+                      surface="dark"
+                    />
+                  ))}
+                </div>
+
+                <CtaButton
+                  as="button"
+                  type="button"
+                  variant="primary"
+                  onClick={(e) =>
+                    handleClick(
+                      e,
+                      sectionIDS.contact.navId,
+                      sectionIDS.contact.sectionId,
+                    )
+                  }
+                  icon={<ArrowOutwardIcon sx={{ fontSize: 16 }} />}
+                  className="!mt-3 !w-full !rounded-full !py-3.5 !text-sm"
+                >
+                  Let&apos;s Talk
+                </CtaButton>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

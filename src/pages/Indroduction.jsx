@@ -1,12 +1,7 @@
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { FadeIn } from "../varients/varientAnim";
-import sivaneshImg from "../images/sivaneshDP.webp";
+import sivaneshImg from "../images/sivaneshDP.jpg";
 import CVdownloadBtn from "../components/Buttons/CVdowloadBtn";
 import CtaButton from "../components/Buttons/CtaButton";
 import SocialIconBtn from "../components/SocialIconBtn";
@@ -85,7 +80,7 @@ function Indroduction() {
         responseType: "blob",
         onDownloadProgress: (progressEvent) => {
           const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
+            (progressEvent.loaded * 100) / progressEvent.total,
           );
           setProgressValue(percentCompleted); // Update actual progress
         },
@@ -153,15 +148,18 @@ function Indroduction() {
       onMouseLeave={() => setPopupState(false)}
     >
       {/* decorative background */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-hero-bg via-hero-bg2 to-hero-bg3"></div>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#020617] via-[#1e1650] to-[#031321]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_65%_at_15%_0%,rgba(59,130,246,0.55),transparent)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_60%_at_100%_25%,rgba(139,92,246,0.5),transparent)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_20%_100%,rgba(6,182,212,0.35),transparent)]"></div>
         <div className="absolute inset-0 bg-grid-pattern"></div>
-        <div className="absolute -top-32 -left-24 w-[26rem] h-[26rem] rounded-full bg-hero-primary/25 blur-[110px] animate-blob"></div>
-        <div className="absolute top-1/3 -right-24 w-[24rem] h-[24rem] rounded-full bg-hero-secondary/25 blur-[110px] animate-blobSlow"></div>
-        <div className="absolute bottom-0 left-1/4 w-[20rem] h-[20rem] rounded-full bg-hero-accent/15 blur-[100px] animate-blob"></div>
-        <span className="hidden sm:block absolute top-[20%] left-[8%] text-hero-muted/[0.08] text-6xl font-mono select-none animate-float">{"</>"}</span>
-        <span className="hidden sm:block absolute bottom-[24%] right-[10%] text-hero-muted/[0.08] text-5xl font-mono select-none animate-float-slow">{"{ }"}</span>
-        <span className="hidden sm:block absolute top-[62%] left-[46%] text-hero-muted/[0.08] text-4xl font-mono select-none animate-float">;</span>
+        <div className="absolute -top-32 -left-24 w-[30rem] h-[30rem] rounded-full bg-hero-primary/40 blur-[120px] animate-blob"></div>
+        <div className="absolute top-1/3 -right-24 w-[28rem] h-[28rem] rounded-full bg-hero-secondary/40 blur-[120px] animate-blobSlow"></div>
+        <div className="absolute bottom-0 left-1/4 w-[24rem] h-[24rem] rounded-full bg-hero-accent/30 blur-[110px] animate-blob"></div>
       </div>
 
       <div className="mx-auto max-w-7xl px-5 sm:px-10 md:px-14 lg:px-20">
@@ -221,14 +219,15 @@ function Indroduction() {
 
             <p className="mx-auto lg:mx-0 max-w-[600px] text-sm sm:text-base leading-relaxed text-hero-muted">
               I am a passionate web developer and self-learner, skilled in
-              building responsive and user-friendly websites. With expertise
-              in <span className="font-semibold text-hero-accent">HTML</span>,{" "}
+              building responsive and user-friendly websites. With expertise in{" "}
+              <span className="font-semibold text-hero-accent">HTML</span>,{" "}
               <span className="font-semibold text-hero-primary">CSS</span>,{" "}
               <span className="font-semibold text-hero-secondary">
                 JavaScript
               </span>
-              , and <span className="font-semibold text-hero-accent">React</span>,
-              I focus on creating seamless digital experiences. Explore my
+              , and{" "}
+              <span className="font-semibold text-hero-accent">React</span>, I
+              focus on creating seamless digital experiences. Explore my
               portfolio to see my latest work!
             </p>
 
@@ -396,27 +395,6 @@ function Indroduction() {
                 </motion.div>
               </div>
             </div>
-
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-6 max-w-lg mx-auto lg:mx-0">
-              <StatCard
-                icon={<VisibilityIcon fontSize="small" />}
-                value={NumberFormatter(views)}
-                label="Profile Views"
-                delay={0.2}
-              />
-              <StatCard
-                icon={<WhatsAppIcon fontSize="small" />}
-                value={NumberFormatter(whatsapp)}
-                label="WhatsApp Shares"
-                delay={0.3}
-              />
-              <StatCard
-                icon={<GetAppIcon fontSize="small" />}
-                value={NumberFormatter(downloads)}
-                label="Downloads"
-                delay={0.4}
-              />
-            </div>
           </motion.div>
 
           {/* right column - profile card */}
@@ -457,7 +435,11 @@ function Indroduction() {
                   transformStyle: "preserve-3d",
                 }}
                 animate={{ y: [0, -14, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
                 className="relative rounded-3xl p-[2px] bg-gradient-to-br from-hero-primary via-hero-secondary to-hero-accent shadow-2xl shadow-black/40"
               >
                 <div className="rounded-3xl bg-hero-bg2 p-3">
@@ -469,6 +451,26 @@ function Indroduction() {
               </motion.div>
             </motion.div>
           </div>
+        </div>
+        <div className="flex flex-wrap items-stretch justify-center gap-2.5 pt-6 sm:gap-3">
+          <StatCard
+            icon={<VisibilityIcon fontSize="small" />}
+            value={NumberFormatter(views)}
+            label="Profile Views"
+            delay={0.2}
+          />
+          <StatCard
+            icon={<WhatsAppIcon fontSize="small" />}
+            value={NumberFormatter(whatsapp)}
+            label="WhatsApp Shares"
+            delay={0.3}
+          />
+          <StatCard
+            icon={<GetAppIcon fontSize="small" />}
+            value={NumberFormatter(downloads)}
+            label="Downloads"
+            delay={0.4}
+          />
         </div>
       </div>
 

@@ -1,19 +1,22 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useContext, useState, useEffect } from "react";
-import emojiThumb from "../images/emojiThump.png";
-import FeedbackInput from "./FeedBackInput";
+import ContactInput from "./ContactInput";
 import BtnForm from "./Buttons/BtnForm";
+import ConfettiBurst from "./ConfettiBurst";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { logInFirebase } from "../firebase/config";
 import { LoginFormContext, LoginStatus } from "../context/LoginFormContext";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 function LoginForm() {
   const { loginFormOpen, setLoginFormOpen } = useContext(LoginFormContext);
   const { loginStatus, setLoginStatus } = useContext(LoginStatus);
   const [loginError, setLoginError] = useState(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const userId = localStorage.getItem("portfolioUserId");
@@ -72,9 +75,12 @@ function LoginForm() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
     reset, // Add reset here
   } = useForm({ resolver: zodResolver(schemaValidation) });
+
+  const watchedValues = watch();
 
   return (
     <div
@@ -95,7 +101,7 @@ function LoginForm() {
         transition={{ duration: 0.4, type: "spring" }}
       >
         <div className={`w-full flex flex-col items-center ${loginStatus ? "hidden" : "flex"} ${showMessage.success ? "!hidden" : ""}`}>
-          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-[#7c0446] text-white shadow-lg shadow-accent/30 mb-4">
+          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-hero-primary to-hero-secondary text-white shadow-lg shadow-hero-primary/30 mb-4">
             <LockRoundedIcon fontSize="small" />
           </span>
           <h4 className="text-center text-textHead dark:text-white font-bold text-lg">
@@ -118,40 +124,41 @@ function LoginForm() {
           <form
             action="submit"
             name="feedBackForm"
+            noValidate
             className={`w-full space-y-4 pt-6 ${
               loginStatus ? "hidden" : "block"
             }`}
             onSubmit={handleSubmit(sentFormData)}
           >
-            <FeedbackInput
+            <ContactInput
               lable="Email address"
-              placeholder="you@example.com"
               id="loginEmail"
               type="email"
+              icon={<AlternateEmailIcon fontSize="small" />}
               register={register("loginEmail")}
               error={errors.loginEmail}
-              className="!py-3 !px-4 !rounded-xl !text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 transition-shadow duration-200"
+              success={!errors.loginEmail && !!watchedValues.loginEmail}
             />
-            <FeedbackInput
+            <ContactInput
               lable="Password"
-              placeholder="••••••••"
               id="password"
               type="password"
+              icon={<LockRoundedIcon fontSize="small" />}
               register={register("password")}
               error={errors.password}
-              className="!py-3 !px-4 !rounded-xl !text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 transition-shadow duration-200"
+              success={!errors.password && !!watchedValues.password}
             />
             <div className="pt-2">
               <BtnForm
                 text="LOGIN"
                 loading={showMessage.loading && true}
-                className="!rounded-xl !py-3 !text-sm shadow-lg shadow-accent/30 hover:brightness-110 transition-all duration-200"
+                className="!rounded-xl !py-3 !text-sm"
               />
             </div>
           </form>
 
           <div className={`${loginStatus ? "block" : "hidden"}`}>
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-[#7c0446] text-white shadow-lg shadow-accent/30 mb-4 mx-auto">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-hero-primary to-hero-secondary text-white shadow-lg shadow-hero-primary/30 mb-4 mx-auto">
               <LockRoundedIcon fontSize="small" />
             </span>
             <p className="text-sm text-center text-textHead dark:text-dark-textHead font-medium mb-5">
@@ -180,39 +187,48 @@ function LoginForm() {
         </div>
 
         <div
-          className={`flex flex-col items-center mt-2 justify-center ${
-            showMessage.success ? "block" : "hidden"
+          className={`relative flex w-full flex-col items-center justify-center px-2 py-2 text-center ${
+            showMessage.success ? "flex" : "hidden"
           }`}
         >
-          <span className="relative flex items-center justify-center">
-            <span className="absolute inset-0 rounded-full bg-hero-success/20 blur-xl scale-150"></span>
-            <motion.span
-              className="relative"
-              animate={showMessage.success ? { scale: [0, 1] } : { scale: 0 }}
-              transition={{
-                duration: 0.8,
-                type: "spring",
-              }}
-            >
-              <img src={emojiThumb} alt="thump" className="w-20 h-20" />
-            </motion.span>
-          </span>
-          <motion.p
-            className={`text-center w-full text-textHead dark:text-white mt-5 font-semibold text-sm`}
-            animate={showMessage.success && { y: [200, 0] }}
+          {!prefersReducedMotion && <ConfettiBurst count={12} />}
+
+          <motion.span
+            initial={{ scale: 0 }}
+            animate={showMessage.success ? { scale: 1 } : { scale: 0 }}
+            transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.1 }}
+            className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-hero-success/30 to-hero-primary/20 text-hero-success shadow-[0_0_30px_-6px_rgba(34,197,94,0.6)]"
           >
-            Login successful
-          </motion.p>
+            <CheckCircleIcon sx={{ fontSize: 38 }} />
+          </motion.span>
+
+          <motion.h4
+            className="mt-5 font-manrope text-xl font-extrabold text-textHead dark:text-dark-textHead"
+            animate={showMessage.success && { y: [16, 0], opacity: [0, 1] }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+          >
+            🎉 Login Successful!
+          </motion.h4>
           <motion.p
-            className="text-center w-full text-textpara dark:text-dark-textpara mt-1 text-xs"
-            animate={showMessage.success && { y: [200, 0] }}
+            className="mt-1 text-xs text-textpara dark:text-dark-textpara"
+            animate={showMessage.success && { y: [16, 0], opacity: [0, 1] }}
+            transition={{ delay: 0.3, duration: 0.4 }}
           >
             Redirecting you to the dashboard...
           </motion.p>
+
+          <div className="mt-4 h-1 w-32 overflow-hidden rounded-full bg-secondary dark:bg-dark-secondary">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-hero-primary to-hero-secondary"
+              initial={{ width: "0%" }}
+              animate={showMessage.success ? { width: "100%" } : { width: "0%" }}
+              transition={{ duration: 3, ease: "linear" }}
+            ></motion.div>
+          </div>
         </div>
 
         <span
-          className={`p-2 cursor-pointer text-textpara dark:text-dark-textpara hover:text-accent absolute top-3 right-3 rounded-full hover:bg-secondary dark:hover:bg-dark-secondary transition-colors duration-200 ${
+          className={`p-2 cursor-pointer text-textpara dark:text-dark-textpara hover:text-hero-primary absolute top-3 right-3 rounded-full hover:bg-secondary dark:hover:bg-dark-secondary transition-colors duration-200 ${
             loginStatus ? "hidden" : "block"
           }`}
           onClick={() => {

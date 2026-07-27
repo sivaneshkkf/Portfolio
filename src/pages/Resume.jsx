@@ -54,7 +54,7 @@ function Resume() {
         responseType: "blob",
         onDownloadProgress: (progressEvent) => {
           const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
+            (progressEvent.loaded * 100) / progressEvent.total,
           );
           setProgressValue(percentCompleted); // Update actual progress
         },
@@ -114,22 +114,19 @@ function Resume() {
 
   const totalProjects = ProjectData.length + MobileAppData.length;
   const currentRole = getRoleTitle(JobExperience[0].title);
-  const careerPath = [...JobExperience].reverse().map((j) => getRoleTitle(j.title));
+  const careerPath = [...JobExperience]
+    .reverse()
+    .map((j) => getRoleTitle(j.title));
 
   return (
-    <div className="relative overflow-hidden bg-primary dark:bg-dark-secondary py-20 sm:py-28 lg:py-36 px-5">
+    <div className="relative overflow-hidden bg-primary dark:bg-gradient-to-b dark:from-hero-bg2 dark:via-hero-bg dark:to-[#020617] py-20 sm:py-28 lg:py-36 px-5">
       {/* decorative background */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        <div className="absolute inset-0 bg-grid-pattern opacity-60"></div>
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-hero-primary/10 blur-[100px]"></div>
-        <div className="absolute top-1/2 -left-24 w-96 h-96 rounded-full bg-hero-secondary/10 blur-[100px]"></div>
-        <div className="absolute bottom-0 right-1/3 w-80 h-80 rounded-full bg-hero-accent/10 blur-[90px]"></div>
-        <span className="hidden sm:block absolute top-[10%] left-[6%] text-hero-primary/10 text-6xl font-mono select-none">
-          {"</>"}
-        </span>
+        <div className="absolute top-1/2 -right-24 -translate-y-1/2 w-96 h-96 rounded-full bg-hero-primary/10 dark:bg-hero-primary/25 blur-[200px] dark:animate-blobSlow"></div>
+        <div className="absolute top-1/4 -left-24 -translate-y-1/2 w-96 h-96 rounded-full bg-hero-secondary/10 dark:bg-hero-secondary/25 blur-[200px] dark:animate-blob"></div>
       </div>
 
       <div className="mx-auto max-w-7xl">
@@ -148,7 +145,10 @@ function Resume() {
             </span>
           </motion.div>
 
-          <TheHeading heading="CAREER JOURNEY" id={sectionIDS.resume.sectionId} />
+          <TheHeading
+            heading="CAREER JOURNEY"
+            id={sectionIDS.resume.sectionId}
+          />
 
           <motion.h2
             variants={FadeIn("up", 0.2, 0)}
@@ -301,7 +301,11 @@ function Resume() {
               </h3>
               <div className="flex flex-col gap-3">
                 {EducationData.map((edu, index) => (
-                  <EducationCard key={edu.title} edu={edu} delay={index * 0.1} />
+                  <EducationCard
+                    key={edu.title}
+                    edu={edu}
+                    delay={index * 0.1}
+                  />
                 ))}
               </div>
             </div>

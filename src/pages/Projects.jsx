@@ -9,24 +9,15 @@ import MobileAppsLi from "../components/MobileAppsLI";
 import { FadeIn } from "../varients/varientAnim";
 
 function Projects() {
-
   return (
-    <div className="relative overflow-hidden bg-primary dark:bg-dark-secondary py-20 sm:py-28 lg:py-36 px-5">
+    <div className="relative overflow-hidden bg-primary dark:bg-gradient-to-b dark:from-[#020617] dark:via-hero-bg dark:to-hero-bg2 py-20 sm:py-28 lg:py-36 px-5">
       {/* decorative background */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        <div className="absolute inset-0 bg-grid-pattern opacity-60"></div>
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-hero-primary/10 blur-[100px]"></div>
-        <div className="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-hero-secondary/10 blur-[100px]"></div>
-        <div className="absolute bottom-0 left-1/3 w-80 h-80 rounded-full bg-hero-accent/10 blur-[90px]"></div>
-        <span className="hidden sm:block absolute top-[10%] right-[6%] text-hero-primary/10 text-6xl font-mono select-none">
-          {"</>"}
-        </span>
-        <span className="hidden sm:block absolute bottom-[16%] left-[8%] text-hero-secondary/10 text-5xl font-mono select-none">
-          {"{ }"}
-        </span>
+        <div className="absolute top-1/4 -left-24 -translate-y-1/2 w-96 h-96 rounded-full bg-hero-primary/10 dark:bg-hero-primary/25 blur-[200px] dark:animate-blob"></div>
+        <div className="absolute top-1/2 -right-24 -translate-y-1/2 w-96 h-96 rounded-full bg-hero-secondary/10 dark:bg-hero-secondary/25 blur-[200px] dark:animate-blobSlow"></div>
       </div>
 
       <div className="mx-auto max-w-7xl">
@@ -45,7 +36,10 @@ function Projects() {
             </span>
           </motion.div>
 
-          <TheHeading heading="FEATURED PROJECTS" id={sectionIDS.projects.sectionId} />
+          <TheHeading
+            heading="FEATURED PROJECTS"
+            id={sectionIDS.projects.sectionId}
+          />
 
           <motion.h2
             variants={FadeIn("up", 0.2, 0)}
@@ -68,8 +62,7 @@ function Projects() {
             className="mt-4 text-sm sm:text-base text-textpara dark:text-dark-textpara"
           >
             A collection of full-stack applications demonstrating clean
-            architecture, responsive design, and scalable development
-            practices.
+            architecture, responsive design, and scalable development practices.
           </motion.p>
         </div>
 
@@ -110,7 +103,7 @@ function Projects() {
         ))}
       </div>
       <div className="px-10 mt-20 sm:mt-24">
-        <BreakLine/>
+        <BreakLine />
       </div>
     </div>
   );
