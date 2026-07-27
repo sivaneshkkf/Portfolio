@@ -7,7 +7,7 @@ function LearningChip({ name, svg, delay = 0 }) {
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
       whileHover={{ y: -4 }}
       className="relative flex min-w-[120px] flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-black/10 dark:border-white/15 bg-white/50 dark:bg-white/5 px-5 py-4 transition-colors duration-300 hover:border-hero-primary/50"
     >

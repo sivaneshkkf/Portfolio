@@ -8,7 +8,7 @@ function SocialIconBtn({ href, label, delay = 0, children }) {
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
     >
       <Tooltip title={label} arrow>
         <motion.a

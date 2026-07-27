@@ -96,7 +96,7 @@ function KpiCard({ icon, label, value, delta, delay = 0, color = "blue" }) {
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
       whileHover={{ y: -5 }}
       className={`group relative overflow-hidden rounded-[20px] border border-black/5 bg-white/70 p-5 backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-white/5 ${theme.glow}`}
     >

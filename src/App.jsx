@@ -214,7 +214,7 @@ function App() {
                 {dashboardOpen ? (
                   <DashboardScreen />
                 ) : (
-                  <div className="relative overflow-x-hidden">
+                  <div className="relative">
                     <ScrolContext.Provider
                       value={{ scrolEnable, setScrollEnable }}
                     >

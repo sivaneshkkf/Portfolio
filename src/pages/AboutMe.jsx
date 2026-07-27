@@ -37,7 +37,7 @@ function AboutMe() {
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="inline-flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-4 py-1.5 mb-4"
           >
             <span className="text-sm">👋</span>
@@ -52,7 +52,7 @@ function AboutMe() {
             variants={FadeIn("up", 0.2, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="mt-4 font-manrope text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-textHead dark:text-dark-textHead"
           >
             Crafting Modern{" "}
@@ -65,7 +65,7 @@ function AboutMe() {
             variants={FadeIn("up", 0.3, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="mt-4 text-sm sm:text-base text-textpara dark:text-dark-textpara"
           >
             Passionate about building scalable, user-friendly, and
@@ -79,7 +79,7 @@ function AboutMe() {
             variants={FadeIn("left", 0.3, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             whileHover={{ y: -4 }}
             className="rounded-[20px] border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md shadow-sm hover:shadow-xl transition-all duration-500 p-8 sm:p-10 max-w-[650px] mx-auto lg:mx-0"
           >
@@ -103,7 +103,7 @@ function AboutMe() {
             variants={FadeIn("right", 0.3, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="relative flex justify-center"
           >
             <div
@@ -146,7 +146,7 @@ function AboutMe() {
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="text-center font-manrope text-2xl sm:text-3xl font-bold text-textHead dark:text-dark-textHead mb-12 sm:mb-16"
           >
             My Journey
@@ -160,7 +160,7 @@ function AboutMe() {
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="text-center font-manrope text-xl sm:text-2xl font-bold text-textHead dark:text-dark-textHead mb-8"
           >
             Technologies I Work With
@@ -211,7 +211,7 @@ function AboutMe() {
           variants={FadeIn("up", 0.2, 0)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
           className="mt-20 sm:mt-24 max-w-3xl mx-auto rounded-3xl p-[1.5px] bg-gradient-to-r from-hero-primary via-hero-secondary to-hero-accent"
         >
           <div className="rounded-3xl bg-white/90 dark:bg-dark-primary/90 backdrop-blur-md px-8 sm:px-12 py-10 text-center">

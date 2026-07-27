@@ -27,7 +27,7 @@ function Projects() {
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="inline-flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-4 py-1.5 mb-4"
           >
             <span className="text-sm">🚀</span>
@@ -45,7 +45,7 @@ function Projects() {
             variants={FadeIn("up", 0.2, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="mt-4 font-manrope text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-textHead dark:text-dark-textHead"
           >
             Things{" "}
@@ -58,7 +58,7 @@ function Projects() {
             variants={FadeIn("up", 0.3, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="mt-4 text-sm sm:text-base text-textpara dark:text-dark-textpara"
           >
             A collection of full-stack applications demonstrating clean

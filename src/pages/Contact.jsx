@@ -118,7 +118,7 @@ function Contact() {
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="inline-flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-4 py-1.5 mb-4"
           >
             <span className="text-sm">📩</span>
@@ -136,7 +136,7 @@ function Contact() {
             variants={FadeIn("up", 0.2, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="mt-4 font-manrope text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-textHead dark:text-dark-textHead"
           >
             Let&apos;s Build Something{" "}
@@ -149,7 +149,7 @@ function Contact() {
             variants={FadeIn("up", 0.3, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="mt-4 text-sm sm:text-base text-textpara dark:text-dark-textpara"
           >
             I&apos;m always open to discussing full-time opportunities,
@@ -166,7 +166,7 @@ function Contact() {
               variants={FadeIn("left", 0.2, 0)}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
               whileHover={{ y: -4 }}
               className="rounded-[24px] p-[1.5px] bg-gradient-to-br from-hero-primary/40 via-hero-secondary/30 to-hero-accent/30 shadow-xl shadow-black/5 transition-shadow duration-500 hover:shadow-2xl"
             >
@@ -204,7 +204,7 @@ function Contact() {
               variants={FadeIn("up", 0.3, 0)}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
               className="flex items-center gap-3 rounded-2xl border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-5 py-4"
             >
               <span className="relative flex h-3 w-3 shrink-0">
@@ -266,7 +266,7 @@ function Contact() {
             variants={FadeIn("right", 0.2, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="lg:col-span-3 rounded-[24px] border border-black/5 dark:border-white/10 bg-white/80 dark:bg-white/[0.04] backdrop-blur-xl shadow-xl shadow-black/5 p-7 sm:p-10"
           >
             <form
@@ -346,7 +346,7 @@ function Contact() {
           variants={FadeIn("up", 0.2, 0)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
           className="mt-16 sm:mt-20 rounded-3xl p-[1.5px] bg-gradient-to-r from-hero-primary via-hero-secondary to-hero-accent"
         >
           <div className="rounded-3xl bg-white/90 dark:bg-dark-primary/90 backdrop-blur-md px-8 sm:px-12 py-10 text-center">

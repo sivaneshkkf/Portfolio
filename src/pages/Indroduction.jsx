@@ -170,14 +170,14 @@ function Indroduction() {
             variants={FadeIn("up", 0.4, 0)}
             initial="hidden"
             whileInView={"show"}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
           >
             <motion.div
               className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md"
               variants={FadeIn("up", 0.2, 0)}
               initial="hidden"
               whileInView={"show"}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-hero-success opacity-75"></span>
@@ -385,7 +385,7 @@ function Indroduction() {
                   variants={FadeIn("up", 0.6, 0)}
                   initial="hidden"
                   whileInView={"show"}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
                   className="relative"
                 >
                   <PopupShareBtn
@@ -409,7 +409,7 @@ function Indroduction() {
               variants={FadeIn("up", 0.6, 0)}
               initial="hidden"
               whileInView={"show"}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             >
               <div
                 aria-hidden="true"
