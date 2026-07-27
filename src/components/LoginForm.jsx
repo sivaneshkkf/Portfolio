@@ -1,20 +1,14 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useContext, useState, useEffect } from "react";
-import emoji from "../images/emoji.png";
 import emojiThumb from "../images/emojiThump.png";
 import FeedbackInput from "./FeedBackInput";
 import BtnForm from "./Buttons/BtnForm";
-import { FeedbackFormContext } from "../context/FeedBackFormContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import {
-  AddFeedBack,
-  logInFirebase,
-  UseFetchCollection,
-} from "../firebase/config";
+import { logInFirebase } from "../firebase/config";
 import { LoginFormContext, LoginStatus } from "../context/LoginFormContext";
-import { LocalParking } from "@mui/icons-material";
+import LockRoundedIcon from "@mui/icons-material/LockRounded";
 
 function LoginForm() {
   const { loginFormOpen, setLoginFormOpen } = useContext(LoginFormContext);
@@ -27,15 +21,6 @@ function LoginForm() {
       setLoginStatus(true);
     }
   }, []);
-
-  // Check localStorage on mount to determine initial open state
-  // useEffect(() => {
-  //     const isFirstVisit = localStorage.getItem("feedbackFormOpened");
-  //     if (!isFirstVisit) {
-  //         setFeedbackFormOpen({ open: true, once: true });
-  //         localStorage.setItem("feedbackFormOpened", "true");
-  //     }
-  // }, [setFeedbackFormOpen]);
 
   const schemaValidation = z.object({
     loginEmail: z.string().email(),
@@ -93,60 +78,90 @@ function LoginForm() {
 
   return (
     <div
-      className={`fixed w-full h-screen flex justify-center items-center inset-0 z-50 dark:bg-white dark:bg-opacity-20 bg-black bg-opacity-20 overflow-y-scroll ${
-        loginFormOpen ? "block" : "hidden"
+      className={`fixed w-full h-screen flex justify-center items-center inset-0 z-50 bg-black/50 backdrop-blur-sm overflow-y-scroll transition-opacity duration-300 ${
+        loginFormOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
+      onClick={(e) => {
+        if (e.target === e.currentTarget && !loginStatus) {
+          setLoginFormOpen(false);
+          setShowMessage({ loading: false, success: false });
+          setLoginError(null);
+        }
+      }}
     >
       <motion.div
-        className="p-8 rounded-lg bg-primary dark:bg-dark-primary flex flex-col items-center justify-center w-[30rem] m-2 relative overflow-hidden"
-        animate={loginFormOpen ? { y: [300, 0] } : { y: 300 }}
-        transition={{ duration: 0.5, type: "spring" }}
+        className="p-8 sm:p-10 rounded-3xl bg-primary dark:bg-dark-primary shadow-2xl shadow-black/30 border border-black/5 dark:border-white/10 flex flex-col items-center justify-center w-[26rem] max-w-[92vw] m-2 relative overflow-hidden"
+        animate={loginFormOpen ? { y: [40, 0], opacity: [0, 1] } : { y: 40, opacity: 0 }}
+        transition={{ duration: 0.4, type: "spring" }}
       >
-        <div className={`w-full ${loginStatus ? "hidden" : "block"}`}>
-          <h4 className="text-center text-textHead dark:text-white font-semibold mb-2">
-            Login
+        <div className={`w-full flex flex-col items-center ${loginStatus ? "hidden" : "flex"} ${showMessage.success ? "!hidden" : ""}`}>
+          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-[#7c0446] text-white shadow-lg shadow-accent/30 mb-4">
+            <LockRoundedIcon fontSize="small" />
+          </span>
+          <h4 className="text-center text-textHead dark:text-white font-bold text-lg">
+            Welcome back
           </h4>
-          <div className="w-full h-[1px] bg-dark-icon"></div>
+          <p className="text-center text-xs text-textpara dark:text-dark-textpara mt-1">
+            Sign in to access the admin dashboard
+          </p>
         </div>
-        <div>
-          <p className="text-xs text-red-600 mt-2">{loginError}</p>
-        </div>
+
+        {loginError && (
+          <div className="w-full mt-4 rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2">
+            <p className="text-xs text-red-500 font-medium">
+              Incorrect email or password. Please try again.
+            </p>
+          </div>
+        )}
+
         <div className={`w-full ${showMessage.success ? "hidden" : "block"}`}>
           <form
             action="submit"
             name="feedBackForm"
-            className={`w-full space-y-5  pt-5 ${
+            className={`w-full space-y-4 pt-6 ${
               loginStatus ? "hidden" : "block"
             }`}
             onSubmit={handleSubmit(sentFormData)}
           >
             <FeedbackInput
-              placeholder="Email"
+              lable="Email address"
+              placeholder="you@example.com"
               id="loginEmail"
               type="email"
               register={register("loginEmail")}
               error={errors.loginEmail}
+              className="!py-3 !px-4 !rounded-xl !text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 transition-shadow duration-200"
             />
             <FeedbackInput
-              placeholder="Password"
+              lable="Password"
+              placeholder="••••••••"
               id="password"
               type="password"
               register={register("password")}
               error={errors.password}
+              className="!py-3 !px-4 !rounded-xl !text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 transition-shadow duration-200"
             />
-            <BtnForm text="LOGIN" loading={showMessage.loading && true} />
+            <div className="pt-2">
+              <BtnForm
+                text="LOGIN"
+                loading={showMessage.loading && true}
+                className="!rounded-xl !py-3 !text-sm shadow-lg shadow-accent/30 hover:brightness-110 transition-all duration-200"
+              />
+            </div>
           </form>
 
-          <div
-            className={`${loginStatus ? "block" : "hidden"}`}
-          >
-            <p className="text-xs text-textHead dark:text-dark-textHead font-medium mb-5">
-              Are you sure you want to log out?
+          <div className={`${loginStatus ? "block" : "hidden"}`}>
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-[#7c0446] text-white shadow-lg shadow-accent/30 mb-4 mx-auto">
+              <LockRoundedIcon fontSize="small" />
+            </span>
+            <p className="text-sm text-center text-textHead dark:text-dark-textHead font-medium mb-5">
+              You’re currently signed in as admin. Log out?
             </p>
-            <div className="flex gap-3 ">
+            <div className="flex gap-3">
               <BtnForm
                 text="LOGOUT"
                 loading={showMessage.loading}
+                className="!rounded-xl !py-3 !text-sm"
                 onClick={() => {
                   localStorage.removeItem("portfolioUserId", ""); // Clear userID on logout
                   // Add any additional logout logic here
@@ -157,7 +172,7 @@ function LoginForm() {
               <BtnForm
                 text="CANCEL"
                 loading={showMessage.loading}
-                className="bg-gray-300 text-gray-600"
+                className="!rounded-xl !py-3 !text-sm !bg-secondary dark:!bg-dark-secondary !text-textHead dark:!text-dark-textHead"
                 onClick={() => setLoginFormOpen(false)} // Ensure this is a function
               />
             </div>
@@ -165,29 +180,39 @@ function LoginForm() {
         </div>
 
         <div
-          className={`flex flex-col items-center mt-4 justify-center ${
+          className={`flex flex-col items-center mt-2 justify-center ${
             showMessage.success ? "block" : "hidden"
           }`}
         >
-          <motion.span
-            animate={showMessage.success ? { scale: [0, 1] } : { scale: 0 }}
-            transition={{
-              duration: 0.8,
-              type: "spring",
-            }}
-          >
-            <img src={emojiThumb} alt="thump" className="w-20 h-20" />
-          </motion.span>
+          <span className="relative flex items-center justify-center">
+            <span className="absolute inset-0 rounded-full bg-hero-success/20 blur-xl scale-150"></span>
+            <motion.span
+              className="relative"
+              animate={showMessage.success ? { scale: [0, 1] } : { scale: 0 }}
+              transition={{
+                duration: 0.8,
+                type: "spring",
+              }}
+            >
+              <img src={emojiThumb} alt="thump" className="w-20 h-20" />
+            </motion.span>
+          </span>
           <motion.p
             className={`text-center w-full text-textHead dark:text-white mt-5 font-semibold text-sm`}
             animate={showMessage.success && { y: [200, 0] }}
           >
-            Login successfully
+            Login successful
+          </motion.p>
+          <motion.p
+            className="text-center w-full text-textpara dark:text-dark-textpara mt-1 text-xs"
+            animate={showMessage.success && { y: [200, 0] }}
+          >
+            Redirecting you to the dashboard...
           </motion.p>
         </div>
 
         <span
-          className={`text-lg p-3 cursor-pointer text-dark-textpara absolute top-1 right-1 ${
+          className={`p-2 cursor-pointer text-textpara dark:text-dark-textpara hover:text-accent absolute top-3 right-3 rounded-full hover:bg-secondary dark:hover:bg-dark-secondary transition-colors duration-200 ${
             loginStatus ? "hidden" : "block"
           }`}
           onClick={() => {

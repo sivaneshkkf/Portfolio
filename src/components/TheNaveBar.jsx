@@ -22,6 +22,15 @@ function TheNaveBar() {
 
   const {scrolEnable, setScrollEnable } = useContext(ScrolContext)
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScrollShadow = () => setIsScrolled(window.scrollY > 12);
+    handleScrollShadow();
+    window.addEventListener("scroll", handleScrollShadow);
+    return () => window.removeEventListener("scroll", handleScrollShadow);
+  }, []);
+
   // useLayoutEffect(() => {
   //   if (activeLi || visibleSection) {
 
@@ -95,7 +104,12 @@ function TheNaveBar() {
   // }, [visibleSection]);
 
   return (
-    <div className=" bg-white dark:bg-dark-primary fixed top-0 left-0 right-0 z-50 overflow-hidden">
+    <div className="fixed top-0 left-0 right-0 z-50 px-2 pt-2 sm:px-3 sm:pt-3">
+      <div
+        className={`bg-white/80 dark:bg-dark-primary/70 backdrop-blur-xl border border-black/5 dark:border-white/10 rounded-b-2xl sm:rounded-2xl overflow-hidden transition-shadow duration-300 ${
+          isScrolled ? "shadow-lg shadow-black/10 dark:shadow-black/30" : ""
+        }`}
+      >
       <div className=" py-1 sm:px-4 md:px-10 flex items-center gap-4 relative">
         <div className="hidden sm:flex items-center gap-1 lg:gap-4 flex-1">
           <p className="text-textHead dark:text-dark-textHead text-xl font-black sm:text-lg lg:text-2xl">
@@ -171,14 +185,15 @@ function TheNaveBar() {
               </span>
             </NavLi>
           </ul>
-          <a
+          <motion.a
             href="https://github.com/sivaneshkkf?tab=repositories"
             target="blank"
-            className="hidden sm:block"
+            className="hidden sm:flex w-9 h-9 lg:w-11 lg:h-11 items-center justify-center rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 backdrop-blur-md text-accent transition-colors duration-300 hover:bg-accent hover:text-white hover:border-accent"
+            whileHover={{ scale: 1.12 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span className="text-accent">
               <svg
-                className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
+                className="w-5 h-5 lg:w-6 lg:h-6"
                 xmlns="http://www.w3.org/2000/svg"
                 width="2em"
                 height="2em"
@@ -191,11 +206,9 @@ function TheNaveBar() {
                   clipRule="evenodd"
                 ></path>
               </svg>
-            </span>
-          </a>
+          </motion.a>
         </div>
       </div>
-      <div className="w-full h-[2px] bg-gradient1 blur-[2px]"></div>
       <motion.div
         className="sm:hidden absolute h-1 bg-accent bottom-0 left-0"
         style={{ width: `${dimensions.width}px` }}
@@ -203,6 +216,7 @@ function TheNaveBar() {
         animate={{ x: dimensions.left }} // Animate to the current x position
         transition={{ duration: 0.5 }} // Optional: Add smooth animation timing
       ></motion.div>
+      </div>
     </div>
   );
 }

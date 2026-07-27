@@ -1,132 +1,175 @@
 import { motion } from "framer-motion";
 import { FadeIn } from "../varients/varientAnim";
-import GlowCircle from "./GlowCircle";
+import TechPill from "./TechPill";
+import CtaButton from "./Buttons/CtaButton";
+import LaunchRoundedIcon from "@mui/icons-material/LaunchRounded";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
-function ProjectLi({ name, disc, img, techs, bg, link, ghLink }) {
+const STATUS_STYLES = {
+  Featured: "bg-gradient-to-r from-hero-primary to-hero-secondary text-white",
+  Completed: "bg-hero-success text-white",
+  "In Progress": "bg-gradient-to-r from-amber-500 to-orange-500 text-white",
+  "Production Ready": "bg-gradient-to-r from-hero-primary to-hero-accent text-white",
+  "Open Source": "bg-gradient-to-r from-hero-accent to-hero-secondary text-white",
+};
+
+const METADATA_ICONS = {
+  Responsive: "📱",
+  "Fast Performance": "⚡",
+  Authentication: "🔒",
+  "Cloud Ready": "☁️",
+  "Dark Mode": "🌙",
+  Dashboard: "📊",
+};
+
+function ProjectLi({
+  name,
+  disc,
+  img,
+  techs,
+  link,
+  ghLink,
+  tagline,
+  status,
+  featured,
+  metadata = [],
+  delay = 0,
+}) {
   return (
-    // <li className="bg-white shadow-cardShadow sm:p-4 p-3 flex flex-col justify-between rounded-lg">
-    //   <a href="#" className="flex flex-col h-full">
-    //     <div className="flex-grow">
-    //       <img
-    //         src={img}
-    //         alt="Music Player"
-    //         className="w-full object-cover rounded"
-    //       />
-    //     </div>
-    //     <div className="flex-grow">
-    //       <h4 className="text-accent lg:text-lg text-sm font-semibold">{name}</h4>
-    //       <p className="text-textpara sm:text-xs text-[10px] mt-2">{disc}</p>
-    //     </div>
-    //     <div className="mt-4 flex sm:items-center items-end justify-between">
-    //       <ul className="flex flex-wrap md:gap-2 gap-1">
-    //         {techs.map((li, index) => {
-    //           return (
-    //             <li className="md:py-1 md:px-2 py-[2px] px-1 border-2 bg-primary md:text-xs text-[10px] font-semibold text-textHead rounded" key={index}>
-    //               {li}
-    //             </li>
-    //           );
-    //         })}
-
-    //       </ul>
-    //       <span className="text-accent">
-    //         <svg
-    //           className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
-    //           xmlns="http://www.w3.org/2000/svg"
-    //           width="2em"
-    //           height="2em"
-    //           viewBox="0 0 15 15"
-    //         >
-    //           <path
-    //             fill="currentColor"
-    //             fillRule="evenodd"
-    //             d="M7.5.25a7.25 7.25 0 0 0-2.292 14.13c.363.066.495-.158.495-.35c0-.172-.006-.628-.01-1.233c-2.016.438-2.442-.972-2.442-.972c-.33-.838-.805-1.06-.805-1.06c-.658-.45.05-.441.05-.441c.728.051 1.11.747 1.11.747c.647 1.108 1.697.788 2.11.602c.066-.468.254-.788.46-.969c-1.61-.183-3.302-.805-3.302-3.583a2.8 2.8 0 0 1 .747-1.945c-.075-.184-.324-.92.07-1.92c0 0 .61-.194 1.994.744A7 7 0 0 1 7.5 3.756A7 7 0 0 1 9.315 4c1.384-.938 1.992-.743 1.992-.743c.396.998.147 1.735.072 1.919c.465.507.745 1.153.745 1.945c0 2.785-1.695 3.398-3.31 3.577c.26.224.492.667.492 1.343c0 .97-.009 1.751-.009 1.989c0 .194.131.42.499.349A7.25 7.25 0 0 0 7.499.25"
-    //             clipRule="evenodd"
-    //           ></path>
-    //         </svg>
-    //       </span>
-    //     </div>
-    //   </a>
-    // </li>
-
     <motion.li
-      className="bg-white group shadow-cardShadow flex flex-col md:rounded-2xl rounded-xl overflow-hidden backdrop-blur-lg backdrop-saturate-0 bg-opacity-100 relative"
-      style={{ backgroundImage: `url(${bg})` }}
-      variants={FadeIn("up", 0.2)}
+      variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      whileInView={"show"}
-      viewport={{ once: false }}
+      whileInView="show"
+      viewport={{ once: true }}
+      whileHover={{ y: -6 }}
+      className={`group relative flex flex-col rounded-[22px] border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md shadow-sm transition-shadow duration-300 hover:shadow-2xl overflow-hidden ${
+        featured ? "lg:col-span-3 lg:flex-row" : ""
+      }`}
     >
-      {/* Blurred Background using an absolute div */}
-      <div
-        className="absolute -inset-10 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${bg})`,
-          filter: "blur(20px)", // This applies the blur
-          zIndex: -1,
-        }}
-      ></div>
+      {status && (
+        <span
+          className={`absolute top-3 right-3 z-10 rounded-full px-3 py-1 text-[10px] font-bold shadow-md ${
+            STATUS_STYLES[status] || "bg-hero-primary text-white"
+          }`}
+        >
+          {status}
+        </span>
+      )}
 
-       
-        <GlowCircle
-        className="group-hover:bottom-1/2 group-hover:opacity-100 group-hover:scale-100"
-        link={link}/>
-      
-        
-    
-
-      <div
-        className=" group flex flex-col h-full relative"
-      >
-        <div className="relative flex-1 flex justify-center items-center bg-cover bg-center transition-all duration-300 group-hover:scale-[1.02]">
-          {/* Main content */}
-          <img
-            src={img}
-            alt={name}
-            className="object-cover object-center relative"
-          />
+      {/* image with browser-window chrome */}
+      <div className={`relative flex flex-col ${featured ? "lg:w-1/2" : ""}`}>
+        <div className="flex items-center gap-1.5 px-4 py-2.5 bg-black/[0.04] dark:bg-white/5">
+          <span className="h-2.5 w-2.5 rounded-full bg-red-400"></span>
+          <span className="h-2.5 w-2.5 rounded-full bg-yellow-400"></span>
+          <span className="h-2.5 w-2.5 rounded-full bg-green-400"></span>
         </div>
 
-        {/* Content section */}
-        <div className="bottom-0 bg-white flex flex-col px-5 py-3 w-full h-full bg-blend-color-burn backdrop-blur-lg bg-opacity-[0.05]">
-          <div className="flex-grow">
-            <h4 className="text-accent lg:text-lg text-sm font-semibold">
-              {name}
-            </h4>
-            <p className="text-gray-200 dark:text-gray-400 sm:text-xs text-[10px] mt-2">
-              {disc}
-            </p>
-          </div>
-
-          <div className="mt-auto pt-5 flex sm:items-center items-end justify-between">
-            <ul className="flex flex-wrap md:gap-2 gap-1">
-              {techs.map((li, index) => (
-                <li
-                  className="md:py-1 md:px-2 py-[2px] px-1 border dark:border-gray-600 bg-primary dark:bg-dark-primary md:text-xs text-[10px] font-semibold text-textHead dark:text-dark-textHead rounded"
-                  key={index}
-                >
-                  {li}
-                </li>
-              ))}
-            </ul>
-            <div>
-              <a href={ghLink} className="text-icon" target="blank">
-                <svg
-                  className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="2em"
-                  height="2em"
-                  viewBox="0 0 15 15"
-                >
-                  <path
-                    fill="currentColor"
-                    fillRule="evenodd"
-                    d="M7.5.25a7.25 7.25 0 0 0-2.292 14.13c.363.066.495-.158.495-.35c0-.172-.006-.628-.01-1.233c-2.016.438-2.442-.972-2.442-.972c-.33-.838-.805-1.06-.805-1.06c-.658-.45.05-.441.05-.441c.728.051 1.11.747 1.11.747c.647 1.108 1.697.788 2.11.602c.066-.468.254-.788.46-.969c-1.61-.183-3.302-.805-3.302-3.583a2.8 2.8 0 0 1 .747-1.945c-.075-.184-.324-.92.07-1.92c0 0 .61-.194 1.994.744A7 7 0 0 1 7.5 3.756A7 7 0 0 1 9.315 4c1.384-.938 1.992-.743 1.992-.743c.396.998.147 1.735.072 1.919c.465.507.745 1.153.745 1.945c0 2.785-1.695 3.398-3.31 3.577c.26.224.492.667.492 1.343c0 .97-.009 1.751-.009 1.989c0 .194.131.42.499.349A7.25 7.25 0 0 0 7.499.25"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
+        <div className="relative flex-1 overflow-hidden">
+          <img
+            src={img}
+            alt={`${name} screenshot`}
+            loading="lazy"
+            className="h-full w-full min-h-[200px] lg:min-h-[280px] object-cover object-center transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 via-black/10 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div className="flex gap-2">
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${name} live demo`}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-hero-bg transition-transform duration-300 hover:scale-110"
+              >
+                <LaunchRoundedIcon fontSize="small" />
+              </a>
+              <a
+                href={ghLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${name} source code on GitHub`}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-hero-bg transition-transform duration-300 hover:scale-110"
+              >
+                <GitHubIcon fontSize="small" />
               </a>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* content */}
+      <div className={`flex flex-1 flex-col gap-3 p-5 sm:p-6 ${featured ? "lg:w-1/2" : ""}`}>
+        <div>
+          <h4 className="text-lg sm:text-xl font-bold text-textHead dark:text-dark-textHead">
+            {name}
+          </h4>
+          {tagline && (
+            <p className="mt-1 text-sm font-medium text-hero-primary">
+              {tagline}
+            </p>
+          )}
+        </div>
+
+        <p className="text-xs sm:text-sm text-textpara dark:text-dark-textpara line-clamp-3">
+          {disc}
+        </p>
+
+        <div className="flex flex-wrap gap-2">
+          {techs.map((tech) => (
+            <TechPill key={tech} name={tech} />
+          ))}
+        </div>
+
+        {metadata.length > 0 && (
+          <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-textpara dark:text-dark-textpara">
+            {metadata.map((tag) => (
+              <span key={tag}>
+                {METADATA_ICONS[tag] || "✓"} {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className="flex items-center gap-3 text-[11px] text-textpara dark:text-dark-textpara border-t border-black/5 dark:border-white/10 pt-3">
+          <span>🛠 {techs.length} Technologies</span>
+          <span>🌐 Live</span>
+          <span>📂 Open Source</span>
+        </div>
+
+        <div className="mt-auto flex flex-col sm:flex-row gap-3 pt-2">
+          {link ? (
+            <CtaButton
+              as="a"
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="primary"
+              icon={<LaunchRoundedIcon fontSize="small" />}
+              className="!px-4 !py-2.5 !text-xs !rounded-xl"
+            >
+              Live Demo
+            </CtaButton>
+          ) : (
+            <CtaButton
+              as="button"
+              type="button"
+              disabled
+              variant="primary"
+              className="!px-4 !py-2.5 !text-xs !rounded-xl opacity-50 cursor-not-allowed hover:!translate-y-0 hover:!shadow-lg"
+            >
+              Coming Soon
+            </CtaButton>
+          )}
+          <CtaButton
+            as="a"
+            href={ghLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="secondary"
+            icon={<GitHubIcon fontSize="small" />}
+            className="!px-4 !py-2.5 !text-xs !rounded-xl !text-textHead dark:!text-dark-textHead !bg-black/[0.03] dark:!bg-white/5 !border-black/10 dark:!border-white/15"
+          >
+            GitHub Repository
+          </CtaButton>
         </div>
       </div>
     </motion.li>

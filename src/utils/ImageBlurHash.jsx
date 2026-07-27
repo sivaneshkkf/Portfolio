@@ -33,7 +33,7 @@ function ImageBlurHash({ src, className }) {
   return (
     <>
       <div
-        className={`mx-auto md:rounded-3xl rounded-2xl shadow-2xl border-2 border-zinc-700 overflow-hidden ${imageLoaded ? "hidden" : ""}`}
+        className={`mx-auto rounded-2xl overflow-hidden ${imageLoaded ? "hidden" : ""}`}
         style={{ width: `${size.width}px`, height: `${size.height}px` }}
       >
         {!imageLoaded && (
