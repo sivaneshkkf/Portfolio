@@ -1,4 +1,3 @@
-import { div } from "framer-motion/client";
 import logo from "../images/logo.png";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
