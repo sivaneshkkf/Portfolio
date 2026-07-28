@@ -16,14 +16,12 @@ import { getAuth } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB9vzUQDF2NvK4tQfT6JN4WmGsv4ayzktg",
-  authDomain: "portfolio-fe47a.firebaseapp.com",
-  projectId: "portfolio-fe47a",
-  storageBucket: "portfolio-fe47a.firebasestorage.app",
-  messagingSenderId: "928609820800",
-  appId: "1:928609820800:web:e6b90ae4310d3731f80665",
-  databaseURL:
-    "https://console.firebase.google.com/u/0/project/portfolio-fe47a/database/portfolio-fe47a-default-rtdb/data/~2F",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
