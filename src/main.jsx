@@ -2,7 +2,9 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 
 import LoadingAnim from "./components/LoadingAnim.jsx";
-import React, { Suspense, useEffect, useState } from "react";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
+import App from "./App.jsx";
+import { useEffect, useState } from "react";
 import { ScreenSizeContext } from "./context/ScreenSizeContext.jsx";
 import { ScrollProvider } from "./utils/ScrollValues.jsx";
 
@@ -15,18 +17,45 @@ if (new URLSearchParams(window.location.search).has("debug")) {
   document.head.appendChild(script);
 }
 
-const LazyComponentApp = React.lazy(() => import("./App.jsx"));
+// Some iOS Safari/Chrome (WebKit) builds leave IntersectionObserver entries
+// stuck at their initial state after first paint -- scroll-triggered
+// (whileInView) animations across the site never fire, so sections stay at
+// opacity 0. Attaching Web Inspector "fixes" it because that forces a full
+// layout/style recalculation, which makes WebKit re-evaluate the observers.
+// We do the same thing programmatically shortly after mount and whenever
+// the page is restored from the back-forward cache, so users never have to
+// open dev tools for content to appear.
+function kickStaleObservers() {
+  // Force a synchronous reflow.
+  void document.body.offsetHeight;
+  window.dispatchEvent(new Event("resize"));
+  window.dispatchEvent(new Event("scroll"));
+}
 
-function AppWithDelay() {
-  const [showSuspense, setShowSuspense] = useState(false);
+function useIOSObserverWatchdog() {
+  useEffect(() => {
+    const timers = [300, 1000, 2000].map((delay) =>
+      setTimeout(kickStaleObservers, delay),
+    );
+    window.addEventListener("pageshow", kickStaleObservers);
+    return () => {
+      timers.forEach(clearTimeout);
+      window.removeEventListener("pageshow", kickStaleObservers);
+    };
+  }, []);
+}
+
+function AppShell() {
   const [ScreenSize, setScreenSize] = useState(getScreenWidth());
+  const [showLoader, setShowLoader] = useState(true);
+
+  useIOSObserverWatchdog();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSuspense(true); // Show Suspense after delay
-    }, 2000); // Adjust the delay (in milliseconds) as needed
-
-    return () => clearTimeout(timer); // Clear timer on component unmount
+    // Brief branded splash only; it no longer gates when the real app
+    // mounts, so a slow/failed transition can't leave the page blank.
+    const timer = setTimeout(() => setShowLoader(false), 900);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -40,14 +69,15 @@ function AppWithDelay() {
 
   return (
     <ScreenSizeContext.Provider value={{ ScreenSize, setScreenSize }}>
-      {showSuspense ? (
-        <Suspense fallback={<LoadingAnim />}>
-           <ScrollProvider>
-          <LazyComponentApp />
-          </ScrollProvider>
-        </Suspense>
-      ) : (
-        <LoadingAnim /> // Initial loading animation shown during delay
+      <ErrorBoundary>
+        <ScrollProvider>
+          <App />
+        </ScrollProvider>
+      </ErrorBoundary>
+      {showLoader && (
+        <div className="fixed inset-0 z-[999]">
+          <LoadingAnim />
+        </div>
       )}
     </ScreenSizeContext.Provider>
   );
@@ -67,4 +97,4 @@ function getScreenWidth() {
   }
 }
 
-createRoot(document.getElementById("root")).render(<AppWithDelay />);
+createRoot(document.getElementById("root")).render(<AppShell />);

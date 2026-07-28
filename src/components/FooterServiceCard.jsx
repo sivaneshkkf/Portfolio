@@ -7,7 +7,7 @@ function FooterServiceCard({ icon, title, delay = 0 }) {
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+      viewport={{ once: true, amount: 0 }}
       whileHover={{ y: -4 }}
       className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md px-4 py-3.5 transition-shadow duration-300 hover:shadow-[0_0_24px_-8px_rgba(59,130,246,0.5)]"
     >

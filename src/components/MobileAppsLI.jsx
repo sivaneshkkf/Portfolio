@@ -66,7 +66,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
         variants={FadeIn("up", 0.1, 0)}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+        viewport={{ once: true, amount: 0 }}
         className="inline-flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-4 py-1.5 mb-8 shadow-sm"
       >
         <span className="text-sm">⭐</span>
@@ -81,7 +81,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
           variants={FadeIn("left", 0.2, 0)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+          viewport={{ once: true, amount: 0 }}
           className="lg:col-span-2 relative flex items-center justify-center p-10"
           style={{ perspective: "1000px" }}
         >
@@ -144,7 +144,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
           variants={FadeIn("right", 0.2, 0)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+          viewport={{ once: true, amount: 0 }}
           className="lg:col-span-3 flex flex-col gap-6"
         >
           <div>
@@ -173,7 +173,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
                   variants={FadeIn("up", 0.1 + i * 0.05, 0)}
                   initial="hidden"
                   whileInView="show"
-                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+                  viewport={{ once: true, amount: 0 }}
                   whileHover={{ y: -3 }}
                   className="flex items-center gap-2.5 rounded-xl border border-black/5 dark:border-white/10 bg-white/60 dark:bg-white/5 px-3.5 py-2.5 transition-shadow duration-300 hover:shadow-md"
                 >

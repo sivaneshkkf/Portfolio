@@ -59,4 +59,22 @@ export default defineConfig({
   ],
   base: "/Portfolio/",
   assetsInclude: ["**/*.lottie"],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom"],
+          "vendor-motion": ["framer-motion"],
+          "vendor-mui": [
+            "@mui/material",
+            "@mui/icons-material",
+            "@emotion/react",
+            "@emotion/styled",
+          ],
+          "vendor-firebase": ["firebase/app", "firebase/firestore", "firebase/auth"],
+          "vendor-charts": ["recharts"],
+        },
+      },
+    },
+  },
 });

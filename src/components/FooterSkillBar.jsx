@@ -7,7 +7,7 @@ function FooterSkillBar({ svg, name, percent, delay = 0 }) {
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+      viewport={{ once: true, amount: 0 }}
     >
       <div className="mb-1.5 flex items-center justify-between gap-2">
         <span className="flex items-center gap-2 text-xs font-semibold text-hero-text">
@@ -26,7 +26,7 @@ function FooterSkillBar({ svg, name, percent, delay = 0 }) {
           className="h-full rounded-full bg-gradient-to-r from-hero-primary via-hero-secondary to-hero-accent"
           initial={{ width: 0 }}
           whileInView={{ width: `${percent}%` }}
-          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+          viewport={{ once: true, amount: 0 }}
           transition={{ duration: 1, delay: delay + 0.2, ease: "easeOut" }}
         ></motion.div>
       </div>

@@ -119,7 +119,7 @@ function Footer() {
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            viewport={{ once: true, amount: 0 }}
             className="sm:col-span-2 lg:col-span-1 rounded-[24px] border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-7 shadow-[0_0_40px_-15px_rgba(59,130,246,0.5)]"
           >
             <div className="flex items-center gap-3">
@@ -165,7 +165,7 @@ function Footer() {
                   variants={FadeIn("left", 0.05 * index, 0)}
                   initial="hidden"
                   whileInView="show"
-                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+                  viewport={{ once: true, amount: 0 }}
                   whileHover={{ x: 4 }}
                   className="group flex w-fit items-center gap-1.5 text-sm font-medium text-hero-muted transition-colors duration-300 hover:text-hero-text"
                 >
@@ -255,7 +255,7 @@ function Footer() {
           variants={FadeIn("up", 0.1, 0)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+          viewport={{ once: true, amount: 0 }}
           className="mx-auto mt-16 max-w-2xl rounded-3xl p-[1.5px] bg-gradient-to-r from-hero-primary via-hero-secondary to-hero-accent sm:mt-20"
         >
           <div className="rounded-3xl bg-hero-bg2/80 backdrop-blur-xl px-8 py-9 text-center">
@@ -278,7 +278,7 @@ function Footer() {
           variants={FadeIn("up", 0.1, 0)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+          viewport={{ once: true, amount: 0 }}
           className="mt-16 rounded-3xl border border-white/10 bg-gradient-to-r from-hero-primary/15 via-hero-secondary/15 to-hero-accent/15 px-8 py-10 text-center backdrop-blur-xl sm:mt-20"
         >
           <h3 className="font-manrope text-2xl font-extrabold text-hero-text sm:text-3xl">

@@ -33,7 +33,7 @@ function SocialButton({
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+      viewport={{ once: true, amount: 0 }}
     >
       <Tooltip title={label} arrow>
         <motion.a

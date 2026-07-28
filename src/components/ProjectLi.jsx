@@ -51,7 +51,7 @@ function ProjectLi({
       variants={CARD_ENTRANCE(delay)}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+      viewport={{ once: true, amount: 0 }}
       whileHover={{ y: -8, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
       className={`group relative motion-reduce:!transform-none h-full ${

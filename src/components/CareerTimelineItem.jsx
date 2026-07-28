@@ -8,7 +8,7 @@ function CareerTimelineItem({ job, meta, index }) {
       variants={FadeIn("up", index * 0.1, 0)}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+      viewport={{ once: true, amount: 0 }}
       className="relative lg:pl-14"
     >
       <span

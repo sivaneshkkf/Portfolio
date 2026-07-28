@@ -13,7 +13,7 @@ function LoadingAnim() {
 
   return (
     <div
-      className={`w-full h-screen flex justify-center items-center gap-4 ${
+      className={`w-full h-dvh flex justify-center items-center gap-4 ${
         theme === "light" ? "bg-primary" : "bg-dark-secondary"
       }`}
     >

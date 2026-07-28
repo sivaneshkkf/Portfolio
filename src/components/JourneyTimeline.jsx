@@ -272,7 +272,7 @@ function JourneyTimeline() {
                       : { opacity: 0, y: 35, x: 15, scale: 0.96 }
                   }
                   whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+                  viewport={{ once: true, amount: 0 }}
                   transition={{
                     duration: 0.6,
                     type: "spring",
