@@ -11,7 +11,6 @@ import SocialButton from "../components/SocialButton";
 import FooterSkillBar from "../components/FooterSkillBar";
 import FooterServiceCard from "../components/FooterServiceCard";
 import { FadeIn } from "../varients/varientAnim";
-import { useReveal } from "../hooks/useReveal";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
@@ -56,8 +55,6 @@ function Footer() {
   const { setVisibleSection } = useContext(HeadingContext);
   const { setScrollEnable } = useContext(ScrolContext);
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const brand = useReveal();
-  const quote = useReveal();
 
   useEffect(() => {
     const handleScroll = () => setShowBackToTop(window.scrollY > 500);
@@ -79,9 +76,9 @@ function Footer() {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-hero-bg to-hero-bg2"></div>
         <div className="absolute inset-0 bg-grid-pattern opacity-40"></div>
-        <div className="absolute -top-32 -left-20 h-[26rem] w-[26rem] rounded-full bg-hero-primary/20 blur-3xl animate-blob"></div>
-        <div className="absolute top-10 -right-24 h-[22rem] w-[22rem] rounded-full bg-hero-secondary/20 blur-3xl animate-blobSlow"></div>
-        <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-hero-accent/10 blur-3xl"></div>
+        <div className="absolute -top-32 -left-20 h-[26rem] w-[26rem] rounded-full bg-hero-primary/20 blur-[110px] animate-blob"></div>
+        <div className="absolute top-10 -right-24 h-[22rem] w-[22rem] rounded-full bg-hero-secondary/20 blur-[110px] animate-blobSlow"></div>
+        <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-hero-accent/10 blur-[100px]"></div>
 
         <span className="absolute top-[15%] left-[12%] h-1 w-1 rounded-full bg-hero-primary/60 animate-float"></span>
         <span className="absolute top-[40%] right-[18%] h-1.5 w-1.5 rounded-full bg-hero-secondary/50 animate-float-slow"></span>
@@ -119,10 +116,10 @@ function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
           {/* brand */}
           <motion.div
-            ref={brand.ref}
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
-            animate={brand.inView ? "show" : "hidden"}
+            whileInView="show"
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="sm:col-span-2 lg:col-span-1 rounded-[24px] border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-7 shadow-[0_0_40px_-15px_rgba(59,130,246,0.5)]"
           >
             <div className="flex items-center gap-3">
@@ -168,7 +165,7 @@ function Footer() {
                   variants={FadeIn("left", 0.05 * index, 0)}
                   initial="hidden"
                   whileInView="show"
-                  viewport={{ once: true, amount: 0 }}
+                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
                   whileHover={{ x: 4 }}
                   className="group flex w-fit items-center gap-1.5 text-sm font-medium text-hero-muted transition-colors duration-300 hover:text-hero-text"
                 >
@@ -255,10 +252,10 @@ function Footer() {
 
         {/* developer quote */}
         <motion.div
-          ref={quote.ref}
           variants={FadeIn("up", 0.1, 0)}
           initial="hidden"
-          animate={quote.inView ? "show" : "hidden"}
+          whileInView="show"
+          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
           className="mx-auto mt-16 max-w-2xl rounded-3xl p-[1.5px] bg-gradient-to-r from-hero-primary via-hero-secondary to-hero-accent sm:mt-20"
         >
           <div className="rounded-3xl bg-hero-bg2/80 backdrop-blur-xl px-8 py-9 text-center">
@@ -281,7 +278,7 @@ function Footer() {
           variants={FadeIn("up", 0.1, 0)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0 }}
+          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
           className="mt-16 rounded-3xl border border-white/10 bg-gradient-to-r from-hero-primary/15 via-hero-secondary/15 to-hero-accent/15 px-8 py-10 text-center backdrop-blur-xl sm:mt-20"
         >
           <h3 className="font-manrope text-2xl font-extrabold text-hero-text sm:text-3xl">

@@ -1,3 +1,4 @@
+import { div } from "framer-motion/client";
 import TheHeading from "../components/TheHeading";
 import { UseFetchCollection } from "../firebase/config";
 import Tooltip from "@mui/material/Tooltip";

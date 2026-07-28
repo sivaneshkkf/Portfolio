@@ -157,9 +157,9 @@ function Indroduction() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_60%_at_100%_25%,rgba(139,92,246,0.5),transparent)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_20%_100%,rgba(6,182,212,0.35),transparent)]"></div>
         <div className="absolute inset-0 bg-grid-pattern"></div>
-        <div className="absolute -top-32 -left-24 w-[30rem] h-[30rem] rounded-full bg-hero-primary/40 blur-3xl animate-blob"></div>
-        <div className="absolute top-1/3 -right-24 w-[28rem] h-[28rem] rounded-full bg-hero-secondary/40 blur-3xl animate-blobSlow"></div>
-        <div className="absolute bottom-0 left-1/4 w-[24rem] h-[24rem] rounded-full bg-hero-accent/30 blur-3xl animate-blob"></div>
+        <div className="absolute -top-32 -left-24 w-[30rem] h-[30rem] rounded-full bg-hero-primary/40 blur-[120px] animate-blob"></div>
+        <div className="absolute top-1/3 -right-24 w-[28rem] h-[28rem] rounded-full bg-hero-secondary/40 blur-[120px] animate-blobSlow"></div>
+        <div className="absolute bottom-0 left-1/4 w-[24rem] h-[24rem] rounded-full bg-hero-accent/30 blur-[110px] animate-blob"></div>
       </div>
 
       <div className="mx-auto max-w-7xl px-5 sm:px-10 md:px-14 lg:px-20">
@@ -169,13 +169,15 @@ function Indroduction() {
             className="flex-1 w-full max-w-2xl space-y-6 text-center lg:text-left"
             variants={FadeIn("up", 0.4, 0)}
             initial="hidden"
-            animate="show"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
           >
             <motion.div
               className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md"
               variants={FadeIn("up", 0.2, 0)}
               initial="hidden"
-              animate="show"
+              whileInView={"show"}
+              viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-hero-success opacity-75"></span>
@@ -382,7 +384,8 @@ function Indroduction() {
                 <motion.div
                   variants={FadeIn("up", 0.6, 0)}
                   initial="hidden"
-                  animate="show"
+                  whileInView={"show"}
+                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
                   className="relative"
                 >
                   <PopupShareBtn
@@ -405,7 +408,8 @@ function Indroduction() {
               className="relative"
               variants={FadeIn("up", 0.6, 0)}
               initial="hidden"
-              animate="show"
+              whileInView={"show"}
+              viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             >
               <div
                 aria-hidden="true"

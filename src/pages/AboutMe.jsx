@@ -9,7 +9,6 @@ import aboutImg from "../images/about.png";
 import skillsData from "../data/skillsData.json";
 import { ProjectData, MobileAppData } from "../data/ProjectData";
 import { FadeIn } from "../varients/varientAnim";
-import { useReveal } from "../hooks/useReveal";
 import SchoolIcon from "@mui/icons-material/School";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import MemoryIcon from "@mui/icons-material/Memory";
@@ -20,15 +19,6 @@ function AboutMe() {
   const totalProjects = ProjectData.length + MobileAppData.length;
   const totalTechnologies = skillsData.length;
 
-  const badge = useReveal();
-  const heading = useReveal();
-  const lead = useReveal();
-  const introText = useReveal();
-  const illustration = useReveal();
-  const journeyHeading = useReveal();
-  const techHeading = useReveal();
-  const quote = useReveal();
-
   return (
     <div className="relative overflow-hidden bg-primary dark:bg-gradient-to-b dark:from-[#020617] dark:via-hero-bg dark:to-hero-bg2 py-20 sm:py-28 lg:py-36 px-5">
       {/* decorative background */}
@@ -36,18 +26,18 @@ function AboutMe() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        <div className="absolute top-1/4 left-0 -translate-y-1/2 w-96 h-96 rounded-full bg-hero-primary/10 dark:bg-hero-primary/25 blur-3xl dark:animate-blob"></div>
-        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-96 h-96 rounded-full bg-hero-secondary/10 dark:bg-hero-secondary/25 blur-3xl dark:animate-blobSlow"></div>
+        <div className="absolute top-1/4 left-0 -translate-y-1/2 w-96 h-96 rounded-full bg-hero-primary/10 dark:bg-hero-primary/25 blur-[200px] dark:animate-blob"></div>
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-96 h-96 rounded-full bg-hero-secondary/10 dark:bg-hero-secondary/25 blur-[200px] dark:animate-blobSlow"></div>
       </div>
 
       <div className="mx-auto max-w-7xl">
         {/* section header */}
         <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
           <motion.div
-            ref={badge.ref}
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
-            animate={badge.inView ? "show" : "hidden"}
+            whileInView="show"
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="inline-flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-4 py-1.5 mb-4"
           >
             <span className="text-sm">👋</span>
@@ -59,10 +49,10 @@ function AboutMe() {
           <TheHeading heading="ABOUT ME" id={sectionIDS.aboutME.sectionId} />
 
           <motion.h2
-            ref={heading.ref}
             variants={FadeIn("up", 0.2, 0)}
             initial="hidden"
-            animate={heading.inView ? "show" : "hidden"}
+            whileInView="show"
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="mt-4 font-manrope text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-textHead dark:text-dark-textHead"
           >
             Crafting Modern{" "}
@@ -72,10 +62,10 @@ function AboutMe() {
           </motion.h2>
 
           <motion.p
-            ref={lead.ref}
             variants={FadeIn("up", 0.3, 0)}
             initial="hidden"
-            animate={lead.inView ? "show" : "hidden"}
+            whileInView="show"
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="mt-4 text-sm sm:text-base text-textpara dark:text-dark-textpara"
           >
             Passionate about building scalable, user-friendly, and
@@ -86,10 +76,10 @@ function AboutMe() {
         {/* intro + illustration */}
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div
-            ref={introText.ref}
             variants={FadeIn("left", 0.3, 0)}
             initial="hidden"
-            animate={introText.inView ? "show" : "hidden"}
+            whileInView="show"
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             whileHover={{ y: -4 }}
             className="rounded-[20px] border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md shadow-sm hover:shadow-xl transition-all duration-500 p-8 sm:p-10 max-w-[650px] mx-auto lg:mx-0"
           >
@@ -110,10 +100,10 @@ function AboutMe() {
           </motion.div>
 
           <motion.div
-            ref={illustration.ref}
             variants={FadeIn("right", 0.3, 0)}
             initial="hidden"
-            animate={illustration.inView ? "show" : "hidden"}
+            whileInView="show"
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="relative flex justify-center"
           >
             <div
@@ -153,10 +143,10 @@ function AboutMe() {
         {/* journey timeline */}
         <div className="mt-24 sm:mt-32">
           <motion.h3
-            ref={journeyHeading.ref}
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
-            animate={journeyHeading.inView ? "show" : "hidden"}
+            whileInView="show"
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="text-center font-manrope text-2xl sm:text-3xl font-bold text-textHead dark:text-dark-textHead mb-12 sm:mb-16"
           >
             My Journey
@@ -167,10 +157,10 @@ function AboutMe() {
         {/* tech chips */}
         <div className="mt-20 sm:mt-24">
           <motion.h3
-            ref={techHeading.ref}
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
-            animate={techHeading.inView ? "show" : "hidden"}
+            whileInView="show"
+            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
             className="text-center font-manrope text-xl sm:text-2xl font-bold text-textHead dark:text-dark-textHead mb-8"
           >
             Technologies I Work With
@@ -218,10 +208,10 @@ function AboutMe() {
 
         {/* philosophy quote */}
         <motion.div
-          ref={quote.ref}
           variants={FadeIn("up", 0.2, 0)}
           initial="hidden"
-          animate={quote.inView ? "show" : "hidden"}
+          whileInView="show"
+          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
           className="mt-20 sm:mt-24 max-w-3xl mx-auto rounded-3xl p-[1.5px] bg-gradient-to-r from-hero-primary via-hero-secondary to-hero-accent"
         >
           <div className="rounded-3xl bg-white/90 dark:bg-dark-primary/90 backdrop-blur-md px-8 sm:px-12 py-10 text-center">

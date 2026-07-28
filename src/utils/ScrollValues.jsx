@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import App from '../App';
 
 // Create Scroll Context
 const scrollPositionContext = createContext();

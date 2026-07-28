@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import Tooltip from "@mui/material/Tooltip";
 import { FadeIn } from "../varients/varientAnim";
-import { useReveal } from "../hooks/useReveal";
 
 function SkillCard({
   name,
@@ -14,8 +13,6 @@ function SkillCard({
   featured,
   delay = 0,
 }) {
-  const { ref, inView } = useReveal();
-
   return (
     // <Tooltip
     //   arrow
@@ -30,10 +27,10 @@ function SkillCard({
     //   }
     // >
     <motion.div
-      ref={ref}
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      animate={inView ? "show" : "hidden"}
+      whileInView="show"
+      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
       whileHover={{ y: -6, scale: 1.03 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       tabIndex={0}
@@ -76,7 +73,8 @@ function SkillCard({
               className="h-full rounded-full"
               style={{ backgroundColor: brandColor }}
               initial={{ width: 0 }}
-              animate={{ width: inView ? `${proficiency}%` : 0 }}
+              whileInView={{ width: `${proficiency}%` }}
+              viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
               transition={{
                 duration: 0.8,
                 delay: delay + 0.2,

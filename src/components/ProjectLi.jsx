@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useReveal } from "../hooks/useReveal";
 import TechPill from "./TechPill";
 import CtaButton from "./Buttons/CtaButton";
 import LaunchRoundedIcon from "@mui/icons-material/LaunchRounded";
@@ -47,14 +46,12 @@ function ProjectLi({
   metadata = [],
   delay = 0,
 }) {
-  const { ref, inView } = useReveal();
-
   return (
     <motion.li
-      ref={ref}
       variants={CARD_ENTRANCE(delay)}
       initial="hidden"
-      animate={inView ? "show" : "hidden"}
+      whileInView="show"
+      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
       whileHover={{ y: -8, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
       className={`group relative motion-reduce:!transform-none h-full ${

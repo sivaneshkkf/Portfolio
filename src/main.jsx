@@ -2,11 +2,9 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 
 import LoadingAnim from "./components/LoadingAnim.jsx";
-import ErrorBoundary from "./components/ErrorBoundary.jsx";
-import App from "./App.jsx";
-import { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { ScreenSizeContext } from "./context/ScreenSizeContext.jsx";
-import { ScrollProvider } from "./utils/ScrollValues.jsx";
+import { ScrollProvider } from "./Utils/ScrollValues.jsx";
 
 // Temporary on-page debug console for diagnosing a mobile rendering issue.
 // Only loads when visiting the site with ?debug in the URL. Remove once resolved.
@@ -17,59 +15,18 @@ if (new URLSearchParams(window.location.search).has("debug")) {
   document.head.appendChild(script);
 }
 
-// Some iOS Safari/Chrome (WebKit) builds leave IntersectionObserver entries
-// stuck at their initial state after first paint -- scroll-triggered
-// (whileInView) animations across the site never fire, so sections stay at
-// opacity 0. Attaching Web Inspector "fixes" it because that forces a full
-// layout/style recalculation, which makes WebKit re-evaluate the observers.
-// We do the same thing programmatically shortly after mount and whenever
-// the page is restored from the back-forward cache, so users never have to
-// open dev tools for content to appear.
-function kickStaleObservers() {
-  // Force a synchronous reflow.
-  void document.body.offsetHeight;
+const LazyComponentApp = React.lazy(() => import("./App.jsx"));
 
-  // Force a genuine compositor repaint, not just a layout read. WebKit can
-  // leave a stale/blank compositing layer behind after a hardware-
-  // accelerated element (transform/opacity/backdrop-filter) unmounts --
-  // e.g. the splash screen removed shortly after load -- showing as a
-  // solid white patch over whatever renders underneath until something
-  // forces every layer to recomposite. Toggling a transform on <body> is a
-  // standard, harmless way to force that.
-  const { body } = document;
-  const prevTransform = body.style.transform;
-  body.style.transform = "translateZ(0)";
-  void body.offsetHeight;
-  body.style.transform = prevTransform;
-
-  window.dispatchEvent(new Event("resize"));
-  window.dispatchEvent(new Event("scroll"));
-}
-
-function useIOSObserverWatchdog() {
-  useEffect(() => {
-    const timers = [300, 1000, 2000].map((delay) =>
-      setTimeout(kickStaleObservers, delay),
-    );
-    window.addEventListener("pageshow", kickStaleObservers);
-    return () => {
-      timers.forEach(clearTimeout);
-      window.removeEventListener("pageshow", kickStaleObservers);
-    };
-  }, []);
-}
-
-function AppShell() {
+function AppWithDelay() {
+  const [showSuspense, setShowSuspense] = useState(false);
   const [ScreenSize, setScreenSize] = useState(getScreenWidth());
-  const [showLoader, setShowLoader] = useState(true);
-
-  useIOSObserverWatchdog();
 
   useEffect(() => {
-    // Brief branded splash only; it no longer gates when the real app
-    // mounts, so a slow/failed transition can't leave the page blank.
-    const timer = setTimeout(() => setShowLoader(false), 900);
-    return () => clearTimeout(timer);
+    const timer = setTimeout(() => {
+      setShowSuspense(true); // Show Suspense after delay
+    }, 2000); // Adjust the delay (in milliseconds) as needed
+
+    return () => clearTimeout(timer); // Clear timer on component unmount
   }, []);
 
   useEffect(() => {
@@ -83,15 +40,14 @@ function AppShell() {
 
   return (
     <ScreenSizeContext.Provider value={{ ScreenSize, setScreenSize }}>
-      <ErrorBoundary>
-        <ScrollProvider>
-          <App />
-        </ScrollProvider>
-      </ErrorBoundary>
-      {showLoader && (
-        <div className="fixed inset-0 z-[999]">
-          <LoadingAnim />
-        </div>
+      {showSuspense ? (
+        <Suspense fallback={<LoadingAnim />}>
+           <ScrollProvider>
+          <LazyComponentApp />
+          </ScrollProvider>
+        </Suspense>
+      ) : (
+        <LoadingAnim /> // Initial loading animation shown during delay
       )}
     </ScreenSizeContext.Provider>
   );
@@ -111,4 +67,4 @@ function getScreenWidth() {
   }
 }
 
-createRoot(document.getElementById("root")).render(<AppShell />);
+createRoot(document.getElementById("root")).render(<AppWithDelay />);

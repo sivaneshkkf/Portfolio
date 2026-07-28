@@ -1,3 +1,4 @@
+import { div } from "framer-motion/client";
 import logo from "../images/logo.png";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -13,7 +14,7 @@ function LoadingAnim() {
 
   return (
     <div
-      className={`w-full h-dvh flex justify-center items-center gap-4 ${
+      className={`w-full h-screen flex justify-center items-center gap-4 ${
         theme === "light" ? "bg-primary" : "bg-dark-secondary"
       }`}
     >
