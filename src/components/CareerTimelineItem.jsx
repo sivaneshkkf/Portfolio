@@ -1,14 +1,17 @@
 import { motion } from "framer-motion";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 import ExperienceCard from "./ExperienceCard";
 
 function CareerTimelineItem({ job, meta, index }) {
+  const { ref, inView } = useReveal();
+
   return (
     <motion.div
+      ref={ref}
       variants={FadeIn("up", index * 0.1, 0)}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0 }}
+      animate={inView ? "show" : "hidden"}
       className="relative lg:pl-14"
     >
       <span

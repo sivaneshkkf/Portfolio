@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { FadeIn } from "../../varients/varientAnim";
+import { useReveal } from "../../hooks/useReveal";
 
 const KPI_THEMES = {
   blue: {
@@ -56,8 +57,7 @@ const KPI_THEMES = {
 };
 
 function KpiCard({ icon, label, value, delta, delay = 0, color = "blue" }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const { ref, inView } = useReveal({ amount: 0.5 });
   const [count, setCount] = useState(0);
   const theme = KPI_THEMES[color] || KPI_THEMES.blue;
 
@@ -95,8 +95,7 @@ function KpiCard({ icon, label, value, delta, delay = 0, color = "blue" }) {
       ref={ref}
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0 }}
+      animate={inView ? "show" : "hidden"}
       whileHover={{ y: -5 }}
       className={`group relative overflow-hidden rounded-[20px] border border-black/5 bg-white/70 p-5 backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-white/5 ${theme.glow}`}
     >

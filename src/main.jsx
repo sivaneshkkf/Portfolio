@@ -28,6 +28,20 @@ if (new URLSearchParams(window.location.search).has("debug")) {
 function kickStaleObservers() {
   // Force a synchronous reflow.
   void document.body.offsetHeight;
+
+  // Force a genuine compositor repaint, not just a layout read. WebKit can
+  // leave a stale/blank compositing layer behind after a hardware-
+  // accelerated element (transform/opacity/backdrop-filter) unmounts --
+  // e.g. the splash screen removed shortly after load -- showing as a
+  // solid white patch over whatever renders underneath until something
+  // forces every layer to recomposite. Toggling a transform on <body> is a
+  // standard, harmless way to force that.
+  const { body } = document;
+  const prevTransform = body.style.transform;
+  body.style.transform = "translateZ(0)";
+  void body.offsetHeight;
+  body.style.transform = prevTransform;
+
   window.dispatchEvent(new Event("resize"));
   window.dispatchEvent(new Event("scroll"));
 }

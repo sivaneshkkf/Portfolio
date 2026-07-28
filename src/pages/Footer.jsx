@@ -11,6 +11,7 @@ import SocialButton from "../components/SocialButton";
 import FooterSkillBar from "../components/FooterSkillBar";
 import FooterServiceCard from "../components/FooterServiceCard";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
@@ -55,6 +56,8 @@ function Footer() {
   const { setVisibleSection } = useContext(HeadingContext);
   const { setScrollEnable } = useContext(ScrolContext);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const brand = useReveal();
+  const quote = useReveal();
 
   useEffect(() => {
     const handleScroll = () => setShowBackToTop(window.scrollY > 500);
@@ -116,10 +119,10 @@ function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
           {/* brand */}
           <motion.div
+            ref={brand.ref}
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0 }}
+            animate={brand.inView ? "show" : "hidden"}
             className="sm:col-span-2 lg:col-span-1 rounded-[24px] border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-7 shadow-[0_0_40px_-15px_rgba(59,130,246,0.5)]"
           >
             <div className="flex items-center gap-3">
@@ -252,10 +255,10 @@ function Footer() {
 
         {/* developer quote */}
         <motion.div
+          ref={quote.ref}
           variants={FadeIn("up", 0.1, 0)}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0 }}
+          animate={quote.inView ? "show" : "hidden"}
           className="mx-auto mt-16 max-w-2xl rounded-3xl p-[1.5px] bg-gradient-to-r from-hero-primary via-hero-secondary to-hero-accent sm:mt-20"
         >
           <div className="rounded-3xl bg-hero-bg2/80 backdrop-blur-xl px-8 py-9 text-center">

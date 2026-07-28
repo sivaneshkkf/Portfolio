@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
 
 function ContactDetailCard({ icon, label, value, href, copyable, delay = 0 }) {
   const [copied, setCopied] = useState(false);
+  const { ref, inView } = useReveal();
 
   const handleCopy = async (e) => {
     e.preventDefault();
@@ -25,10 +27,10 @@ function ContactDetailCard({ icon, label, value, href, copyable, delay = 0 }) {
 
   return (
     <motion.div
+      ref={ref}
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0 }}
+      animate={inView ? "show" : "hidden"}
     >
       <Wrapper
         {...wrapperProps}

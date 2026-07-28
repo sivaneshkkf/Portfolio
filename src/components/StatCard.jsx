@@ -1,13 +1,16 @@
 import { motion } from "framer-motion";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 
 function StatCard({ icon, value, label, delay = 0 }) {
+  const { ref, inView } = useReveal();
+
   return (
     <motion.div
+      ref={ref}
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0 }}
+      animate={inView ? "show" : "hidden"}
       whileHover={{ y: -4 }}
       className="flex w-fit items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-2.5 py-1.5 backdrop-blur-md transition-colors duration-300 hover:border-hero-primary/40 sm:gap-2.5 sm:px-3 sm:py-2"
     >
