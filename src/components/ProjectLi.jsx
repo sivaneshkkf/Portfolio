@@ -52,7 +52,7 @@ function ProjectLi({
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
-      whileHover={{ y: -8, scale: 1.02 }}
+      whileHover={{ y: -4, scale: 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
       className={`group relative motion-reduce:!transform-none h-full ${
         featured ? "lg:col-span-3" : ""
@@ -66,7 +66,7 @@ function ProjectLi({
 
       {/* gradient border shimmer wrapper */}
       <div
-        className={`relative rounded-[24px] p-px overflow-hidden bg-gradient-to-r from-hero-primary/30 via-hero-secondary/30 to-hero-accent/30 bg-[length:200%_200%] group-hover:animate-gradient-shimmer transition-shadow duration-500 group-hover:shadow-[0_20px_30px_rgba(0,0,0,.45)] h-full ${
+        className={`relative rounded-[24px] p-px overflow-hidden bg-gradient-to-r from-hero-primary/30 via-hero-secondary/30 to-hero-accent/30 bg-[length:200%_200%] group-hover:animate-gradient-shimmer transition-shadow duration-500 group-hover:shadow-[0_5px_10px_rgba(0,0,0,.45)] h-full ${
           featured ? "ring-1 ring-hero-primary/40" : ""
         }`}
       >

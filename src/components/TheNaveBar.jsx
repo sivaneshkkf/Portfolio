@@ -64,8 +64,8 @@ function TheNaveBar() {
       <div
         className={`mx-auto max-w-[1400px] overflow-hidden border border-white/10 bg-hero-bg/90 backdrop-blur-md dark:backdrop-blur-2xl transition-all duration-300 dark:bg-hero-bg/75 ${
           isScrolled
-            ? "rounded-b-2xl shadow-xl shadow-black/40 sm:rounded-[20px]"
-            : "rounded-b-2xl shadow-md shadow-black/20 sm:rounded-[24px]"
+            ? "rounded-2xl shadow-xl shadow-black/40 sm:rounded-[20px]"
+            : "rounded-2xl shadow-md shadow-black/20 sm:rounded-[24px]"
         }`}
       >
         <div
