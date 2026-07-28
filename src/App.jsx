@@ -38,7 +38,7 @@ function App() {
 
   const [dashboardOpen, setDashboardOpen] = useState(false);
 
-  const [dashboardData, setDashboardData] =useState(null)
+  const [dashboardData, setDashboardData] = useState(null);
 
   const [loginFormOpen, setLoginFormOpen] = useState(false);
 
@@ -228,12 +228,15 @@ function App() {
                           <Indroduction />
                         </div>
                         <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
-                          <AboutMe />
+                          {/* <AboutMe /> */}
                         </div>
                         <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
                           <SKills />
                         </div>
-                        <div ref={projectRef} id={sectionIDS.projects.sectionId}>
+                        <div
+                          ref={projectRef}
+                          id={sectionIDS.projects.sectionId}
+                        >
                           <Projects />
                         </div>
                         <div ref={resumeRef} id={sectionIDS.resume.sectionId}>
