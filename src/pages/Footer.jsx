@@ -79,9 +79,9 @@ function Footer() {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-hero-bg to-hero-bg2"></div>
         <div className="absolute inset-0 bg-grid-pattern opacity-40"></div>
-        <div className="absolute -top-32 -left-20 h-[26rem] w-[26rem] rounded-full bg-hero-primary/20 blur-[110px] animate-blob"></div>
-        <div className="absolute top-10 -right-24 h-[22rem] w-[22rem] rounded-full bg-hero-secondary/20 blur-[110px] animate-blobSlow"></div>
-        <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-hero-accent/10 blur-[100px]"></div>
+        <div className="absolute -top-32 -left-20 h-[26rem] w-[26rem] rounded-full bg-hero-primary/20 blur-3xl animate-blob"></div>
+        <div className="absolute top-10 -right-24 h-[22rem] w-[22rem] rounded-full bg-hero-secondary/20 blur-3xl animate-blobSlow"></div>
+        <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-hero-accent/10 blur-3xl"></div>
 
         <span className="absolute top-[15%] left-[12%] h-1 w-1 rounded-full bg-hero-primary/60 animate-float"></span>
         <span className="absolute top-[40%] right-[18%] h-1.5 w-1.5 rounded-full bg-hero-secondary/50 animate-float-slow"></span>

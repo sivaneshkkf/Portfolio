@@ -228,7 +228,7 @@ function App() {
                           <Indroduction />
                         </div>
                         <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
-                          {/* <AboutMe /> */}
+                          <AboutMe />
                         </div>
                         <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
                           <SKills />

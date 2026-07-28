@@ -13,6 +13,31 @@ html, body {
     overflow-x: hidden;
 }
 
+/*
+ * iOS Safari/Chrome (WebKit) has a long-standing tile-rendering bug: elements
+ * using `filter: blur()` or `backdrop-filter: blur()` that get promoted to a
+ * compositing layer lazily -- i.e. only once they scroll into view -- can be
+ * left as a blank/unpainted tile. The content is still in the DOM and still
+ * interactive, it just never gets painted until something forces a full
+ * relayout (which is why opening Web Inspector "fixes" it: attaching the
+ * inspector forces WebKit to repaint everything). This app has ~55
+ * backdrop-blur glass cards and a dozen+ large blurred decorative background
+ * blobs mounted simultaneously (it's a single-page scroller, so every
+ * section's blur layers exist from first load, not just when scrolled to),
+ * which is exactly the setup this bug needs to trigger.
+ *
+ * Forcing each blurred element onto its own stable, permanently-composited
+ * layer up front (rather than letting WebKit lazily promote/tile it during
+ * scroll) is the standard fix for this class of bug.
+ */
+[class*="backdrop-blur"],
+[class*="blur-"] {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
 body{
     @apply font-poppins
 }
