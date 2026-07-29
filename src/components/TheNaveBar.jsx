@@ -51,13 +51,13 @@ function TheNaveBar() {
   //   };
   // }, [mobileOpen]);
 
-  const handleClick = (e, navId, secId) => {
-    e.preventDefault();
-    e.currentTarget.blur();
-    setScrollEnable(false);
-    setVisibleSection({ sectionId: secId, navLiId: navId });
-    setMobileOpen(false);
-  };
+  // const handleClick = (e, navId, secId) => {
+  //   e.preventDefault();
+  //   e.currentTarget.blur();
+  //   setScrollEnable(false);
+  //   setVisibleSection({ sectionId: secId, navLiId: navId });
+  //   setMobileOpen(false);
+  // };
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 px-2 pt-2 sm:px-3 sm:pt-3">
