@@ -9,21 +9,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 
+ * Removed overflow-x: hidden/clip from html, body. This ensures WebKit (iOS Safari/Chrome) 
+ * computes fixed-position containing blocks correctly against the viewport. 
+ * Any horizontal clipping is instead handled on a page-wrapper component.
+ */
 html, body {
-    /*
-     * `overflow-x: hidden` on html/body is a well-known cause of
-     * `position: fixed` breaking specifically on iOS Safari/Chrome: setting
-     * overflow (even just the -x axis) on body changes how WebKit computes
-     * the containing block for fixed-position descendants, so instead of
-     * staying pinned to the true viewport they scroll away with the page.
-     * `overflow: clip` clips the same way but -- critically -- doesn't
-     * establish that scrolling context, so it doesn't trigger the bug.
-     * Kept as a fallback first for browsers that don't support the `clip`
-     * value on overflow-x/y (invalid values are ignored, so unsupported
-     * browsers just keep using this line).
-     */
-    overflow-x: hidden;
-    overflow-x: clip;
+    margin: 0;
+    padding: 0;
 }
 
 /*

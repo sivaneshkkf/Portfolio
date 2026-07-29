@@ -107,7 +107,7 @@ function TheNaveBar() {
             </span>
             <span className="flex flex-col leading-none">
               <span className="font-manrope text-lg font-extrabold text-hero-text sm:text-xl">
-                Sivanesh
+                Sivanesh v1
               </span>
               <span className="hidden text-[10px] font-semibold uppercase tracking-widest text-hero-muted sm:block">
                 Full Stack Developer
