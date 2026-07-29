@@ -135,22 +135,32 @@ function App() {
     }
   }, [scrolEnable, sections]);
 
-  // Scroll to the current section based on visibleSection changes
+  // Scroll to the current section based on visibleSection changes. Deferred
+  // one animation frame: this effect can run in the same commit as closing
+  // the mobile nav drawer, which resets `document.body.style.overflow` from
+  // "hidden" back to "" (see TheNaveBar's mobileOpen effect). Chromium
+  // doesn't reliably treat the page as scrollable again until it has had a
+  // chance to process that style change -- calling scrollTo synchronously
+  // in the same tick is silently a no-op. One rAF is enough to let that
+  // settle before asking the browser to scroll.
   useEffect(() => {
-    if (!scrolEnable) {
+    if (scrolEnable) return;
+
+    const rafId = requestAnimationFrame(() => {
       const element = document.getElementById(visibleSection.sectionId);
+      if (!element) return;
 
-      if (element) {
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = window.pageYOffset + elementPosition;
-        const navbarHeight = document.querySelector("#navBar").offsetHeight;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = window.pageYOffset + elementPosition;
+      const navbarHeight = document.querySelector("#navBar").offsetHeight;
 
-        window.scrollTo({
-          top: offsetPosition - navbarHeight - 60,
-          behavior: "smooth",
-        });
-      }
-    }
+      window.scrollTo({
+        top: offsetPosition - navbarHeight - 60,
+        behavior: "smooth",
+      });
+    });
+
+    return () => cancelAnimationFrame(rafId);
   }, [visibleSection.navLiId]);
 
   // Enable scrolling when using the mouse wheel
