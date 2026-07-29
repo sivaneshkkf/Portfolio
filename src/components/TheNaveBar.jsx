@@ -44,12 +44,12 @@ function TheNaveBar() {
   //   return () => window.removeEventListener("scroll", handleScrollShadow);
   // }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
+  // useEffect(() => {
+  //   document.body.style.overflow = mobileOpen ? "hidden" : "";
+  //   return () => {
+  //     document.body.style.overflow = "";
+  //   };
+  // }, [mobileOpen]);
 
   const handleClick = (e, navId, secId) => {
     e.preventDefault();
