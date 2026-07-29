@@ -13,6 +13,25 @@ html, body {
     overflow-x: hidden;
 }
 
+/*
+ * iOS Safari/Chrome (WebKit) has a well-documented bug where `position:
+ * fixed` elements using `backdrop-filter`/`filter: blur()` -- like this
+ * app's fixed navbar, theme toggle, back-to-top button, and login modal --
+ * get lazily promoted to a compositing layer. WebKit's tile-based renderer
+ * doesn't reliably keep that layer correctly positioned/painted during
+ * scroll (worse still with Lenis driving scroll via JS), so the element can
+ * jump, disappear, or detach from the viewport entirely. Forcing each such
+ * element onto its own stable, pre-composited layer up front -- instead of
+ * letting WebKit promote it lazily -- is the standard fix for this bug.
+ */
+[class*="backdrop-blur"],
+[class*="blur-"] {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
 body{
     @apply font-poppins
 }
