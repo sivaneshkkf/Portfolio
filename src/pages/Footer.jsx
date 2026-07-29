@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FeedbackFormContext } from "../context/FeedBackFormContext";
 import { HeadingContext } from "../context/HeadingContext";
-import { ScrolContext } from "../context/scrolContext";
+import { ScrolContext } from "../context/ScrolContext";
 import sectionIDS from "../data/SectionIDS";
 import { SocialLinks } from "../data/SocialLinks";
 import skillsData from "../data/skillsData.json";

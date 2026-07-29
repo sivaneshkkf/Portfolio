@@ -7,7 +7,7 @@ import sectionIDS from "../data/SectionIDS";
 import { SocialLinks } from "../data/SocialLinks";
 import { FadeIn } from "../varients/varientAnim";
 import { HeadingContext } from "../context/HeadingContext";
-import { ScrolContext } from "../context/scrolContext";
+import { ScrolContext } from "../context/ScrolContext";
 
 import HomeIcon from "@mui/icons-material/Home";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";

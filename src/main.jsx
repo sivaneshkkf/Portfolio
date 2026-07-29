@@ -4,7 +4,7 @@ import "./index.css";
 import LoadingAnim from "./components/LoadingAnim.jsx";
 import React, { Suspense, useEffect, useState } from "react";
 import { ScreenSizeContext } from "./context/ScreenSizeContext.jsx";
-import { ScrollProvider } from "./Utils/ScrollValues.jsx";
+import { ScrollProvider } from "./utils/ScrollValues.jsx";
 
 // Temporary on-page debug console for diagnosing a mobile rendering issue.
 // Only loads when visiting the site with ?debug in the URL. Remove once resolved.

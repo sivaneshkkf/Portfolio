@@ -23,7 +23,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import { DashBoardContext } from "../context/DashBoardContext";
 import { HeadingContext } from "../context/HeadingContext";
-import { ScrolContext } from "../context/scrolContext";
+import { ScrolContext } from "../context/ScrolContext";
 import sectionIDS from "../data/SectionIDS";
 
 function Indroduction() {

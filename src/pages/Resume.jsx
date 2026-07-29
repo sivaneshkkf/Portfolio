@@ -12,7 +12,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AddDashboardDetails, UseFetchCollection } from "../firebase/config";
 import { HeadingContext } from "../context/HeadingContext";
-import { ScrolContext } from "../context/scrolContext";
+import { ScrolContext } from "../context/ScrolContext";
 import skillsData from "../data/skillsData.json";
 import CtaButton from "../components/Buttons/CtaButton";
 import CVdownloadBtn from "../components/Buttons/CVdowloadBtn";
