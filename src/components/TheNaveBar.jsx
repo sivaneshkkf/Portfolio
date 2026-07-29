@@ -32,10 +32,10 @@ const navSocials = SocialLinks.filter((social) =>
 
 function TheNaveBar() {
   const { visibleSection, setVisibleSection } = useContext(HeadingContext);
-  const { setScrollEnable } = useContext(ScrolContext);
+  // const { setScrollEnable } = useContext(ScrolContext);
 
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  // const [isScrolled, setIsScrolled] = useState(false);
+  // const [mobileOpen, setMobileOpen] = useState(false);
 
   // useEffect(() => {
   //   const handleScrollShadow = () => setIsScrolled(window.scrollY > 12);
@@ -62,23 +62,17 @@ function TheNaveBar() {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 px-2 pt-2 sm:px-3 sm:pt-3">
       <div
-        className={`mx-auto max-w-[1400px] overflow-hidden border border-white/10 bg-hero-bg/90 backdrop-blur-md dark:backdrop-blur-2xl transition-all duration-300 dark:bg-hero-bg/75 ${
-          isScrolled
-            ? "rounded-2xl shadow-xl shadow-black/40 sm:rounded-[20px]"
-            : "rounded-2xl shadow-md shadow-black/20 sm:rounded-[24px]"
-        }`}
+        className={`mx-auto max-w-[1400px] overflow-hidden border border-white/10 bg-hero-bg/90 backdrop-blur-md dark:backdrop-blur-2xl transition-all duration-300 dark:bg-hero-bg/75`}
       >
         <div
-          className={`flex items-center justify-between gap-4 px-3 transition-all duration-300 sm:px-5 lg:px-7 ${
-            isScrolled ? "py-2" : "py-2.5 sm:py-3"
-          }`}
+          className={`flex items-center justify-between gap-4 px-3 transition-all duration-300 sm:px-5 lg:px-7`}
         >
           {/* logo */}
           <motion.a
             href="#"
-            onClick={(e) =>
-              handleClick(e, sectionIDS.home.navId, sectionIDS.home.sectionId)
-            }
+            // onClick={(e) =>
+            //   handleClick(e, sectionIDS.home.navId, sectionIDS.home.sectionId)
+            // }
             whileHover="hover"
             initial="rest"
             className="group flex items-center gap-2.5 sm:gap-3"
@@ -116,7 +110,7 @@ function TheNaveBar() {
                 key={item.navId}
                 label={item.label}
                 isActive={visibleSection.navLiId === item.navId}
-                onClick={(e) => handleClick(e, item.navId, item.sectionId)}
+                // onClick={(e) => handleClick(e, item.navId, item.sectionId)}
               />
             ))}
           </ul>
@@ -154,7 +148,7 @@ function TheNaveBar() {
           </div>
 
           {/* mobile hamburger */}
-          <button
+          {/* <button
             type="button"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -176,7 +170,7 @@ function TheNaveBar() {
               animate={mobileOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 6 }}
               transition={{ duration: 0.3 }}
             ></motion.span>
-          </button>
+          </button> */}
         </div>
 
         {/* mobile drawer */}
