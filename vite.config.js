@@ -2,6 +2,14 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
+// GitHub Pages serves this site from a /Portfolio/ subpath
+// (sivaneshkkf.github.io/Portfolio/), so asset URLs need that prefix.
+// Netlify serves it from the domain root (sivaneshkkf.netlify.app/), so
+// the same prefix there causes every asset to 404. Netlify always sets
+// NETLIFY=true in its build environment, so use that to pick the right
+// base path automatically instead of having to hand-edit this per deploy.
+const base = process.env.NETLIFY === "true" ? "/" : "/Portfolio/";
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -18,8 +26,8 @@ export default defineConfig({
         background_color: "#1a1a18",
         display: "standalone",
         orientation: "portrait",
-        start_url: "/Portfolio/",
-        base: "/Portfolio/",
+        start_url: base,
+        base,
         icons: [
           {
             purpose: "maskable",
@@ -57,6 +65,6 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/Portfolio/",
+  base,
   assetsInclude: ["**/*.lottie"],
 });
