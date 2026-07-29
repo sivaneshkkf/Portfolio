@@ -19,7 +19,7 @@ import CVdownloadBtn from "../components/Buttons/CVdowloadBtn";
 import AboutStatCard from "../components/AboutStatCard";
 import EducationCard from "../components/EducationCard";
 import CareerTimelineItem from "../components/CareerTimelineItem";
-import { ProjectData, MobileAppData } from "../data/projectData";
+import { ProjectData, MobileAppData } from "../data/ProjectData";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import MemoryIcon from "@mui/icons-material/Memory";

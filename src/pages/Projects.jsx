@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import TheHeading from "../components/TheHeading";
 import sectionIDS from "../data/SectionIDS";
 import ProjectLi from "../components/ProjectLi";
-import { ProjectData, MobileAppData } from "../data/projectData";
+import { ProjectData, MobileAppData } from "../data/ProjectData";
 import { projectsMeta } from "../data/projectsMeta";
 import BreakLine from "../components/BreakLine";
 import MobileAppsLi from "../components/MobileAppsLI";

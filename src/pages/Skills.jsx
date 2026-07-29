@@ -94,7 +94,11 @@ function SKills() {
                   variants={FadeIn("up", 0.1, 0)}
                   initial="hidden"
                   whileInView="show"
-                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+                  viewport={{
+                    once: true,
+                    amount: 0,
+                    margin: "0px 0px 300px 0px",
+                  }}
                   className="flex items-center gap-4 mb-8"
                 >
                   <h3 className="font-manrope text-xl sm:text-2xl font-bold text-textHead dark:text-dark-textHead whitespace-nowrap">
@@ -135,7 +139,7 @@ function SKills() {
           />
           <AboutStatCard
             icon={<WorkHistoryIcon fontSize="small" />}
-            value={1}
+            value={4}
             suffix="+"
             label="Years Experience"
             delay={0.2}
