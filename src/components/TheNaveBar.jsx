@@ -35,7 +35,7 @@ function TheNaveBar() {
   // const { setScrollEnable } = useContext(ScrolContext);
 
   // const [isScrolled, setIsScrolled] = useState(false);
-  // const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   // useEffect(() => {
   //   const handleScrollShadow = () => setIsScrolled(window.scrollY > 12);
