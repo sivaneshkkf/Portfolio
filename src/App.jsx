@@ -278,7 +278,7 @@ function App() {
                 {dashboardOpen ? (
                   <DashboardScreen />
                 ) : (
-                  <div className="relative overflow-x-clip">
+                  <div className="relative">
                     <ScrolContext.Provider
                       value={{ scrolEnable, setScrollEnable }}
                     >
@@ -286,11 +286,11 @@ function App() {
                         value={{ visibleSection, setVisibleSection }}
                       >
                         <DashboardStatsProvider>
+                          <div id="navBar" className="sticky top-0 z-50 w-full -mb-20">
+                            <TheNaveBar />
+                          </div>
                           <div ref={introRef} id={sectionIDS.home.sectionId}>
                             <Indroduction />
-                          </div>
-                          <div id="navBar">
-                            <TheNaveBar />
                           </div>
                           <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
                             <AboutMe />
