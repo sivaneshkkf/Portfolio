@@ -37,12 +37,12 @@ function TheNaveBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScrollShadow = () => setIsScrolled(window.scrollY > 12);
-    handleScrollShadow();
-    window.addEventListener("scroll", handleScrollShadow);
-    return () => window.removeEventListener("scroll", handleScrollShadow);
-  }, []);
+  // useEffect(() => {
+  //   const handleScrollShadow = () => setIsScrolled(window.scrollY > 12);
+  //   handleScrollShadow();
+  //   window.addEventListener("scroll", handleScrollShadow);
+  //   return () => window.removeEventListener("scroll", handleScrollShadow);
+  // }, []);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -180,7 +180,7 @@ function TheNaveBar() {
         </div>
 
         {/* mobile drawer */}
-        {/* <AnimatePresence>
+        <AnimatePresence>
           {mobileOpen && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
@@ -252,7 +252,7 @@ function TheNaveBar() {
               </div>
             </motion.div>
           )}
-        </AnimatePresence> */}
+        </AnimatePresence>
       </div>
     </div>
   );
