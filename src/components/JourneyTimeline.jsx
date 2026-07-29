@@ -119,16 +119,29 @@ function JourneyTimeline() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
+    // Raw scroll/resize events can fire far more often than the screen
+    // repaints, so coalesce to at most once per animation frame -- this
+    // handler does up to 7 getBoundingClientRect() reads per call.
+    let rafId = null;
+    const onScrollOrResize = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        handleScroll();
+      });
+    };
+
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize, { passive: true });
 
     // Defer initial execution slightly to ensure layout and bounding boxes are ready
     const timer = setTimeout(handleScroll, 100);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
       clearTimeout(timer);
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, []);
 

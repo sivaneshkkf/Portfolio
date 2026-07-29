@@ -1,5 +1,10 @@
+import { memo } from "react";
 import { projectTechIcons } from "../data/projectTechIcons";
 
+// Rendered many times per page (every project card lists several techs).
+// `name` and `iconMap` are always primitives/stable module-level imports at
+// every call site in this app, so a shallow prop comparison is safe and
+// skips re-rendering pills whose props didn't actually change.
 function TechPill({ name, iconMap = projectTechIcons }) {
   const tech = iconMap[name];
 
@@ -19,4 +24,4 @@ function TechPill({ name, iconMap = projectTechIcons }) {
   );
 }
 
-export default TechPill;
+export default memo(TechPill);

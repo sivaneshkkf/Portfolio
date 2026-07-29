@@ -10,7 +10,8 @@ import { FadeIn } from "../varients/varientAnim";
 import sivanesh_resume from "../images/SIVANESH-RESUME.pdf";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { AddDashboardDetails, UseFetchCollection } from "../firebase/config";
+import { AddDashboardDetails } from "../firebase/config";
+import { useDashboardStats } from "../context/DashboardStatsContext";
 import { HeadingContext } from "../context/HeadingContext";
 import { ScrolContext } from "../context/ScrolContext";
 import skillsData from "../data/skillsData.json";
@@ -35,7 +36,7 @@ function Resume() {
   const [progressValue, setProgressValue] = useState(0); // Actual progress
   const [displayedProgress, setDisplayedProgress] = useState(0); // Displayed for animation
 
-  const dashbordDetails = UseFetchCollection("dashboard");
+  const dashbordDetails = useDashboardStats();
   const {
     whatsapp = 0,
     url = 0,

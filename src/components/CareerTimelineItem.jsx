@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { FadeIn } from "../varients/varientAnim";
 import ExperienceCard from "./ExperienceCard";
@@ -21,4 +22,4 @@ function CareerTimelineItem({ job, meta, index }) {
   );
 }
 
-export default CareerTimelineItem;
+export default memo(CareerTimelineItem);

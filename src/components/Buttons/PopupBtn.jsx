@@ -9,7 +9,8 @@ import DoneIcon from "@mui/icons-material/Done";
 import React from "react";
 import { Helmet } from "react-helmet";
 import { ScreenSizeContext } from "../../context/ScreenSizeContext";
-import { AddDashboardDetails, UseFetchCollection } from "../../firebase/config";
+import { AddDashboardDetails } from "../../firebase/config";
+import { useDashboardStats } from "../../context/DashboardStatsContext";
 import { Download } from "@mui/icons-material";
 import { RWebShare } from "react-web-share";
 import ReplyIcon from "@mui/icons-material/Reply";
@@ -17,7 +18,7 @@ import ReplyIcon from "@mui/icons-material/Reply";
 function PopupShareBtn({ popupState, setPopupState }) {
   const [copySuccess, setCopySuccess] = useState(false);
 
-  const dashboardDetails = UseFetchCollection("dashboard");
+  const dashboardDetails = useDashboardStats();
   const {
     whatsapp = 0,
     url = 0,

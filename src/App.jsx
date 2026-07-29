@@ -1,4 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import TheNaveBar from "./components/TheNaveBar";
 import AboutMe from "./pages/AboutMe";
 import Indroduction from "./pages/Indroduction";
@@ -22,6 +29,7 @@ import {
 } from "./context/DashBoardContext";
 import DashboardScreen from "./pages/DashboardScreen";
 import getUserLocation from "./utils/GetUserLocation";
+import { DashboardStatsProvider } from "./context/DashboardStatsContext";
 
 function App() {
   const [visibleSection, setVisibleSection] = useState({
@@ -55,56 +63,77 @@ function App() {
   const resumeRef = useRef(null);
   const contactRef = useRef(null);
 
-  const sections = [
-    {
-      ref: introRef,
-      sectionId: sectionIDS.home.sectionId,
-      navId: sectionIDS.home.navId,
-    },
-    {
-      ref: aboutRef,
-      sectionId: sectionIDS.aboutME.sectionId,
-      navId: sectionIDS.aboutME.navId,
-    },
-    {
-      ref: skillsRef,
-      sectionId: sectionIDS.skills.sectionId,
-      navId: sectionIDS.skills.navId,
-    },
-    {
-      ref: projectRef,
-      sectionId: sectionIDS.projects.sectionId,
-      navId: sectionIDS.projects.navId,
-    },
-    {
-      ref: resumeRef,
-      sectionId: sectionIDS.resume.sectionId,
-      navId: sectionIDS.resume.navId,
-    },
-    {
-      ref: contactRef,
-      sectionId: sectionIDS.contact.sectionId,
-      navId: sectionIDS.contact.navId,
-    },
-  ];
+  // Refs are stable across renders, and sectionIDS is a static import, so
+  // this array never actually needs to change -- building a fresh array (and
+  // 6 fresh objects) on every render was pure waste, and gave handleScroll a
+  // new identity every render too.
+  const sections = useMemo(
+    () => [
+      {
+        ref: introRef,
+        sectionId: sectionIDS.home.sectionId,
+        navId: sectionIDS.home.navId,
+      },
+      {
+        ref: aboutRef,
+        sectionId: sectionIDS.aboutME.sectionId,
+        navId: sectionIDS.aboutME.navId,
+      },
+      {
+        ref: skillsRef,
+        sectionId: sectionIDS.skills.sectionId,
+        navId: sectionIDS.skills.navId,
+      },
+      {
+        ref: projectRef,
+        sectionId: sectionIDS.projects.sectionId,
+        navId: sectionIDS.projects.navId,
+      },
+      {
+        ref: resumeRef,
+        sectionId: sectionIDS.resume.sectionId,
+        navId: sectionIDS.resume.navId,
+      },
+      {
+        ref: contactRef,
+        sectionId: sectionIDS.contact.sectionId,
+        navId: sectionIDS.contact.navId,
+      },
+    ],
+    [],
+  );
 
-  // Function to handle scroll event and update visible section
-  const handleScroll = () => {
-    if (scrolEnable) {
-      sections.forEach((section) => {
-        const { ref, sectionId, navId } = section;
-        if (ref.current) {
-          const rect = ref.current.getBoundingClientRect();
-          const isVisible =
-            rect.top >= 0 && rect.top < window.innerHeight * 0.4;
+  // Tracks the latest visibleSection without forcing handleScroll to change
+  // identity (and the scroll listener to be torn down/reattached) every time
+  // it updates.
+  const visibleSectionRef = useRef(visibleSection);
+  useEffect(() => {
+    visibleSectionRef.current = visibleSection;
+  }, [visibleSection]);
 
-          if (isVisible) {
-            setVisibleSection({ navLiId: navId, sectionId: sectionId });
-          }
-        }
-      });
+  // Determine which section is active and update state -- but only when the
+  // answer actually changed. Previously this called setVisibleSection on
+  // every single 'scroll' event for whichever section matched, even when it
+  // was the same section as last time, forcing a full App re-render (and
+  // everything under it) dozens of times a second while scrolling.
+  const handleScroll = useCallback(() => {
+    if (!scrolEnable) return;
+
+    let match = null;
+    for (const { ref, sectionId, navId } of sections) {
+      const el = ref.current;
+      if (!el) continue;
+      const rect = el.getBoundingClientRect();
+      const isVisible = rect.top >= 0 && rect.top < window.innerHeight * 0.4;
+      if (isVisible) {
+        match = { navLiId: navId, sectionId };
+      }
     }
-  };
+
+    if (match && visibleSectionRef.current.navLiId !== match.navLiId) {
+      setVisibleSection(match);
+    }
+  }, [scrolEnable, sections]);
 
   // Scroll to the current section based on visibleSection changes
   useEffect(() => {
@@ -145,13 +174,29 @@ function App() {
     };
   }, []);
 
-  // Listen for the scroll event and update visible sections
+  // Listen for the scroll event and update visible sections. Raw 'scroll'
+  // events can fire far more often than the screen repaints (especially
+  // during momentum scrolling on mobile), so handleScroll's layout reads
+  // (getBoundingClientRect on every section) are coalesced to at most once
+  // per animation frame. { passive: true } tells the browser this listener
+  // will never call preventDefault(), so it doesn't have to block scrolling
+  // to wait and find out.
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
+    let rafId = null;
+    const onScroll = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        handleScroll();
+      });
     };
-  }, [scrolEnable]);
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
+  }, [handleScroll]);
 
   // feedback form open
   useEffect(() => {
@@ -221,31 +266,33 @@ function App() {
                       <HeadingContext.Provider
                         value={{ visibleSection, setVisibleSection }}
                       >
-                        <div id="navBar">
-                          <TheNaveBar />
-                        </div>
-                        <div ref={introRef} id={sectionIDS.home.sectionId}>
-                          <Indroduction />
-                        </div>
-                        <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
-                          <AboutMe />
-                        </div>
-                        <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
-                          <SKills />
-                        </div>
-                        <div ref={projectRef} id={sectionIDS.projects.sectionId}>
-                          <Projects />
-                        </div>
-                        <div ref={resumeRef} id={sectionIDS.resume.sectionId}>
-                          <Resume />
-                        </div>
-                        <div ref={contactRef} id={sectionIDS.contact.sectionId}>
-                          <Contact />
-                        </div>
-                        <Footer />
-                        <ThemeBtn />
-                        <FeedBackForm />
-                        <LoginForm />
+                        <DashboardStatsProvider>
+                          <div id="navBar">
+                            <TheNaveBar />
+                          </div>
+                          <div ref={introRef} id={sectionIDS.home.sectionId}>
+                            <Indroduction />
+                          </div>
+                          <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
+                            <AboutMe />
+                          </div>
+                          <div ref={skillsRef} id={sectionIDS.skills.sectionId}>
+                            <SKills />
+                          </div>
+                          <div ref={projectRef} id={sectionIDS.projects.sectionId}>
+                            <Projects />
+                          </div>
+                          <div ref={resumeRef} id={sectionIDS.resume.sectionId}>
+                            <Resume />
+                          </div>
+                          <div ref={contactRef} id={sectionIDS.contact.sectionId}>
+                            <Contact />
+                          </div>
+                          <Footer />
+                          <ThemeBtn />
+                          <FeedBackForm />
+                          <LoginForm />
+                        </DashboardStatsProvider>
                       </HeadingContext.Provider>
                     </ScrolContext.Provider>
                   </div>

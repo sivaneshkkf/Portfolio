@@ -103,6 +103,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
               alt="Expense Tracker app screen"
               className="lg:max-w-52 sm:max-w-48 max-w-32 drop-shadow-lg"
               style={{ willChange: "transform" }}
+              loading="lazy"
             />
           </motion.span>
 
@@ -119,6 +120,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
               alt="Expense Tracker app screen"
               className="lg:max-w-52 sm:max-w-48 max-w-32 drop-shadow-lg"
               style={{ willChange: "transform" }}
+              loading="lazy"
             />
           </motion.span>
 
@@ -135,6 +137,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
               alt="Expense Tracker app screen"
               className="lg:max-w-52 sm:max-w-48 max-w-32 drop-shadow-lg"
               style={{ willChange: "transform" }}
+              loading="lazy"
             />
           </motion.span>
         </motion.div>

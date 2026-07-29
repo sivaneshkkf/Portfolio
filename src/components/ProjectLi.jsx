@@ -1,8 +1,13 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import TechPill from "./TechPill";
 import CtaButton from "./Buttons/CtaButton";
 import LaunchRoundedIcon from "@mui/icons-material/LaunchRounded";
 import GitHubIcon from "@mui/icons-material/GitHub";
+
+// Stable reference so components that don't pass `metadata` don't defeat
+// memoization below with a fresh [] on every parent render.
+const EMPTY_METADATA = [];
 
 const STATUS_STYLES = {
   Featured: "bg-gradient-to-r from-hero-primary to-hero-secondary text-white",
@@ -43,7 +48,7 @@ function ProjectLi({
   tagline,
   status,
   featured,
-  metadata = [],
+  metadata = EMPTY_METADATA,
   delay = 0,
 }) {
   return (
@@ -223,4 +228,4 @@ function ProjectLi({
   );
 }
 
-export default ProjectLi;
+export default memo(ProjectLi);

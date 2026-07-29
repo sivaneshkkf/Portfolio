@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { FadeIn } from "../varients/varientAnim";
 
@@ -33,4 +34,4 @@ function EducationCard({ edu, delay = 0 }) {
   );
 }
 
-export default EducationCard;
+export default memo(EducationCard);

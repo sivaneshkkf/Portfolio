@@ -13,7 +13,8 @@ import ImageBlurHash from "../utils/ImageBlurHash";
 import PopupShareBtn from "../components/Buttons/PopupBtn";
 import Dashboard from "./DashBoard";
 import { LoginFormContext, LoginStatus } from "../context/LoginFormContext";
-import { AddDashboardDetails, UseFetchCollection } from "../firebase/config";
+import { AddDashboardDetails } from "../firebase/config";
+import { useDashboardStats } from "../context/DashboardStatsContext";
 import { NumberFormatter } from "../utils/Formatter";
 import { Tooltip } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -63,7 +64,7 @@ function Indroduction() {
   const { loginStatus } = useContext(LoginStatus);
   const { setVisibleSection } = useContext(HeadingContext);
   const { setScrollEnable } = useContext(ScrolContext);
-  const dashbordDetails = UseFetchCollection("dashboard");
+  const dashbordDetails = useDashboardStats();
   const {
     whatsapp = 0,
     url = 0,
