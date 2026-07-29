@@ -60,7 +60,7 @@ function TheNaveBar() {
   // };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 px-2 pt-2">Sivanesh v4</div>
+    <div className="fixed top-0 left-0 right-0 px-2 pt-2">Sivanesh v5</div>
   );
 }
 
