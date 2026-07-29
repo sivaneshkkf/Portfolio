@@ -286,7 +286,7 @@ function App() {
                         value={{ visibleSection, setVisibleSection }}
                       >
                         <DashboardStatsProvider>
-                          <div id="navBar" className="sticky top-0 z-50 w-full -mb-20">
+                          <div id="navBar">
                             <TheNaveBar />
                           </div>
                           <div ref={introRef} id={sectionIDS.home.sectionId}>

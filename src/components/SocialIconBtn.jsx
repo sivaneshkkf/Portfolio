@@ -1,16 +1,14 @@
 import { motion } from "motion/react";
 import Tooltip from "@mui/material/Tooltip";
 import { FadeIn } from "../varients/varientAnim";
-import { useReveal } from "../hooks/useReveal";
 
 function SocialIconBtn({ href, label, delay = 0, children }) {
-  const { ref, inView } = useReveal();
   return (
     <motion.div
-      ref={ref}
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      animate={inView ? "show" : "hidden"}
+      whileInView="show"
+      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
     >
       <Tooltip title={label} arrow>
         <motion.a

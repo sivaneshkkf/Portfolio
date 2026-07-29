@@ -1,15 +1,13 @@
 import { motion } from "motion/react";
 import { FadeIn } from "../../varients/varientAnim";
-import { useReveal } from "../../hooks/useReveal";
 
 function ChartCard({ title, subtitle, action, children, delay = 0, className = "" }) {
-  const { ref, inView } = useReveal();
   return (
     <motion.div
-      ref={ref}
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      animate={inView ? "show" : "hidden"}
+      whileInView="show"
+      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
       className={`rounded-[20px] border border-black/5 bg-white/70 p-5 backdrop-blur-xl dark:border-white/10 dark:bg-white/5 sm:p-6 ${className}`}
     >
       <div className="mb-4 flex items-start justify-between gap-3">

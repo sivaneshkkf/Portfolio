@@ -1,15 +1,13 @@
 import { motion } from "motion/react";
 import { FadeIn } from "../varients/varientAnim";
-import { useReveal } from "../hooks/useReveal";
 
 function FooterServiceCard({ icon, title, delay = 0 }) {
-  const { ref, inView } = useReveal();
   return (
     <motion.div
-      ref={ref}
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      animate={inView ? "show" : "hidden"}
+      whileInView="show"
+      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
       whileHover={{ y: -4 }}
       className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md px-4 py-3.5 transition-shadow duration-300 hover:shadow-[0_0_24px_-8px_rgba(59,130,246,0.5)]"
     >

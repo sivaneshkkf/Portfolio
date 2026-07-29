@@ -9,14 +9,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
- * Removed overflow-x: hidden/clip from html, body. This ensures WebKit (iOS Safari/Chrome) 
- * computes fixed-position containing blocks correctly against the viewport. 
- * Any horizontal clipping is instead handled on a page-wrapper component.
- */
 html, body {
-    margin: 0;
-    padding: 0;
+    overflow-x: hidden;
 }
 
 /*

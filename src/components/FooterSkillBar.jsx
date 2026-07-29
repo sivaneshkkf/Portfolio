@@ -1,15 +1,13 @@
 import { motion } from "motion/react";
 import { FadeIn } from "../varients/varientAnim";
-import { useReveal } from "../hooks/useReveal";
 
 function FooterSkillBar({ svg, name, percent, delay = 0 }) {
-  const { ref, inView } = useReveal();
   return (
     <motion.div
-      ref={ref}
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      animate={inView ? "show" : "hidden"}
+      whileInView="show"
+      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
     >
       <div className="mb-1.5 flex items-center justify-between gap-2">
         <span className="flex items-center gap-2 text-xs font-semibold text-hero-text">
@@ -27,7 +25,8 @@ function FooterSkillBar({ svg, name, percent, delay = 0 }) {
         <motion.div
           className="h-full rounded-full bg-gradient-to-r from-hero-primary via-hero-secondary to-hero-accent"
           initial={{ width: 0 }}
-          animate={{ width: inView ? `${percent}%` : 0 }}
+          whileInView={{ width: `${percent}%` }}
+          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
           transition={{ duration: 1, delay: delay + 0.2, ease: "easeOut" }}
         ></motion.div>
       </div>
