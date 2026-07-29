@@ -286,11 +286,9 @@ function App() {
                         value={{ visibleSection, setVisibleSection }}
                       >
                         <DashboardStatsProvider>
-                          <div id="navBar">
-                            <TheNaveBar />
-                          </div>
+                          <div id="navBar">{/* <TheNaveBar /> */}</div>
                           <div ref={introRef} id={sectionIDS.home.sectionId}>
-                            {/* <Indroduction /> */}
+                            <Indroduction />
                           </div>
                           <div ref={aboutRef} id={sectionIDS.aboutME.sectionId}>
                             <AboutMe />
