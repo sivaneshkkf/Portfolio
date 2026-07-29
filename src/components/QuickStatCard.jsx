@@ -1,13 +1,15 @@
 import { motion } from "motion/react";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 
 function QuickStatCard({ icon, text, delay = 0 }) {
+  const { ref, inView } = useReveal();
   return (
     <motion.div
+      ref={ref}
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+      animate={inView ? "show" : "hidden"}
       whileHover={{ y: -3 }}
       className="flex items-center gap-2.5 rounded-xl border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-3.5 py-3 transition-shadow duration-300 hover:shadow-md"
     >

@@ -7,8 +7,13 @@ import { projectsMeta } from "../data/projectsMeta";
 import BreakLine from "../components/BreakLine";
 import MobileAppsLi from "../components/MobileAppsLI";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 
 function Projects() {
+  const badge = useReveal();
+  const heading = useReveal();
+  const lead = useReveal();
+
   return (
     <div className="relative overflow-hidden bg-primary dark:bg-gradient-to-b dark:from-[#020617] dark:via-hero-bg dark:to-hero-bg2 py-20 sm:py-28 lg:py-36 px-5">
       {/* decorative background */}
@@ -24,10 +29,10 @@ function Projects() {
         {/* section header */}
         <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
           <motion.div
+            ref={badge.ref}
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            animate={badge.inView ? "show" : "hidden"}
             className="inline-flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-4 py-1.5 mb-4"
           >
             <span className="text-sm">🚀</span>
@@ -42,10 +47,10 @@ function Projects() {
           />
 
           <motion.h2
+            ref={heading.ref}
             variants={FadeIn("up", 0.2, 0)}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            animate={heading.inView ? "show" : "hidden"}
             className="mt-4 font-manrope text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-textHead dark:text-dark-textHead"
           >
             Things{" "}
@@ -55,10 +60,10 @@ function Projects() {
           </motion.h2>
 
           <motion.p
+            ref={lead.ref}
             variants={FadeIn("up", 0.3, 0)}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            animate={lead.inView ? "show" : "hidden"}
             className="mt-4 text-sm sm:text-base text-textpara dark:text-dark-textpara"
           >
             A collection of full-stack applications demonstrating clean

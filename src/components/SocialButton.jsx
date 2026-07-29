@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import Tooltip from "@mui/material/Tooltip";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 
 function SocialButton({
   href,
@@ -14,6 +15,7 @@ function SocialButton({
 }) {
   const [ripples, setRipples] = useState([]);
   const isDarkSurface = surface === "dark";
+  const { ref, inView } = useReveal();
 
   const handleClick = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -30,10 +32,10 @@ function SocialButton({
 
   return (
     <motion.div
+      ref={ref}
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+      animate={inView ? "show" : "hidden"}
     >
       <Tooltip title={label} arrow>
         <motion.a

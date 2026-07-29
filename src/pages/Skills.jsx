@@ -10,12 +10,31 @@ import { LearningData } from "../data/LearningData";
 import { ProjectData, MobileAppData } from "../data/ProjectData";
 import sectionIDS from "../data/SectionIDS";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 import MemoryIcon from "@mui/icons-material/Memory";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 const CATEGORIES = ["Frontend", "Backend", "Database", "Tools"];
+
+function CategoryHeading({ category }) {
+  const { ref, inView } = useReveal();
+  return (
+    <motion.div
+      ref={ref}
+      variants={FadeIn("up", 0.1, 0)}
+      initial="hidden"
+      animate={inView ? "show" : "hidden"}
+      className="flex items-center gap-4 mb-8"
+    >
+      <h3 className="font-manrope text-xl sm:text-2xl font-bold text-textHead dark:text-dark-textHead whitespace-nowrap">
+        {category}
+      </h3>
+      <div className="h-px flex-1 bg-gradient-to-r from-hero-primary/40 via-hero-secondary/30 to-transparent"></div>
+    </motion.div>
+  );
+}
 
 function SKills() {
   const enrichedSkills = skillsData.map((skill) => ({
@@ -24,6 +43,11 @@ function SKills() {
   }));
 
   const totalProjects = ProjectData.length + MobileAppData.length;
+
+  const badge = useReveal();
+  const heading = useReveal();
+  const lead = useReveal();
+  const learningHeading = useReveal();
 
   return (
     <div className="relative overflow-hidden bg-primary dark:bg-gradient-to-b dark:from-hero-bg2 dark:via-hero-bg dark:to-[#020617] py-20 sm:py-28 lg:py-36 px-5">
@@ -40,10 +64,10 @@ function SKills() {
         {/* section header */}
         <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
           <motion.div
+            ref={badge.ref}
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            animate={badge.inView ? "show" : "hidden"}
             className="inline-flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-4 py-1.5 mb-4"
           >
             <span className="text-sm">💻</span>
@@ -58,10 +82,10 @@ function SKills() {
           />
 
           <motion.h2
+            ref={heading.ref}
             variants={FadeIn("up", 0.2, 0)}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            animate={heading.inView ? "show" : "hidden"}
             className="mt-4 font-manrope text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-textHead dark:text-dark-textHead"
           >
             Technologies I{" "}
@@ -71,10 +95,10 @@ function SKills() {
           </motion.h2>
 
           <motion.p
+            ref={lead.ref}
             variants={FadeIn("up", 0.3, 0)}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            animate={lead.inView ? "show" : "hidden"}
             className="mt-4 text-sm sm:text-base text-textpara dark:text-dark-textpara"
           >
             Building scalable and modern full-stack applications using
@@ -90,22 +114,7 @@ function SKills() {
 
             return (
               <div key={category}>
-                <motion.div
-                  variants={FadeIn("up", 0.1, 0)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{
-                    once: true,
-                    amount: 0,
-                    margin: "0px 0px 300px 0px",
-                  }}
-                  className="flex items-center gap-4 mb-8"
-                >
-                  <h3 className="font-manrope text-xl sm:text-2xl font-bold text-textHead dark:text-dark-textHead whitespace-nowrap">
-                    {category}
-                  </h3>
-                  <div className="h-px flex-1 bg-gradient-to-r from-hero-primary/40 via-hero-secondary/30 to-transparent"></div>
-                </motion.div>
+                <CategoryHeading category={category} />
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
                   {items.map((skill, index) => (
@@ -163,10 +172,10 @@ function SKills() {
         {/* currently learning */}
         <div className="mt-20 sm:mt-24">
           <motion.h3
+            ref={learningHeading.ref}
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            animate={learningHeading.inView ? "show" : "hidden"}
             className="text-center font-manrope text-xl sm:text-2xl font-bold text-textHead dark:text-dark-textHead mb-8"
           >
             Currently Learning

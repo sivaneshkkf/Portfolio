@@ -7,6 +7,7 @@ import resume from "../images/resume.jpg";
 import BreakLine from "../components/BreakLine";
 import { motion } from "motion/react";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 import sivanesh_resume from "../images/SIVANESH-RESUME.pdf";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
@@ -33,6 +34,14 @@ function getRoleTitle(title) {
 }
 
 function Resume() {
+  const badge = useReveal();
+  const heading = useReveal();
+  const lead = useReveal();
+  const careerFlow = useReveal();
+  const resumePreview = useReveal();
+  const currentRoleBadge = useReveal();
+  const cta = useReveal();
+
   const [progressValue, setProgressValue] = useState(0); // Actual progress
   const [displayedProgress, setDisplayedProgress] = useState(0); // Displayed for animation
 
@@ -134,10 +143,10 @@ function Resume() {
         {/* section header */}
         <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
           <motion.div
+            ref={badge.ref}
             variants={FadeIn("up", 0.1, 0)}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            animate={badge.inView ? "show" : "hidden"}
             className="inline-flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-4 py-1.5 mb-4"
           >
             <span className="text-sm">📄</span>
@@ -152,10 +161,10 @@ function Resume() {
           />
 
           <motion.h2
+            ref={heading.ref}
             variants={FadeIn("up", 0.2, 0)}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            animate={heading.inView ? "show" : "hidden"}
             className="mt-4 font-manrope text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-textHead dark:text-dark-textHead"
           >
             Resume &{" "}
@@ -165,10 +174,10 @@ function Resume() {
           </motion.h2>
 
           <motion.p
+            ref={lead.ref}
             variants={FadeIn("up", 0.3, 0)}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            animate={lead.inView ? "show" : "hidden"}
             className="mt-4 text-sm sm:text-base text-textpara dark:text-dark-textpara"
           >
             A timeline of my education, professional growth, and hands-on
@@ -178,10 +187,10 @@ function Resume() {
 
         {/* career progression flow */}
         <motion.div
+          ref={careerFlow.ref}
           variants={FadeIn("up", 0.1, 0)}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+          animate={careerFlow.inView ? "show" : "hidden"}
           className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 mb-16 sm:mb-20"
         >
           {careerPath.map((role, i) => (
@@ -209,10 +218,10 @@ function Resume() {
           <div className="lg:col-span-2 flex flex-col gap-8">
             {/* resume preview */}
             <motion.div
+              ref={resumePreview.ref}
               variants={FadeIn("up", 0.2, 0)}
               initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+              animate={resumePreview.inView ? "show" : "hidden"}
               whileHover={{ y: -4 }}
               className="rounded-3xl p-[2px] bg-gradient-to-br from-hero-primary via-hero-secondary to-hero-accent shadow-xl shadow-black/10"
             >
@@ -279,10 +288,10 @@ function Resume() {
                 delay={0.3}
               />
               <motion.div
+                ref={currentRoleBadge.ref}
                 variants={FadeIn("up", 0.4, 0)}
                 initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+                animate={currentRoleBadge.inView ? "show" : "hidden"}
                 whileHover={{ y: -4 }}
                 className="flex flex-col items-center text-center gap-2 rounded-2xl border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-3 py-6 shadow-sm transition-shadow duration-300 hover:shadow-lg"
               >
@@ -338,10 +347,10 @@ function Resume() {
 
         {/* CTA */}
         <motion.div
+          ref={cta.ref}
           variants={FadeIn("up", 0.2, 0)}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+          animate={cta.inView ? "show" : "hidden"}
           className="mt-20 sm:mt-24 max-w-3xl mx-auto rounded-3xl p-[1.5px] bg-gradient-to-r from-hero-primary via-hero-secondary to-hero-accent"
         >
           <div className="rounded-3xl bg-white/90 dark:bg-dark-primary/90 backdrop-blur-md px-8 sm:px-12 py-10 text-center">

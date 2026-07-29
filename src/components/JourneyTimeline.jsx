@@ -3,6 +3,53 @@ import { motion, useReducedMotion } from "motion/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { JourneyData } from "../data/JourneyData";
 import ConfettiBurst from "./ConfettiBurst";
+import { useReveal } from "../hooks/useReveal";
+
+function MilestoneCard({ item, style, isActive, shouldReduceMotion }) {
+  const { ref, inView } = useReveal();
+
+  return (
+    <motion.div
+      ref={ref}
+      tabIndex={0}
+      initial={
+        shouldReduceMotion
+          ? { opacity: 0 }
+          : { opacity: 0, y: 35, x: 15, scale: 0.96 }
+      }
+      animate={
+        inView
+          ? { opacity: 1, y: 0, x: 0, scale: 1 }
+          : shouldReduceMotion
+          ? { opacity: 0 }
+          : { opacity: 0, y: 35, x: 15, scale: 0.96 }
+      }
+      transition={{
+        duration: 0.6,
+        type: "spring",
+        stiffness: 100,
+        damping: 14,
+      }}
+      whileHover={shouldReduceMotion ? {} : { y: -5 }}
+      style={{
+        borderColor: isActive ? style.color : undefined,
+        boxShadow: isActive ? `0 0 20px ${style.glow}` : undefined,
+      }}
+      className={`relative z-10 w-full max-w-xl rounded-2xl border bg-white/90 dark:bg-dark-primary/90 backdrop-blur-md p-5 sm:p-6 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-hero-primary focus:outline-none ${
+        isActive
+          ? "scale-[1.01]"
+          : "border-black/5 dark:border-white/10 shadow-sm"
+      }`}
+    >
+      <h4 className="font-manrope text-base sm:text-lg font-extrabold text-textHead dark:text-dark-textHead transition-colors duration-300">
+        {item.title}
+      </h4>
+      <p className="text-sm text-textpara dark:text-dark-textpara mt-2 leading-relaxed font-normal">
+        {item.description}
+      </p>
+    </motion.div>
+  );
+}
 
 const milestoneStyles = [
   {
@@ -277,39 +324,12 @@ function JourneyTimeline() {
                 </div>
 
                 {/* Milestone Details Card */}
-                <motion.div
-                  tabIndex={0}
-                  initial={
-                    shouldReduceMotion
-                      ? { opacity: 0 }
-                      : { opacity: 0, y: 35, x: 15, scale: 0.96 }
-                  }
-                  whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
-                  transition={{
-                    duration: 0.6,
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 14,
-                  }}
-                  whileHover={shouldReduceMotion ? {} : { y: -5 }}
-                  style={{
-                    borderColor: isActive ? style.color : undefined,
-                    boxShadow: isActive ? `0 0 20px ${style.glow}` : undefined,
-                  }}
-                  className={`relative z-10 w-full max-w-xl rounded-2xl border bg-white/90 dark:bg-dark-primary/90 backdrop-blur-md p-5 sm:p-6 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-hero-primary focus:outline-none ${
-                    isActive
-                      ? "scale-[1.01]"
-                      : "border-black/5 dark:border-white/10 shadow-sm"
-                  }`}
-                >
-                  <h4 className="font-manrope text-base sm:text-lg font-extrabold text-textHead dark:text-dark-textHead transition-colors duration-300">
-                    {item.title}
-                  </h4>
-                  <p className="text-sm text-textpara dark:text-dark-textpara mt-2 leading-relaxed font-normal">
-                    {item.description}
-                  </p>
-                </motion.div>
+                <MilestoneCard
+                  item={item}
+                  style={style}
+                  isActive={isActive}
+                  shouldReduceMotion={shouldReduceMotion}
+                />
               </div>
             );
           })}

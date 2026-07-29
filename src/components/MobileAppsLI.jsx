@@ -3,7 +3,27 @@ import { useContext, useEffect, useState } from "react";
 import { ScreenSizeContext } from "../context/ScreenSizeContext";
 import { mobileAppMeta, mobileAppTechIcons } from "../data/mobileAppMeta";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 import TechPill from "./TechPill";
+
+function FeatureChip({ f, delay }) {
+  const { ref, inView } = useReveal();
+  return (
+    <motion.div
+      ref={ref}
+      variants={FadeIn("up", delay, 0)}
+      initial="hidden"
+      animate={inView ? "show" : "hidden"}
+      whileHover={{ y: -3 }}
+      className="flex items-center gap-2.5 rounded-xl border border-black/5 dark:border-white/10 bg-white/60 dark:bg-white/5 px-3.5 py-2.5 transition-shadow duration-300 hover:shadow-md"
+    >
+      <span className="text-base">{f.icon}</span>
+      <span className="text-xs sm:text-sm font-medium text-textHead dark:text-dark-textHead">
+        {f.label}
+      </span>
+    </motion.div>
+  );
+}
 import AboutStatCard from "./AboutStatCard";
 import CtaButton from "./Buttons/CtaButton";
 import LaunchRoundedIcon from "@mui/icons-material/LaunchRounded";
@@ -19,6 +39,9 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
 
   const { ScreenSize } = useContext(ScreenSizeContext);
   const [xVal, setXval] = useState(getResponsiveXvalue());
+  const badge = useReveal();
+  const phones = useReveal();
+  const info = useReveal();
 
   function getResponsiveXvalue() {
     const width = window.innerWidth;
@@ -63,10 +86,10 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
       </div>
 
       <motion.div
+        ref={badge.ref}
         variants={FadeIn("up", 0.1, 0)}
         initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+        animate={badge.inView ? "show" : "hidden"}
         className="inline-flex items-center gap-2 rounded-full border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-4 py-1.5 mb-8 shadow-sm"
       >
         <span className="text-sm">⭐</span>
@@ -78,10 +101,10 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
       <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 items-center">
         {/* mobile mockups - 40% */}
         <motion.div
+          ref={phones.ref}
           variants={FadeIn("left", 0.2, 0)}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+          animate={phones.inView ? "show" : "hidden"}
           className="lg:col-span-2 relative flex items-center justify-center p-10"
           style={{ perspective: "1000px" }}
         >
@@ -144,10 +167,10 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
 
         {/* project information - 60% */}
         <motion.div
+          ref={info.ref}
           variants={FadeIn("right", 0.2, 0)}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+          animate={info.inView ? "show" : "hidden"}
           className="lg:col-span-3 flex flex-col gap-6"
         >
           <div>
@@ -171,20 +194,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
           {meta.features && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {meta.features.map((f, i) => (
-                <motion.div
-                  key={f.label}
-                  variants={FadeIn("up", 0.1 + i * 0.05, 0)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
-                  whileHover={{ y: -3 }}
-                  className="flex items-center gap-2.5 rounded-xl border border-black/5 dark:border-white/10 bg-white/60 dark:bg-white/5 px-3.5 py-2.5 transition-shadow duration-300 hover:shadow-md"
-                >
-                  <span className="text-base">{f.icon}</span>
-                  <span className="text-xs sm:text-sm font-medium text-textHead dark:text-dark-textHead">
-                    {f.label}
-                  </span>
-                </motion.div>
+                <FeatureChip key={f.label} f={f} delay={0.1 + i * 0.05} />
               ))}
             </div>
           )}

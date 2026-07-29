@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "motion/react";
+import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 
 function AboutStatCard({ icon, value, suffix = "", label, delay = 0 }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const { ref, inView } = useReveal({ amount: 0.6 });
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -37,8 +37,7 @@ function AboutStatCard({ icon, value, suffix = "", label, delay = 0 }) {
       ref={ref}
       variants={FadeIn("up", delay, 0)}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+      animate={inView ? "show" : "hidden"}
       whileHover={{ y: -4 }}
       className="flex flex-col items-center text-center gap-2 rounded-2xl border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-5 py-6 shadow-sm transition-shadow duration-300 hover:shadow-lg"
     >

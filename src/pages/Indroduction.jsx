@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { TypeAnimation } from "react-type-animation";
 import { FadeIn } from "../varients/varientAnim";
+import { useReveal } from "../hooks/useReveal";
 import sivaneshImg from "../images/sivaneshDP.jpg";
 import CVdownloadBtn from "../components/Buttons/CVdowloadBtn";
 import CtaButton from "../components/Buttons/CtaButton";
@@ -56,6 +57,11 @@ function Indroduction() {
     x.set(0);
     y.set(0);
   };
+
+  const leftColumn = useReveal();
+  const badge = useReveal();
+  const shareBtn = useReveal();
+  const profileCard = useReveal();
 
   const [progressValue, setProgressValue] = useState(0); // Actual progress
   const [displayedProgress, setDisplayedProgress] = useState(0); // Displayed for animation
@@ -167,18 +173,18 @@ function Indroduction() {
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-10">
           {/* left column */}
           <motion.div
+            ref={leftColumn.ref}
             className="flex-1 w-full max-w-2xl space-y-6 text-center lg:text-left"
             variants={FadeIn("up", 0.4, 0)}
             initial="hidden"
-            whileInView={"show"}
-            viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+            animate={leftColumn.inView ? "show" : "hidden"}
           >
             <motion.div
+              ref={badge.ref}
               className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md"
               variants={FadeIn("up", 0.2, 0)}
               initial="hidden"
-              whileInView={"show"}
-              viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+              animate={badge.inView ? "show" : "hidden"}
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-hero-success opacity-75"></span>
@@ -383,10 +389,10 @@ function Indroduction() {
                 </SocialIconBtn>
 
                 <motion.div
+                  ref={shareBtn.ref}
                   variants={FadeIn("up", 0.6, 0)}
                   initial="hidden"
-                  whileInView={"show"}
-                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+                  animate={shareBtn.inView ? "show" : "hidden"}
                   className="relative"
                 >
                   <PopupShareBtn
@@ -406,11 +412,11 @@ function Indroduction() {
             onMouseLeave={handleMouseLeave}
           >
             <motion.div
+              ref={profileCard.ref}
               className="relative"
               variants={FadeIn("up", 0.6, 0)}
               initial="hidden"
-              whileInView={"show"}
-              viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+              animate={profileCard.inView ? "show" : "hidden"}
             >
               <div
                 aria-hidden="true"

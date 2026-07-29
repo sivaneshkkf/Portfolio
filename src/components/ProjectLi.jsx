@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { motion } from "motion/react";
+import { useReveal } from "../hooks/useReveal";
 import TechPill from "./TechPill";
 import CtaButton from "./Buttons/CtaButton";
 import LaunchRoundedIcon from "@mui/icons-material/LaunchRounded";
@@ -51,12 +52,13 @@ function ProjectLi({
   metadata = EMPTY_METADATA,
   delay = 0,
 }) {
+  const { ref, inView } = useReveal();
   return (
     <motion.li
+      ref={ref}
       variants={CARD_ENTRANCE(delay)}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+      animate={inView ? "show" : "hidden"}
       whileHover={{ y: -4, scale: 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
       className={`group relative motion-reduce:!transform-none h-full ${
