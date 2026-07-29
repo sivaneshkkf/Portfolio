@@ -31,7 +31,7 @@ const navSocials = SocialLinks.filter((social) =>
 );
 
 function TheNaveBar() {
-  const { visibleSection, setVisibleSection } = useContext(HeadingContext);
+  // const { visibleSection, setVisibleSection } = useContext(HeadingContext);
   // const { setScrollEnable } = useContext(ScrolContext);
 
   // const [isScrolled, setIsScrolled] = useState(false);
@@ -59,11 +59,7 @@ function TheNaveBar() {
   //   setMobileOpen(false);
   // };
 
-  return (
-    <div className="fixed top-0 left-0 right-0 z-50 px-2 pt-2 sm:px-3 sm:pt-3">
-      Sivanesh v1
-    </div>
-  );
+  return <div className="">Sivanesh v1</div>;
 }
 
 export default TheNaveBar;
