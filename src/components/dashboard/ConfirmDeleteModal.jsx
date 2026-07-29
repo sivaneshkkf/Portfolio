@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 function ConfirmDeleteModal({ open, title, description, onConfirm, onCancel, loading }) {

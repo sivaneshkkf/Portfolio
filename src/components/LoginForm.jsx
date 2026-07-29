@@ -5,7 +5,7 @@ import ContactInput from "./ContactInput";
 import BtnForm from "./Buttons/BtnForm";
 import ConfettiBurst from "./ConfettiBurst";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { logInFirebase } from "../firebase/config";
 import { LoginFormContext, LoginStatus } from "../context/LoginFormContext";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";

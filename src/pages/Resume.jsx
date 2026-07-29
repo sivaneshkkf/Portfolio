@@ -5,7 +5,7 @@ import { EducationData } from "../data/EducationData";
 import { experienceMeta } from "../data/experienceMeta";
 import resume from "../images/resume.jpg";
 import BreakLine from "../components/BreakLine";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { FadeIn } from "../varients/varientAnim";
 import sivanesh_resume from "../images/SIVANESH-RESUME.pdf";
 import axios from "axios";

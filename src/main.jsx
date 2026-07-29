@@ -3,6 +3,7 @@ import "./index.css";
 
 import LoadingAnim from "./components/LoadingAnim.jsx";
 import React, { Suspense, useEffect, useState } from "react";
+import { ReactLenis } from "lenis/react";
 import { ScreenSizeContext } from "./context/ScreenSizeContext.jsx";
 import { ScrollProvider } from "./utils/ScrollValues.jsx";
 
@@ -42,8 +43,13 @@ function AppWithDelay() {
     <ScreenSizeContext.Provider value={{ ScreenSize, setScreenSize }}>
       {showSuspense ? (
         <Suspense fallback={<LoadingAnim />}>
-           <ScrollProvider>
-          <LazyComponentApp />
+          <ScrollProvider>
+            <ReactLenis
+              root
+              options={{ lerp: 0.1, smoothWheel: true, syncTouch: false }}
+            >
+              <LazyComponentApp />
+            </ReactLenis>
           </ScrollProvider>
         </Suspense>
       ) : (

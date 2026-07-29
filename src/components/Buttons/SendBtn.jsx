@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
 function SendBtn({ showMessage, text }) {

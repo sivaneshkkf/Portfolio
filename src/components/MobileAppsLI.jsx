@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useContext, useEffect, useState } from "react";
 import { ScreenSizeContext } from "../context/ScreenSizeContext";
 import { mobileAppMeta, mobileAppTechIcons } from "../data/mobileAppMeta";

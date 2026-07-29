@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import TheHeading from "../components/TheHeading";
 import sectionIDS from "../data/SectionIDS";
 import ProjectLi from "../components/ProjectLi";

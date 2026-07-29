@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import TechPill from "./TechPill";
 import CtaButton from "./Buttons/CtaButton";
 import LaunchRoundedIcon from "@mui/icons-material/LaunchRounded";

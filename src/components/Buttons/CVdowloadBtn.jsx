@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 
 function CVdownloadBtn({ progressValue }) {
   const isDownloading = progressValue > 0 && progressValue < 100;

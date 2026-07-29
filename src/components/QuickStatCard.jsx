@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { FadeIn } from "../varients/varientAnim";
 
 function QuickStatCard({ icon, text, delay = 0 }) {

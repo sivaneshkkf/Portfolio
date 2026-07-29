@@ -30,6 +30,7 @@ import {
 import DashboardScreen from "./pages/DashboardScreen";
 import getUserLocation from "./utils/GetUserLocation";
 import { DashboardStatsProvider } from "./context/DashboardStatsContext";
+import { useLenis } from "lenis/react";
 
 function App() {
   const [visibleSection, setVisibleSection] = useState({
@@ -51,6 +52,7 @@ function App() {
   const [loginFormOpen, setLoginFormOpen] = useState(false);
 
   const { scrollPosition, setScrollPosition } = useScrollPosition();
+  const lenis = useLenis();
 
   const [loginStatus, setLoginStatus] = useState(false);
 
@@ -143,6 +145,11 @@ function App() {
   // chance to process that style change -- calling scrollTo synchronously
   // in the same tick is silently a no-op. One rAF is enough to let that
   // settle before asking the browser to scroll.
+  //
+  // Uses Lenis's own scrollTo rather than native window.scrollTo: Lenis
+  // drives page scroll via its own rAF loop, so a native smooth-scroll
+  // animation running at the same time gets fought/overridden by it every
+  // frame. Routing through Lenis keeps its internal position in sync.
   useEffect(() => {
     if (scrolEnable) return;
 
@@ -150,18 +157,20 @@ function App() {
       const element = document.getElementById(visibleSection.sectionId);
       if (!element) return;
 
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = window.pageYOffset + elementPosition;
       const navbarHeight = document.querySelector("#navBar").offsetHeight;
+      const offset = -(navbarHeight + 60);
 
-      window.scrollTo({
-        top: offsetPosition - navbarHeight - 60,
-        behavior: "smooth",
-      });
+      if (lenis) {
+        lenis.scrollTo(element, { offset });
+      } else {
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = window.pageYOffset + elementPosition;
+        window.scrollTo({ top: offsetPosition + offset, behavior: "smooth" });
+      }
     });
 
     return () => cancelAnimationFrame(rafId);
-  }, [visibleSection.navLiId]);
+  }, [visibleSection.navLiId, lenis]);
 
   // Enable scrolling when using the mouse wheel
   useEffect(() => {

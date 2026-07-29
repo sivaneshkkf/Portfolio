@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const RATING_OPTIONS = [
   { value: 1, emoji: "😞", label: "Poor" },

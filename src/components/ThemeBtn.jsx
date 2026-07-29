@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Theme } from "../context/HeadingContext";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";

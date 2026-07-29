@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { FadeIn } from "../varients/varientAnim";
 
 function AboutStatCard({ icon, value, suffix = "", label, delay = 0 }) {

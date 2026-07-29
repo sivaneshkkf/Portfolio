@@ -1,5 +1,5 @@
 import { Fragment, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { UseFetchCollection } from "../../firebase/config";
 import {
   normalizeLocation,

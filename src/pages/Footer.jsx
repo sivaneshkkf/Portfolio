@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { FeedbackFormContext } from "../context/FeedBackFormContext";
 import { HeadingContext } from "../context/HeadingContext";
 import { ScrolContext } from "../context/ScrolContext";

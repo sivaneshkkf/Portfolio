@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Tooltip from "@mui/material/Tooltip";
 import { FadeIn } from "../varients/varientAnim";
 

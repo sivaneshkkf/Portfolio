@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { UseFetchCollection } from "../../firebase/config";
 import { normalizeLocation, relativeTime, toDate } from "../../utils/dashboardHelpers";
 import ChartCard from "./ChartCard";

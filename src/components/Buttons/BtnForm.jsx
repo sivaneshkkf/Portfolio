@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 function BtnForm({ text, className = "", loading, onClick }) {
   const [ripples, setRipples] = useState([]);

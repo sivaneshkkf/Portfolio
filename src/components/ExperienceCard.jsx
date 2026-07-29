@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import BusinessIcon from "@mui/icons-material/Business";
 import TechPill from "./TechPill";
 import { experienceTechIcons } from "../data/experienceTechIcons";

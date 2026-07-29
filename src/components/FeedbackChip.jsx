@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 function FeedbackChip({ label, selected, onClick, delay = 0 }) {
   return (

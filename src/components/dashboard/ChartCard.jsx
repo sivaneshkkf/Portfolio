@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { FadeIn } from "../../varients/varientAnim";
 
 function ChartCard({ title, subtitle, action, children, delay = 0, className = "" }) {

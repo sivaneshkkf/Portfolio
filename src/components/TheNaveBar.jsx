@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import NavLi from "./NavLi";
 import CtaButton from "./Buttons/CtaButton";
 import SocialButton from "./SocialButton";

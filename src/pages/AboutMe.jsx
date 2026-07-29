@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import BreakLine from "../components/BreakLine";
 import TheHeading from "../components/TheHeading";
 import JourneyTimeline from "../components/JourneyTimeline";

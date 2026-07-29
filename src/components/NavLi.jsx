@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 function NavLi({ label, isActive, compact, onClick }) {
   return (

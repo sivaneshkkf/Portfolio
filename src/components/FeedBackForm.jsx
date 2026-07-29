@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import FeedbackInput from "./FeedBackInput";
 import FeedbackRatingPicker from "./FeedbackRatingPicker";
 import FeedbackChip from "./FeedbackChip";

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { FadeIn } from "../varients/varientAnim";
 
 function StatCard({ icon, value, label, delay = 0 }) {
