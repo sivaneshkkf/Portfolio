@@ -11,6 +11,15 @@
 
 html, body {
     overflow-x: hidden;
+    /* Matches the hero/footer gradient's darkest stop (#020617), which is
+     * always dark regardless of the light/dark theme toggle. Mobile
+     * browsers' native rubber-band overscroll (Lenis doesn't intercept
+     * touch scroll -- see `syncTouch: false` in main.jsx) briefly reveals
+     * whatever sits behind the document past its top/bottom edge; without
+     * this, that flashed the browser's default white instead of blending
+     * with the page. */
+    background-color: #020617;
+    overscroll-behavior-y: none;
 }
 
 /*
