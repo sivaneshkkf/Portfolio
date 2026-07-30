@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import NavLi from "./NavLi";
 import CtaButton from "./Buttons/CtaButton";
@@ -36,13 +36,41 @@ function TheNaveBar() {
   const { setScrollEnable } = useContext(ScrolContext);
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const handleScrollShadow = () => setIsScrolled(window.scrollY > 12);
-    handleScrollShadow();
-    window.addEventListener("scroll", handleScrollShadow);
-    return () => window.removeEventListener("scroll", handleScrollShadow);
+    let hideTimer;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 12);
+
+      if (currentScrollY < 50 || currentScrollY < lastScrollY.current) {
+        setIsHidden(false);
+      } else if (currentScrollY > lastScrollY.current) {
+        setIsHidden(true);
+      }
+      lastScrollY.current = currentScrollY;
+
+      // If the user stops scrolling while the nav is showing (e.g. after
+      // scrolling up), don't leave it visible forever -- hide it again once
+      // they've been idle for a few seconds, same as it would on scroll-down.
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => {
+        if (window.scrollY > 50) {
+          setIsHidden(true);
+        }
+      }, 3000);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(hideTimer);
+    };
   }, []);
 
   useScrollLock(mobileOpen);
@@ -56,7 +84,13 @@ function TheNaveBar() {
   };
 
   return (
-    <div className="px-2 pt-2 sm:px-3 sm:pt-3">
+    <div
+      className={`fixed top-0 left-0 right-0 z-50 px-2 pt-2 transition-transform duration-500 sm:px-3 sm:pt-3 ${
+        isHidden && !mobileOpen
+          ? "-translate-y-full pointer-events-none"
+          : "translate-y-0"
+      }`}
+    >
       <div
         className={`mx-auto max-w-[1400px] overflow-hidden border border-white/10 bg-hero-bg/90 backdrop-blur-md dark:backdrop-blur-2xl transition-all duration-300 dark:bg-hero-bg/75 ${
           isScrolled
