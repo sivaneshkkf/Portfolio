@@ -58,7 +58,7 @@ function TheNaveBar() {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 px-2 pt-2 sm:px-3 sm:pt-3">
       <div
-        className={`mx-auto max-w-[1400px] overflow-hidden border border-white/10 bg-hero-bg/90 backdrop-blur-md dark:backdrop-blur-2xl transition-all duration-300 dark:bg-hero-bg/75 ${
+        className={`mx-auto max-w-[1400px] overflow-hidden border border-white/10 bg-hero-bg/90 transition-all duration-300 dark:bg-hero-bg/75 ${
           isScrolled
             ? "rounded-2xl shadow-xl shadow-black/40 sm:rounded-[20px]"
             : "rounded-2xl shadow-md shadow-black/20 sm:rounded-[24px]"
