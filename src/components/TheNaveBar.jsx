@@ -56,10 +56,7 @@ function TheNaveBar() {
   };
 
   return (
-    <div
-      className="px-2 pt-2 sm:px-3 sm:pt-3"
-      style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000 }}
-    >
+    <div className="px-2 pt-2 sm:px-3 sm:pt-3">
       <div
         className={`mx-auto max-w-[1400px] overflow-hidden border border-white/10 bg-hero-bg/90 backdrop-blur-md dark:backdrop-blur-2xl transition-all duration-300 dark:bg-hero-bg/75 ${
           isScrolled

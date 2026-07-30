@@ -265,18 +265,25 @@ function App() {
           >
             <LoginStatus.Provider value={{ loginStatus, setLoginStatus }}>
               <Theme.Provider value={{ theme, setTheme }}>
-                {dashboardOpen ? (
-                  <DashboardScreen />
-                ) : (
-                  <div className="relative">
-                    <ScrolContext.Provider
-                      value={{ scrolEnable, setScrollEnable }}
-                    >
-                      <HeadingContext.Provider
-                        value={{ visibleSection, setVisibleSection }}
-                      >
-                        <DashboardStatsProvider>
-                          <div id="navBar">
+                <ScrolContext.Provider value={{ scrolEnable, setScrollEnable }}>
+                  <HeadingContext.Provider
+                    value={{ visibleSection, setVisibleSection }}
+                  >
+                    <DashboardStatsProvider>
+                      {dashboardOpen ? (
+                        <DashboardScreen />
+                      ) : (
+                        <div className="relative">
+                          <div
+                            id="navBar"
+                            style={{
+                              position: "fixed",
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              zIndex: 1,
+                            }}
+                          >
                             <TheNaveBar />
                           </div>
                           <div ref={introRef} id={sectionIDS.home.sectionId}>
@@ -307,11 +314,11 @@ function App() {
                           <ThemeBtn />
                           <FeedBackForm />
                           <LoginForm />
-                        </DashboardStatsProvider>
-                      </HeadingContext.Provider>
-                    </ScrolContext.Provider>
-                  </div>
-                )}
+                        </div>
+                      )}
+                    </DashboardStatsProvider>
+                  </HeadingContext.Provider>
+                </ScrolContext.Provider>
               </Theme.Provider>
             </LoginStatus.Provider>
           </FeedbackFormContext.Provider>
