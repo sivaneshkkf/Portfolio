@@ -15,15 +15,23 @@ html, body {
 
 /*
  * iOS Safari/Chrome (WebKit) has a well-documented bug where `position:
- * fixed` elements using `backdrop-filter`/`filter: blur()` -- like this
- * app's fixed navbar, theme toggle, back-to-top button, and login modal --
- * get lazily promoted to a compositing layer. WebKit's tile-based renderer
- * doesn't reliably keep that layer correctly positioned/painted during
- * scroll (worse still with Lenis driving scroll via JS), so the element can
- * jump, disappear, or detach from the viewport entirely. Forcing each such
- * element onto its own stable, pre-composited layer up front -- instead of
- * letting WebKit promote it lazily -- is the standard fix for this bug.
+ * fixed` elements -- especially ones using `backdrop-filter`/`filter:
+ * blur()`, like this app's fixed navbar, theme toggle, back-to-top button,
+ * and login modal -- get lazily promoted to a compositing layer. WebKit's
+ * tile-based renderer doesn't reliably keep that layer correctly
+ * positioned/painted during scroll (worse still with Lenis driving scroll
+ * via JS), so the element can jump, disappear, or detach from the viewport
+ * entirely. Forcing each such element onto its own stable, pre-composited
+ * layer up front -- instead of letting WebKit promote it lazily -- is the
+ * standard fix for this bug.
+ *
+ * The `.fixed` selector is listed explicitly (not just `[class*="backdrop-
+ * blur"]`) because the bug is triggered by `position: fixed` itself, not
+ * only by blur -- e.g. TheNaveBar's outer fixed div has no blur class of
+ * its own (the blur lives on a nested child), so it needs to be targeted
+ * directly rather than relying on it also matching the blur selector.
  */
+.fixed,
 [class*="backdrop-blur"],
 [class*="blur-"] {
     -webkit-transform: translateZ(0);
