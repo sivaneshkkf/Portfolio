@@ -36,7 +36,7 @@ function ThemeBtn() {
       onClick={handleToggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       aria-pressed={isDark}
-      className="fixed bottom-3 right-5 z-50 flex h-8 w-16 items-center justify-between rounded-full border border-white/10 bg-hero-bg2/85 px-1.5 shadow-lg shadow-black/30 backdrop-blur-xl transition-colors duration-300 hover:border-white/20"
+      className="ios-fixed-chrome fixed bottom-3 right-5 z-50 flex h-8 w-16 items-center justify-between rounded-full border border-white/10 bg-hero-bg2/85 px-1.5 shadow-lg shadow-black/30 backdrop-blur-xl transition-colors duration-300 hover:border-white/20"
     >
       <LightModeIcon
         sx={{ fontSize: 13 }}

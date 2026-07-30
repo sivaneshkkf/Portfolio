@@ -248,7 +248,7 @@ function Footer() {
         aria-label="Send feedback"
         onClick={() => setFeedbackFormOpen((pre) => ({ ...pre, open: true }))}
         whileTap={{ scale: 0.94 }}
-        className="group fixed bottom-5 left-5 z-40 flex h-12 items-center overflow-hidden rounded-full border border-white/10 bg-hero-bg2/90 px-3.5 text-hero-text shadow-lg shadow-black/30 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_0_24px_-4px_rgba(139,92,246,0.7)]"
+        className="ios-fixed-chrome group fixed bottom-5 left-5 z-40 flex h-12 items-center overflow-hidden rounded-full border border-white/10 bg-hero-bg2/90 px-3.5 text-hero-text shadow-lg shadow-black/30 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_0_24px_-4px_rgba(139,92,246,0.7)]"
       >
         <ChatBubbleOutlineIcon
           fontSize="small"
@@ -273,7 +273,7 @@ function Footer() {
         transition={{ duration: 0.3 }}
         whileHover={{ y: -4, scale: 1.08 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-20 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-gradient-to-r from-hero-primary to-hero-secondary text-white shadow-lg shadow-hero-primary/40 backdrop-blur-md hover:shadow-[0_0_24px_-2px_rgba(139,92,246,0.7)]"
+        className="ios-fixed-chrome fixed bottom-20 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-gradient-to-r from-hero-primary to-hero-secondary text-white shadow-lg shadow-hero-primary/40 backdrop-blur-md hover:shadow-[0_0_24px_-2px_rgba(139,92,246,0.7)]"
       >
         <motion.span
           animate={{ y: [0, -3, 0] }}

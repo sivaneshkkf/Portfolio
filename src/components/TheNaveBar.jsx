@@ -85,7 +85,7 @@ function TheNaveBar() {
 
   return (
     <div
-      className={`fixed top-0 left-0 right-0 z-50 px-2 pt-2 transition-transform duration-500 sm:px-3 sm:pt-3 ${
+      className={`ios-fixed-chrome fixed top-0 left-0 right-0 z-50 px-2 pt-2 transition-transform duration-500 sm:px-3 sm:pt-3 ${
         isHidden && !mobileOpen
           ? "-translate-y-full pointer-events-none"
           : "translate-y-0"

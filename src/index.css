@@ -15,25 +15,27 @@ html, body {
 
 /*
  * iOS Safari/Chrome (WebKit) has a well-documented bug where `position:
- * fixed` elements -- especially ones using `backdrop-filter`/`filter:
- * blur()`, like this app's fixed navbar, theme toggle, back-to-top button,
- * and login modal -- get lazily promoted to a compositing layer. WebKit's
- * tile-based renderer doesn't reliably keep that layer correctly
- * positioned/painted during scroll (worse still with Lenis driving scroll
- * via JS), so the element can jump, disappear, or detach from the viewport
- * entirely. Forcing each such element onto its own stable, pre-composited
- * layer up front -- instead of letting WebKit promote it lazily -- is the
- * standard fix for this bug.
+ * fixed` elements using `backdrop-filter` get lazily promoted to a
+ * compositing layer, and WebKit's tile-based renderer doesn't reliably
+ * keep that layer correctly positioned/painted during scroll -- the
+ * element can jump, disappear, or detach from the viewport.
  *
- * The `.fixed` selector is listed explicitly (not just `[class*="backdrop-
- * blur"]`) because the bug is triggered by `position: fixed` itself, not
- * only by blur -- e.g. TheNaveBar's outer fixed div has no blur class of
- * its own (the blur lives on a nested child), so it needs to be targeted
- * directly rather than relying on it also matching the blur selector.
+ * IMPORTANT: this must stay scoped to the small, explicit set of
+ * always-mounted "chrome" elements below (navbar, theme toggle,
+ * back-to-top, feedback bubble) via `.ios-fixed-chrome` -- NOT a blanket
+ * `.fixed` / `[class*="blur-"]` selector. This app has ~140 elements
+ * matching `blur-*`/`backdrop-blur-*` (most are decorative background
+ * blobs, not fixed) plus several large `fixed inset-0` full-screen
+ * modals. Forcing all of them onto individually pre-composited GPU
+ * layers at once exhausts WebKit's tile memory budget on real devices,
+ * which causes an even worse bug: blank/checkerboarded content and a
+ * hung main thread (touch/scroll stop responding entirely). This has
+ * happened before in this project's history and had to be reverted --
+ * see git commits "Fix WebKit blur/backdrop-filter scroll-paint bug" /
+ * "Fix iOS Safari/Chrome blank-content bug" and their revert. Keep this
+ * selector list short and explicit.
  */
-.fixed,
-[class*="backdrop-blur"],
-[class*="blur-"] {
+.ios-fixed-chrome {
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     -webkit-backface-visibility: hidden;
