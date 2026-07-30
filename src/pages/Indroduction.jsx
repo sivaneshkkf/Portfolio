@@ -80,7 +80,7 @@ function Indroduction() {
 
   return (
     <motion.div
-      className="relative w-full overflow-hidden bg-hero-bg font-manrope min-h-[90vh] sm:min-h-screen pt-8 md:pt-28 pb-20"
+      className="relative w-full overflow-hidden bg-hero-bg font-manrope min-h-[90vh] sm:min-h-screen pt-12 md:pt-28 pb-20"
       onMouseLeave={() => setPopupState(false)}
     >
       {/* decorative background */}
