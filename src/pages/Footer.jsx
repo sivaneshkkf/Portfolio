@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { FeedbackFormContext } from "../context/FeedBackFormContext";
 import { HeadingContext } from "../context/HeadingContext";
 import { ScrolContext } from "../context/ScrolContext";
+import { ScreenSizeContext } from "../context/ScreenSizeContext";
 import sectionIDS from "../data/SectionIDS";
 import { SocialLinks } from "../data/SocialLinks";
 import skillsData from "../data/skillsData.json";
@@ -44,6 +45,8 @@ function Footer() {
   const { setFeedbackFormOpen } = useContext(FeedbackFormContext);
   const { setVisibleSection } = useContext(HeadingContext);
   const { setScrollEnable } = useContext(ScrolContext);
+  const { ScreenSize } = useContext(ScreenSizeContext);
+  const isMobileScreen = ScreenSize === "sm" || ScreenSize === "md";
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
@@ -248,7 +251,7 @@ function Footer() {
         aria-label="Send feedback"
         onClick={() => setFeedbackFormOpen((pre) => ({ ...pre, open: true }))}
         whileTap={{ scale: 0.94 }}
-        className="ios-fixed-chrome group fixed top-4 left-4 z-40 flex h-[45px] md:h-12 items-center overflow-hidden rounded-full border border-white/10 bg-hero-bg2/90 px-3.5 text-hero-text opacity-80 shadow-lg shadow-black/30 backdrop-blur-xl transition-all duration-300 hover:opacity-100 hover:shadow-[0_0_24px_-4px_rgba(139,92,246,0.7)] md:bottom-5 md:left-5 md:top-auto"
+        className="ios-fixed-chrome group fixed top-2 left-2 z-40 flex h-[45px] md:h-12 items-center overflow-hidden rounded-full border border-white/10 bg-hero-bg2/90 px-3.5 text-hero-text opacity-80 shadow-lg shadow-black/30 backdrop-blur-xl transition-all duration-300 hover:opacity-100 hover:shadow-[0_0_24px_-4px_rgba(139,92,246,0.7)] md:bottom-5 md:left-5 md:top-auto"
       >
         <ChatBubbleOutlineIcon
           sx={{ fontSize: { xs: 14, sm: 18 } }}
@@ -266,14 +269,14 @@ function Footer() {
         onClick={() => goToSection(sectionIDS.home)}
         initial={false}
         animate={{
-          opacity: showBackToTop ? 1 : 0,
+          opacity: showBackToTop ? (isMobileScreen ? 0.6 : 1) : 0,
           y: showBackToTop ? 0 : 16,
           pointerEvents: showBackToTop ? "auto" : "none",
         }}
         transition={{ duration: 0.3 }}
-        whileHover={{ y: -4, scale: 1.08 }}
+        whileHover={{ y: -4, scale: 1.08, opacity: 1 }}
         whileTap={{ scale: 0.9 }}
-        className="ios-fixed-chrome fixed bottom-24 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-gradient-to-r from-hero-primary to-hero-secondary text-white shadow-lg shadow-hero-primary/40 backdrop-blur-md hover:shadow-[0_0_24px_-2px_rgba(139,92,246,0.7)] md:bottom-20"
+        className="ios-fixed-chrome fixed bottom-20 right-3 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-gradient-to-r from-hero-primary to-hero-secondary text-white shadow-lg shadow-hero-primary/40 backdrop-blur-md hover:shadow-[0_0_24px_-2px_rgba(139,92,246,0.7)] md:bottom-20"
       >
         <motion.span
           animate={{ y: [0, -3, 0] }}

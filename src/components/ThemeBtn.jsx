@@ -36,7 +36,7 @@ function ThemeBtn() {
       onClick={handleToggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       aria-pressed={isDark}
-      className="ios-fixed-chrome fixed top-4 right-4 z-50 flex h-8 w-16 items-center justify-between rounded-full border border-white/10 bg-hero-bg2/85 px-1.5 opacity-80 shadow-lg shadow-black/30 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:opacity-100 md:bottom-3 md:right-5 md:top-auto"
+      className="ios-fixed-chrome fixed top-2 right-2 z-50 flex h-8 w-16 items-center justify-between rounded-full border border-white/10 bg-hero-bg2/85 px-1.5 opacity-80 shadow-lg shadow-black/30 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:opacity-100 md:bottom-3 md:right-5 md:top-auto"
     >
       <LightModeIcon
         sx={{ fontSize: { xs: 11, md: 13 } }}
@@ -61,9 +61,15 @@ function ThemeBtn() {
         }`}
       >
         {isDark ? (
-          <DarkModeIcon sx={{ fontSize: { xs: 11, md: 13 } }} className="text-white" />
+          <DarkModeIcon
+            sx={{ fontSize: { xs: 11, md: 13 } }}
+            className="text-white"
+          />
         ) : (
-          <LightModeIcon sx={{ fontSize: { xs: 11, md: 13 } }} className="text-white" />
+          <LightModeIcon
+            sx={{ fontSize: { xs: 11, md: 13 } }}
+            className="text-white"
+          />
         )}
       </motion.span>
     </button>
