@@ -248,10 +248,10 @@ function Footer() {
         aria-label="Send feedback"
         onClick={() => setFeedbackFormOpen((pre) => ({ ...pre, open: true }))}
         whileTap={{ scale: 0.94 }}
-        className="ios-fixed-chrome group fixed bottom-24 left-5 z-40 flex h-12 items-center overflow-hidden rounded-full border border-white/10 bg-hero-bg2/90 px-3.5 text-hero-text shadow-lg shadow-black/30 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_0_24px_-4px_rgba(139,92,246,0.7)] md:bottom-5"
+        className="ios-fixed-chrome group fixed top-4 left-4 z-40 flex h-[45px] md:h-12 items-center overflow-hidden rounded-full border border-white/10 bg-hero-bg2/90 px-3.5 text-hero-text opacity-80 shadow-lg shadow-black/30 backdrop-blur-xl transition-all duration-300 hover:opacity-100 hover:shadow-[0_0_24px_-4px_rgba(139,92,246,0.7)] md:bottom-5 md:left-5 md:top-auto"
       >
         <ChatBubbleOutlineIcon
-          fontSize="small"
+          sx={{ fontSize: { xs: 14, sm: 18 } }}
           className="shrink-0 text-hero-secondary"
         />
         <span className="max-w-0 overflow-hidden whitespace-nowrap text-xs font-semibold opacity-0 transition-all duration-300 group-hover:ml-2 group-hover:max-w-[100px] group-hover:opacity-100">
@@ -273,7 +273,7 @@ function Footer() {
         transition={{ duration: 0.3 }}
         whileHover={{ y: -4, scale: 1.08 }}
         whileTap={{ scale: 0.9 }}
-        className="ios-fixed-chrome fixed bottom-40 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-gradient-to-r from-hero-primary to-hero-secondary text-white shadow-lg shadow-hero-primary/40 backdrop-blur-md hover:shadow-[0_0_24px_-2px_rgba(139,92,246,0.7)] md:bottom-20"
+        className="ios-fixed-chrome fixed bottom-24 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-gradient-to-r from-hero-primary to-hero-secondary text-white shadow-lg shadow-hero-primary/40 backdrop-blur-md hover:shadow-[0_0_24px_-2px_rgba(139,92,246,0.7)] md:bottom-20"
       >
         <motion.span
           animate={{ y: [0, -3, 0] }}

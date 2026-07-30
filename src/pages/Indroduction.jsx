@@ -80,7 +80,7 @@ function Indroduction() {
 
   return (
     <motion.div
-      className="relative w-full overflow-hidden bg-hero-bg font-manrope min-h-[90vh] sm:min-h-screen pt-28 pb-20"
+      className="relative w-full overflow-hidden bg-hero-bg font-manrope min-h-[90vh] sm:min-h-screen pt-8 md:pt-28 pb-20"
       onMouseLeave={() => setPopupState(false)}
     >
       {/* decorative background */}
@@ -321,7 +321,11 @@ function Indroduction() {
                   variants={FadeIn("up", 0.6, 0)}
                   initial="hidden"
                   whileInView={"show"}
-                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+                  viewport={{
+                    once: true,
+                    amount: 0,
+                    margin: "0px 0px 300px 0px",
+                  }}
                   className="relative"
                 >
                   <PopupShareBtn
