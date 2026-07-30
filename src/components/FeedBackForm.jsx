@@ -134,7 +134,7 @@ function FeedBackForm() {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="themed-scrollbar fixed inset-0 z-50 flex items-end justify-center overflow-y-auto p-0 sm:items-center sm:p-4"
+          className="themed-scrollbar fixed inset-0 z-50 flex h-[100dvh] items-end justify-center overflow-y-auto p-0 sm:items-center sm:p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -165,7 +165,7 @@ function FeedBackForm() {
             transition={{ duration: 0.4, ease: [0.25, 0.25, 0.25, 0.75] }}
             className="relative w-full max-w-[720px] rounded-t-[28px] bg-gradient-to-br from-hero-primary/40 via-hero-secondary/30 to-hero-accent/30 p-[1.5px] shadow-2xl shadow-black/50 sm:rounded-[28px]"
           >
-            <div className="relative flex max-h-[92vh] flex-col overflow-hidden rounded-t-[26px] bg-hero-bg2/90 backdrop-blur-2xl sm:rounded-[26px]">
+            <div className="relative flex max-h-[92dvh] flex-col overflow-hidden rounded-t-[26px] bg-hero-bg2/90 backdrop-blur-2xl sm:rounded-[26px]">
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-t-[26px] sm:rounded-[26px]"

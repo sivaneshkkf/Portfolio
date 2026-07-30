@@ -77,7 +77,7 @@ function LoginForm() {
 
   return (
     <div
-      className={`fixed w-full h-screen flex justify-center items-center inset-0 z-50 bg-black/50 backdrop-blur-sm overflow-y-scroll transition-opacity duration-300 ${
+      className={`fixed w-full h-[100dvh] flex justify-center items-center inset-0 z-50 bg-black/50 backdrop-blur-sm overflow-y-scroll transition-opacity duration-300 ${
         loginFormOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
       onClick={(e) => {
