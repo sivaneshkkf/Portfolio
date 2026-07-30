@@ -106,13 +106,9 @@ function DashboardScreen() {
   // is opened/closed, so the KPI delta badges reflect "since last visit".
   useEffect(() => {
     if (dashboardData) {
-      AddPreDashboardDetails(dashboardData)
-        .then((docRef) => {
-          console.log("DashBordPreData successfully submitted with ID:", docRef.id);
-        })
-        .catch((e) => {
-          console.error("Failed to send feedback:", e);
-        });
+      AddPreDashboardDetails(dashboardData).catch((e) => {
+        console.error("Failed to send feedback:", e);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

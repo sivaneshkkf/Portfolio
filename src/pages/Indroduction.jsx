@@ -7,14 +7,13 @@ import CtaButton from "../components/Buttons/CtaButton";
 import SocialIconBtn from "../components/SocialIconBtn";
 import StatCard from "../components/StatCard";
 import sivanesh_resume from "../images/SIVANESH-RESUME.pdf";
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
 import ImageBlurHash from "../utils/ImageBlurHash";
 import PopupShareBtn from "../components/Buttons/PopupBtn";
 import Dashboard from "./DashBoard";
 import { LoginFormContext, LoginStatus } from "../context/LoginFormContext";
-import { AddDashboardDetails } from "../firebase/config";
 import { useDashboardStats } from "../context/DashboardStatsContext";
+import { useResumeDownload } from "../hooks/useResumeDownload";
 import { NumberFormatter } from "../utils/Formatter";
 import { Tooltip } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -57,79 +56,15 @@ function Indroduction() {
     y.set(0);
   };
 
-  const [progressValue, setProgressValue] = useState(0); // Actual progress
-  const [displayedProgress, setDisplayedProgress] = useState(0); // Displayed for animation
   const { loginFormOpen, setLoginFormOpen } = useContext(LoginFormContext);
   const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
   const { loginStatus } = useContext(LoginStatus);
   const { setVisibleSection } = useContext(HeadingContext);
   const { setScrollEnable } = useContext(ScrolContext);
   const dashbordDetails = useDashboardStats();
-  const {
-    whatsapp = 0,
-    url = 0,
-    views = 0,
-    downloads = 0,
-  } = dashbordDetails[0] || {};
-
-  // download resume
-  async function handleDownload(e) {
-    try {
-      await axios({
-        url: sivanesh_resume,
-        method: "GET",
-        responseType: "blob",
-        onDownloadProgress: (progressEvent) => {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total,
-          );
-          setProgressValue(percentCompleted); // Update actual progress
-        },
-      });
-
-      // update dashboard
-      const updateDashboard = {
-        whatsapp: whatsapp,
-        url: url,
-        views: views,
-        downloads: downloads + 1,
-      };
-      AddDashboardDetails(updateDashboard)
-        .then((docRef) => {
-          console.log("Downloads with ID:", docRef.id);
-        })
-        .catch((e) => {
-          console.error("Failed to update download count:", e);
-        });
-
-      // Reset both progress values after download completes
-      setTimeout(() => {
-        setProgressValue(0);
-        setDisplayedProgress(0);
-      }, 5000);
-    } catch (error) {
-      console.error("Download error:", error);
-      setProgressValue(0);
-      setDisplayedProgress(0);
-    }
-  }
-
-  // Effect to smoothly animate the displayed progress
-  useEffect(() => {
-    if (displayedProgress < progressValue) {
-      const increment = setInterval(() => {
-        setDisplayedProgress((prev) => {
-          if (prev >= progressValue) {
-            clearInterval(increment); // Stop when displayed progress catches up
-            return prev;
-          }
-          return Math.min(prev + 1, progressValue); // Smoothly increment
-        });
-      }, 8); // Adjust timing to control smoothness
-
-      return () => clearInterval(increment);
-    }
-  }, [progressValue, displayedProgress]);
+  const { whatsapp = 0, views = 0, downloads = 0 } = dashbordDetails[0] || {};
+  const { handleDownload, progressValue, displayedProgress } =
+    useResumeDownload(sivanesh_resume, dashbordDetails);
 
   // popup state
   const [popupState, setPopupState] = useState(false);

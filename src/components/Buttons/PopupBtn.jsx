@@ -6,12 +6,10 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import ShareIcon from "@mui/icons-material/Share";
 import DoneIcon from "@mui/icons-material/Done";
-import React from "react";
 import { Helmet } from "react-helmet";
 import { ScreenSizeContext } from "../../context/ScreenSizeContext";
 import { AddDashboardDetails } from "../../firebase/config";
 import { useDashboardStats } from "../../context/DashboardStatsContext";
-import { Download } from "@mui/icons-material";
 import { RWebShare } from "react-web-share";
 import ReplyIcon from "@mui/icons-material/Reply";
 
@@ -42,8 +40,7 @@ function PopupShareBtn({ popupState, setPopupState }) {
 
         const userId = localStorage.getItem("portfolioUserId");
         if (userId != "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
-          const docRef = await AddDashboardDetails(updatedDetails);
-          console.log("View count updated with ID:", docRef.id);
+          await AddDashboardDetails(updatedDetails);
         }
       } catch (error) {
         console.error("Failed to update view count:", error);
@@ -75,13 +72,9 @@ function PopupShareBtn({ popupState, setPopupState }) {
       };
 
       // Update the Firestore database with incremented values
-      AddDashboardDetails(updatedDetails)
-        .then((docRef) => {
-          console.log("Feedback successfully submitted with ID:", docRef.id);
-        })
-        .catch((e) => {
-          console.error("Failed to send feedback:", e);
-        });
+      AddDashboardDetails(updatedDetails).catch((e) => {
+        console.error("Failed to send feedback:", e);
+      });
 
       // Reset the copy success message after 3 seconds
       setTimeout(() => setCopySuccess(false), 3000);
@@ -99,20 +92,16 @@ function PopupShareBtn({ popupState, setPopupState }) {
     };
 
     // Update the Firestore database with incremented values
-    AddDashboardDetails(updatedDetails)
-      .then((docRef) => {
-        console.log("Whatsapp successfully submitted with ID:", docRef.id);
-      })
-      .catch((e) => {
-        console.error("Failed to update whatsapp count:", e);
-      });
+    AddDashboardDetails(updatedDetails).catch((e) => {
+      console.error("Failed to update whatsapp count:", e);
+    });
   }
 
   const shareUrl = "https://sivaneshkkf.github.io/Portfolio/";
   const message = `Check out Sivanesh's Portfolio: ${shareUrl}`;
 
   // screen size contenxt
-  const { ScreenSize, setScreenSize } = useContext(ScreenSizeContext);
+  const { ScreenSize } = useContext(ScreenSizeContext);
   // Narrow screens don't have room to expand sideways without running off
   // the edge of the viewport, so the menu opens upward instead.
   const isNarrowScreen = ScreenSize === "sm";

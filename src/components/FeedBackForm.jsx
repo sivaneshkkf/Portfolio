@@ -14,6 +14,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import { useScrollLock } from "../hooks/useScrollLock";
 
 const QUICK_TAGS = [
   "✨ Beautiful UI",
@@ -28,6 +29,15 @@ const MESSAGE_MAX = 500;
 const FOCUSABLE_SELECTOR =
   'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])';
 
+const schemaValidation = z.object({
+  feedbackName: z.string().min(3, { message: "Please enter at least 3 characters" }).max(30),
+  feedbackEmail: z.string().email({ message: "Enter a valid email address" }),
+  message: z
+    .string()
+    .min(5, { message: "Tell me a little more (min 5 characters)" })
+    .max(MESSAGE_MAX),
+});
+
 function FeedBackForm() {
   const { feedbackFormOpen, setFeedbackFormOpen } = useContext(FeedbackFormContext);
   const { open, once } = feedbackFormOpen;
@@ -40,15 +50,6 @@ function FeedBackForm() {
   const [showMessage, setShowMessage] = useState({ loading: false, success: false });
   const [rating, setRating] = useState(null);
   const [tags, setTags] = useState([]);
-
-  const schemaValidation = z.object({
-    feedbackName: z.string().min(3, { message: "Please enter at least 3 characters" }).max(30),
-    feedbackEmail: z.string().email({ message: "Enter a valid email address" }),
-    message: z
-      .string()
-      .min(5, { message: "Tell me a little more (min 5 characters)" })
-      .max(MESSAGE_MAX),
-  });
 
   const {
     register,
@@ -74,8 +75,7 @@ function FeedBackForm() {
     setShowMessage({ loading: true, success: false });
 
     AddFeedBack({ ...data, rating, tags })
-      .then((docRef) => {
-        console.log("Feedback successfully submitted with ID:", docRef.id);
+      .then(() => {
         setShowMessage({ loading: false, success: true });
         closeTimeoutRef.current = setTimeout(closeModal, 4000);
       })
@@ -98,12 +98,7 @@ function FeedBackForm() {
   }, [isOpen, reset]);
 
   // Lock background scroll while the modal is open.
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+  useScrollLock(isOpen);
 
   // ESC to close + a lightweight focus trap.
   useEffect(() => {

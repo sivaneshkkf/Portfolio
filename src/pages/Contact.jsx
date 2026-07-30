@@ -33,14 +33,14 @@ const CONTACT_ICONS = {
   github: GitHubIcon,
 };
 
-function Contact() {
-  const schemaValidation = z.object({
-    name: z.string().min(3, { message: "Invalid Name" }).max(40),
-    email: z.string().email(),
-    subject: z.string().min(3, { message: "Add a short subject" }).max(80),
-    message: z.string().min(2, { message: "Enter your message briefly" }),
-  });
+const schemaValidation = z.object({
+  name: z.string().min(3, { message: "Invalid Name" }).max(40),
+  email: z.string().email(),
+  subject: z.string().min(3, { message: "Add a short subject" }).max(80),
+  message: z.string().min(2, { message: "Enter your message briefly" }),
+});
 
+function Contact() {
   const [showMessage, setShowMessage] = useState({
     anim: false,
     text: false,
@@ -66,38 +66,39 @@ function Contact() {
 
     addMessage(data);
 
-    mailObj.access_key = "9b19e215-8878-45d3-8f85-a6ca812579c3";
+    mailObj.access_key = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
-    const json = JSON.stringify(mailObj);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(mailObj),
+      }).then((res) => res.json());
 
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: json,
-    }).then((res) => res.json());
-
-    if (res.success) {
-      setShowMessage((pre) => ({ ...pre, anim: true, btnAnim: false }));
-      setTimeout(() => {
-        setShowMessage((pre) => ({
-          ...pre,
-          text: true,
-        }));
-      }, 1000);
+      if (res.success) {
+        setShowMessage((pre) => ({ ...pre, anim: true, btnAnim: false }));
+        setTimeout(() => {
+          setShowMessage((pre) => ({
+            ...pre,
+            text: true,
+          }));
+        }, 1000);
+      } else {
+        setShowMessage((pre) => ({ ...pre, btnAnim: false }));
+      }
+    } catch (error) {
+      console.error("Failed to submit contact form:", error);
+      setShowMessage((pre) => ({ ...pre, btnAnim: false }));
     }
   }
 
   const addMessage = (data) => {
-    AddMessage(data)
-      .then((docRef) => {
-        console.log("Message successfully submitted with ID:", docRef.id);
-      })
-      .catch((e) => {
-        console.error("Failed to add Message:", e);
-      });
+    AddMessage(data).catch((e) => {
+      console.error("Failed to add Message:", e);
+    });
   };
 
   return (

@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { motion } from "motion/react";
 import Tooltip from "@mui/material/Tooltip";
 import { FadeIn } from "../varients/varientAnim";
+import { useRipple } from "../hooks/useRipple";
 
 function SocialButton({
   href,
@@ -12,21 +12,8 @@ function SocialButton({
   delay = 0,
   surface = "adaptive",
 }) {
-  const [ripples, setRipples] = useState([]);
+  const { ripples, addRipple } = useRipple({ sizeMultiplier: 1.6, duration: 600, centered: true });
   const isDarkSurface = surface === "dark";
-
-  const handleClick = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height) * 1.6;
-    const id = Date.now();
-    setRipples((prev) => [
-      ...prev,
-      { id, x: rect.width / 2 - size / 2, y: rect.height / 2 - size / 2, size },
-    ]);
-    setTimeout(() => {
-      setRipples((prev) => prev.filter((r) => r.id !== id));
-    }, 600);
-  };
 
   return (
     <motion.div
@@ -41,7 +28,7 @@ function SocialButton({
           target="_blank"
           rel="noopener noreferrer"
           aria-label={label}
-          onClick={handleClick}
+          onClick={addRipple}
           style={{ "--brand": brand, "--brand-dark": brandDark || brand }}
           whileHover={{ scale: 1.12, y: -3 }}
           whileTap={{ scale: 0.94 }}

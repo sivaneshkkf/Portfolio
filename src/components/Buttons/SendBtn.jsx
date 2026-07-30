@@ -1,32 +1,14 @@
-import { useState } from "react";
 import { motion } from "motion/react";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
+import { useRipple } from "../../hooks/useRipple";
 
 function SendBtn({ showMessage, text }) {
-  const [ripples, setRipples] = useState([]);
-
-  const handleClick = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height) * 1.4;
-    const id = Date.now();
-    setRipples((prev) => [
-      ...prev,
-      {
-        id,
-        x: e.clientX - rect.left - size / 2,
-        y: e.clientY - rect.top - size / 2,
-        size,
-      },
-    ]);
-    setTimeout(() => {
-      setRipples((prev) => prev.filter((r) => r.id !== id));
-    }, 650);
-  };
+  const { ripples, addRipple } = useRipple();
 
   return (
     <motion.button
       type="submit"
-      onClick={handleClick}
+      onClick={addRipple}
       className="group relative mx-auto flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-hero-primary to-hero-secondary text-white shadow-lg shadow-hero-primary/30 transition-shadow duration-300 hover:shadow-xl hover:shadow-hero-secondary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hero-primary focus-visible:ring-offset-2"
       initial={{ width: 190, height: 48, borderRadius: 9999 }}
       animate={{

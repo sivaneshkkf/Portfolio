@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import ContactInput from "./ContactInput";
 import BtnForm from "./Buttons/BtnForm";
 import ConfettiBurst from "./ConfettiBurst";
@@ -12,25 +12,21 @@ import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
+const schemaValidation = z.object({
+  loginEmail: z.string().email(),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters long." }),
+});
+
 function LoginForm() {
   const { loginFormOpen, setLoginFormOpen } = useContext(LoginFormContext);
+  // loginStatus is initialized from localStorage once, in App.jsx (this
+  // component shares the same LoginStatus context provider), so it doesn't
+  // need to re-check localStorage itself here.
   const { loginStatus, setLoginStatus } = useContext(LoginStatus);
   const [loginError, setLoginError] = useState(null);
   const prefersReducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    const userId = localStorage.getItem("portfolioUserId");
-    if (userId === "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
-      setLoginStatus(true);
-    }
-  }, []);
-
-  const schemaValidation = z.object({
-    loginEmail: z.string().email(),
-    password: z
-      .string()
-      .min(6, { message: "Password must be at least 6 characters long." }),
-  });
 
   const [showMessage, setShowMessage] = useState({
     loading: false,
@@ -48,10 +44,7 @@ function LoginForm() {
 
     logInFirebase(loginEmail, password)
       .then((user) => {
-        console.log("Login Successfully");
-
-        // Store the user ID in local storage
-        localStorage.setItem("portfolioUserId", user.uid); // Assuming `user.uid` is the user ID
+        localStorage.setItem("portfolioUserId", user.uid);
 
         setLoginError(null)
         setShowMessage({ loading: true, success: true });
@@ -170,8 +163,7 @@ function LoginForm() {
                 loading={showMessage.loading}
                 className="!rounded-xl !py-3 !text-sm"
                 onClick={() => {
-                  localStorage.removeItem("portfolioUserId", ""); // Clear userID on logout
-                  // Add any additional logout logic here
+                  localStorage.removeItem("portfolioUserId");
                   setLoginFormOpen(false);
                   setLoginStatus(false);
                 }}

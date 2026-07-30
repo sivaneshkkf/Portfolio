@@ -12,20 +12,10 @@ import FooterSkillBar from "../components/FooterSkillBar";
 import FooterServiceCard from "../components/FooterServiceCard";
 import { FadeIn } from "../varients/varientAnim";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import EmailIcon from "@mui/icons-material/Email";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
-
-const quickLinks = [
-  { label: "Home", ...sectionIDS.home },
-  { label: "About", ...sectionIDS.aboutME },
-  { label: "Skills", ...sectionIDS.skills },
-  { label: "Projects", ...sectionIDS.projects },
-  { label: "Resume", ...sectionIDS.resume },
-  { label: "Contact", ...sectionIDS.contact },
-];
 
 const footerSocials = SocialLinks.filter((social) =>
   ["GitHub", "LinkedIn", "Instagram", "WhatsApp", "Email"].includes(
@@ -148,40 +138,6 @@ function Footer() {
             </div>
           </motion.div>
 
-          {/* quick links */}
-          {/* <div>
-            <h3 className="mb-5 font-manrope text-[22px] font-bold text-hero-text">
-              Quick Links
-            </h3>
-            <nav
-              aria-label="Footer quick links"
-              className="flex flex-col gap-3"
-            >
-              {quickLinks.map((link, index) => (
-                <motion.button
-                  key={link.sectionId}
-                  type="button"
-                  onClick={() => goToSection(link)}
-                  variants={FadeIn("left", 0.05 * index, 0)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
-                  whileHover={{ x: 4 }}
-                  className="group flex w-fit items-center gap-1.5 text-sm font-medium text-hero-muted transition-colors duration-300 hover:text-hero-text"
-                >
-                  <ArrowForwardIcon
-                    sx={{ fontSize: 14 }}
-                    className="-ml-4 text-hero-accent opacity-0 transition-all duration-300 group-hover:ml-0 group-hover:opacity-100"
-                  />
-                  <span className="relative">
-                    {link.label}
-                    <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-hero-accent transition-all duration-300 group-hover:w-full"></span>
-                  </span>
-                </motion.button>
-              ))}
-            </nav>
-          </div> */}
-
           {/* expertise */}
           <div>
             <h3 className="mb-5 font-manrope text-[22px] font-bold text-hero-text">
@@ -272,32 +228,6 @@ function Footer() {
             </p>
           </div>
         </motion.div>
-
-        {/* CTA */}
-        {/* <motion.div
-          variants={FadeIn("up", 0.1, 0)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
-          className="mt-16 rounded-3xl border border-white/10 bg-gradient-to-r from-hero-primary/15 via-hero-secondary/15 to-hero-accent/15 px-8 py-10 text-center backdrop-blur-xl sm:mt-20"
-        >
-          <h3 className="font-manrope text-2xl font-extrabold text-hero-text sm:text-3xl">
-            Have a Project in Mind?
-          </h3>
-          <p className="mx-auto mt-2 max-w-xl text-sm text-hero-muted sm:text-base">
-            Let&apos;s turn your idea into a polished, production-ready
-            product.
-          </p>
-          <motion.button
-            type="button"
-            onClick={() => goToSection(sectionIDS.contact)}
-            whileHover={{ y: -2, scale: 1.03 }}
-            whileTap={{ scale: 0.96 }}
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-hero-primary to-hero-secondary px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-hero-primary/30 transition-shadow duration-300 hover:shadow-xl hover:shadow-hero-secondary/40"
-          >
-            Contact Me <ArrowForwardIcon sx={{ fontSize: 16 }} />
-          </motion.button>
-        </motion.div> */}
 
         {/* bottom bar */}
         <div className="mt-14 flex flex-col items-center gap-4 border-t border-white/10 pt-8 sm:flex-row sm:justify-between">

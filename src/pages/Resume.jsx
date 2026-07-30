@@ -8,10 +8,9 @@ import BreakLine from "../components/BreakLine";
 import { motion } from "motion/react";
 import { FadeIn } from "../varients/varientAnim";
 import sivanesh_resume from "../images/SIVANESH-RESUME.pdf";
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { AddDashboardDetails } from "../firebase/config";
+import { useContext } from "react";
 import { useDashboardStats } from "../context/DashboardStatsContext";
+import { useResumeDownload } from "../hooks/useResumeDownload";
 import { HeadingContext } from "../context/HeadingContext";
 import { ScrolContext } from "../context/ScrolContext";
 import skillsData from "../data/skillsData.json";
@@ -33,77 +32,12 @@ function getRoleTitle(title) {
 }
 
 function Resume() {
-  const [progressValue, setProgressValue] = useState(0); // Actual progress
-  const [displayedProgress, setDisplayedProgress] = useState(0); // Displayed for animation
-
   const dashbordDetails = useDashboardStats();
-  const {
-    whatsapp = 0,
-    url = 0,
-    views = 0,
-    downloads = 0,
-  } = dashbordDetails[0] || {};
+  const { handleDownload, progressValue, displayedProgress } =
+    useResumeDownload(sivanesh_resume, dashbordDetails);
 
   const { setVisibleSection } = useContext(HeadingContext);
   const { setScrollEnable } = useContext(ScrolContext);
-
-  async function handleDownload(e) {
-    try {
-      await axios({
-        url: sivanesh_resume,
-        method: "GET",
-        responseType: "blob",
-        onDownloadProgress: (progressEvent) => {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total,
-          );
-          setProgressValue(percentCompleted); // Update actual progress
-        },
-      });
-
-      // update dashboard
-      const updateDashboard = {
-        whatsapp: whatsapp,
-        url: url,
-        views: views,
-        downloads: downloads + 1,
-      };
-      AddDashboardDetails(updateDashboard)
-        .then((docRef) => {
-          console.log("Download with ID:", docRef.id);
-        })
-        .catch((e) => {
-          console.error("Failed to update download count:", e);
-        });
-
-      // Reset both progress values after download completes
-      setTimeout(() => {
-        setProgressValue(0);
-        setDisplayedProgress(0);
-      }, 3000);
-    } catch (error) {
-      console.error("Download error:", error);
-      setProgressValue(0);
-      setDisplayedProgress(0);
-    }
-  }
-
-  // Effect to smoothly animate the displayed progress
-  useEffect(() => {
-    if (displayedProgress < progressValue) {
-      const increment = setInterval(() => {
-        setDisplayedProgress((prev) => {
-          if (prev >= progressValue) {
-            clearInterval(increment); // Stop when displayed progress catches up
-            return prev;
-          }
-          return Math.min(prev + 1, progressValue); // Smoothly increment
-        });
-      }, 10); // Adjust timing to control smoothness
-
-      return () => clearInterval(increment);
-    }
-  }, [progressValue, displayedProgress]);
 
   function handleContactMe() {
     setScrollEnable(false);

@@ -11,7 +11,7 @@ function ThemeBtn() {
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme) setTheme(storedTheme);
-    else if (window.matchMedia("prefers-color-scheme : dark").matches) {
+    else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       setTheme("dark");
     }
   }, []);
@@ -24,7 +24,7 @@ function ThemeBtn() {
       localStorage.setItem("theme", "light");
       document.documentElement.classList.remove("dark");
     }
-  });
+  }, [theme]);
 
   function handleToggle() {
     setTheme(isDark ? "light" : "dark");

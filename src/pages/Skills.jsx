@@ -17,12 +17,12 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 const CATEGORIES = ["Frontend", "Backend", "Database", "Tools"];
 
-function SKills() {
-  const enrichedSkills = skillsData.map((skill) => ({
-    ...skill,
-    ...(skillsMeta[skill.name] || {}),
-  }));
+const enrichedSkills = skillsData.map((skill) => ({
+  ...skill,
+  ...(skillsMeta[skill.name] || {}),
+}));
 
+function SKills() {
   const totalProjects = ProjectData.length + MobileAppData.length;
 
   return (

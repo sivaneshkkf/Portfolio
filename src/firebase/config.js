@@ -112,7 +112,6 @@ export function AddLocationToFirebase(data) {
         // Delete the oldest documents
         for (const doc of oldestDocs) {
           await deleteDoc(doc.ref);
-          //console.log(`Deleted document with ID: ${doc.id}`);
         }
       }
 
@@ -176,7 +175,6 @@ export async function deleteDocument(collectionName, docId) {
   try {
     const docRef = doc(db, collectionName, docId); // Reference to the document
     await deleteDoc(docRef); // Deletes the document
-    console.log("Deleted document with ID:", docId);
   } catch (error) {
     console.error("Error deleting document:", error);
   }

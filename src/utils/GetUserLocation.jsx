@@ -3,7 +3,7 @@ import { parseUserAgent } from "./dashboardHelpers";
 
 async function getUserLocation() {
 
-    const apiKey = "fb280a422eff45ba84bc5ab237df3d41"
+    const apiKey = import.meta.env.VITE_IPGEOLOCATION_API_KEY;
     const { browser, device } = parseUserAgent(navigator.userAgent);
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -21,10 +21,9 @@ async function getUserLocation() {
 
     const fetchLocationData1 = async () => {
         try {
-            const url ="https://api.ipgeolocation.io/ipgeo?apiKey=fb280a422eff45ba84bc5ab237df3d41&fields=geo";
+            const url = `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&fields=geo`;
             const fetchData = await fetch(url);
             const response = await fetchData.json();
-            //console.log(response)
             await AddLocationToFirebase({ ...response, browser, device, timezone });
         } catch (error) {
             console.error("Error fetching location data:", error);

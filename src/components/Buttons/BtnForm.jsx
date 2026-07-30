@@ -1,25 +1,11 @@
-import { useState } from "react";
 import { motion } from "motion/react";
+import { useRipple } from "../../hooks/useRipple";
 
 function BtnForm({ text, className = "", loading, onClick }) {
-  const [ripples, setRipples] = useState([]);
+  const { ripples, addRipple } = useRipple();
 
   const handleClick = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height) * 1.4;
-    const id = Date.now();
-    setRipples((prev) => [
-      ...prev,
-      {
-        id,
-        x: e.clientX - rect.left - size / 2,
-        y: e.clientY - rect.top - size / 2,
-        size,
-      },
-    ]);
-    setTimeout(() => {
-      setRipples((prev) => prev.filter((r) => r.id !== id));
-    }, 650);
+    addRipple(e);
     onClick && onClick(e);
   };
 

@@ -15,6 +15,40 @@ import {
   DashBoardContext,
   DashBoardDataContext,
 } from "../context/DashBoardContext";
+import { useDashboardStats } from "../context/DashboardStatsContext";
+
+// Reusable Stats pill. Hoisted out of Dashboard so it isn't redefined (and
+// its instances remounted) on every render of the parent.
+function Stats({ icon, count, title, dif, style, className }) {
+  return (
+    <div
+      className={`flex justify-center items-center shadow-lg relative ${style}`}
+    >
+      <Tooltip title={title}>
+        <div className="flex bg-[#0b1f35] dark:bg-white h-7 dark:bg-opacity-5 bg-opacity-40 rounded overflow-hidden items-center justify-center">
+          <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40 dark:bg-opacity-80">
+            <IconButton>{icon}</IconButton>
+          </div>
+          <h4
+            className={`text-sm font-normal lg:font-medium px-2 sm:px-3 ${
+              className ? className : "text-zinc-400"
+            }`}
+          >
+            {NumberFormatter(count)}
+            <span className="text-[10px] ml-2 hidden font-normal xl:inline">
+              {title}
+            </span>
+          </h4>
+        </div>
+      </Tooltip>
+      {dif > 0 && (
+        <div className="absolute -top-3 -right-2 w-5 h-5 flex items-center justify-center bg-green-600 rounded-full p-1">
+          <p className="text-[12px] text-white">{dif}</p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Dashboard({ className = "", flex }) {
   const feedBackData = UseFetchCollection("feedback");
@@ -32,7 +66,7 @@ function Dashboard({ className = "", flex }) {
   });
   const { dashboardOpen, setDashboardOpen } = useContext(DashBoardContext);
 
-  const dashbordDetails = UseFetchCollection("dashboard");
+  const dashbordDetails = useDashboardStats();
   const {
     whatsapp = 0,
     url = 0,
@@ -54,49 +88,24 @@ function Dashboard({ className = "", flex }) {
   // Calculate badge values based on localStorage
   const preDashbordDetails = UseFetchCollection("dashboardPreData");
   useEffect(() => {
-    // const storedData = JSON.parse(localStorage.getItem("dashBoardData")) || [];
-    // const localData = storedData || {}; // Ensure the structure is consist
-    const data = preDashbordDetails[0] || "";
+    const data = preDashbordDetails[0] || {};
     setDashboardBadge({
-      whatsapp: whatsapp - data.whatsapp,
-      url: url - data.url,
-      views: views - data.views,
-      downloads: downloads - data.downloads,
-      feedbacks: feedBackLength - data.feedbacks,
-      messages: messageDataLength - data.messages,
+      whatsapp: whatsapp - (data.whatsapp || 0),
+      url: url - (data.url || 0),
+      views: views - (data.views || 0),
+      downloads: downloads - (data.downloads || 0),
+      feedbacks: feedBackLength - (data.feedbacks || 0),
+      messages: messageDataLength - (data.messages || 0),
     });
-  }, [whatsapp, url, views, downloads, feedBackLength, messageDataLength]); // Use individual dependencies for clarity
-  // Reusable Stats Component
-  function Stats({ icon, count, title, dif, style }) {
-    return (
-      <div
-        className={`flex justify-center items-center shadow-lg relative ${style}`}
-      >
-        <Tooltip title={title}>
-          <div className="flex bg-[#0b1f35] dark:bg-white h-7 dark:bg-opacity-5 bg-opacity-40 rounded overflow-hidden items-center justify-center">
-            <div className="bg-[#081625] dark:bg-dark-primary bg-opacity-40 dark:bg-opacity-80">
-              <IconButton>{icon}</IconButton>
-            </div>
-            <h4
-              className={`text-sm font-normal lg:font-medium px-2 sm:px-3 ${
-                className ? className : "text-zinc-400"
-              }`}
-            >
-              {NumberFormatter(count)}
-              <span className="text-[10px] ml-2 hidden font-normal xl:inline">
-                {title}
-              </span>
-            </h4>
-          </div>
-        </Tooltip>
-        {dif > 0 && (
-          <div className="absolute -top-3 -right-2 w-5 h-5 flex items-center justify-center bg-green-600 rounded-full p-1">
-            <p className="text-[12px] text-white">{dif}</p>
-          </div>
-        )}
-      </div>
-    );
-  }
+  }, [
+    whatsapp,
+    url,
+    views,
+    downloads,
+    feedBackLength,
+    messageDataLength,
+    preDashbordDetails,
+  ]);
 
   return (
     <div className="flex flex-col justify-center mt-3">
@@ -106,18 +115,21 @@ function Dashboard({ className = "", flex }) {
           count={views}
           title="Views"
           dif={dashboardBadge.views}
+          className={className}
         />
         <Stats
           icon={<WhatsAppIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}
           count={whatsapp}
           title="WhatsApp Shares"
           dif={dashboardBadge.whatsapp}
+          className={className}
         />
         <Stats
           icon={<EmailIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}
           count={messageDataLength}
           title="Messages"
           dif={dashboardBadge.messages}
+          className={className}
         />
         <Stats
           icon={<LinkIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}
@@ -125,18 +137,21 @@ function Dashboard({ className = "", flex }) {
           title="URL Shares"
           dif={dashboardBadge.url}
           style={`${dashboardOpen ? "flex" : "hidden"} sm:flex`}
+          className={className}
         />
         <Stats
           icon={<FeedbackIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}
           count={feedBackLength}
           title="Feedbacks"
           dif={dashboardBadge.feedbacks}
+          className={className}
         />
         <Stats
           icon={<GetAppIcon sx={{ color: "#A5A7A9", fontSize: "1rem" }} />}
           count={downloads}
           title="Downloads"
           dif={dashboardBadge.downloads}
+          className={className}
         />
       </div>
     </div>

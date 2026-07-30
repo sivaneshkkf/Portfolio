@@ -8,6 +8,7 @@ import { SocialLinks } from "../data/SocialLinks";
 import { FadeIn } from "../varients/varientAnim";
 import { HeadingContext } from "../context/HeadingContext";
 import { ScrolContext } from "../context/ScrolContext";
+import { useScrollLock } from "../hooks/useScrollLock";
 
 import HomeIcon from "@mui/icons-material/Home";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -44,12 +45,7 @@ function TheNaveBar() {
     return () => window.removeEventListener("scroll", handleScrollShadow);
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
+  useScrollLock(mobileOpen);
 
   const handleClick = (e, navId, secId) => {
     e.preventDefault();
@@ -123,18 +119,6 @@ function TheNaveBar() {
 
           {/* desktop right side */}
           <div className="hidden items-center gap-2.5 md:flex lg:gap-3">
-            {/* {navSocials.map((social, index) => (
-              <SocialButton
-                key={social.name}
-                href={social.href}
-                label={social.name}
-                icon={<social.icon fontSize="small" />}
-                brand={social.brand}
-                brandDark={social.brandDark}
-                delay={0.05 * index}
-                surface="dark"
-              />
-            ))} */}
             <CtaButton
               as="button"
               type="button"

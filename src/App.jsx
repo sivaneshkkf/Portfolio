@@ -31,6 +31,7 @@ import DashboardScreen from "./pages/DashboardScreen";
 import getUserLocation from "./utils/GetUserLocation";
 import { DashboardStatsProvider } from "./context/DashboardStatsContext";
 import { useLenis } from "lenis/react";
+import { useScrollLock } from "./hooks/useScrollLock";
 
 function App() {
   const [visibleSection, setVisibleSection] = useState({
@@ -178,18 +179,16 @@ function App() {
       setScrollEnable(true); // Enable scrolling when wheel event is triggered
     };
 
-    const handleTouch = (e) => {
-      if (e.target != "navBar") {
-        setScrollEnable(true);
-      }
+    const handleTouch = () => {
+      setScrollEnable(true); // Enable scrolling when touch event is triggered
     };
 
     document.addEventListener("wheel", handleWheelScroll);
-
     document.addEventListener("touchstart", handleTouch);
 
     return () => {
       document.removeEventListener("wheel", handleWheelScroll);
+      document.removeEventListener("touchstart", handleTouch);
     };
   }, []);
 
@@ -229,23 +228,14 @@ function App() {
   }, [scrollPosition]);
 
   // scroll off function when i am open dashboard
-  useEffect(() => {
-    if (dashboardOpen) {
-      document.body.style.overflow = "hidden"; // Disable scroll
-    } else {
-      document.body.style.overflow = ""; // Enable scroll
-    }
-    return () => {
-      document.body.style.overflow = ""; // Reset on component unmount
-    };
-  }, [dashboardOpen]);
+  useScrollLock(dashboardOpen);
 
   useEffect(() => {
     const userId = localStorage.getItem("portfolioUserId");
     if (userId === "kCNccaH0HmbLWK6E6K1ChzXuvbf1") {
       setLoginStatus(true);
     }
-  }, [loginStatus]);
+  }, []);
 
   // Track visitor location (skipped for the admin). Lives here (always
   // mounted) rather than inside the dashboard, since the dashboard is now
