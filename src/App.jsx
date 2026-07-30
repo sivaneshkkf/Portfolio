@@ -274,16 +274,7 @@ function App() {
                         <DashboardScreen />
                       ) : (
                         <div className="relative">
-                          <div
-                            id="navBar"
-                            style={{
-                              position: "fixed",
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              zIndex: 1,
-                            }}
-                          >
+                          <div id="navBar">
                             <TheNaveBar />
                           </div>
                           <div ref={introRef} id={sectionIDS.home.sectionId}>

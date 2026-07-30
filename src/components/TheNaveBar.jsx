@@ -9,6 +9,7 @@ import { FadeIn } from "../varients/varientAnim";
 import { HeadingContext } from "../context/HeadingContext";
 import { ScrolContext } from "../context/ScrolContext";
 import { useScrollLock } from "../hooks/useScrollLock";
+import { useIsIOS } from "../hooks/useIsIOS";
 
 import HomeIcon from "@mui/icons-material/Home";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -35,6 +36,7 @@ function TheNaveBar() {
   const { visibleSection, setVisibleSection } = useContext(HeadingContext);
   const { setScrollEnable } = useContext(ScrolContext);
 
+  const isIOS = useIsIOS();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -85,7 +87,7 @@ function TheNaveBar() {
 
   return (
     <div
-      className={`ios-fixed-chrome fixed top-0 left-0 right-0 z-50 px-2 pt-2 transition-transform duration-500 sm:px-3 sm:pt-3 ${
+      className={`${"ios-fixed-chrome fixed left-0 right-0"} top-0 z-50 px-2 pt-2 transition-transform duration-500 sm:px-3 sm:pt-3 ${
         isHidden && !mobileOpen
           ? "-translate-y-full pointer-events-none"
           : "translate-y-0"
