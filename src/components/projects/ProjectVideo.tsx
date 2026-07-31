@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { Maximize } from "lucide-react";
 
@@ -7,44 +7,56 @@ interface ProjectVideoProps {
   video?: string;
   name: string;
   /** Hover state owned by the parent card, so hovering anywhere on the
-   * whole card (not just this panel) triggers playback. */
+   * whole card (not just this panel) triggers playback on devices that
+   * actually have a hover-capable pointer. */
   isCardHovering: boolean;
 }
 
-// Video preview panel: hovering the card cross-fades the thumbnail to an
-// autoplay muted video. The only overlay control is the fullscreen button;
-// everything else (badges, duration, play button, status text) has been
-// stripped per request, so this only works via hover -- there's no
-// keyboard/touch-accessible way to trigger playback without it.
+// Video preview panel: on hover-capable devices (desktop), hovering the
+// card cross-fades the thumbnail to an autoplay muted video. On touch
+// devices -- which have no hover -- the same preview instead plays
+// automatically while the panel is scrolled into view, pausing again once
+// it scrolls back out. The only overlay control is the fullscreen button.
 function ProjectVideo({ image, video, name, isCardHovering }: ProjectVideoProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(hover: none)");
+    setIsTouchDevice(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsTouchDevice(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  const isPlaying = isCardHovering || (isTouchDevice && isInView);
+
   useEffect(() => {
     const el = videoRef.current;
     if (!el || !video) return;
 
-    if (isCardHovering) {
+    if (isPlaying) {
       el.play().catch(() => {});
     } else {
       el.pause();
       el.currentTime = 0;
     }
-  }, [isCardHovering, video]);
+  }, [isPlaying, video]);
 
-  // Pause if the card scrolls offscreen while still playing.
+  // Touch devices: play while in view, pause once scrolled away. Desktop
+  // still relies on hover, but this also acts as a safety net there --
+  // pausing playback if the card scrolls offscreen while hovered.
   useEffect(() => {
     const el = containerRef.current;
     if (!el || !video) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          videoRef.current?.pause();
-        }
-      },
-      { threshold: 0.1 },
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.5 },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -65,7 +77,7 @@ function ProjectVideo({ image, video, name, isCardHovering }: ProjectVideoProps)
         alt={`${name} preview`}
         loading="lazy"
         className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-[400ms] ease-out ${
-          video && isCardHovering ? "opacity-0" : "opacity-100"
+          video && isPlaying ? "opacity-0" : "opacity-100"
         }`}
       />
 
@@ -78,7 +90,7 @@ function ProjectVideo({ image, video, name, isCardHovering }: ProjectVideoProps)
           playsInline
           preload="none"
           className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-[400ms] ease-out ${
-            isCardHovering
+            isPlaying
               ? `opacity-100 ${prefersReducedMotion ? "" : "scale-[1.03]"}`
               : "opacity-0"
           }`}
