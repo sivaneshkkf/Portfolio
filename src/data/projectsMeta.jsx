@@ -4,11 +4,31 @@
 // each project's existing description — no invented dates, durations, or
 // features a project doesn't actually have.
 export const projectsMeta = {
+  "Gym Management System": {
+    tagline: "Complete Fitness Center Management Solution",
+    category: "Web Application",
+    status: "Completed",
+    featured: true,
+    year: 2026,
+    features: [
+      { icon: "👥", label: "Member Management" },
+      { icon: "💳", label: "Membership Plans" },
+      { icon: "💰", label: "Payment Tracking" },
+      { icon: "📅", label: "Attendance Management" },
+      { icon: "🏋", label: "Trainer Management" },
+      { icon: "📊", label: "Analytics Dashboard" },
+      { icon: "📱", label: "WhatsApp Notifications" },
+      { icon: "🔐", label: "Role-Based Authentication" },
+      { icon: "📈", label: "Reports & Insights" },
+      { icon: "🌙", label: "Dark Mode" },
+      { icon: "📱", label: "Fully Responsive" },
+      { icon: "⚡", label: "Real-time Firestore Updates" },
+    ],
+  },
   PhotoPix: {
     tagline: "Modern photo editing platform with real-time image adjustments.",
     category: "Frontend",
-    status: "Featured",
-    featured: true,
+    status: "Completed",
     metadata: ["Responsive", "Fast Performance"],
   },
   "Music Player": {

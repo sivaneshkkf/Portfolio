@@ -2,12 +2,23 @@ import img1 from "../images/musicPlayer.png"
 import img2 from "../images/formApp.png"
 import img3 from "../images/calculator.png"
 import photopix from "../images/photopix.webp"
+import gymManagement from "../images/gymManagementPreview.svg"
+import gymManagementVideo from "../images/gymVid.mp4"
 
 import savingsApp1 from "../images/savingsApp1.png";
 import savingsApp2 from "../images/savingsApp2.png";
 import savingsApp3 from "../images/savingsApp3.png";
 
 export const ProjectData =[
+    {
+        name :"Gym Management System",
+        image : gymManagement,
+        video : gymManagementVideo,
+        disc : "A comprehensive gym management platform that helps fitness centers manage memberships, attendance, trainers, workout plans, payment tracking, WhatsApp notifications, reports, and analytics from a single dashboard.",
+        techs : ["REACT","TAILWINDCSS","Firebase","Firestore","Authentication","Cloud Functions","WhatsApp API","Chart.js"],
+        link : "",
+        ghLink : ""
+    },
     {
         name :"PhotoPix",
         image : photopix,

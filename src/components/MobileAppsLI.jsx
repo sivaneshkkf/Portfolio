@@ -164,7 +164,7 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
             )}
           </div>
 
-          <p className="max-w-[600px] text-sm sm:text-base leading-relaxed text-textpara dark:text-dark-textpara">
+          <p className="max-w-[600px] text-xs sm:text-sm leading-relaxed text-textpara dark:text-dark-textpara">
             {disc}
           </p>
 
@@ -176,7 +176,11 @@ function MobileAppsLi({ imgs, name, disc, techs, link, ghLink }) {
                   variants={FadeIn("up", 0.1 + i * 0.05, 0)}
                   initial="hidden"
                   whileInView="show"
-                  viewport={{ once: true, amount: 0, margin: "0px 0px 300px 0px" }}
+                  viewport={{
+                    once: true,
+                    amount: 0,
+                    margin: "0px 0px 300px 0px",
+                  }}
                   whileHover={{ y: -3 }}
                   className="flex items-center gap-2.5 rounded-xl border border-black/5 dark:border-white/10 bg-white/60 dark:bg-white/5 px-3.5 py-2.5 transition-shadow duration-300 hover:shadow-md"
                 >
