@@ -19,7 +19,13 @@ html, body {
      * this, that flashed the browser's default white instead of blending
      * with the page. */
     background-color: #020617;
-    overscroll-behavior-y: none;
+    /* NOTE: don't add `overscroll-behavior-y: none` here. It was here
+     * briefly to suppress the bounce itself (the background-color fix
+     * above already makes the bounce blend in, which is enough), but
+     * `overscroll-behavior: none` on <html>/<body> is a known trigger for
+     * an Android Chrome/WebView bug where single-finger touch scroll stops
+     * initiating and only two-finger gestures (which bypass the DOM
+     * overscroll chain) still work. Removed for that reason. */
 }
 
 /*
