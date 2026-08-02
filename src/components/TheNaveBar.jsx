@@ -26,7 +26,7 @@ const navItems = [
 
 function TheNaveBar() {
   const { visibleSection, setVisibleSection } = useContext(HeadingContext);
-  const { setScrollEnable } = useContext(ScrolContext);
+  const { scrolEnable, setScrollEnable } = useContext(ScrolContext);
 
   const isIOS = useIsIOS();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -39,6 +39,18 @@ function TheNaveBar() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 12);
+
+      // While a nav-click-triggered scroll is animating (scrolEnable is
+      // false during that window -- see ScrolContext/App.jsx), don't let
+      // the auto-hide-on-scroll-down heuristic below hide the navbar out
+      // from under the user: it can't distinguish "user scrolled down" from
+      // "we're smooth-scrolling them to the section they just clicked",
+      // and hiding mid-navigation made every link after the first
+      // effectively unclickable.
+      if (!scrolEnable) {
+        lastScrollY.current = currentScrollY;
+        return;
+      }
 
       if (currentScrollY < 50 || currentScrollY < lastScrollY.current) {
         setIsHidden(false);
@@ -64,7 +76,7 @@ function TheNaveBar() {
       window.removeEventListener("scroll", handleScroll);
       clearTimeout(hideTimer);
     };
-  }, []);
+  }, [scrolEnable]);
 
   const handleClick = (e, navId, secId) => {
     e.preventDefault();
