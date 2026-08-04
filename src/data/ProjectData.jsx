@@ -16,7 +16,7 @@ export const ProjectData =[
         video : gymManagementVideo,
         disc : "A comprehensive gym management platform that helps fitness centers manage memberships, attendance, trainers, workout plans, payment tracking, WhatsApp notifications, reports, and analytics from a single dashboard.",
         techs : ["REACT","TAILWINDCSS","Firebase","Firestore","Authentication","Cloud Functions","WhatsApp API","Chart.js"],
-        link : "https://gymmange.netlify.app/",
+        link : "https://gymmanageplus.netlify.app/",
         ghLink : ""
     },
     {
